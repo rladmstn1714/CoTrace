@@ -1080,7 +1080,7 @@
 
             <div class="findings-card">
               <h4>Findings</h4>
-              <button class="evidence-item finding-trigger active" type="button" data-figure="direction">
+              <button class="evidence-item finding-trigger" type="button" data-figure="direction">
                 <strong>Humans set direction, but models shape the details and specificity.</strong>
                 <span>Humans dominate high-level goal direction, while models play a larger role in refining specific requirements and implementation details.</span>
               </button>
@@ -1222,30 +1222,31 @@
       });
     });
 
-    // ── Measuring: finding trigger → highlight figure card ───────────
-    document.querySelectorAll(".finding-trigger").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const target = btn.dataset.figure;
-
-        document.querySelectorAll(".finding-trigger").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-
-        document.querySelectorAll("#measuringFigures .figure-card").forEach(card => {
-          card.classList.toggle("active", card.dataset.figure === target);
-        });
-      });
-    });
-
-    // ── Exposing: finding trigger → highlight quote cards ────────────
+    // ── Exposing: hover on finding box → highlight box + quote cards ─
     document.querySelectorAll(".exposing-trigger").forEach(btn => {
-      btn.addEventListener("click", () => {
+      btn.addEventListener("mouseenter", () => {
         const targets = new Set((btn.dataset.quotes || "").split(",").map(s => s.trim()));
 
         document.querySelectorAll(".exposing-trigger").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
 
+        let firstMatch = null;
         document.querySelectorAll(".reflection-card").forEach(card => {
-          card.classList.toggle("active", targets.has(card.dataset.quote));
+          const isActive = targets.has(card.dataset.quote);
+          card.classList.toggle("active", isActive);
+          if (isActive && !firstMatch) firstMatch = card;
+        });
+
+        // Scroll the horizontal strip so the first matching card is visible
+        if (firstMatch) {
+          firstMatch.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+        }
+      });
+
+      btn.addEventListener("mouseleave", () => {
+        btn.classList.remove("active");
+        document.querySelectorAll(".reflection-card").forEach(card => {
+          card.classList.remove("active");
         });
       });
     });
