@@ -1,19 +1,16 @@
 #!/usr/bin/env python3
 """
-V4 pipeline logic (refactored_req_based_v5_publish bundle).
+pipeline logic
 
-Efficient unified extraction.
-
-Architecture (vs V3):
+Architecture :
   Step 0:  Normalize input                       (no LLM)
   Step 1:  Unified block extraction               (1 LLM call per block → outcomes + actions + req ops)
   Step 1b: Intention extraction                   (1 LLM call total)
-  Step 2a: Embedding-based pair selection          (same as V3 Step 2, no LLM)
+  Step 2a: Embedding-based pair selection          (no LLM)
   Step 2b: Batch relationship labeling             (1 LLM call per outcome, not per pair)
-  Step 3:  Contribution analysis                   (no LLM, same math as V3 Step 4)
+  Step 3:  Contribution analysis                   (no LLM)
 
 Typical call count for 40-turn dialogue (block_size=4, 5 outcomes, ~120 pairs):
-  V3: ~148 LLM calls    V4: ~16 LLM calls
 """
 
 import json
