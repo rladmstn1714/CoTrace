@@ -1,10 +1,5 @@
 """
-LLM Prompts for V4 Pipeline — Efficient unified extraction.
-
-Key changes from V3:
-- UNIFIED_BLOCK_EXTRACTION_PROMPT: Single LLM call per block extracts outcomes, actions, AND requirements
-- REQUIREMENT_RELATIONSHIP_LABELING_PROMPT: One LLM call per requirement labels candidate utterances
-- INTENTION_EXTRACTION_PROMPT: Kept as separate post-hoc grouping step (lightweight)
+LLM Prompts 
 """
 
 # =============================================================================
@@ -59,7 +54,7 @@ Now, extract ALL actions from EVERY turn. Return JSON only:
 CRITICAL: Respond with ONLY the JSON object. No additional text.
 """
 
-# Step 1a variant for ShareChat / CoGym **teammate message** blocks (batched: all SEND_TEAMMATE_MESSAGE
+# Step 1a variant for CoGym **teammate message** blocks (batched: all SEND_TEAMMATE_MESSAGE
 # turns in one LLM call). Tool steps are still extracted rule-based as `Calling Tool: ...` elsewhere;
 # this prompt aligns wording with the standard Step 1a block format (see raw_log: `[Turn t] speaker: ...`).
 

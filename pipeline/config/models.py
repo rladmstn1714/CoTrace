@@ -67,7 +67,6 @@ def load_secrets_toml(path: str | None = None):
         _pkg_root = Path(__file__).resolve().parent.parent
         candidates = [
             _pkg_root / "secrets.toml",
-            Path("/mnt/nas3/eunsu/collaborative-gym/secrets.toml"),
         ]
         for c in candidates:
             if c.is_file():
