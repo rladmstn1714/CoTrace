@@ -53,9 +53,10 @@ jobs:
 
       - name: Inject paper website and assets
         # Replace the SvelteKit redirect at the root with the paper project page,
-        # and copy the concept figure so the image loads correctly.
+        # add the viewer wrapper, and copy the concept figure.
         run: |
           cp web/index.html tool/build/index.html
+          cp web/viewer.html tool/build/viewer.html
           mkdir -p tool/build/assets
           cp assets/concept.png tool/build/assets/concept.png
 
