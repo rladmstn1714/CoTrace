@@ -5,7 +5,7 @@
     This is the official GitHub repository for "I didn’t Make the Micro Decisions": Measuring, Inducing, and Exposing Goal-Level AI Contributions in Collaboration.
   </p>
   <p>
-    <a href="ARXIV_LINK"><img src="https://arxiv.org/abs/2605.21363" alt="Paper"></a>
+    <a href="https://arxiv.org/abs/2605.21363"><img src="https://img.shields.io/badge/Arxiv-Paper-red" alt="Paper"></a>
     <!-- <a href="Web_LINK"><img src="" alt="Web"></a> -->
     <!-- <a href="HF_LINK"><img src="https://img.shields.io/badge/HuggingFace-Dataset-ffd21e" alt="Hugging Face"></a> -->
     <!-- <a href="REPO_LINK"><img src="https://img.shields.io/badge/GitHub-Repository-181717" alt="GitHub Repo"></a> -->
@@ -26,4 +26,18 @@ This repository contains the code, analysis pipeline, and interactive tool for t
 ├── tool/         # Interactive tool for exploring goal hierarchies and influence relations
 ├── pipeline/     # Core pipeline for goal extraction, requirement extraction, and influence labeling
 └── README.md
+```
+
+## Citation
+Please cite our paper if you use any part of this code in your work:
+```text
+@misc{kim2026cotrace,
+      title={"I didn't Make the Micro Decisions": Measuring, Inducing, and Exposing Goal-Level AI Contributions in Collaboration}, 
+      author={Eunsu Kim and Jessica R. Mindel and Kyungjin Kim and Sherry Tongshuang Wu},
+      year={2026},
+      eprint={2605.21363},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2605.21363}, 
+}
 ```
