@@ -42,13 +42,12 @@ jobs:
       - name: Build static site
         working-directory: tool
         env:
-          # BASE_PATH tells SvelteKit to prefix all asset/link paths with /CoTrace
           BASE_PATH: /CoTrace
-          # VITE_DATA_BASE is baked into the client bundle; setting it to CoTrace/sample
-          # makes data fetches resolve to /CoTrace/sample/sample1/… which matches the
-          # GitHub Pages URL after the build/sample/ folder is deployed under /CoTrace/
-          VITE_DATA_BASE: CoTrace/sample
-        run: npm run build
+        # Call vite directly instead of `npm run build` because the npm script
+        # hardcodes VITE_DATA_BASE=sample inline, which would override our value.
+        # We need VITE_DATA_BASE=CoTrace/sample so the client fetches data from
+        # /CoTrace/sample/sample1/… (the correct GitHub Pages path).
+        run: VITE_DATA_BASE=CoTrace/sample node node_modules/vite/bin/vite.js build
 
       - name: Create static run-list API endpoint
         # The app calls /CoTrace/api/runs at runtime to discover available sessions.
