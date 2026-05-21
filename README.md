@@ -20,7 +20,7 @@
 ## Overview
 
 This repository contains the code for CoTrace pipeline, and interactive tool for the paper.
-We provide the example of interactive tool in 
+Try an [interactive CoTrace-viewer demo](https://rladmstn1714.github.io/CoTrace/Explorer) on a sample collaboration trace.
 ## Repository Structure
 
 ```text
