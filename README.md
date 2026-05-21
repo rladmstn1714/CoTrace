@@ -11,9 +11,9 @@
     <!-- <a href="REPO_LINK"><img src="https://img.shields.io/badge/GitHub-Repository-181717" alt="GitHub Repo"></a> -->
   </p>
 </div>
-
----
 ![Overview figure](assets/concept.png)
+---
+
 ## Overview
 
 This repository contains the code, analysis pipeline, and interactive tool for the paper.

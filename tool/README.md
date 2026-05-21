@@ -1,4 +1,4 @@
-# Dialogue Outcome Attribution Explorer
+# CoTrace-viewer
 
 Interactive SvelteKit app for exploring how outcomes evolve through dialogue, with hierarchy/timeline views and role-based contribution summaries.
 
@@ -89,7 +89,7 @@ Optional file:
 
 - `outcome_action_map.json`
 
-Reference example data under `static/wine3/` and `static/user_study/`.
+Reference example data under `static/sample/sampel1/`.
 
 ## Quality checks
 
