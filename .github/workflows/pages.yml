@@ -1,0 +1,71 @@
+name: Deploy CoTrace demo to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tool/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: tool/package-lock.json
+
+      - name: Install dependencies
+        working-directory: tool
+        run: npm ci
+
+      - name: Build static site
+        working-directory: tool
+        env:
+          # BASE_PATH tells SvelteKit to prefix all asset/link paths with /CoTrace
+          BASE_PATH: /CoTrace
+          # VITE_DATA_BASE is baked into the client bundle; setting it to CoTrace/sample
+          # makes data fetches resolve to /CoTrace/sample/sample1/… which matches the
+          # GitHub Pages URL after the build/sample/ folder is deployed under /CoTrace/
+          VITE_DATA_BASE: CoTrace/sample
+        run: npm run build
+
+      - name: Create static run-list API endpoint
+        # The app calls /CoTrace/api/runs at runtime to discover available sessions.
+        # On a static host there is no server, so we drop a pre-baked JSON file at
+        # exactly that path so the fetch resolves successfully.
+        run: |
+          mkdir -p tool/build/api
+          printf '{"runs":["sample1"]}' > tool/build/api/runs
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: tool/build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
