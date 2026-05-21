@@ -1,0 +1,2 @@
+{"t": 2, "requirement_id": "r1", "operation_type": "ADD", "related_prev_requirement": null, "outcome_id": "outcome_1"}
+{"t": 7, "requirement_id": "r2", "operation_type": "ADD", "related_prev_requirement": null, "outcome_id": "outcome_3"}

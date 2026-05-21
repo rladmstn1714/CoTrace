@@ -17,8 +17,15 @@ const resolvedDataBase = dataBase
 /** URL prefix the client uses for data requests (must match dataLoader BASE). */
 const baseUrlPrefix = dataBase ? '/' + dataBase.replace(/^\/+/, '').replace(/\\/g, '/') : '';
 
-const FILE_CACHE_MAX = 80; // cache up to 80 files (e.g. 9 per run) to speed up NAS / repeated run switch
+const FILE_CACHE_MAX = 80;
 const fileCache = new Map<string, { data: Buffer; ext: string }>();
+const OPTIONAL_DATA_FILES = new Set([
+	'outcome_action_map.json',
+	'intent_outcome_map.json',
+	'step05b_output.json',
+	'requirement_status.json',
+	'requirement_contributions.json'
+]);
 
 function getCached(filePath: string): { data: Buffer; ext: string } | undefined {
 	return fileCache.get(path.normalize(filePath));
@@ -32,7 +39,7 @@ function setCache(filePath: string, data: Buffer, ext: string) {
 	}
 }
 
-/** Serve JSON/jsonl from VITE_DATA_BASE (absolute or relative to cwd). Uses in-memory cache to avoid repeated slow reads (e.g. on NAS). */
+/** Serve JSON/jsonl from VITE_DATA_BASE (absolute or relative to cwd). */
 function dataDirPlugin() {
 	return {
 		name: 'serve-data-dir',
@@ -45,6 +52,7 @@ function dataDirPlugin() {
 				const filePath = path.join(resolvedDataBase, relativePath);
 				if (!filePath.startsWith(resolvedDataBase)) return next();
 				const ext = path.extname(filePath);
+				const isOptionalDataFile = OPTIONAL_DATA_FILES.has(path.basename(filePath));
 				function serve(data: Buffer) {
 					res.setHeader('Content-Type', ext === '.jsonl' ? 'application/x-ndjson' : 'application/json');
 					res.end(data);
@@ -56,7 +64,6 @@ function dataDirPlugin() {
 				}
 				fs.readFile(filePath, (err, data) => {
 					if (err) {
-						// wine2 layout: try {run}/run/{filename} (e.g. .../chenyang_simple/run/utterance_list.json)
 						const dir = path.dirname(filePath);
 						const name = path.basename(filePath);
 						const fallbackPath = path.join(dir, 'run', name);
@@ -66,7 +73,14 @@ function dataDirPlugin() {
 							return;
 						}
 						fs.readFile(fallbackPath, (err2, data2) => {
-							if (err2) return next();
+							if (err2) {
+								if (isOptionalDataFile) {
+									res.statusCode = 204;
+									res.end();
+									return;
+								}
+								return next();
+							}
 							setCache(fallbackPath, data2!, path.extname(fallbackPath));
 							serve(data2!);
 						});

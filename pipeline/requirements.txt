@@ -1,0 +1,15 @@
+# Core (pipeline + run_pipeline)
+openai>=1.0
+numpy>=1.24
+scikit-learn>=1.3
+tqdm>=4.65
+python-dotenv>=1.0
+
+# Optional: repair invalid JSON from LLM responses
+json-repair>=0.7
+
+# Provider: Google Gemini (only if --provider google or gemini-* models)
+google-generativeai>=0.8
+
+# Optional: gateway secrets.toml (see config/models.py load_secrets_toml)
+toml>=0.10

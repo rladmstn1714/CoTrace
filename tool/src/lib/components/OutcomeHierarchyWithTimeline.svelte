@@ -418,7 +418,7 @@ function baseOutcomeId(outputId: string): string {
 				const impl = Array.isArray((entry as { implementation_actions?: OriginAction[] }).implementation_actions) ? (entry as { implementation_actions: OriginAction[] }).implementation_actions : [];
 				for (const a of origin) add(a, true);
 				/* Count contributing_actions in the timeline too: execution is often only here while
-				 * `is_executed` is true; excluding them left Executor empty (see OutcomeTimelineGraph). */
+				 * `is_executed` is true; excluding them left Executor empty. */
 				for (const a of contrib) add(a, true);
 				for (const a of impl) add(a, true);
 			}

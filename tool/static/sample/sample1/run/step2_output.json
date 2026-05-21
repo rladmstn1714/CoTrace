@@ -1,0 +1,136 @@
+{
+  "dialogue_id": "gemini_english_diag_8_9_turns_Practical_Guidance_Planning_0",
+  "pairs": [
+    {
+      "req_id": "r2",
+      "req_text": "Assistant must provide an audio overview title and metadata, including the duration, for the podcast.",
+      "origin_turn_id": 7,
+      "origin_turn_text": "Sure, here is your Audio Overview.\nDecoding the Digital Doctor: The Making of a West LA Tech Trust\nGemini-generated audio overview\n0:00\n59:59",
+      "origin_turn_speaker": "assistant",
+      "origin_turn_actions": [
+        {
+          "action_id": "7-1",
+          "action_text": "Assistant acknowledges the request and signals readiness to deliver the audio overview",
+          "role": "EXECUTOR"
+        },
+        {
+          "action_id": "7-2",
+          "action_text": "Assistant provides an audio overview title and metadata (Gemini-generated audio overview, duration)",
+          "role": "EXECUTOR"
+        }
+      ],
+      "prev_turn_id": 6,
+      "prev_turn_text": "Generate Audio Overview",
+      "prev_turn_speaker": "user",
+      "prev_turn_actions": [
+        {
+          "action_id": "6-1",
+          "action_text": "User requests the assistant to generate an audio overview",
+          "role": "SHAPER"
+        }
+      ],
+      "similarity": 0.6241730898079758,
+      "sources": [
+        "utterance"
+      ]
+    },
+    {
+      "req_id": "r2",
+      "req_text": "Assistant must provide an audio overview title and metadata, including the duration, for the podcast.",
+      "origin_turn_id": 7,
+      "origin_turn_text": "Sure, here is your Audio Overview.\nDecoding the Digital Doctor: The Making of a West LA Tech Trust\nGemini-generated audio overview\n0:00\n59:59",
+      "origin_turn_speaker": "assistant",
+      "origin_turn_actions": [
+        {
+          "action_id": "7-1",
+          "action_text": "Assistant acknowledges the request and signals readiness to deliver the audio overview",
+          "role": "EXECUTOR"
+        },
+        {
+          "action_id": "7-2",
+          "action_text": "Assistant provides an audio overview title and metadata (Gemini-generated audio overview, duration)",
+          "role": "EXECUTOR"
+        }
+      ],
+      "prev_turn_id": 2,
+      "prev_turn_text": "create a podcast about <REDACTED>: lead tech at West LA Computer Expert",
+      "prev_turn_speaker": "user",
+      "prev_turn_actions": [
+        {
+          "action_id": "2-1",
+          "action_text": "User specifies the podcast topic/request: create a podcast about the named lead tech at West LA Computer Expert.",
+          "role": "SHAPER"
+        }
+      ],
+      "similarity": 0.5120961134197572,
+      "sources": [
+        "utterance"
+      ]
+    },
+    {
+      "req_id": "r1",
+      "req_text": "The podcast plan must include a specific focus on the named lead tech at West LA Computer Expert.",
+      "origin_turn_id": 2,
+      "origin_turn_text": "create a podcast about <REDACTED>: lead tech at West LA Computer Expert",
+      "origin_turn_speaker": "user",
+      "origin_turn_actions": [
+        {
+          "action_id": "2-1",
+          "action_text": "User specifies the podcast topic/request: create a podcast about the named lead tech at West LA Computer Expert.",
+          "role": "SHAPER"
+        }
+      ],
+      "prev_turn_id": 0,
+      "prev_turn_text": "can you create a podcast?",
+      "prev_turn_speaker": "user",
+      "prev_turn_actions": [
+        {
+          "action_id": "0-1",
+          "action_text": "User asks the assistant to create a podcast.",
+          "role": "SHAPER"
+        }
+      ],
+      "similarity": 0.5100617176562372,
+      "sources": [
+        "utterance"
+      ]
+    },
+    {
+      "req_id": "r1",
+      "req_text": "The podcast plan must include a specific focus on the named lead tech at West LA Computer Expert.",
+      "origin_turn_id": 2,
+      "origin_turn_text": "create a podcast about <REDACTED>: lead tech at West LA Computer Expert",
+      "origin_turn_speaker": "user",
+      "origin_turn_actions": [
+        {
+          "action_id": "2-1",
+          "action_text": "User specifies the podcast topic/request: create a podcast about the named lead tech at West LA Computer Expert.",
+          "role": "SHAPER"
+        }
+      ],
+      "prev_turn_id": 1,
+      "prev_turn_text": "I am a Gemini Deep Research agent and I am powered by Gemini 2.0 Flash Thinking. What else would you like to know?",
+      "prev_turn_speaker": "assistant",
+      "prev_turn_actions": [
+        {
+          "action_id": "1-1",
+          "action_text": "Assistant states its identity and capabilities as a Gemini Deep Research agent powered by Gemini 2.0 Flash Thinking.",
+          "role": "OTHER"
+        },
+        {
+          "action_id": "1-2",
+          "action_text": "Assistant asks what else the user would like to know.",
+          "role": "SHAPER"
+        }
+      ],
+      "similarity": 0.5,
+      "sources": [
+        "adjacent_prev"
+      ]
+    }
+  ],
+  "metadata": {
+    "num_pairs": 4,
+    "model": "text-embedding-3-small"
+  }
+}

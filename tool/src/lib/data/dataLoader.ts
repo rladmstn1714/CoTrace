@@ -12,12 +12,12 @@ import type {
 import { compareOutcomeIds, outcomeSortKey } from '$lib/utils';
 
 /**
- * Data directory. VITE_DATA_BASE overrides; default is wine3 (static/wine3) so bundled runs show.
+ * Data directory. VITE_DATA_BASE overrides; default is sample (static/sample, e.g. paper-demo).
  */
 const BASE =
 	typeof import.meta.env?.VITE_DATA_BASE === 'string' && import.meta.env.VITE_DATA_BASE.trim()
 		? '/' + String(import.meta.env.VITE_DATA_BASE).replace(/^\/+/, '')
-		: '/wine3';
+		: '/sample';
 
 interface RequirementOutputDependency {
 	dialogue_id: string;
@@ -135,15 +135,14 @@ function getInlineData<T>(path: string, run?: string | null): T | null {
 	return null;
 }
 
-/** Try primary path; if 404 and run is set, try wine2 layout: {run}/run/{path} */
+/** Try primary path; if 404, try pipeline layout: {base}/run/{path}. */
 async function fetchJson<T>(path: string, run?: string | null): Promise<T> {
 	const base = getDataBase(run);
 	const inline = getInlineData<T>(path, run);
 	if (inline != null) return inline;
 	let res = await fetch(`${base}${path}`);
-	if (!res.ok && run) {
-		const wine2Url = `${base}/run${path}`;
-		res = await fetch(wine2Url);
+	if (!res.ok) {
+		res = await fetch(`${base}/run${path}`);
 	}
 	if (!res.ok) throw new Error(`Failed to load ${path}`);
 	return res.json();
@@ -155,14 +154,15 @@ async function fetchJsonOptional<T>(path: string, run?: string | null): Promise<
 	const inline = getInlineData<T>(path, run);
 	if (inline != null) return inline;
 	let res = await fetch(`${base}${path}`);
-	if (!res.ok && run) {
+	if (!res.ok) {
 		res = await fetch(`${base}/run${path}`);
 	}
+	if (res.status === 204) return null;
 	if (!res.ok) return null;
 	return res.json();
 }
 
-/** Try primary path; if 404 and run is set, try wine2 layout: {run}/run/{path} */
+/** Try primary path; if 404, try pipeline layout: {base}/run/{path}. */
 async function fetchJsonl<T>(path: string, run?: string | null): Promise<T[]> {
 	const base = getDataBase(run);
 	const inlineRaw = getInlineData<string>(path, run);
@@ -178,7 +178,7 @@ async function fetchJsonl<T>(path: string, run?: string | null): Promise<T[]> {
 		if ((e as Error)?.name === 'AbortError') throw new Error(`Timeout loading ${path}`);
 		throw e;
 	}
-	if (!res.ok && run) {
+	if (!res.ok) {
 		res = await fetchWithTimeout(`${base}/run${path}`).catch(() => res);
 	}
 	if (!res.ok) throw new Error(`Failed to load ${path}`);
@@ -505,7 +505,9 @@ export async function loadRequirementContributions(run?: string | null): Promise
 	// Prefer API: server reads from VITE_DATA_BASE (same folder as /api/runs), so file on disk is used
 	if (run) {
 		try {
-			const res = await fetch(`/api/requirement_contributions/${encodeURIComponent(run)}`);
+			const res = await fetch(
+				`${import.meta.env.BASE_URL}api/requirement_contributions/${encodeURIComponent(run)}`
+			);
 			if (res.ok) return (await res.json()) as RequirementContributionsData;
 		} catch {
 			/* fall through to static path */

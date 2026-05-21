@@ -1,0 +1,8 @@
+{
+  "dialogue_id": "gemini_english_diag_8_9_turns_Practical_Guidance_Planning_0",
+  "final_turn": 7,
+  "requirement_to_outcome": {
+    "r1": "outcome_1",
+    "r2": "outcome_3"
+  }
+}

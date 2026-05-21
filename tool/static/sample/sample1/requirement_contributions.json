@@ -1,0 +1,108 @@
+{
+  "r1": {
+    "created_by": "user",
+    "turn_id": 2,
+    "influential_utterances": [
+      {
+        "turn_id": 0,
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "relationship_score": 2
+      },
+      {
+        "turn_id": 1,
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "relationship_score": 1
+      },
+      {
+        "turn_id": 2,
+        "relationship_type": "DIRECT_CONNECTION",
+        "relationship_score": 5
+      }
+    ],
+    "role_contributions": {
+      "user": {
+        "SHAPER": {
+          "M_dir": 0.0,
+          "M_ind": 0.32000000000000006,
+          "M_total": 0.32000000000000006,
+          "count": 1
+        }
+      },
+      "assistant": {
+        "OTHER": {
+          "M_dir": 0.0,
+          "M_ind": 0.2,
+          "M_total": 0.2,
+          "count": 1
+        },
+        "SHAPER": {
+          "M_dir": 0.0,
+          "M_ind": 0.4,
+          "M_total": 0.4,
+          "count": 1
+        },
+        "EXECUTOR": {
+          "M_dir": 1.0,
+          "M_ind": 0.0,
+          "M_total": 1.0,
+          "count": 1
+        }
+      }
+    },
+    "overall": {
+      "user": {
+        "rate": 0.16666666666666669,
+        "M_total": 0.32000000000000006,
+        "count": 1
+      },
+      "assistant": {
+        "rate": 0.8333333333333333,
+        "M_total": 1.6,
+        "count": 3
+      }
+    }
+  },
+  "r2": {
+    "created_by": "assistant",
+    "turn_id": 7,
+    "influential_utterances": [
+      {
+        "turn_id": 2,
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "relationship_score": 2
+      },
+      {
+        "turn_id": 6,
+        "relationship_type": "DIRECT_CONNECTION",
+        "relationship_score": 4
+      },
+      {
+        "turn_id": 7,
+        "relationship_type": "DIRECT_CONNECTION",
+        "relationship_score": 5
+      }
+    ],
+    "role_contributions": {
+      "user": {
+        "SHAPER": {
+          "M_dir": 3.2,
+          "M_ind": 0.32000000000000006,
+          "M_total": 3.5200000000000005,
+          "count": 2
+        }
+      }
+    },
+    "overall": {
+      "user": {
+        "rate": 1.0,
+        "M_total": 3.5200000000000005,
+        "count": 2
+      },
+      "assistant": {
+        "rate": 0.0,
+        "M_total": 0.0,
+        "count": 0
+      }
+    }
+  }
+}

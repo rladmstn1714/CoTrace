@@ -1,0 +1,19 @@
+{
+  "dialogue_id": "gemini_english_diag_8_9_turns_Practical_Guidance_Planning_0",
+  "requirements": [
+    {
+      "id": "r1",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": true
+    },
+    {
+      "id": "r2",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": false
+    }
+  ]
+}

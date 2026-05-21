@@ -40,7 +40,7 @@ function collectRunsUnderRoot(rootAbs: string, relative = ''): string[] {
 	return found;
 }
 
-/** List runs: from VITE_DATA_BASE (if set) or bundled static/wine3. */
+/** List runs: from VITE_DATA_BASE (if set) or bundled static/sample. */
 export const GET: RequestHandler = async () => {
 	const dataBase = (typeof process !== 'undefined' && process.env?.VITE_DATA_BASE?.trim()) ?? '';
 	let dataRuns: string[] = [];
@@ -49,18 +49,18 @@ export const GET: RequestHandler = async () => {
 	if (dataBase) {
 		try {
 			const resolved = resolveDataBasePath(dataBase);
-			const collected = collectRunsUnderRoot(resolved);
+			const collected = isRunDirectory(resolved) ? ['__default__'] : collectRunsUnderRoot(resolved);
 			dataRuns = [...new Set(collected)].sort((a, b) => a.localeCompare(b));
 		} catch {
 			// fall through
 		}
 	}
 
-	// 2) If nothing from env, use bundled static/wine3 (so it works without .env locally)
-	if (dataRuns.length === 0) {
+	// 2) If no env path was provided, use bundled static/sample (paper-demo, etc.)
+	if (!dataBase && dataRuns.length === 0) {
 		try {
-			const wine3Path = path.join(process.cwd(), 'static', 'wine3');
-			const collected = collectRunsUnderRoot(wine3Path);
+			const samplePath = path.join(process.cwd(), 'static', 'sample');
+			const collected = collectRunsUnderRoot(samplePath);
 			dataRuns = [...new Set(collected)].sort((a, b) => a.localeCompare(b));
 		} catch {
 			dataRuns = [];

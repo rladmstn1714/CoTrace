@@ -1,0 +1,131 @@
+{
+  "dialogue_id": "gemini_english_diag_8_9_turns_Practical_Guidance_Planning_0",
+  "forward_labels": {
+    "r1": {
+      "implementation_action_ids": [
+        "5-3"
+      ],
+      "contributing_action_ids": [
+        "3-1",
+        "4-1",
+        "5-4",
+        "5-5",
+        "5-12",
+        "5-13"
+      ],
+      "revise_action_ids": [],
+      "all_labels": [
+        {
+          "action_id": "3-1",
+          "relationship": "CONTRIBUTES",
+          "relationship_score": null,
+          "explanation": "Initiates the research/plan workflow in which the requirement (specific focus on named lead tech) can be carried into the plan.",
+          "explanation_type": "Other",
+          "contribution_role": "SHAPER"
+        },
+        {
+          "action_id": "3-2",
+          "relationship": "NO_CONNECTION",
+          "relationship_score": null,
+          "explanation": "Invitation to request updates is procedural and does not itself act on the named-lead-tech focus requirement.",
+          "explanation_type": "Other",
+          "contribution_role": "SHAPER"
+        },
+        {
+          "action_id": "3-3",
+          "relationship": "DIRECT_CONNECTION",
+          "relationship_score": 4,
+          "explanation": "Naming the plan around the individual (“Daniel Zivetz Podcast Planning”) explicitly aligns the plan with the required focus on the named lead tech.",
+          "explanation_type": "Preference-Accumulate",
+          "contribution_role": "SHAPER"
+        },
+        {
+          "action_id": "3-12",
+          "relationship": "NO_CONNECTION",
+          "relationship_score": null,
+          "explanation": "Offering additional options (“More”) does not specifically shape or fulfill the named-lead-tech focus requirement.",
+          "explanation_type": "Other",
+          "contribution_role": "SHAPER"
+        },
+        {
+          "action_id": "3-15",
+          "relationship": "NO_CONNECTION",
+          "relationship_score": null,
+          "explanation": "Time-to-ready statement does not affect the content focus requirement.",
+          "explanation_type": "Other",
+          "contribution_role": "EXECUTOR"
+        },
+        {
+          "action_id": "3-16",
+          "relationship": "NO_CONNECTION",
+          "relationship_score": null,
+          "explanation": "Offering to edit is procedural and does not directly shape the requirement itself.",
+          "explanation_type": "Other",
+          "contribution_role": "SHAPER"
+        },
+        {
+          "action_id": "4-1",
+          "relationship": "CONTRIBUTES",
+          "relationship_score": null,
+          "explanation": "User’s request to start research advances execution of the plan that must meet the named-lead-tech focus requirement.",
+          "explanation_type": "Other",
+          "contribution_role": "SHAPER"
+        },
+        {
+          "action_id": "5-3",
+          "relationship": "IMPLEMENTS",
+          "relationship_score": null,
+          "explanation": "Provides the detailed podcast plan output, which is the artifact constrained by the requirement to focus on the named lead tech.",
+          "explanation_type": "Other",
+          "contribution_role": "EXECUTOR"
+        },
+        {
+          "action_id": "5-4",
+          "relationship": "CONTRIBUTES",
+          "relationship_score": null,
+          "explanation": "Explains business value/opportunity; supports the plan but is not specifically about ensuring focus on the named lead tech.",
+          "explanation_type": "Other",
+          "contribution_role": "SHAPER"
+        },
+        {
+          "action_id": "5-5",
+          "relationship": "CONTRIBUTES",
+          "relationship_score": null,
+          "explanation": "Lists primary podcast goals; contributes content to the plan but only indirectly relates to the named-lead-tech focus requirement.",
+          "explanation_type": "Other",
+          "contribution_role": "SHAPER"
+        },
+        {
+          "action_id": "5-12",
+          "relationship": "CONTRIBUTES",
+          "relationship_score": null,
+          "explanation": "Summarizes next steps for launching; supports completion but does not directly enforce the named-lead-tech focus requirement.",
+          "explanation_type": "Other",
+          "contribution_role": "EXECUTOR"
+        },
+        {
+          "action_id": "5-13",
+          "relationship": "CONTRIBUTES",
+          "relationship_score": null,
+          "explanation": "Recommends initiating development around topics; contributes guidance but not specifically about the named-lead-tech focus constraint.",
+          "explanation_type": "Other",
+          "contribution_role": "SHAPER"
+        }
+      ]
+    },
+    "r2": {
+      "implementation_action_ids": [],
+      "contributing_action_ids": [],
+      "revise_action_ids": [],
+      "all_labels": []
+    }
+  },
+  "enriched_counts": {
+    "implements": 1,
+    "contributes": 6,
+    "revises": 0
+  },
+  "metadata": {
+    "model": "gpt-5.2-2025-12-11"
+  }
+}

@@ -18,7 +18,7 @@ npm install
 npm run dev
 ```
 
-Optional: open directly in browser.
+Then open **http://localhost:5173/**.
 
 ```sh
 npm run dev -- --open
@@ -36,13 +36,42 @@ Helper script (same behavior, with optional port):
 ./run.sh <folder> --port 5173
 ```
 
+## Viewing pipeline outputs
+
+The pipeline writes the parsed JSON/JSONL files that this tool expects. Put each pipeline run under `tool/static/<dataset_name>/<run_name>/`.
+
+From the repository root:
+
+```sh
+python pipeline/run_pipeline.py \
+  --input_diag /path/to/dialogue.json \
+  --output_dir tool/static/my-runs/my-dialogue
+
+cd tool
+npm install
+./run.sh my-runs --port 5173
+```
+
+Then open **http://localhost:5173/explorer**.
+
+For multiple runs, place each output directory under the same dataset folder:
+
+```text
+tool/static/my-runs/
+├── dialogue-a/
+├── dialogue-b/
+└── dialogue-c/
+```
+
+The explorer will list those run folders in the Run dropdown.
+
 ## Data base and run selection
 
 The app reads data from `static/<VITE_DATA_BASE>/`.
 
 - If `VITE_DATA_BASE` points to a folder containing multiple run subfolders, the UI shows a Run dropdown.
 - If it points to a single run folder, that run is loaded directly.
-- If omitted, the default is `wine3`.
+- If omitted, the default is `sample` (includes the bundled `sample/paper-demo` run).
 
 ## Required data files (per run)
 
@@ -80,3 +109,4 @@ npm run check:watch
 npm run build
 npm run preview
 ```
+

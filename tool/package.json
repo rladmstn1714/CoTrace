@@ -1,11 +1,11 @@
 {
-	"name": "chatvis2",
+	"name": "cotrace-tool",
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
 		"dev": "node node_modules/vite/bin/vite.js dev",
-		"build": "node node_modules/vite/bin/vite.js build",
+		"build": "VITE_DATA_BASE=sample node node_modules/vite/bin/vite.js build",
 		"preview": "node node_modules/vite/bin/vite.js preview",
 		"prepare": "node node_modules/@sveltejs/kit/svelte-kit.js sync || echo ''",
 		"check": "node node_modules/@sveltejs/kit/svelte-kit.js sync && node node_modules/svelte-check/bin/svelte-check --tsconfig ./tsconfig.json",

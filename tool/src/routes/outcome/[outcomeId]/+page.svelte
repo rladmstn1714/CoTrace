@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { page } from '$app/stores';
 	import { get } from 'svelte/store';
 	import { onMount } from 'svelte';
@@ -36,10 +37,10 @@
 		<div class="error">{error}</div>
 	{:else if !outcome}
 		<div class="error">Outcome not found.</div>
-		<a href="/" class="back">← Back to start</a>
+		<a href="{base}/explorer" class="back">← Back to explorer</a>
 	{:else}
 		<header class="detail-header">
-			<a href="/" class="back">← Back to start</a>
+			<a href="{base}/explorer" class="back">← Back to explorer</a>
 			<h1 class="outcome-title">{outcome.outcome}</h1>
 			<p class="outcome-sub">
 				Shaper / Executor mini-charts for this goal are on the main screen — select this goal in the left outcome hierarchy.
