@@ -1,8 +1,8 @@
-# pipeline
+# CoTrace pipeline
 
-Run the requirement/outcome pipeline on one chat dialogue and export parsed artifacts.
+Run the pipeline on one chat dialogue and export parsed artifacts.
 
-`--input_diag` is a unified chat source argument name. Despite the name, it accepts both URLs and local paths.
+`--input_diag` is a unified chat source argument name. It accepts both chat URLs and local paths.
 
 ## Quick start
 
