@@ -6,7 +6,7 @@
   </p>
   <p>
     <a href="https://arxiv.org/abs/2605.21363"><img src="https://img.shields.io/badge/Arxiv-Paper-red" alt="Paper"></a>
-    <!-- <a href="Web_LINK"><img src="" alt="Web"></a> -->
+    <!-- <a href="Web_LINK"><img src="https://img.shields.io/badge/Arxiv-Paper-red" alt="Web"></a> -->
     <!-- <a href="HF_LINK"><img src="https://img.shields.io/badge/HuggingFace-Dataset-ffd21e" alt="Hugging Face"></a> -->
     <!-- <a href="REPO_LINK"><img src="https://img.shields.io/badge/GitHub-Repository-181717" alt="GitHub Repo"></a> -->
   </p>
@@ -43,3 +43,5 @@ Please cite our paper if you use any part of this code in your work:
       url={https://arxiv.org/abs/2605.21363}, 
 }
 ```
+
+If you have any questions, please open a GitHub issue or contact us via email at [eunsukim@andrew.cmu.edu](mailto:eunsukim@andrew.cmu.edu).
