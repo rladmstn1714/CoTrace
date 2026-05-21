@@ -13,7 +13,7 @@
 </div>
 
 ---
-![Overview figure](assets/concept.pdf)
+![Overview figure](assets/concept.png)
 ## Overview
 
 This repository contains the code, analysis pipeline, and interactive tool for the paper.
