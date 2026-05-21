@@ -71,7 +71,7 @@ The app reads data from `static/<VITE_DATA_BASE>/`.
 
 - If `VITE_DATA_BASE` points to a folder containing multiple run subfolders, the UI shows a Run dropdown.
 - If it points to a single run folder, that run is loaded directly.
-- If omitted, the default is `sample` (includes the bundled `sample/paper-demo` run).
+- If omitted, the default is `sample` (includes the bundled `sample/sample1` run).
 
 ## Required data files (per run)
 

@@ -12,6 +12,7 @@
   </p>
 </div>
 ![Overview figure](assets/concept.png)
+
 ---
 
 ## Overview
