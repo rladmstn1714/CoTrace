@@ -6,8 +6,8 @@
   </p>
   <p>
     <a href="https://arxiv.org/abs/2605.21363"><img src="https://img.shields.io/badge/Arxiv-Paper-red" alt="Paper"></a>
-    <a href="https://rladmstn1714.github.io/CoTrace"><img src="https://img.shields.io/badge/Web-Project-Green" alt="Web"></a>
-    <a href="https://rladmstn1714.github.io/CoTrace/Explorer"><img src="https://img.shields.io/badge/Web-Demo-Blue" alt="Web"></a>
+    <a href="https://rladmstn1714.github.io/CoTrace"><img src="https://img.shields.io/badge/Web-Project-green" alt="Web"></a>
+    <a href="https://rladmstn1714.github.io/CoTrace/Explorer"><img src="https://img.shields.io/badge/Web-Demo-blue" alt="Web"></a>
     <!-- <a href="HF_LINK"><img src="https://img.shields.io/badge/HuggingFace-Dataset-ffd21e" alt="Hugging Face"></a> -->
     <!-- <a href="REPO_LINK"><img src="https://img.shields.io/badge/GitHub-Repository-181717" alt="GitHub Repo"></a> -->
   </p>
@@ -20,7 +20,7 @@
 ## Overview
 
 This repository contains the code for CoTrace pipeline, and interactive tool for the paper.
-
+We provide the example of interactive tool in 
 ## Repository Structure
 
 ```text
