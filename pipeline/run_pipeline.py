@@ -52,7 +52,7 @@ def _fetch_poe_share_html(url: str) -> str:
     req = urllib.request.Request(
         url.strip(),
         headers={
-            "User-Agent": "Mozilla/5.0 (compatible; refactored_req_based_v5_publish/1.0)",
+            "User-Agent": "Mozilla/5.0",
             "Accept": "text/html,application/xhtml+xml",
         },
     )
@@ -868,7 +868,7 @@ def run_pipeline(input_file: Path, run_dir: Path, model: str = "gpt-5.2",
 # =============================================================================
 
 def main():
-    ap = argparse.ArgumentParser(description="Run pipeline — refactored_req_based_v5_publish")
+    ap = argparse.ArgumentParser(description="Run pipeline")
     ap.add_argument("--input_dir", metavar="DIR", help="Run on every dialogue JSON in DIR")
     ap.add_argument(
         "--recursive",
@@ -903,7 +903,7 @@ def main():
     ap.add_argument(
         "--input_diag",
         help=(
-            "Chat source: Poe shared URL (https://poe.com/s/CODE) OR local chat file/dir path. "
+            "Chat source: Chat URL (https://poe.com/s/CODE) OR local chat file/dir path. "
             "Directory must contain exactly one .json/.jsonl dialogue file or one of "
             "input_dialogue.json, dialogue.json, step0_input.json."
         ),
