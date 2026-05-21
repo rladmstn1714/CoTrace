@@ -93,6 +93,41 @@
       box-shadow: 0 10px 30px rgba(79, 70, 229, 0.22);
     }
 
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-sep {
+      width: 1px;
+      height: 18px;
+      background: var(--line);
+      flex-shrink: 0;
+    }
+
+    .brand-viewer {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid #bfdbfe;
+      background: linear-gradient(180deg, #eff6ff 0%, #dbeafe 100%);
+      color: #1e40af;
+      font-size: 0.84rem;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.10);
+      transition: transform 150ms ease, box-shadow 150ms ease;
+      white-space: nowrap;
+    }
+
+    .brand-viewer:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 5px 14px rgba(37, 99, 235, 0.20);
+      color: #1e40af;
+    }
+
     .nav-links {
       display: flex;
       align-items: center;
@@ -243,8 +278,8 @@
     }
 
     .section-title p {
-      max-width: 760px;
-      margin: 0;
+      max-width: 1005px;
+    margin: 0;
       color: var(--muted);
       font-size: 1.06rem;
     }
@@ -353,6 +388,450 @@
       margin-top: 16px;
     }
 
+
+    .card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(229, 231, 235, 0.9);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 14px 38px rgba(15, 23, 42, 0.05);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .mini-card {
+      padding: 22px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .mini-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+      letter-spacing: -0.015em;
+      font-weight: 700;
+    }
+
+    .mini-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      counter-reset: step;
+    }
+
+    .step {
+      position: relative;
+      padding: 22px;
+      min-height: 200px;
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 850;
+      margin-bottom: 18px;
+    }
+
+    .step h3 {
+      margin: 0 0 8px;
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+      font-weight: 700;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .contribution-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .contribution-tab {
+      appearance: none;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #ffffff;
+      color: var(--muted);
+      padding: 10px 16px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+    }
+
+    .contribution-tab:hover {
+      transform: translateY(-1px);
+      border-color: #c7d2fe;
+      color: var(--accent);
+    }
+
+    .contribution-tab.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #ffffff;
+    }
+
+    .contribution-panels {
+      position: relative;
+    }
+
+    .contribution-panel {
+      display: none;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .contribution-panel.active {
+      display: grid;
+    }
+
+    .label-card {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 28px;
+      background: #ffffff;
+      box-shadow: 0 14px 38px rgba(15, 23, 42, 0.05);
+    }
+
+    .label-card h3 {
+      margin: 0 0 12px;
+      font-size: clamp(1.45rem, 3vw, 2.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .label-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .figure-stack {
+      display: flex;
+      gap: 12px;
+      margin-top: 22px;
+      padding-bottom: 4px;
+      overflow-x: auto;
+      scroll-snap-type: x proximity;
+    }
+
+    .figure-card {
+      flex: 0 0 min(360px, 82vw);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      background: #f9fafb;
+      scroll-snap-align: start;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+
+    .figure-card.active {
+      background: var(--accent-soft);
+      transform: translateY(-1px);
+    }
+
+    .figure-card:focus-visible {
+      outline: none;
+    }
+
+    .figure-title {
+      margin: 0 0 4px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .figure-note {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .dummy-figure {
+      display: grid;
+      gap: 10px;
+      min-height: 150px;
+      padding: 14px;
+      border-radius: 14px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      align-content: center;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 100px 1fr 38px;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .bar-label,
+    .bar-value {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .bar-value {
+      text-align: right;
+    }
+
+    .bar-track {
+      height: 10px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      overflow: hidden;
+    }
+   .setup-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .setup-item {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #f9fafb;
+    }
+
+    .setup-item strong {
+      color: var(--ink);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .setup-item span {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+    .bar-fill {
+      display: block;
+      width: var(--value, 0%);
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #8b5cf6);
+      transition: width 520ms ease;
+    }
+
+    .figure-path {
+      display: inline-flex;
+      width: max-content;
+      margin-top: 12px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      color: #6b7280;
+      font-size: 0.72rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .figure-stack::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .figure-stack::-webkit-scrollbar-thumb {
+      background: #d1d5db;
+      border-radius: 999px;
+    }
+
+    .findings-card {
+      display: grid;
+      gap: 14px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px;
+      background: #f9fafb;
+    }
+
+    .findings-card h4 {
+      margin: 0 0 2px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .evidence-item {
+      width: 100%;
+      text-align: left;
+      border-radius: 16px;
+      padding: 16px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      font: inherit;
+      cursor: pointer;
+      transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+    }
+
+    .evidence-item:hover {
+      transform: translateY(-1px);
+      background: #f8fafc;
+    }
+
+    .evidence-item.active {
+      background: var(--accent-soft);
+    }
+
+    .evidence-item.active strong {
+      color: var(--accent);
+    }
+
+    .evidence-item strong {
+      display: block;
+      margin-bottom: 4px;
+      letter-spacing: -0.015em;
+    }
+
+    .metric-inline {
+      color: var(--accent);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .evidence-item span {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .text-link {
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: underline;
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 3px;
+    }
+
+    .text-link::after {
+      content: " ↗";
+      font-size: 0.82em;
+      text-decoration: none;
+    }
+
+    .text-link:hover {
+      color: var(--accent);
+    }
+
+    .reflection-stack {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+      padding-bottom: 4px;
+      overflow-x: auto;
+      scroll-snap-type: x proximity;
+    }
+
+    .reflection-card {
+      position: relative;
+      flex: 0 0 min(230px, 72vw);
+      min-height: 92px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 8px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      background: #ffffff;
+      scroll-snap-align: start;
+      transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    }
+
+    .reflection-card.active {
+      background: var(--accent-soft);
+    }
+
+    .reflection-card:focus-visible {
+      outline: none;
+    }
+
+    .reflection-card::before {
+      content: "“";
+      position: absolute;
+      top: 4px;
+      right: 10px;
+      color: #e5e7eb;
+      font-size: 2rem;
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .reflection-card span {
+      position: relative;
+      z-index: 1;
+      color: #9ca3af;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .reflection-card.active span {
+      color: var(--accent);
+    }
+
+    .reflection-card p {
+      position: relative;
+      z-index: 1;
+      align-self: end;
+      margin: 0;
+      color: var(--ink);
+      font-size: 0.88rem;
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+      font-weight: 600;
+    }
+
+    .reflection-stack::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .reflection-stack::-webkit-scrollbar-thumb {
+      background: #d1d5db;
+      border-radius: 999px;
+    }
+
     pre {
       margin: 0;
       white-space: pre-wrap;
@@ -408,10 +887,13 @@
   <header>
     <div class="container">
       <nav aria-label="Primary navigation">
-        <a class="brand" href="#top" aria-label="CoTrace home">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span>CoTrace</span>
-        </a>
+        <div class="brand-group">
+          <a class="brand" href="#top" aria-label="CoTrace home">
+            <span>CoTrace</span>
+          </a>
+          <span class="brand-sep" aria-hidden="true"></span>
+          <a class="brand-viewer" href="explorer">CoTrace Viewer (Sample) ↗</a>
+        </div>
         <div class="nav-links">
           <a href="#overview">Overview</a>
           <a href="#method">Method</a>
@@ -441,6 +923,7 @@
           <div class="buttons" aria-label="Paper resources">
             <a class="button primary" href="https://arxiv.org/abs/2605.21363" target="_blank" rel="noopener">Paper</a>
             <a class="button" href="https://github.com/rladmstn1714/CoTrace" target="_blank" rel="noopener">Code</a>
+            <!--<a class="button" href="explorer" target="_blank" rel="noopener">CoTrace Viewer (Sample)</a>-->
           </div>
 
           <figure class="concept-figure">
@@ -482,7 +965,7 @@
         <div class="section-title">
           <h2>The CoTrace pipeline</h2>
           <p>
-            CoTrace decomposes collaboration into goals, requirements, actions, and influence links, then aggregates them into interpretable contribution scores.
+            CoTrace decomposes collaboration logs into goals, requirements, actions, and influence links, then aggregates them into interpretable contribution scores.
           </p>
         </div>
 
@@ -501,55 +984,138 @@
           </article>
           <article class="step">
             <h3>Contribution scoring</h3>
-            <p>Aggregate influence across requirements and goal levels to summarize each participant's role in shaping the collaboration.</p>
+            <p>Aggregate influence across requirements and goal levels to summarize each participant’s role in shaping the collaboration.</p>
           </article>
         </div>
       </div>
     </section>
-
     <section id="findings">
       <div class="container">
         <div class="section-title">
-          <h2>Key findings</h2>
+          <h2>Measuring · Inducing · Exposing Goal-Level Contributions</h2>
           <p>
-            The paper studies CoTrace as an evaluation suite, a design tool, and a reflection tool for human–AI collaboration.
+            CoTrace provides three complementary uses: <strong style="font-weight:800;">measuring</strong> collaborative goal shaping, <strong style="font-weight:800;">inducing</strong> goal-shaping behavior at inference time, and <strong style="font-weight:800;">exposing</strong> these dynamics to users.
           </p>
         </div>
 
-        <div class="grid-2">
-          <article class="card">
-            <h3>Humans set direction; models fill in details.</h3>
-            <p>
-              Across real-world logs, humans dominated high-level goal shaping, while LLMs contributed more to specific child goals and concrete requirements—especially in technical tasks.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Interaction design changes AI initiative.</h3>
-            <p>
-              Simulations showed that prompting strategies and requiring messages before tool actions can increase assistant-originated requirements, making system design a lever for goal shaping.
-            </p>
-          </article>
-          <article class="card">
-            <h3>More goal shaping is not automatically better.</h3>
-            <p>
-              Assistant-created requirements were often satisfied immediately, but increased model goal shaping did not clearly translate into higher overall output quality.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Users recalibrate after seeing CoTrace.</h3>
-            <p>
-              In a user study, participants revised their sense of who contributed what after viewing goal-level analyses of their own human–LLM conversations.
-            </p>
-          </article>
+        <div class="contribution-tabs" role="tablist" aria-label="Contribution framing">
+          <button class="contribution-tab active" type="button" role="tab" aria-selected="true" data-panel="measuring">Measuring</button>
+          <button class="contribution-tab" type="button" role="tab" aria-selected="false" data-panel="inducing">Inducing</button>
+          <button class="contribution-tab" type="button" role="tab" aria-selected="false" data-panel="exposing">Exposing</button>
         </div>
-      </div>
-    </section>
 
-    <section aria-label="Paper quote">
-      <div class="container">
-        <div class="quote">
-          <p>"I didn't necessarily make the micro decisions."</p>
-          <small>Participant reflection reported in the paper, motivating goal-level attribution for human–AI collaboration.</small>
+        <div class="contribution-panels">
+          <article class="contribution-panel active" id="panel-measuring" aria-label="Measuring contribution">
+            <div class="label-card">
+              <h3>Measuring collaborative goal shaping in the wild.</h3>
+              <p>
+                CoTrace applies goal-level attribution to real-world human–LLM collaboration logs across task types and goal specificity levels.
+              </p>
+              <div class="setup-list" aria-label="Measuring study setup">
+                <div class="setup-item">
+                  <strong>Setting</strong>
+                  <span><span class="metric-inline">638</span> <a class="text-link" href="https://arxiv.org/abs/2512.17843" target="_blank" rel="noopener">ShareChat</a> logs across <span class="metric-inline">4 task categories</span>.</span>
+                </div>
+                <div class="setup-item">
+                  <strong>Measure</strong>
+                  <span>Goal-level contribution across parent goals, child goals, requirements, and direct / indirect influence links.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="findings-card">
+              <h4>Findings</h4>
+              <button class="evidence-item finding-trigger active" type="button" data-figure="direction">
+                <strong>Humans set direction, but models shape the details and specificity.</strong>
+                <span>Humans dominate high-level goal direction, while models play a larger role in refining specific requirements and implementation details.</span>
+              </button>
+              <button class="evidence-item finding-trigger" type="button" data-figure="requirements">
+                <strong>Humans and LLMs jointly shape goals throughout the interaction.</strong>
+                <span>Over the dialogue, newly added requirements fall into 4 categories: user-created, user-created after assistant influence, assistant-created, and assistant-created after user influence. The steady growth of assistant-influenced user requirements shows that goals are co-constructed across turns, not specified by the user only at the start.</span>
+              </button>
+              <button class="evidence-item finding-trigger" type="button" data-figure="patterns">
+                <strong>Indirect influence exhibits recurring patterns.</strong>
+                <span>CoTrace surfaces <span class="metric-inline">11 recurring interaction subtypes</span> of indirect influence, including underspecified intent, artifact-triggered elaboration, problem-triggered revision, and interactional steering.</span>
+              </button>
+            </div>
+          </article>
+
+          <article class="contribution-panel" id="panel-inducing" aria-label="Inducing contribution">
+            <div class="label-card">
+              <h3>Inducing and evaluating goal shaping at inference time.</h3>
+              <p>
+                CoTrace asks whether model goal-shaping can be amplified through intervention, and whether amplified goal-shaping improves collaboration outcomes.
+              </p>
+              <div class="setup-list" aria-label="Inducing simulation setup">
+                <div class="setup-item">
+                    
+                  <strong style="display:block;margin-top:16px;">Setting</strong>
+                  <span>Controlled <a class="text-link" href="https://arxiv.org/abs/2412.15701" target="_blank" rel="noopener">CoGym</a> simulations across related-work writing, travel planning, and tabular analysis tasks.</span>
+                </div>
+              </div>
+            </div>
+            <div class="findings-card">
+              <h4>Findings</h4>
+              <button class="evidence-item" type="button">
+                <strong>Prompting strategies derived from observed influence patterns further increase goal shaping.</strong>
+                <span>When the simulated user gives vague directional cues or open-ended steering questions, assistant contribution to requirement generation rises from <span class="metric-inline">30.65%</span> to <span class="metric-inline">69.64%</span> and to <span class="metric-inline">51.47%</span> correspondingly.</span>
+              </button>
+              <button class="evidence-item" type="button">
+                <strong>Requiring communication before action nearly doubles model goal-shaping.</strong>
+                <span>Chat-CoGym requires assistants to send a message before tool use, creating opportunities to articulate plans and propose next steps. Assistants directly contribute to <span class="metric-inline">42.9%</span> of requirements in Chat-CoGym versus <span class="metric-inline">24.5%</span> in Original Setting.</span>
+              </button>
+              <button class="evidence-item" type="button">
+                <strong>More goal shaping does not clearly improve output quality.</strong>
+                <span>Assistant-created requirements are satisfied more often than user-created ones, <span class="metric-inline">75.1%</span> vs. <span class="metric-inline">62.7%</span>, but much of the gap comes from same-turn execution. Excluding those cases, satisfaction becomes similar, and created requirements are essentially uncorrelated with normalized output quality.</span>
+              </button>
+            </div>
+          </article>
+
+          <article class="contribution-panel" id="panel-exposing" aria-label="Exposing contribution">
+            <div class="label-card">
+              <h3>Improving user awareness and intentionality.</h3>
+              <p>
+                CoTrace-viewer makes contribution dynamics legible, helping users notice aspects of collaboration they had not previously been aware of.
+              </p>
+              <div class="reflection-stack" aria-label="Participant reflections">
+                <div class="reflection-card" data-quote="micro" tabindex="-1">
+                  <span>P6</span>
+                  <p>“I didn’t necessarily make the micro decisions.”</p>
+                </div>
+                <div class="reflection-card" data-quote="indirect" tabindex="-1">
+                  <span>P3</span>
+                  <p>“Learning about the indirect influence really surprised me.”</p>
+                </div>
+                <div class="reflection-card" data-quote="reflection" tabindex="-1">
+                  <span>P1</span>
+                  <p>“I was not doing this cognitive reflection yet.”</p>
+                </div>
+                <div class="reflection-card" data-quote="hidden-decisions" tabindex="-1">
+                  <span>P1</span>
+                  <p>“It was surprising to me how much the tool was making decisions without me explicitly stating them.”</p>
+                </div>
+                <div class="reflection-card" data-quote="prompting" tabindex="-1">
+                  <span>P2</span>
+                  <p>“I feel like I should be way more specific in my prompting.”</p>
+                </div>
+              </div>
+            </div>
+            <div class="findings-card">
+              <h4>Findings</h4>
+              <button class="evidence-item exposing-trigger" type="button" data-quotes="reflection,micro">
+                <strong>Goal-level analysis can increase user self-awareness.</strong>
+                <span>In a user study with <span class="metric-inline">10 participants</span>, exposing participants to goal-level analysis shifted perceived contributions by nearly <span class="metric-inline">2 points</span> on a <span class="metric-inline">5-point scale</span>.</span>
+              </button>
+              <button class="evidence-item exposing-trigger" type="button" data-quotes="micro,indirect,hidden-decisions">
+                <strong>Users are surprised by the AI’s hidden decision-making.</strong>
+                <span>Most participants, <span class="metric-inline">9 out of 10</span>, reported that the tool helped them notice aspects of the collaboration they had not previously been aware of.</span>
+              </button>
+              <button class="evidence-item exposing-trigger" type="button" data-quotes="reflection,prompting">
+                <strong>The tool prompted reflection on prompting behavior.</strong>
+                <span>Participant responses suggest that goal-level contribution analysis can make implicit collaborative dynamics more apparent.</span>
+              </button>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -558,16 +1124,10 @@
       <div class="container">
         <div class="section-title">
           <h2>Citation</h2>
-          <p>Use the BibTeX below for the arXiv preprint. Update the venue fields if a proceedings version becomes available.</p>
         </div>
 
         <div class="card">
-          <div class="copy-row">
-            <strong>BibTeX</strong>
-            <button class="button" type="button" id="copyBibtex">Copy</button>
-          </div>
-          <div class="copy-status" id="copyStatus" aria-live="polite"></div>
-          <pre id="bibtex">@misc{kim2026microdecisions,
+          <pre id="bibtex">@misc{kim2026cotrace,
   title        = {"I didn't Make the Micro Decisions": Measuring, Inducing, and Exposing Goal-Level AI Contributions in Collaboration},
   author       = {Kim, Eunsu and Mindel, Jessica R. and Kim, Kyungjin and Wu, Sherry Tongshuang},
   year         = {2026},
@@ -583,21 +1143,66 @@
 
   <footer>
     <div class="container">
-      <p>Static project page template for GitHub Pages. Replace or extend sections as needed for your lab, dataset, demo, or camera-ready version.</p>
+      <p>© 2026 CoTrace Authors · <a href="https://arxiv.org/abs/2605.21363" target="_blank" rel="noopener" style="color:inherit;font-weight:600;">arXiv</a> · <a href="https://github.com/rladmstn1714/CoTrace" target="_blank" rel="noopener" style="color:inherit;font-weight:600;">GitHub</a></p>
     </div>
   </footer>
 
   <script>
-    const copyButton = document.getElementById("copyBibtex");
-    const copyStatus = document.getElementById("copyStatus");
-    const bibtex = document.getElementById("bibtex");
+    // ── Tab switching (Measuring / Inducing / Exposing) ──────────────
+    document.querySelectorAll(".contribution-tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        const panelId = "panel-" + tab.dataset.panel;
 
-    copyButton.addEventListener("click", async () => {
+        document.querySelectorAll(".contribution-tab").forEach(t => {
+          t.classList.remove("active");
+          t.setAttribute("aria-selected", "false");
+        });
+        document.querySelectorAll(".contribution-panel").forEach(p => {
+          p.classList.remove("active");
+        });
+
+        tab.classList.add("active");
+        tab.setAttribute("aria-selected", "true");
+        document.getElementById(panelId)?.classList.add("active");
+      });
+    });
+
+    // ── Measuring: finding trigger → highlight figure card ───────────
+    document.querySelectorAll(".finding-trigger").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = btn.dataset.figure;
+
+        document.querySelectorAll(".finding-trigger").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        document.querySelectorAll("#measuringFigures .figure-card").forEach(card => {
+          card.classList.toggle("active", card.dataset.figure === target);
+        });
+      });
+    });
+
+    // ── Exposing: finding trigger → highlight quote cards ────────────
+    document.querySelectorAll(".exposing-trigger").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const targets = new Set((btn.dataset.quotes || "").split(",").map(s => s.trim()));
+
+        document.querySelectorAll(".exposing-trigger").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        document.querySelectorAll(".reflection-card").forEach(card => {
+          card.classList.toggle("active", targets.has(card.dataset.quote));
+        });
+      });
+    });
+
+    // ── BibTeX copy ──────────────────────────────────────────────────
+    document.getElementById("copyBibtex")?.addEventListener("click", async () => {
+      const status = document.getElementById("copyStatus");
       try {
-        await navigator.clipboard.writeText(bibtex.textContent.trim());
-        copyStatus.textContent = "BibTeX copied to clipboard.";
-      } catch (error) {
-        copyStatus.textContent = "Copy failed. Select the BibTeX text manually.";
+        await navigator.clipboard.writeText(document.getElementById("bibtex").textContent.trim());
+        if (status) status.textContent = "BibTeX copied to clipboard.";
+      } catch {
+        if (status) status.textContent = "Copy failed. Select the BibTeX text manually.";
       }
     });
   </script>
