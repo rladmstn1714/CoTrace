@@ -323,12 +323,50 @@
       color: var(--muted);
     }
 
+    .desiderata-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .desideratum-card {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 24px;
+      background: #f9fafb;
+    }
+
+    .desideratum-label {
+      display: inline-flex;
+      margin-bottom: 12px;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .desideratum-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+
+    .desideratum-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
     .pipeline {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 14px;
       counter-reset: step;
     }
+
 
     .step {
       position: relative;
@@ -965,8 +1003,25 @@
         <div class="section-title">
           <h2>The CoTrace pipeline</h2>
           <p>
-            CoTrace decomposes collaboration logs into goals, requirements, actions, and influence links, then aggregates them into interpretable contribution scores.
+            CoTrace is built around two core design choices: representing goals as checkable requirements, and tracing both direct and indirect influence across dialogue turns.
           </p>
+        </div>
+
+        <div class="desiderata-grid" aria-label="CoTrace desiderata">
+          <article class="desideratum-card">
+            <span class="desideratum-label">Desideratum 1</span>
+            <h3>Goal and Requirement</h3>
+            <p>
+              CoTrace treats a goal as an explicit, actionable target with a desired outcome, then decomposes underspecified goals into requirements—the smallest independently checkable success predicates.
+            </p>
+          </article>
+          <article class="desideratum-card">
+            <span class="desideratum-label">Desideratum 2</span>
+            <h3>Direct and Indirect Influence</h3>
+            <p>
+              CoTrace models goal shaping as cumulative: actions can directly introduce or modify requirements, or indirectly provide context that later motivates another requirement.
+            </p>
+          </article>
         </div>
 
         <div class="pipeline">
