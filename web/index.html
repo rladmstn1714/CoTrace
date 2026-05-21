@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Project page for CoTrace: Measuring, Inducing, and Exposing Goal-Level AI Contributions in Collaboration." />
+  <meta property="og:title" content="CoTrace: Goal-Level AI Contributions in Collaboration" />
+  <meta property="og:description" content="A framework for measuring direct and indirect human-AI goal shaping across collaboration logs." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#111827" />
+
+  <title>CoTrace | Goal-Level AI Contributions in Collaboration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --paper: #ffffff;
+      --ink: #111827;
+      --muted: #5b6474;
+      --line: #e5e7eb;
+      --accent: #4f46e5;
+      --accent-2: #0f766e;
+      --accent-soft: #eef2ff;
+      --shadow: 0 24px 80px rgba(15, 23, 42, 0.10);
+      --radius-xl: 28px;
+      --radius-lg: 18px;
+      --max: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent);
+    }
+
+    .container {
+      width: min(100% - 40px, var(--max));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 10px 30px rgba(79, 70, 229, 0.22);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hero {
+      padding: 86px 0 56px;
+    }
+
+    .hero-grid {
+      display: block;
+      max-width: var(--max);
+    }
+
+    h1 {
+      font-size: clamp(2.55rem, 6vw, 5.2rem);
+      line-height: 1;
+      letter-spacing: -0.045em;
+      font-weight: 700;
+      margin: 0 0 24px;
+    }
+
+    .subtitle {
+      max-width: 790px;
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--muted);
+      margin: 0 0 26px;
+    }
+
+    .authors {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      color: #374151;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .affiliations {
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .concept-figure {
+      margin-top: 52px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 18px;
+      background: #ffffff;
+      box-shadow: 0 14px 38px rgba(15, 23, 42, 0.05);
+    }
+
+    .concept-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+    }
+
+    .concept-figure figcaption {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      font-weight: 800;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 38px rgba(15, 23, 42, 0.10);
+      border-color: #c7d2fe;
+    }
+
+    .button.primary {
+      color: white;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--accent), #7c3aed);
+    }
+
+    .stats-card {
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(229, 231, 235, 0.82);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      padding: 26px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      background: #f9fafb;
+      border: 1px solid var(--line);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 2rem;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    section {
+      padding: 46px 0;
+    }
+
+    .section-title {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .section-title p {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(229, 231, 235, 0.9);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 14px 38px rgba(15, 23, 42, 0.05);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .mini-card {
+      padding: 22px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .mini-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+      letter-spacing: -0.015em;
+      font-weight: 700;
+    }
+
+    .mini-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      counter-reset: step;
+    }
+
+    .step {
+      position: relative;
+      padding: 22px;
+      min-height: 200px;
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 850;
+      margin-bottom: 18px;
+    }
+
+    .step h3 {
+      margin: 0 0 8px;
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+      font-weight: 700;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .quote {
+      padding: 28px;
+      border-radius: var(--radius-xl);
+      background: #111827;
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .quote p {
+      margin: 0;
+      font-size: clamp(1.25rem, 3vw, 2rem);
+      line-height: 1.25;
+      letter-spacing: -0.04em;
+    }
+
+    .quote small {
+      display: block;
+      color: #cbd5e1;
+      margin-top: 16px;
+    }
+
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: #d1d5db;
+      background: #0b1120;
+      border-radius: 18px;
+      padding: 20px;
+      overflow: auto;
+      border: 1px solid #1f2937;
+    }
+
+    .copy-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .copy-status {
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    footer {
+      padding: 44px 0 70px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .grid-3,
+      .grid-2,
+      .pipeline,
+      .demo {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 56px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="CoTrace home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>CoTrace</span>
+        </a>
+        <div class="nav-links">
+          <a href="#overview">Overview</a>
+          <a href="#method">Method</a>
+          <a href="#findings">Findings</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1>Measuring, Inducing, and Exposing Goal-Level AI Contributions in Collaboration</h1>
+          <p class="subtitle">
+            CoTrace traces how humans and LLMs jointly shape goals, requirements, and decisions across multi-turn collaboration—not only who wrote the final artifact.
+          </p>
+
+          <div class="authors" aria-label="Authors">
+            <span>Eunsu Kim</span>
+            <span>Jessica R. Mindel</span>
+            <span>Kyungjin Kim</span>
+            <span>Sherry Tongshuang Wu</span>
+          </div>
+          <div class="affiliations">KAIST · Carnegie Mellon University · Seoul National University</div>
+
+          <div class="buttons" aria-label="Paper resources">
+            <a class="button primary" href="https://arxiv.org/abs/2605.21363" target="_blank" rel="noopener">Paper</a>
+            <a class="button" href="https://github.com/rladmstn1714/CoTrace" target="_blank" rel="noopener">Code</a>
+          </div>
+
+          <figure class="concept-figure">
+            <img src="assets/concept.png" alt="Conceptual overview figure for CoTrace" />
+            <figcaption>Conceptual overview of CoTrace.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview">
+      <div class="container">
+        <div class="section-title">
+          <h2>Why goal attribution matters</h2>
+          <p>
+            LLMs can propose structure, introduce constraints, ask questions, and make concrete decisions that shape a task before the final output exists. CoTrace makes those hidden contributions visible.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="mini-card">
+            <h3>Beyond final artifacts</h3>
+            <p>Instead of asking only who produced the final text, CoTrace follows how goals and requirements evolve through dialogue.</p>
+          </article>
+          <article class="mini-card">
+            <h3>Direct + indirect influence</h3>
+            <p>The framework captures explicit requirement creation as well as subtle influence, such as an AI question that prompts a later human decision.</p>
+          </article>
+          <article class="mini-card">
+            <h3>Useful for reflection</h3>
+            <p>Goal-level analysis can help users calibrate reliance, understand hidden AI work, and collaborate more intentionally.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="method">
+      <div class="container">
+        <div class="section-title">
+          <h2>The CoTrace pipeline</h2>
+          <p>
+            CoTrace decomposes collaboration into goals, requirements, actions, and influence links, then aggregates them into interpretable contribution scores.
+          </p>
+        </div>
+
+        <div class="pipeline">
+          <article class="step">
+            <h3>Outcome & action extraction</h3>
+            <p>Segment dialogue and identify outcomes, atomic actions, and whether each action shapes, executes, or plays another role.</p>
+          </article>
+          <article class="step">
+            <h3>Requirement extraction</h3>
+            <p>Convert goals into independently checkable requirements and track create, revise, and delete operations over time.</p>
+          </article>
+          <article class="step">
+            <h3>Influence labeling</h3>
+            <p>Link actions to requirements through direct or implicit influence, capturing both explicit decisions and subtle steering.</p>
+          </article>
+          <article class="step">
+            <h3>Contribution scoring</h3>
+            <p>Aggregate influence across requirements and goal levels to summarize each participant's role in shaping the collaboration.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="findings">
+      <div class="container">
+        <div class="section-title">
+          <h2>Key findings</h2>
+          <p>
+            The paper studies CoTrace as an evaluation suite, a design tool, and a reflection tool for human–AI collaboration.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <article class="card">
+            <h3>Humans set direction; models fill in details.</h3>
+            <p>
+              Across real-world logs, humans dominated high-level goal shaping, while LLMs contributed more to specific child goals and concrete requirements—especially in technical tasks.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Interaction design changes AI initiative.</h3>
+            <p>
+              Simulations showed that prompting strategies and requiring messages before tool actions can increase assistant-originated requirements, making system design a lever for goal shaping.
+            </p>
+          </article>
+          <article class="card">
+            <h3>More goal shaping is not automatically better.</h3>
+            <p>
+              Assistant-created requirements were often satisfied immediately, but increased model goal shaping did not clearly translate into higher overall output quality.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Users recalibrate after seeing CoTrace.</h3>
+            <p>
+              In a user study, participants revised their sense of who contributed what after viewing goal-level analyses of their own human–LLM conversations.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Paper quote">
+      <div class="container">
+        <div class="quote">
+          <p>"I didn't necessarily make the micro decisions."</p>
+          <small>Participant reflection reported in the paper, motivating goal-level attribution for human–AI collaboration.</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="citation">
+      <div class="container">
+        <div class="section-title">
+          <h2>Citation</h2>
+          <p>Use the BibTeX below for the arXiv preprint. Update the venue fields if a proceedings version becomes available.</p>
+        </div>
+
+        <div class="card">
+          <div class="copy-row">
+            <strong>BibTeX</strong>
+            <button class="button" type="button" id="copyBibtex">Copy</button>
+          </div>
+          <div class="copy-status" id="copyStatus" aria-live="polite"></div>
+          <pre id="bibtex">@misc{kim2026microdecisions,
+  title        = {"I didn't Make the Micro Decisions": Measuring, Inducing, and Exposing Goal-Level AI Contributions in Collaboration},
+  author       = {Kim, Eunsu and Mindel, Jessica R. and Kim, Kyungjin and Wu, Sherry Tongshuang},
+  year         = {2026},
+  eprint       = {2605.21363},
+  archivePrefix= {arXiv},
+  primaryClass = {cs.CL},
+  doi          = {10.48550/arXiv.2605.21363}
+}</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Static project page template for GitHub Pages. Replace or extend sections as needed for your lab, dataset, demo, or camera-ready version.</p>
+    </div>
+  </footer>
+
+  <script>
+    const copyButton = document.getElementById("copyBibtex");
+    const copyStatus = document.getElementById("copyStatus");
+    const bibtex = document.getElementById("bibtex");
+
+    copyButton.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(bibtex.textContent.trim());
+        copyStatus.textContent = "BibTeX copied to clipboard.";
+      } catch (error) {
+        copyStatus.textContent = "Copy failed. Select the BibTeX text manually.";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -49,6 +49,14 @@ jobs:
         # /CoTrace/sample/sample1/… (the correct GitHub Pages path).
         run: VITE_DATA_BASE=CoTrace/sample node node_modules/vite/bin/vite.js build
 
+      - name: Inject paper website and assets
+        # Replace the SvelteKit redirect at the root with the paper project page,
+        # and copy the concept figure so the image loads correctly.
+        run: |
+          cp web/index.html tool/build/index.html
+          mkdir -p tool/build/assets
+          cp assets/concept.png tool/build/assets/concept.png
+
       - name: Create static run-list API endpoint
         # The app calls /CoTrace/api/runs at runtime to discover available sessions.
         # On a static host there is no server, so we drop a pre-baked JSON file at
