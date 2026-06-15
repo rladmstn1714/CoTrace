@@ -1,0 +1,86 @@
+Loading dialogue from /mnt/nas3/eunsu/CoTrace/tool/static/sample/pittsburgh_3day_travel/run/input_dialogue.json...
+  Dialogue: pittsburgh_3day_travel, Turns: 26
+
+================================================================================
+STEP 1a: Action Extraction (per block)
+================================================================================
+  Block turns 0-3
+Loading dialogue from /mnt/nas3/eunsu/CoTrace/tool/static/sample/pittsburgh_3day_travel/run/input_dialogue.json...
+  Dialogue: pittsburgh_3day_travel, Turns: 26
+
+================================================================================
+STEP 1a: Action Extraction (per block)
+================================================================================
+  Block turns 0-3
+  Block turns 4-7
+  Block turns 8-11
+  Block turns 12-15
+  Block turns 16-19
+  Block turns 20-23
+  Block turns 24-25
+  Total actions: 138
+
+================================================================================
+STEP 1b: Global Outcome Extraction
+================================================================================
+
+================================================================================
+STEP 1c: Requirement Extraction (grouped by parent outcome) [model=openai/gpt-5.2]
+================================================================================
+  Parent outcome_1: extracting ['outcome_1', 'outcome_2', 'outcome_5', 'outcome_3', 'outcome_7', 'outcome_6', 'outcome_4']
+  Outcomes: 7, Actions: 138, Requirements: 18
+
+================================================================================
+STEP 1b: Intention Extraction
+================================================================================
+  Intentions: 3, mappings: 7
+
+================================================================================
+STEP 2a: Embedding-based Pair Selection
+================================================================================
+  Embedding 178 utterances...
+  Pairs: 67
+
+================================================================================
+STEP 2b: Unified Action-Requirement Labeling (per requirement)
+================================================================================
+Step 2b:   0%|          | 0/18 [00:00<?, ?batch/s]                                                    r1: 0 preceding + 5 subsequent
+Step 2b:   0%|          | 0/18 [00:00<?, ?batch/s]Step 2b:   6%|▌         | 1/18 [00:10<02:50, 10.02s/batch]                                                            r10: 6 preceding + 9 subsequent
+Step 2b:   6%|▌         | 1/18 [00:10<02:50, 10.02s/batch]Step 2b:  11%|█         | 2/18 [00:46<06:47, 25.46s/batch]                                                            r11: 6 preceding + 9 subsequent
+Step 2b:  11%|█         | 2/18 [00:46<06:47, 25.46s/batch]Step 2b:  17%|█▋        | 3/18 [01:38<09:24, 37.65s/batch]                                                            r12: 1 preceding + 2 subsequent
+Step 2b:  17%|█▋        | 3/18 [01:38<09:24, 37.65s/batch]Step 2b:  22%|██▏       | 4/18 [01:58<07:08, 30.61s/batch]                                                            r13: 1 preceding + 9 subsequent
+Step 2b:  22%|██▏       | 4/18 [01:58<07:08, 30.61s/batch]Step 2b:  28%|██▊       | 5/18 [02:28<06:36, 30.54s/batch]                                                            r14: 10 preceding + 31 subsequent
+Step 2b:  28%|██▊       | 5/18 [02:28<06:36, 30.54s/batch]Step 2b:  33%|███▎      | 6/18 [03:44<09:09, 45.83s/batch]                                                            r15: 10 preceding + 18 subsequent
+Step 2b:  33%|███▎      | 6/18 [03:44<09:09, 45.83s/batch]Step 2b:  39%|███▉      | 7/18 [04:29<08:23, 45.76s/batch]                                                            r16: 10 preceding + 18 subsequent
+Step 2b:  39%|███▉      | 7/18 [04:29<08:23, 45.76s/batch]Step 2b:  44%|████▍     | 8/18 [06:17<10:55, 65.55s/batch]                                                            r17: 1 preceding + 13 subsequent
+Step 2b:  44%|████▍     | 8/18 [06:17<10:55, 65.55s/batch]Step 2b:  50%|█████     | 9/18 [06:49<08:14, 54.90s/batch]                                                            r17_1: 3 preceding + 7 subsequent
+Step 2b:  50%|█████     | 9/18 [06:49<08:14, 54.90s/batch]Step 2b:  56%|█████▌    | 10/18 [07:13<06:02, 45.35s/batch]                                                             r2: 0 preceding + 32 subsequent
+Step 2b:  56%|█████▌    | 10/18 [07:13<06:02, 45.35s/batch]Step 2b:  61%|██████    | 11/18 [08:00<05:21, 45.92s/batch]                                                             r3: 1 preceding + 12 subsequent
+Step 2b:  61%|██████    | 11/18 [08:00<05:21, 45.92s/batch]Step 2b:  67%|██████▋   | 12/18 [08:26<03:59, 39.90s/batch]                                                             r4: 1 preceding + 2 subsequent
+Step 2b:  67%|██████▋   | 12/18 [08:26<03:59, 39.90s/batch]Step 2b:  72%|███████▏  | 13/18 [08:39<02:38, 31.63s/batch]                                                             r5: 1 preceding + 4 subsequent
+Step 2b:  72%|███████▏  | 13/18 [08:39<02:38, 31.63s/batch]Step 2b:  78%|███████▊  | 14/18 [09:00<01:54, 28.55s/batch]                                                             r6: 1 preceding + 4 subsequent
+Step 2b:  78%|███████▊  | 14/18 [09:00<01:54, 28.55s/batch]Step 2b:  83%|████████▎ | 15/18 [09:11<01:10, 23.37s/batch]                                                             r7: 5 preceding + 18 subsequent
+Step 2b:  83%|████████▎ | 15/18 [09:11<01:10, 23.37s/batch]Step 2b:  89%|████████▉ | 16/18 [09:53<00:57, 28.77s/batch]                                                             r8: 5 preceding + 18 subsequent
+Step 2b:  89%|████████▉ | 16/18 [09:53<00:57, 28.77s/batch]Step 2b:  94%|█████████▍| 17/18 [10:33<00:32, 32.33s/batch]                                                             r9: 5 preceding + 18 subsequent
+Step 2b:  94%|█████████▍| 17/18 [10:33<00:32, 32.33s/batch]Step 2b: 100%|██████████| 18/18 [11:18<00:00, 35.89s/batch]Step 2b: 100%|██████████| 18/18 [11:18<00:00, 37.67s/batch]
+  Total labeled pairs: 67
+  Forward: +64 implements, +83 contributes, +0 revises
+
+================================================================================
+STEP 3: Contribution Analysis
+================================================================================
+  SHAPER chain decay: alpha_direct=0.8, alpha_indirect=0.4, origin_SHAPER_score=5.0
+  Requirements: 18, Outcomes: 7
+  LLM calls: 28, prompt tokens: 62059, completion tokens: 84661
+
+================================================================================
+V4 PIPELINE SUMMARY
+================================================================================
+  Outcomes: 7
+  Actions: 138
+  Requirements: 18
+  Similarity pairs: 67
+  Labeled pairs: 67
+  LLM calls: 28
+  Output: /mnt/nas3/eunsu/CoTrace/tool/static/sample/pittsburgh_3day_travel/run
+Parsed outputs written to /mnt/nas3/eunsu/CoTrace/tool/static/sample/pittsburgh_3day_travel

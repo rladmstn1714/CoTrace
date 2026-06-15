@@ -1,0 +1,133 @@
+{
+  "dialogue_id": "pittsburgh_3day_travel",
+  "requirements": [
+    {
+      "id": "r1",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": true
+    },
+    {
+      "id": "r2",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": true
+    },
+    {
+      "id": "r3",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": true
+    },
+    {
+      "id": "r4",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": true
+    },
+    {
+      "id": "r5",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": true
+    },
+    {
+      "id": "r6",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": true
+    },
+    {
+      "id": "r7",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": true
+    },
+    {
+      "id": "r8",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": true
+    },
+    {
+      "id": "r9",
+      "is_dismissed": true,
+      "dismissed_by_action_ids": [
+        "14-2"
+      ],
+      "dismissed_at_turn": 12,
+      "is_executed": true
+    },
+    {
+      "id": "r10",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": true
+    },
+    {
+      "id": "r11",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": true
+    },
+    {
+      "id": "r12",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": true
+    },
+    {
+      "id": "r13",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": true
+    },
+    {
+      "id": "r14",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": true
+    },
+    {
+      "id": "r15",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": true
+    },
+    {
+      "id": "r16",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": true
+    },
+    {
+      "id": "r17",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": true
+    },
+    {
+      "id": "r17_1",
+      "is_dismissed": false,
+      "dismissed_by_action_ids": [],
+      "dismissed_at_turn": null,
+      "is_executed": true
+    }
+  ]
+}

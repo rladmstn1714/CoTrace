@@ -1,0 +1,370 @@
+{
+  "outcome_1": {
+    "role_contributions": {
+      "EXECUTOR": {
+        "user": {
+          "rate": 0.0,
+          "M_total": 0.0,
+          "count": 0,
+          "M_dir": 0.0,
+          "M_ind": 0.0
+        },
+        "assistant": {
+          "rate": 1.0,
+          "M_total": 1.0,
+          "count": 1,
+          "M_dir": 1.0,
+          "M_ind": 0.0
+        }
+      },
+      "SHAPER": {
+        "user": {
+          "rate": 1.0,
+          "M_total": 10.0,
+          "count": 2,
+          "M_dir": 10.0,
+          "M_ind": 0.0
+        },
+        "assistant": {
+          "rate": 0.0,
+          "M_total": 0.0,
+          "count": 0,
+          "M_dir": 0.0,
+          "M_ind": 0.0
+        }
+      }
+    },
+    "overall": {
+      "user": {
+        "rate": 0.9090909090909091,
+        "M_total": 10.0,
+        "count": 2
+      },
+      "assistant": {
+        "rate": 0.09090909090909091,
+        "M_total": 1.0,
+        "count": 1
+      }
+    }
+  },
+  "outcome_2": {
+    "role_contributions": {
+      "EXECUTOR": {
+        "user": {
+          "rate": 0.0,
+          "M_total": 0.0,
+          "count": 0,
+          "M_dir": 0.0,
+          "M_ind": 0.0
+        },
+        "assistant": {
+          "rate": 1.0,
+          "M_total": 14.8,
+          "count": 20,
+          "M_dir": 10.0,
+          "M_ind": 4.8
+        }
+      },
+      "SHAPER": {
+        "user": {
+          "rate": 1.0,
+          "M_total": 30.0,
+          "count": 6,
+          "M_dir": 30.0,
+          "M_ind": 0.0
+        },
+        "assistant": {
+          "rate": 0.0,
+          "M_total": 0.0,
+          "count": 0,
+          "M_dir": 0.0,
+          "M_ind": 0.0
+        }
+      }
+    },
+    "overall": {
+      "user": {
+        "rate": 0.6696428571428572,
+        "M_total": 30.0,
+        "count": 6
+      },
+      "assistant": {
+        "rate": 0.3303571428571429,
+        "M_total": 14.8,
+        "count": 20
+      }
+    }
+  },
+  "outcome_5": {
+    "role_contributions": {
+      "EXECUTOR": {
+        "user": {
+          "rate": 0.0,
+          "M_total": 0.0,
+          "count": 0,
+          "M_dir": 0.0,
+          "M_ind": 0.0
+        },
+        "assistant": {
+          "rate": 1.0,
+          "M_total": 31.39999999999999,
+          "count": 47,
+          "M_dir": 8.0,
+          "M_ind": 23.39999999999999
+        }
+      },
+      "SHAPER": {
+        "user": {
+          "rate": 0.9259259259259259,
+          "M_total": 15.0,
+          "count": 3,
+          "M_dir": 15.0,
+          "M_ind": 0.0
+        },
+        "assistant": {
+          "rate": 0.07407407407407408,
+          "M_total": 1.2000000000000002,
+          "count": 1,
+          "M_dir": 0.0,
+          "M_ind": 1.2000000000000002
+        }
+      }
+    },
+    "overall": {
+      "user": {
+        "rate": 0.3151260504201681,
+        "M_total": 15.0,
+        "count": 3
+      },
+      "assistant": {
+        "rate": 0.6848739495798319,
+        "M_total": 32.599999999999994,
+        "count": 48
+      }
+    }
+  },
+  "outcome_3": {
+    "role_contributions": {
+      "EXECUTOR": {
+        "user": {
+          "rate": 0.0,
+          "M_total": 0.0,
+          "count": 0,
+          "M_dir": 0.0,
+          "M_ind": 0.0
+        },
+        "assistant": {
+          "rate": 1.0,
+          "M_total": 28.799999999999997,
+          "count": 98,
+          "M_dir": 3.0,
+          "M_ind": 25.799999999999997
+        }
+      },
+      "OTHER": {
+        "user": {
+          "rate": 1.0,
+          "M_total": 6.0,
+          "count": 3,
+          "M_dir": 5.0,
+          "M_ind": 1.0
+        },
+        "assistant": {
+          "rate": 0.0,
+          "M_total": 0.0,
+          "count": 0,
+          "M_dir": 0.0,
+          "M_ind": 0.0
+        }
+      },
+      "SHAPER": {
+        "user": {
+          "rate": 0.4367057064540244,
+          "M_total": 28.040000000000003,
+          "count": 43,
+          "M_dir": 25.0,
+          "M_ind": 3.040000000000001
+        },
+        "assistant": {
+          "rate": 0.5632942935459756,
+          "M_total": 36.168000000000006,
+          "count": 40,
+          "M_dir": 15.0,
+          "M_ind": 21.168000000000003
+        }
+      }
+    },
+    "overall": {
+      "user": {
+        "rate": 0.3438106011635424,
+        "M_total": 34.040000000000006,
+        "count": 46
+      },
+      "assistant": {
+        "rate": 0.6561893988364577,
+        "M_total": 64.968,
+        "count": 138
+      }
+    }
+  },
+  "outcome_7": {
+    "role_contributions": {
+      "EXECUTOR": {
+        "user": {
+          "rate": 0.0,
+          "M_total": 0.0,
+          "count": 0,
+          "M_dir": 0.0,
+          "M_ind": 0.0
+        },
+        "assistant": {
+          "rate": 1.0,
+          "M_total": 6.2,
+          "count": 9,
+          "M_dir": 2.0,
+          "M_ind": 4.2
+        }
+      },
+      "OTHER": {
+        "user": {
+          "rate": 1.0,
+          "M_total": 5.0,
+          "count": 1,
+          "M_dir": 5.0,
+          "M_ind": 0.0
+        },
+        "assistant": {
+          "rate": 0.0,
+          "M_total": 0.0,
+          "count": 0,
+          "M_dir": 0.0,
+          "M_ind": 0.0
+        }
+      },
+      "SHAPER": {
+        "user": {
+          "rate": 0.0,
+          "M_total": 0.0,
+          "count": 0,
+          "M_dir": 0.0,
+          "M_ind": 0.0
+        },
+        "assistant": {
+          "rate": 1.0,
+          "M_total": 3.6000000000000005,
+          "count": 3,
+          "M_dir": 0.0,
+          "M_ind": 3.6000000000000005
+        }
+      }
+    },
+    "overall": {
+      "user": {
+        "rate": 0.33783783783783783,
+        "M_total": 5.0,
+        "count": 1
+      },
+      "assistant": {
+        "rate": 0.6621621621621622,
+        "M_total": 9.8,
+        "count": 12
+      }
+    }
+  },
+  "outcome_6": {
+    "role_contributions": {
+      "EXECUTOR": {
+        "user": {
+          "rate": 0.0,
+          "M_total": 0.0,
+          "count": 0,
+          "M_dir": 0.0,
+          "M_ind": 0.0
+        },
+        "assistant": {
+          "rate": 1.0,
+          "M_total": 8.0,
+          "count": 9,
+          "M_dir": 8.0,
+          "M_ind": 0.0
+        }
+      },
+      "SHAPER": {
+        "user": {
+          "rate": 1.0,
+          "M_total": 10.0,
+          "count": 2,
+          "M_dir": 10.0,
+          "M_ind": 0.0
+        },
+        "assistant": {
+          "rate": 0.0,
+          "M_total": 0.0,
+          "count": 9,
+          "M_dir": 0.0,
+          "M_ind": 0.0
+        }
+      }
+    },
+    "overall": {
+      "user": {
+        "rate": 0.5555555555555556,
+        "M_total": 10.0,
+        "count": 2
+      },
+      "assistant": {
+        "rate": 0.4444444444444444,
+        "M_total": 8.0,
+        "count": 18
+      }
+    }
+  },
+  "outcome_4": {
+    "role_contributions": {
+      "EXECUTOR": {
+        "user": {
+          "rate": 0.0,
+          "M_total": 0.0,
+          "count": 0,
+          "M_dir": 0.0,
+          "M_ind": 0.0
+        },
+        "assistant": {
+          "rate": 1.0,
+          "M_total": 39.4,
+          "count": 181,
+          "M_dir": 21.0,
+          "M_ind": 18.4
+        }
+      },
+      "SHAPER": {
+        "user": {
+          "rate": 0.9998246531262279,
+          "M_total": 58.388291891200005,
+          "count": 47,
+          "M_dir": 55.0,
+          "M_ind": 3.3882918912000006
+        },
+        "assistant": {
+          "rate": 0.0001753468737720623,
+          "M_total": 0.010240000000000003,
+          "count": 43,
+          "M_dir": 0.0,
+          "M_ind": 0.010240000000000003
+        }
+      }
+    },
+    "overall": {
+      "user": {
+        "rate": 0.5970262616636869,
+        "M_total": 58.388291891200005,
+        "count": 47
+      },
+      "assistant": {
+        "rate": 0.40297373833631306,
+        "M_total": 39.41024,
+        "count": 224
+      }
+    }
+  }
+}

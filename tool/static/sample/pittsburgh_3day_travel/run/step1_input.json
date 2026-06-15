@@ -1,0 +1,2891 @@
+{
+  "dialogue_id": "pittsburgh_3day_travel",
+  "dialogue_summary": "Plan a 3-day trip to Pittsburgh with day-by-day itineraries centered on specific neighborhoods/campuses, including local-food recommendations and adjustments for coffee, dining preferences, and dietary constraints.",
+  "outcomes": [
+    {
+      "outcome_id": "outcome_1",
+      "description": "Complete 3-day Pittsburgh trip plan (overall structure and completion/closure)",
+      "outcome_type": "artifact",
+      "confidence": 0.83,
+      "created_at_turn": 0,
+      "parent_outcome_id": null,
+      "child_outcome_ids": [
+        "outcome_2",
+        "outcome_3",
+        "outcome_4",
+        "outcome_5",
+        "outcome_6",
+        "outcome_7"
+      ],
+      "related_outcome_ids": [],
+      "actions": [
+        {
+          "turn_id": 0,
+          "action_type": "State",
+          "action_text": "User states they are planning to visit Pittsburgh for 3 days.",
+          "role": "SHAPER",
+          "evidence_quote": "I'm planning to visit Pittsburgh for 3 days.",
+          "speaker": "user",
+          "action_id": "0-1",
+          "bound_outcome_id": "outcome_1"
+        },
+        {
+          "turn_id": 0,
+          "action_type": "Plan",
+          "action_text": "User requests to start planning the trip now.",
+          "role": "SHAPER",
+          "evidence_quote": "Let's plan the trip from now.",
+          "speaker": "user",
+          "action_id": "0-2",
+          "bound_outcome_id": "outcome_1"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Acknowledge",
+          "action_text": "Assistant acknowledges the user's preference for concise responses and revising chat.",
+          "role": "EXECUTOR",
+          "evidence_quote": "I also need to provide a concise response as per the user's preference.",
+          "speaker": "assistant",
+          "action_id": "1-1",
+          "bound_outcome_id": "outcome_1"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Decide",
+          "action_text": "Assistant decides to stick to Korean and provide a concise plan.",
+          "role": "EXECUTOR",
+          "evidence_quote": "I will stick to Korean and provide a concise plan.",
+          "speaker": "assistant",
+          "action_id": "1-2",
+          "bound_outcome_id": "outcome_1"
+        },
+        {
+          "turn_id": 21,
+          "action_type": "Report",
+          "action_text": "Assistant reports that the 3-day Pittsburgh plan is complete.",
+          "role": "EXECUTOR",
+          "evidence_quote": "That completes your 3-day Pittsburgh plan.",
+          "speaker": "assistant",
+          "action_id": "21-3",
+          "bound_outcome_id": "outcome_1"
+        },
+        {
+          "turn_id": 21,
+          "action_type": "Invite",
+          "action_text": "Assistant invites the user to ask more questions if needed.",
+          "role": "EXECUTOR",
+          "evidence_quote": "If you have more questions, just ask!",
+          "speaker": "assistant",
+          "action_id": "21-4",
+          "bound_outcome_id": "outcome_1"
+        },
+        {
+          "turn_id": 25,
+          "action_type": "State",
+          "action_text": "Assistant concludes the 3-day Pittsburgh trip and offers a courteous send-off.",
+          "role": "EXECUTOR",
+          "evidence_quote": "That completes your 3-day Pittsburgh trip. Have a great time!",
+          "speaker": "assistant",
+          "action_id": "25-8",
+          "bound_outcome_id": "outcome_1"
+        }
+      ]
+    },
+    {
+      "outcome_id": "outcome_2",
+      "description": "Day 1 itinerary near University of Pittsburgh/Oakland (Cathedral of Learning area) with coffee and meal plan updates",
+      "outcome_type": "artifact",
+      "confidence": 0.86,
+      "created_at_turn": 0,
+      "parent_outcome_id": "outcome_1",
+      "child_outcome_ids": [],
+      "related_outcome_ids": [
+        "outcome_5"
+      ],
+      "actions": [
+        {
+          "turn_id": 0,
+          "action_type": "Decide",
+          "action_text": "User decides to start with planning the first day.",
+          "role": "SHAPER",
+          "evidence_quote": "Let's start with the first day.",
+          "speaker": "user",
+          "action_id": "0-3",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 0,
+          "action_type": "Constrain",
+          "action_text": "User specifies they want to look around near the University of Pittsburgh on the first day.",
+          "role": "SHAPER",
+          "evidence_quote": "On the first day I want to look around near the University of Pittsburgh.",
+          "speaker": "user",
+          "action_id": "0-4",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 0,
+          "action_type": "State",
+          "action_text": "User expresses a desire to visit the Cathedral of Learning.",
+          "role": "SHAPER",
+          "evidence_quote": "I really want to visit the Cathedral of Learning.",
+          "speaker": "user",
+          "action_id": "0-5",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 0,
+          "action_type": "Ask",
+          "action_text": "User asks what else would be good to do.",
+          "role": "SHAPER",
+          "evidence_quote": "What else would be good to do?",
+          "speaker": "user",
+          "action_id": "0-6",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Implement",
+          "action_text": "Assistant states intent to execute a maps query.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Let's execute the maps query.",
+          "speaker": "assistant",
+          "action_id": "1-3",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Provide",
+          "action_text": "Assistant provides a Day 1 plan centered on Oakland and the University of Pittsburgh campus.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Here is a plan for Day 1 of your Pittsburgh trip, centered on the Oakland area and the University of Pittsburgh campus.",
+          "speaker": "assistant",
+          "action_id": "1-4",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Describe",
+          "action_text": "Assistant describes the Cathedral of Learning.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Cathedral of Learning: A 42-story Gothic-style building.",
+          "speaker": "assistant",
+          "action_id": "1-5",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Recommend",
+          "action_text": "Assistant recommends visiting the Commons Room and the Nationality Rooms in the Cathedral of Learning.",
+          "role": "EXECUTOR",
+          "evidence_quote": "I recommend visiting the impressive Commons Room on the 1st floor and the Nationality Rooms showcasing cultures from around the world.",
+          "speaker": "assistant",
+          "action_id": "1-6",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Describe",
+          "action_text": "Assistant describes Heinz Memorial Chapel and its proximity to the Cathedral.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Heinz Memorial Chapel: A beautiful Gothic Revival chapel right next to the Cathedral.",
+          "speaker": "assistant",
+          "action_id": "1-7",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Warn",
+          "action_text": "Assistant warns that Heinz Memorial Chapel is currently closed Fri–Sun and advises to check before visiting.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Note: currently closed Fri–Sun, so check the day before visiting.",
+          "speaker": "assistant",
+          "action_id": "1-8",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Describe",
+          "action_text": "Assistant describes Schenley Plaza as a nearby green space for lunch or a break.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Schenley Plaza: A green space across from the Cathedral with food stands and a carousel, great for lunch or a break.",
+          "speaker": "assistant",
+          "action_id": "1-9",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Describe",
+          "action_text": "Assistant describes the Carnegie Museum of Natural History and its attractions.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Carnegie Museum of Natural History: World-class dinosaur fossils and gem galleries.",
+          "speaker": "assistant",
+          "action_id": "1-10",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Describe",
+          "action_text": "Assistant describes Phipps Conservatory and Botanical Gardens.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Phipps Conservatory and Botanical Gardens: A historic glass conservatory from 1893 with seasonal flower displays and themed gardens.",
+          "speaker": "assistant",
+          "action_id": "1-11",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Summarize",
+          "action_text": "Assistant summarizes that all listed attractions are within walking distance for Day 1.",
+          "role": "EXECUTOR",
+          "evidence_quote": "All of these are within walking distance on Day 1.",
+          "speaker": "assistant",
+          "action_id": "1-12",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Provide",
+          "action_text": "Assistant provides a Day 1 schedule around the Cathedral and Phipps with nearby restaurant suggestions.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Here is a Day 1 schedule around the Cathedral and Phipps with nearby restaurant suggestions.",
+          "speaker": "assistant",
+          "action_id": "1-14",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Recommend",
+          "action_text": "Assistant recommends The Porch at Schenley as a lunch option.",
+          "role": "EXECUTOR",
+          "evidence_quote": "The Porch at Schenley: Outdoor terrace on Schenley Plaza. Wood-fired pizza and fresh local ingredients are popular.",
+          "speaker": "assistant",
+          "action_id": "1-15",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Recommend",
+          "action_text": "Assistant recommends Primanti Bros. as a lunch option.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Primanti Bros.: A Pittsburgh icon. Sandwiches come with fries and vinegar-based coleslaw inside—a unique style worth trying.",
+          "speaker": "assistant",
+          "action_id": "1-16",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Provide",
+          "action_text": "Assistant schedules afternoon visit to Phipps Conservatory and notes walking time.",
+          "role": "EXECUTOR",
+          "evidence_quote": "About 10–15 min on foot from the Cathedral. Tour the themed glass conservatory gardens.",
+          "speaker": "assistant",
+          "action_id": "1-17",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Recommend",
+          "action_text": "Assistant recommends Spirits & Tales and Butterjoint as dinner options.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Spirits & Tales: On the 10th floor... Butterjoint: Cozy spot for house-made burgers and pierogi and other local fare.",
+          "speaker": "assistant",
+          "action_id": "1-18",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Advise",
+          "action_text": "Assistant advises that walking is convenient within the area and suggests parking once and walking.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Everything in this area is within walking distance; parking once and walking is convenient.",
+          "speaker": "assistant",
+          "action_id": "1-19",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 3,
+          "action_type": "Provide",
+          "action_text": "Assistant provides a schedule summary combining the recommended restaurants and attractions for Day 1.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Schedule summary: 1. Morning: Breakfast at Pamela's Diner, then Cathedral of Learning 2. Lunch: Primanti Bros. for a Pittsburgh-style sandwich 3. Afternoon: Phipps Conservatory 4. Dinner: Butterjoint for pierogi and local vibe",
+          "speaker": "assistant",
+          "action_id": "3-5",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 4,
+          "action_type": "State",
+          "action_text": "User states a preference to stop for coffee after lunch.",
+          "role": "SHAPER",
+          "evidence_quote": "After lunch I'd like to stop for coffee.",
+          "speaker": "user",
+          "action_id": "4-1",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 4,
+          "action_type": "Report",
+          "action_text": "User reports having heard La Prima is a famous brand.",
+          "role": "SHAPER",
+          "evidence_quote": "I heard La Prima is a famous brand",
+          "speaker": "user",
+          "action_id": "4-2",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 4,
+          "action_type": "Ask",
+          "action_text": "User asks whether there is a La Prima location near the trip area.",
+          "role": "SHAPER",
+          "evidence_quote": "is there a location near the trip area?",
+          "speaker": "user",
+          "action_id": "4-3",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 5,
+          "action_type": "Provide",
+          "action_text": "Assistant states that La Prima Espresso Company has several locations in and around Oakland.",
+          "role": "EXECUTOR",
+          "evidence_quote": "**La Prima Espresso Company** has several locations in and around Oakland.\"",
+          "speaker": "assistant",
+          "action_id": "5-1",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 5,
+          "action_type": "Provide",
+          "action_text": "Assistant provides details for the Oakland location (link, walking time, address).",
+          "role": "EXECUTOR",
+          "evidence_quote": "La Prima Espresso Company - Oakland: About 15–20 min on foot from the Cathedral... (Address: 3400 Fifth Ave)\"",
+          "speaker": "assistant",
+          "action_id": "5-2",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 5,
+          "action_type": "Provide",
+          "action_text": "Assistant provides details for the Strip District location (link, car time, character).",
+          "role": "EXECUTOR",
+          "evidence_quote": "La Prima Espresso Company - Strip District: The most famous branch; classic Italian café vibe. About 10 min by car from Oakland\"",
+          "speaker": "assistant",
+          "action_id": "5-3",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 5,
+          "action_type": "Suggest",
+          "action_text": "Assistant suggests stopping at the Oakland location in the afternoon before or after Phipps.",
+          "role": "EXECUTOR",
+          "evidence_quote": "I’d suggest stopping at the Oakland location in the afternoon before or after Phipps for coffee.\"",
+          "speaker": "assistant",
+          "action_id": "5-4",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 6,
+          "action_type": "Decide",
+          "action_text": "User selects the 3400 Fifth Ave La Prima location.",
+          "role": "SHAPER",
+          "evidence_quote": "I'll go with the 3400 Fifth Ave location.",
+          "speaker": "user",
+          "action_id": "6-1",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 6,
+          "action_type": "Request",
+          "action_text": "User requests the assistant to add the café and finalize the schedule.",
+          "role": "SHAPER",
+          "evidence_quote": "Please add the café and finalize the schedule.",
+          "speaker": "user",
+          "action_id": "6-2",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 7,
+          "action_type": "Provide",
+          "action_text": "Assistant provides the finalized Day 1 schedule for the Pittsburgh trip.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Final Day 1 schedule for your Pittsburgh trip: Oakland local spots and main sights.",
+          "speaker": "assistant",
+          "action_id": "7-1",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 7,
+          "action_type": "Include",
+          "action_text": "Assistant includes the 14:00 La Prima entry with the 3400 Fifth Ave location in the itinerary.",
+          "role": "EXECUTOR",
+          "evidence_quote": "14:00 - Coffee: [La Prima Espresso Company]... The 3400 Fifth Ave location you asked for.\"",
+          "speaker": "assistant",
+          "action_id": "7-2",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 7,
+          "action_type": "Explain",
+          "action_text": "Assistant states that everything is within Oakland and that walking or short trips are sufficient.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Everything is within Oakland; walking or short trips are enough.\"",
+          "speaker": "assistant",
+          "action_id": "7-3",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 8,
+          "action_type": "Suggest",
+          "action_text": "User proposes changing dinner to The Porch instead of Butterjoint.",
+          "role": "SHAPER",
+          "evidence_quote": "For dinner let's do the Porch instead of Butterjoint.",
+          "speaker": "user",
+          "action_id": "8-1",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 9,
+          "action_type": "Confirm",
+          "action_text": "Assistant confirms it updated the Day 1 schedule with dinner at The Porch at Schenley.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Updated final Day 1 schedule with dinner at **The Porch at Schenley**.",
+          "speaker": "assistant",
+          "action_id": "9-1",
+          "bound_outcome_id": "outcome_2"
+        },
+        {
+          "turn_id": 9,
+          "action_type": "Provide",
+          "action_text": "Assistant provides the full updated Day 1 itinerary.",
+          "role": "EXECUTOR",
+          "evidence_quote": "### **Pittsburgh Day 1: Oakland local tour (final)**\n\n- **09:00 - Breakfast: [Pamela's Diner](https://pamelasdiner.com/)** (pancakes, Lyonnaise potatoes)\n- **10:30 - Morning: [Cathedral of Learning](http://www.tour.pitt.edu/tour/cathedral-learning)** (Commons Room, Nationality Rooms)\n- **12:30 - Lunch: [Primanti Bros.](https://primantibros.com/)** (Pittsburgh-style sandwich)\n- **14:00 - Coffee: [La Prima Espresso Company](http://laprima.com/)** (3400 Fifth Ave)\n- **15:30 - Afternoon: [Phipps Conservatory](https://www.phipps.conservatory.org/)** (conservatory and themed gardens)\n- **18:30 - Dinner: [The Porch at Schenley](https://www.dineattheporch.com/)** (wood-fired pizza and local ingredients)",
+          "speaker": "assistant",
+          "action_id": "9-2",
+          "bound_outcome_id": "outcome_2"
+        }
+      ]
+    },
+    {
+      "outcome_id": "outcome_5",
+      "description": "Recommendations for famous/local Pittsburgh food and local-favorite restaurants (not fancy/expensive), especially for meals during the trip",
+      "outcome_type": "artifact",
+      "confidence": 0.84,
+      "created_at_turn": 2,
+      "parent_outcome_id": "outcome_1",
+      "child_outcome_ids": [],
+      "related_outcome_ids": [
+        "outcome_2",
+        "outcome_3"
+      ],
+      "actions": [
+        {
+          "turn_id": 2,
+          "action_type": "State",
+          "action_text": "User states they want to try famous Pittsburgh food for meals.",
+          "role": "SHAPER",
+          "evidence_quote": "For meals I'd like to try famous Pittsburgh food.",
+          "speaker": "user",
+          "action_id": "2-1",
+          "bound_outcome_id": "outcome_5"
+        },
+        {
+          "turn_id": 2,
+          "action_type": "Constrain",
+          "action_text": "User prefers places locals go to rather than expensive or fancy spots.",
+          "role": "SHAPER",
+          "evidence_quote": "I prefer places that locals go to rather than expensive or fancy spots.",
+          "speaker": "user",
+          "action_id": "2-2",
+          "bound_outcome_id": "outcome_5"
+        },
+        {
+          "turn_id": 2,
+          "action_type": "Request",
+          "action_text": "User asks the assistant to narrow down and recommend those kinds of restaurants.",
+          "role": "SHAPER",
+          "evidence_quote": "Can you narrow it down and recommend those kinds of restaurants?",
+          "speaker": "user",
+          "action_id": "2-3",
+          "bound_outcome_id": "outcome_5"
+        },
+        {
+          "turn_id": 3,
+          "action_type": "Provide",
+          "action_text": "Assistant provides a list of local favorite restaurant picks for Day 1.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Here are local favorites where you can try iconic Pittsburgh food.",
+          "speaker": "assistant",
+          "action_id": "3-1",
+          "bound_outcome_id": "outcome_5"
+        },
+        {
+          "turn_id": 3,
+          "action_type": "Provide",
+          "action_text": "Assistant provides details about Pamela's Diner as a breakfast/lunch local favorite.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Pamela's Diner (breakfast/lunch): A Pittsburgh breakfast staple. Known for crepe-style pancakes with thin, crispy edges and Lyonnaise potatoes.",
+          "speaker": "assistant",
+          "action_id": "3-2",
+          "bound_outcome_id": "outcome_5"
+        },
+        {
+          "turn_id": 3,
+          "action_type": "Provide",
+          "action_text": "Assistant provides details about Primanti Bros. as a lunch option and iconic sandwich spot.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Primanti Bros. (lunch): Home of the famous Primanti sandwich—meat plus fries and vinegar-based coleslaw stuffed inside the sandwich.",
+          "speaker": "assistant",
+          "action_id": "3-3",
+          "bound_outcome_id": "outcome_5"
+        },
+        {
+          "turn_id": 3,
+          "action_type": "Provide",
+          "action_text": "Assistant provides details about Butterjoint as a dinner option for pierogi and local fare.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Butterjoint (dinner): Pittsburgh is known for pierogi... This cozy spot near campus does proper house-made pierogi and burgers with local ingredients.",
+          "speaker": "assistant",
+          "action_id": "3-4",
+          "bound_outcome_id": "outcome_5"
+        }
+      ]
+    },
+    {
+      "outcome_id": "outcome_3",
+      "description": "Day 2 itinerary (Strip District + downtown + Mount Washington), revised to prioritize outdoor downtown spots and user preferences",
+      "outcome_type": "artifact",
+      "confidence": 0.85,
+      "created_at_turn": 1,
+      "parent_outcome_id": "outcome_1",
+      "child_outcome_ids": [],
+      "related_outcome_ids": [
+        "outcome_5",
+        "outcome_6",
+        "outcome_7"
+      ],
+      "actions": [
+        {
+          "turn_id": 1,
+          "action_type": "Ask",
+          "action_text": "Assistant asks whether to plan Day 2 (downtown and Mount Washington).",
+          "role": "EXECUTOR",
+          "evidence_quote": "Shall we plan Day 2 (e.g. downtown and Mount Washington)?",
+          "speaker": "assistant",
+          "action_id": "1-13",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 1,
+          "action_type": "Ask",
+          "action_text": "Assistant asks again whether to plan Day 2.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Would you like me to plan Day 2 (e.g. downtown, Strip District, etc.) next?",
+          "speaker": "assistant",
+          "action_id": "1-20",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 3,
+          "action_type": "Ask",
+          "action_text": "Assistant asks whether to plan Day 2 for downtown or areas with great views.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Should I plan Day 2 for downtown or areas with great views?",
+          "speaker": "assistant",
+          "action_id": "3-6",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 7,
+          "action_type": "Invite",
+          "action_text": "Assistant asks if the user wants to plan Day 2 (downtown and overlooks) next.",
+          "role": "EXECUTOR",
+          "evidence_quote": "If you’re happy with Day 1, shall we plan **Day 2 (downtown and overlooks)** next?\"\n    }",
+          "speaker": "assistant",
+          "action_id": "7-4",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 9,
+          "action_type": "Ask",
+          "action_text": "Assistant asks whether to plan Day 2.",
+          "role": "SHAPER",
+          "evidence_quote": "That’s Day 1 set. Shall I plan Day 2?",
+          "speaker": "assistant",
+          "action_id": "9-3",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 10,
+          "action_type": "Request",
+          "action_text": "User asks the assistant to begin planning Day 2.",
+          "role": "SHAPER",
+          "evidence_quote": "Let's plan Day 2 now.",
+          "speaker": "user",
+          "action_id": "10-1",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 10,
+          "action_type": "Ask",
+          "action_text": "User asks which areas are good to explore on Day 2.",
+          "role": "SHAPER",
+          "evidence_quote": "What areas are good to explore on Day 2?",
+          "speaker": "user",
+          "action_id": "10-2",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 11,
+          "action_type": "Recommend",
+          "action_text": "Assistant recommends the Strip District and Mount Washington for Day 2.",
+          "role": "SHAPER",
+          "evidence_quote": "For Day 2 I recommend **Strip District** and **Mount Washington** for market culture and great views.",
+          "speaker": "assistant",
+          "action_id": "11-1",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 11,
+          "action_type": "Provide",
+          "action_text": "Assistant provides a Morning plan for the Strip District with a brief description.",
+          "role": "EXECUTOR",
+          "evidence_quote": "- **Morning: Strip District**\n    - Former warehouse district; now a lively area where locals buy ingredients and street food—very Pittsburgh.",
+          "speaker": "assistant",
+          "action_id": "11-2",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 11,
+          "action_type": "Provide",
+          "action_text": "Assistant provides local experience suggestions (Pennsylvania Macaroni Co., Wholey's Fish Market).",
+          "role": "EXECUTOR",
+          "evidence_quote": "**Local experience:** Browse cheese at **Pennsylvania Macaroni Co.** or seafood at **Wholey's Fish Market**.",
+          "speaker": "assistant",
+          "action_id": "11-3",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 11,
+          "action_type": "Provide",
+          "action_text": "Assistant provides lunch options and specific dish suggestions for Day 2.",
+          "role": "EXECUTOR",
+          "evidence_quote": "- **Lunch: [Wholey's]... or [S&D Polish Deli]**\n    - Try Wholey's famous **fish sandwich** or S&D's **Polish pierogi**.",
+          "speaker": "assistant",
+          "action_id": "11-4",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 11,
+          "action_type": "Provide",
+          "action_text": "Assistant provides Afternoon activities (North Shore, Andy Warhol Museum, Point State Park).",
+          "role": "EXECUTOR",
+          "evidence_quote": "- **Afternoon: North Shore and downtown**\n    - Walk from the Strip along the river. Visit the **Andy Warhol Museum** or see the three rivers meet at the fountain in **Point State Park**.",
+          "speaker": "assistant",
+          "action_id": "11-5",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 11,
+          "action_type": "Provide",
+          "action_text": "Assistant provides an Evening activity suggestion to take the Duquesne Incline for skyline views.",
+          "role": "EXECUTOR",
+          "evidence_quote": "- **Evening: Duquesne Incline**\n    - Take the historic cable car up Mount Washington for a classic Pittsburgh skyline view.",
+          "speaker": "assistant",
+          "action_id": "11-6",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 11,
+          "action_type": "Provide",
+          "action_text": "Assistant provides a Day 2 dinner suggestion (Gaucho Parrilla Argentina) with background.",
+          "role": "EXECUTOR",
+          "evidence_quote": "- **Dinner: [Gaucho Parrilla Argentina](https://www.google.com/search?q=https://www.eatgaucho.com/)**\n    - Started in the Strip, now in downtown—a popular Argentine wood-fire grill.",
+          "speaker": "assistant",
+          "action_id": "11-7",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 11,
+          "action_type": "Provide",
+          "action_text": "Assistant provides English study example expressions related to the itinerary.",
+          "role": "EXECUTOR",
+          "evidence_quote": "### **English Study: Natural Expressions**\n\n- \"The Strip District is the heart and soul of Pittsburgh's food scene.\"\n- \"You'll get the best view of the skyline from Mount Washington.\"\n- \"Riding the incline is a quintessential Pittsburgh experience.\"",
+          "speaker": "assistant",
+          "action_id": "11-8",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 11,
+          "action_type": "Ask",
+          "action_text": "Assistant asks if the user needs more details on Day 2 dinner or activities.",
+          "role": "SHAPER",
+          "evidence_quote": "Need more details on Day 2 dinner or specific activities?",
+          "speaker": "assistant",
+          "action_id": "11-9",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 11,
+          "action_type": "Ask",
+          "action_text": "Assistant offers to find the Duquesne Incline hours and asks if the user wants that.",
+          "role": "SHAPER",
+          "evidence_quote": "Would you like me to find the Duquesne Incline hours?",
+          "speaker": "assistant",
+          "action_id": "11-10",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 12,
+          "action_type": "Suggest",
+          "action_text": "Suggest visiting the Strip District in the morning",
+          "role": "SHAPER",
+          "evidence_quote": "Let's visit the Strip District in the morning",
+          "speaker": "user",
+          "action_id": "12-1",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 12,
+          "action_type": "Suggest",
+          "action_text": "Suggest having lunch at Wholey's",
+          "role": "SHAPER",
+          "evidence_quote": "and have lunch at Wholey's.",
+          "speaker": "user",
+          "action_id": "12-2",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 12,
+          "action_type": "Plan",
+          "action_text": "State intent to visit the Andy Warhol Museum after lunch",
+          "role": "SHAPER",
+          "evidence_quote": "After that I want to go to the Andy Warhol Museum.",
+          "speaker": "user",
+          "action_id": "12-3",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 13,
+          "action_type": "Provide",
+          "action_text": "Announce and provide an updated Day 2 schedule",
+          "role": "EXECUTOR",
+          "evidence_quote": "Here’s your updated Day 2 schedule.\"",
+          "speaker": "assistant",
+          "action_id": "13-3",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 13,
+          "action_type": "Plan",
+          "action_text": "Schedule a 10:00 Strip District walk",
+          "role": "SHAPER",
+          "evidence_quote": "- **10:00 - Strip District walk** – Soak up the morning market vibe in “Pittsburgh’s kitchen.”",
+          "speaker": "assistant",
+          "action_id": "13-4",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 13,
+          "action_type": "Plan",
+          "action_text": "Schedule 12:00 lunch at Wholey's and recommend the fried fish sandwich and seating",
+          "role": "SHAPER",
+          "evidence_quote": "- **12:00 - Lunch: [Wholey's Fish Market](https://wholey.com/)** – Their signature **fried fish sandwich**—hearty, honest local flavor. Eat on the 2nd floor.",
+          "speaker": "assistant",
+          "action_id": "13-5",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 13,
+          "action_type": "Plan",
+          "action_text": "Schedule a 14:00 visit to the Andy Warhol Museum and provide logistics (travel time and elevator suggestion)",
+          "role": "SHAPER",
+          "evidence_quote": "- **14:00 - Afternoon: [Andy Warhol Museum](https://www.warhol.org/)** – 5 min by car or ~20 min on foot from the Strip. Take the elevator to the 7th floor and work your way down.",
+          "speaker": "assistant",
+          "action_id": "13-6",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 13,
+          "action_type": "Plan",
+          "action_text": "Schedule a 17:00 visit to Point State Park and suggest pairing it with Mount Washington view",
+          "role": "SHAPER",
+          "evidence_quote": "- **17:00 - Point State Park and evening** – Cross the bridge from the museum to the park where the three rivers meet. Pair with the Mount Washington view for a full day.",
+          "speaker": "assistant",
+          "action_id": "13-7",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 14,
+          "action_type": "Evaluate",
+          "action_text": "Express that the museum does not sound appealing",
+          "role": "OTHER",
+          "evidence_quote": "After hearing about it, it doesn't sound that appealing.",
+          "speaker": "user",
+          "action_id": "14-1",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 14,
+          "action_type": "Decide",
+          "action_text": "Decide to skip the Andy Warhol Museum and head downtown after lunch",
+          "role": "SHAPER",
+          "evidence_quote": "Let's skip the Andy Warhol Museum and head downtown after lunch.\"",
+          "speaker": "user",
+          "action_id": "14-2",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 14,
+          "action_type": "State",
+          "action_text": "State a preference to spend time outdoors rather than indoors downtown",
+          "role": "SHAPER",
+          "evidence_quote": "I'd rather spend time outdoors than indoors downtown.\"",
+          "speaker": "user",
+          "action_id": "14-3",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 14,
+          "action_type": "Ask",
+          "action_text": "Ask for recommendations of where to go downtown outdoors",
+          "role": "OTHER",
+          "evidence_quote": "Where should we go?",
+          "speaker": "user",
+          "action_id": "14-4",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 15,
+          "action_type": "Summarize",
+          "action_text": "Summarize a revised Day 2 focused on outdoor downtown spots without the Warhol Museum",
+          "role": "SHAPER",
+          "evidence_quote": "Revised Day 2 schedule without the Warhol Museum, focused on outdoor downtown spots.",
+          "speaker": "assistant",
+          "action_id": "15-1",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 15,
+          "action_type": "Plan",
+          "action_text": "Keep the 10:00 Strip District walk in the revised schedule",
+          "role": "SHAPER",
+          "evidence_quote": "- **10:00 - Strip District walk** – Lively local market atmosphere.",
+          "speaker": "assistant",
+          "action_id": "15-2",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 15,
+          "action_type": "Plan",
+          "action_text": "Keep the 12:00 lunch at Wholey's in the revised schedule",
+          "role": "SHAPER",
+          "evidence_quote": "- **12:00 - Lunch: [Wholey's Fish Market](https://wholey.com/)** – Fish sandwich on the 2nd floor.",
+          "speaker": "assistant",
+          "action_id": "15-3",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 15,
+          "action_type": "Suggest",
+          "action_text": "Suggest Point State Park as a downtown outdoor option",
+          "role": "SHAPER",
+          "evidence_quote": "- [**Point State Park**](https://www.pa.gov/agencies/dcnr/recreation/where-to-go/state-parks/find-a-park/point-state-park.html): Where Pittsburgh’s three rivers meet; big fountain and riverfront paths—ideal for outdoor time.",
+          "speaker": "assistant",
+          "action_id": "15-4",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 15,
+          "action_type": "Suggest",
+          "action_text": "Suggest Market Square as a downtown outdoor option",
+          "role": "SHAPER",
+          "evidence_quote": "- [**Market Square**](http://marketsquarepgh.com/): European-style square with outdoor cafés and benches; a local hangout.",
+          "speaker": "assistant",
+          "action_id": "15-5",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 15,
+          "action_type": "Suggest",
+          "action_text": "Suggest PPG Plaza as a downtown outdoor option",
+          "role": "SHAPER",
+          "evidence_quote": "- [**PPG Plaza**](http://www.ppgplace.com/): The “glass castle”—Gothic-style glass buildings around a plaza.",
+          "speaker": "assistant",
+          "action_id": "15-6",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 15,
+          "action_type": "Plan",
+          "action_text": "Schedule a 17:00 ride on the Duquesne Incline to Mount Washington for the skyline view",
+          "role": "SHAPER",
+          "evidence_quote": "- **17:00 - Duquesne Incline** – Ride up Mount Washington for the skyline view.",
+          "speaker": "assistant",
+          "action_id": "15-7",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 15,
+          "action_type": "Plan",
+          "action_text": "Schedule 19:00 dinner at Gaucho Parrilla Argentina and note its character",
+          "role": "SHAPER",
+          "evidence_quote": "- **19:00 - Dinner: [Gaucho Parrilla Argentina](https://www.google.com/search?q=https://www.eatgaucho.com/)**\n    - Well-known Argentine grill in downtown.",
+          "speaker": "assistant",
+          "action_id": "15-8",
+          "bound_outcome_id": "outcome_3"
+        },
+        {
+          "turn_id": 15,
+          "action_type": "Provide",
+          "action_text": "Provide English study: three natural expression examples",
+          "role": "EXECUTOR",
+          "evidence_quote": "\"I think I'll pass on the Warhol Museum.\" \"I'd rather spend some time outdoors.\" \"Let's head downtown after lunch.\"",
+          "speaker": "assistant",
+          "action_id": "15-9",
+          "bound_outcome_id": "outcome_3"
+        }
+      ]
+    },
+    {
+      "outcome_id": "outcome_7",
+      "description": "Description of the Andy Warhol Museum (what it is like and what to do there)",
+      "outcome_type": "artifact",
+      "confidence": 0.82,
+      "created_at_turn": 12,
+      "parent_outcome_id": "outcome_1",
+      "child_outcome_ids": [],
+      "related_outcome_ids": [
+        "outcome_3"
+      ],
+      "actions": [
+        {
+          "turn_id": 12,
+          "action_type": "Ask",
+          "action_text": "Ask for a description of the Andy Warhol Museum",
+          "role": "OTHER",
+          "evidence_quote": "What is the Andy Warhol Museum like?",
+          "speaker": "user",
+          "action_id": "12-4",
+          "bound_outcome_id": "outcome_7"
+        },
+        {
+          "turn_id": 13,
+          "action_type": "Describe",
+          "action_text": "Describe the Andy Warhol Museum's focus, scale, and collections",
+          "role": "EXECUTOR",
+          "evidence_quote": "**The Andy Warhol Museum** is dedicated to the life and work of Andy Warhol, the pop art icon from Pittsburgh. It’s the largest museum in North America devoted to a single artist. Seven floors cover everything from early commercial design to Campbell’s soup cans and Marilyn Monroe portraits, plus experimental film and archives.",
+          "speaker": "assistant",
+          "action_id": "13-1",
+          "bound_outcome_id": "outcome_7"
+        },
+        {
+          "turn_id": 13,
+          "action_type": "Provide",
+          "action_text": "Provide examples of interactive exhibits and activities",
+          "role": "EXECUTOR",
+          "evidence_quote": "You can try silkscreen techniques and the “Silver Clouds” helium balloon room—it’s interactive, not just viewing.",
+          "speaker": "assistant",
+          "action_id": "13-2",
+          "bound_outcome_id": "outcome_7"
+        }
+      ]
+    },
+    {
+      "outcome_id": "outcome_6",
+      "description": "Menu item recommendations for Gaucho Parrilla Argentina that fit the user's 'no strongly gamey meat' dietary constraint",
+      "outcome_type": "artifact",
+      "confidence": 0.87,
+      "created_at_turn": 16,
+      "parent_outcome_id": "outcome_1",
+      "child_outcome_ids": [],
+      "related_outcome_ids": [
+        "outcome_3"
+      ],
+      "actions": [
+        {
+          "turn_id": 16,
+          "action_type": "State",
+          "action_text": "User states they will have dinner at Gaucho Parrilla Argentina",
+          "role": "OTHER",
+          "evidence_quote": "I'll have dinner at the Gaucho Parrilla Argentina you recommended.",
+          "speaker": "user",
+          "action_id": "16-1",
+          "bound_outcome_id": "outcome_6"
+        },
+        {
+          "turn_id": 16,
+          "action_type": "Constrain",
+          "action_text": "User states a dietary constraint (cannot eat strongly gamey meat)",
+          "role": "SHAPER",
+          "evidence_quote": "I can't eat strongly gamey meat",
+          "speaker": "user",
+          "action_id": "16-2",
+          "bound_outcome_id": "outcome_6"
+        },
+        {
+          "turn_id": 16,
+          "action_type": "Request",
+          "action_text": "User asks the assistant to recommend menu items given the dietary constraint",
+          "role": "SHAPER",
+          "evidence_quote": "please recommend menu items with that in mind.",
+          "speaker": "user",
+          "action_id": "16-3",
+          "bound_outcome_id": "outcome_6"
+        },
+        {
+          "turn_id": 17,
+          "action_type": "Recommend",
+          "action_text": "Assistant recommends choosing lean, mild, or seafood/vegetable-focused options",
+          "role": "EXECUTOR",
+          "evidence_quote": "If you’re sensitive to gamey flavors, choose lean, mild, or seafood/vegetable-focused options.",
+          "speaker": "assistant",
+          "action_id": "17-1",
+          "bound_outcome_id": "outcome_6"
+        },
+        {
+          "turn_id": 17,
+          "action_type": "Provide",
+          "action_text": "Assistant introduces that it will provide Gaucho Parrilla Argentina suggestions",
+          "role": "EXECUTOR",
+          "evidence_quote": "Here are **Gaucho Parrilla Argentina** suggestions.",
+          "speaker": "assistant",
+          "action_id": "17-2",
+          "bound_outcome_id": "outcome_6"
+        },
+        {
+          "turn_id": 17,
+          "action_type": "Recommend",
+          "action_text": "Assistant recommends Lomo (Filet Mignon) as lean and less gamey",
+          "role": "EXECUTOR",
+          "evidence_quote": "Lomo (Filet Mignon): Lean and clean-tasting; less gamey than other cuts.",
+          "speaker": "assistant",
+          "action_id": "17-3",
+          "bound_outcome_id": "outcome_6"
+        },
+        {
+          "turn_id": 17,
+          "action_type": "Recommend",
+          "action_text": "Assistant recommends Pollo a la Parrilla (Grilled Chicken) as a light option",
+          "role": "EXECUTOR",
+          "evidence_quote": "Pollo a la Parrilla (Grilled Chicken): With lemon, thyme, and pickled red onion; light and fresh.",
+          "speaker": "assistant",
+          "action_id": "17-4",
+          "bound_outcome_id": "outcome_6"
+        },
+        {
+          "turn_id": 17,
+          "action_type": "Recommend",
+          "action_text": "Assistant recommends Camarones (Grilled Shrimp) to avoid meat flavor",
+          "role": "EXECUTOR",
+          "evidence_quote": "Camarones (Grilled Shrimp): Rosemary and olive oil; good when you want to avoid meat flavor entirely.",
+          "speaker": "assistant",
+          "action_id": "17-5",
+          "bound_outcome_id": "outcome_6"
+        },
+        {
+          "turn_id": 17,
+          "action_type": "Recommend",
+          "action_text": "Assistant recommends Pescado (Fish) as a fresh, light option",
+          "role": "EXECUTOR",
+          "evidence_quote": "Pescado (Fish): \"Fish of the day\" or fish sandwich (Pescado con Pan) with lemon and arugula—fresh and light.",
+          "speaker": "assistant",
+          "action_id": "17-6",
+          "bound_outcome_id": "outcome_6"
+        },
+        {
+          "turn_id": 17,
+          "action_type": "Recommend",
+          "action_text": "Assistant recommends sides Maiz (grilled corn) and Vegetales (grilled vegetables)",
+          "role": "EXECUTOR",
+          "evidence_quote": "Sides: Maiz (grilled corn) and Vegetales (grilled vegetables) are signature options.",
+          "speaker": "assistant",
+          "action_id": "17-7",
+          "bound_outcome_id": "outcome_6"
+        },
+        {
+          "turn_id": 17,
+          "action_type": "Recommend",
+          "action_text": "Assistant suggests sauces (Chimichurri or Ajo) to balance stronger flavors",
+          "role": "EXECUTOR",
+          "evidence_quote": "Sauces: Table Chimichurri or Ajo (garlic) sauce can balance stronger flavors.",
+          "speaker": "assistant",
+          "action_id": "17-8",
+          "bound_outcome_id": "outcome_6"
+        },
+        {
+          "turn_id": 17,
+          "action_type": "Warn",
+          "action_text": "Assistant warns to avoid Parrillada Mixta or Asado Plate which can include offal or strong sausage",
+          "role": "EXECUTOR",
+          "evidence_quote": "Avoid: Parrillada Mixta or Asado Plate (mixed grill) can include offal or strong sausage—skip if you’re sensitive.",
+          "speaker": "assistant",
+          "action_id": "17-9",
+          "bound_outcome_id": "outcome_6"
+        }
+      ]
+    },
+    {
+      "outcome_id": "outcome_4",
+      "description": "Day 3 itinerary focused on exploring CMU (main campus + Craig St side) with lunch/coffee preferences and dinner on Craig St (revised to combine lunch+coffee at one place)",
+      "outcome_type": "artifact",
+      "confidence": 0.86,
+      "created_at_turn": 15,
+      "parent_outcome_id": "outcome_1",
+      "child_outcome_ids": [],
+      "related_outcome_ids": [],
+      "actions": [
+        {
+          "turn_id": 15,
+          "action_type": "Ask",
+          "action_text": "Ask whether to plan the final Day 3 as well",
+          "role": "SHAPER",
+          "evidence_quote": "Should I plan the final Day 3 as well?",
+          "speaker": "assistant",
+          "action_id": "15-10",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 18,
+          "action_type": "Plan",
+          "action_text": "User proposes planning Day 3",
+          "role": "SHAPER",
+          "evidence_quote": "Let's plan Day 3.",
+          "speaker": "user",
+          "action_id": "18-1",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 18,
+          "action_type": "State",
+          "action_text": "User states they want to visit and explore CMU on Day 3",
+          "role": "SHAPER",
+          "evidence_quote": "On Day 3 I want to visit and explore CMU.",
+          "speaker": "user",
+          "action_id": "18-2",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 18,
+          "action_type": "Request",
+          "action_text": "User asks the assistant to recommend a plan for Day 3",
+          "role": "SHAPER",
+          "evidence_quote": "Please recommend a plan.",
+          "speaker": "user",
+          "action_id": "18-3",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 19,
+          "action_type": "Frame",
+          "action_text": "Assistant frames Day 3 as CMU and the nearby neighborhood Squirrel Hill",
+          "role": "EXECUTOR",
+          "evidence_quote": "Day 3 of your Pittsburgh trip: Carnegie Mellon University (CMU) and the nearby neighborhood Squirrel Hill.",
+          "speaker": "assistant",
+          "action_id": "19-1",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 19,
+          "action_type": "Provide",
+          "action_text": "Assistant provides a 10:00 schedule item for visiting CMU campus",
+          "role": "EXECUTOR",
+          "evidence_quote": "10:00 - CMU campus",
+          "speaker": "assistant",
+          "action_id": "19-2",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 19,
+          "action_type": "Describe",
+          "action_text": "Assistant describes The Fence as a campus icon students repaint nightly",
+          "role": "EXECUTOR",
+          "evidence_quote": "The Fence: A campus icon that students repaint every night.",
+          "speaker": "assistant",
+          "action_id": "19-3",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 19,
+          "action_type": "Describe",
+          "action_text": "Assistant describes the Gates Hillman Complex and its spiral corridor",
+          "role": "EXECUTOR",
+          "evidence_quote": "Gates Hillman Complex: Distinctive modern building with an impressive spiral corridor.",
+          "speaker": "assistant",
+          "action_id": "19-4",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 19,
+          "action_type": "Describe",
+          "action_text": "Assistant describes Pausch Bridge honoring Randy Pausch with art and tech lighting",
+          "role": "EXECUTOR",
+          "evidence_quote": "Pausch Bridge: A bridge honoring Randy Pausch; art and tech lighting.",
+          "speaker": "assistant",
+          "action_id": "19-5",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 19,
+          "action_type": "Provide",
+          "action_text": "Assistant provides a 12:30 lunch recommendation at Everyday Noodles (link included)",
+          "role": "EXECUTOR",
+          "evidence_quote": "12:30 - Lunch: [Everyday Noodles](https://www.everydaynoodles.net/) – Popular spot in Squirrel Hill.",
+          "speaker": "assistant",
+          "action_id": "19-6",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 19,
+          "action_type": "Recommend",
+          "action_text": "Assistant recommends lighter lunch options like shrimp dumplings or vegetable stir-fry noodles",
+          "role": "EXECUTOR",
+          "evidence_quote": "For a lighter option try shrimp dumplings or vegetable stir-fry noodles.",
+          "speaker": "assistant",
+          "action_id": "19-7",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 19,
+          "action_type": "Provide",
+          "action_text": "Assistant provides a 14:30 coffee recommendation for 61C Cafe (link included)",
+          "role": "EXECUTOR",
+          "evidence_quote": "14:30 - Coffee: [61C Cafe](https://www.google.com/search?q=http://www.61ccafe.com/) – Long-standing neighborhood café; cozy and relaxed.",
+          "speaker": "assistant",
+          "action_id": "19-8",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 19,
+          "action_type": "Provide",
+          "action_text": "Assistant provides a 15:30 outdoors suggestion to visit Schenley Park trails and related activities",
+          "role": "EXECUTOR",
+          "evidence_quote": "15:30 - Outdoors: Schenley Park trails – Large park next to CMU. Walk around Panther Hollow Lake or enjoy the view from the hill.",
+          "speaker": "assistant",
+          "action_id": "19-9",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 19,
+          "action_type": "Provide",
+          "action_text": "Assistant provides an 18:00 dinner recommendation at Aiello's Pizza (link included)",
+          "role": "EXECUTOR",
+          "evidence_quote": "18:00 - Dinner: [Aiello's Pizza](https://www.aiellospizza.com/) – One of Pittsburgh’s best-known pizzerias.",
+          "speaker": "assistant",
+          "action_id": "19-10",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 20,
+          "action_type": "State",
+          "action_text": "User states they want to see both CMU's main campus and the buildings on the Craig St side.",
+          "role": "SHAPER",
+          "evidence_quote": "I want to see both CMU's main campus and the buildings on the Craig St side.",
+          "speaker": "user",
+          "action_id": "20-1",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 20,
+          "action_type": "Suggest",
+          "action_text": "User suggests having dinner on Craig St.",
+          "role": "SHAPER",
+          "evidence_quote": "Let's have dinner on Craig St.",
+          "speaker": "user",
+          "action_id": "20-2",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 20,
+          "action_type": "Request",
+          "action_text": "User requests that the assistant adjust the plan accordingly.",
+          "role": "SHAPER",
+          "evidence_quote": "Please adjust the plan accordingly.",
+          "speaker": "user",
+          "action_id": "20-3",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 21,
+          "action_type": "Plan",
+          "action_text": "Assistant provides a revised Day 3 plan focused on CMU main campus and Craig St with dinner on Craig St.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Revised Day 3: CMU main campus and Craig St area, with dinner on Craig St.",
+          "speaker": "assistant",
+          "action_id": "21-1",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 21,
+          "action_type": "Provide",
+          "action_text": "Assistant provides detailed itinerary items and suggestions for Day 3 (times, sites, lunch, Craig St, dinner).",
+          "role": "EXECUTOR",
+          "evidence_quote": "10:00 - CMU main campus – The Fence, Gates Hillman Complex\n\n- **12:30 - Lunch: [Everyday Noodles](https://www.everydaynoodles.net/)** – Taiwanese dumplings and noodles in Squirrel Hill. (Try the shrimp dumplings.)\n\n- **14:30 - Craig St area** – **Mellon Institute:** Classic columned building; a CMU icon and film location. **Software Engineering Institute (SEI):** Modern research buildings.\n\n- **18:00 - Dinner: [Union Grill Oakland](https://www.uniongrilloakland.com/)** – A Craig St favorite.",
+          "speaker": "assistant",
+          "action_id": "21-2",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 22,
+          "action_type": "State",
+          "action_text": "User expresses a preference to have bread for lunch.",
+          "role": "SHAPER",
+          "evidence_quote": "For lunch I'd like to have bread.",
+          "speaker": "user",
+          "action_id": "22-1",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 22,
+          "action_type": "State",
+          "action_text": "User expresses a desire to have coffee at a café after lunch.",
+          "role": "SHAPER",
+          "evidence_quote": "And after lunch I want to have coffee at a café.",
+          "speaker": "user",
+          "action_id": "22-2",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 22,
+          "action_type": "Request",
+          "action_text": "User asks the assistant to update the plan to reflect these preferences.",
+          "role": "SHAPER",
+          "evidence_quote": "Please update the plan.",
+          "speaker": "user",
+          "action_id": "22-3",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 23,
+          "action_type": "Report",
+          "action_text": "Assistant reports that Day 3 has been updated with a bakery lunch and a coffee stop.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Day 3 updated with a bakery lunch and a coffee stop.",
+          "speaker": "assistant",
+          "action_id": "23-1",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 23,
+          "action_type": "Plan",
+          "action_text": "Assistant provides the updated Day 3 itinerary including Allegro Hearth Bakery at 12:30 and Commonplace Coffee at 14:00.",
+          "role": "EXECUTOR",
+          "evidence_quote": "12:30 - Lunch: [Allegro Hearth Bakery](https://www.allegrohearth.com/) – Local bakery known for fresh bread and sandwiches. Great if you want a “bread lunch.”\n\n14:00 - Coffee: [Commonplace Coffee](https://commonplacecoffee.com/) – Pittsburgh local roaster; good coffee in a relaxed setting.",
+          "speaker": "assistant",
+          "action_id": "23-2",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 23,
+          "action_type": "Recommend",
+          "action_text": "Assistant recommends Allegro Hearth Bakery as a good option for a 'bread lunch.'",
+          "role": "EXECUTOR",
+          "evidence_quote": "Great if you want a “bread lunch.”",
+          "speaker": "assistant",
+          "action_id": "23-3",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 23,
+          "action_type": "Recommend",
+          "action_text": "Assistant recommends Commonplace Coffee as the coffee stop.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Commonplace Coffee – Pittsburgh local roaster; good coffee in a relaxed setting.",
+          "speaker": "assistant",
+          "action_id": "23-4",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 24,
+          "action_type": "State",
+          "action_text": "User states a preference to have lunch and coffee at the same time.",
+          "role": "SHAPER",
+          "evidence_quote": "Actually I'd like to have lunch and coffee at the same time.",
+          "speaker": "user",
+          "action_id": "24-1",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 24,
+          "action_type": "Request",
+          "action_text": "User asks the assistant to find a place where they can have both lunch and coffee together.",
+          "role": "SHAPER",
+          "evidence_quote": "Can you find a place where we can do both?",
+          "speaker": "user",
+          "action_id": "24-2",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 25,
+          "action_type": "Modify",
+          "action_text": "Assistant announces a revised Day 3 itinerary to allow lunch and coffee in one place while still covering Craig St and CMU.",
+          "role": "EXECUTOR",
+          "evidence_quote": "Day 3 revised so you can have lunch and coffee in one place while still covering Craig St and CMU.",
+          "speaker": "assistant",
+          "action_id": "25-1",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 25,
+          "action_type": "Provide",
+          "action_text": "Assistant provides the 10:00 CMU main campus item with a note about on-site coffee/sandwich options.",
+          "role": "EXECUTOR",
+          "evidence_quote": "- **10:00 - CMU main campus** – The Fence, Gates Hillman Complex (**Tazza D'Oro** in the building has coffee and sandwiches too, but for a proper bakery I recommend the next spot.)",
+          "speaker": "assistant",
+          "action_id": "25-2",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 25,
+          "action_type": "Recommend",
+          "action_text": "Assistant recommends Sidecar as the lunch-and-coffee spot.",
+          "role": "EXECUTOR",
+          "evidence_quote": "- **12:00 - Lunch & coffee: [Sidecar](https://sidecar412.com/)** – Sister to Butterjoint on Craig St.",
+          "speaker": "assistant",
+          "action_id": "25-3",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 25,
+          "action_type": "Describe",
+          "action_text": "Assistant describes Sidecar's offerings (breads, sandwiches, espresso) and gives its address.",
+          "role": "EXECUTOR",
+          "evidence_quote": "**Japanese milk bread** and **ciabatta** baked daily; fresh **sandwiches** and **espresso** in one cozy, local spot. (200 N Craig St)\"",
+          "speaker": "assistant",
+          "action_id": "25-4",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 25,
+          "action_type": "Provide",
+          "action_text": "Assistant provides the 14:00 Craig St and nearby items (Mellon Institute, SEI).",
+          "role": "EXECUTOR",
+          "evidence_quote": "- **14:00 - Craig St and nearby** – Mellon Institute (very close to Sidecar), SEI",
+          "speaker": "assistant",
+          "action_id": "25-5",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 25,
+          "action_type": "Provide",
+          "action_text": "Assistant provides the 16:00 Craig St walk and free time item (bookstores and small shops).",
+          "role": "EXECUTOR",
+          "evidence_quote": "- **16:00 - Craig St walk and free time** – Bookstores and small shops",
+          "speaker": "assistant",
+          "action_id": "25-6",
+          "bound_outcome_id": "outcome_4"
+        },
+        {
+          "turn_id": 25,
+          "action_type": "Provide",
+          "action_text": "Assistant provides the 18:00 dinner recommendation at Union Grill Oakland with dish suggestions.",
+          "role": "EXECUTOR",
+          "evidence_quote": "- **18:00 - Dinner: [Union Grill Oakland](https://www.uniongrilloakland.com/)** – **Fish and chips** or **salad** for a light, non-gamey finish.",
+          "speaker": "assistant",
+          "action_id": "25-7",
+          "bound_outcome_id": "outcome_4"
+        }
+      ]
+    }
+  ],
+  "outcome_versions": [],
+  "outcome_actions": {
+    "outcome_1": [
+      {
+        "turn_id": 0,
+        "action_type": "State",
+        "action_text": "User states they are planning to visit Pittsburgh for 3 days.",
+        "role": "SHAPER",
+        "evidence_quote": "I'm planning to visit Pittsburgh for 3 days.",
+        "speaker": "user",
+        "action_id": "0-1",
+        "bound_outcome_id": "outcome_1"
+      },
+      {
+        "turn_id": 0,
+        "action_type": "Plan",
+        "action_text": "User requests to start planning the trip now.",
+        "role": "SHAPER",
+        "evidence_quote": "Let's plan the trip from now.",
+        "speaker": "user",
+        "action_id": "0-2",
+        "bound_outcome_id": "outcome_1"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Acknowledge",
+        "action_text": "Assistant acknowledges the user's preference for concise responses and revising chat.",
+        "role": "EXECUTOR",
+        "evidence_quote": "I also need to provide a concise response as per the user's preference.",
+        "speaker": "assistant",
+        "action_id": "1-1",
+        "bound_outcome_id": "outcome_1"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Decide",
+        "action_text": "Assistant decides to stick to Korean and provide a concise plan.",
+        "role": "EXECUTOR",
+        "evidence_quote": "I will stick to Korean and provide a concise plan.",
+        "speaker": "assistant",
+        "action_id": "1-2",
+        "bound_outcome_id": "outcome_1"
+      },
+      {
+        "turn_id": 21,
+        "action_type": "Report",
+        "action_text": "Assistant reports that the 3-day Pittsburgh plan is complete.",
+        "role": "EXECUTOR",
+        "evidence_quote": "That completes your 3-day Pittsburgh plan.",
+        "speaker": "assistant",
+        "action_id": "21-3",
+        "bound_outcome_id": "outcome_1"
+      },
+      {
+        "turn_id": 21,
+        "action_type": "Invite",
+        "action_text": "Assistant invites the user to ask more questions if needed.",
+        "role": "EXECUTOR",
+        "evidence_quote": "If you have more questions, just ask!",
+        "speaker": "assistant",
+        "action_id": "21-4",
+        "bound_outcome_id": "outcome_1"
+      },
+      {
+        "turn_id": 25,
+        "action_type": "State",
+        "action_text": "Assistant concludes the 3-day Pittsburgh trip and offers a courteous send-off.",
+        "role": "EXECUTOR",
+        "evidence_quote": "That completes your 3-day Pittsburgh trip. Have a great time!",
+        "speaker": "assistant",
+        "action_id": "25-8",
+        "bound_outcome_id": "outcome_1"
+      }
+    ],
+    "outcome_2": [
+      {
+        "turn_id": 0,
+        "action_type": "Decide",
+        "action_text": "User decides to start with planning the first day.",
+        "role": "SHAPER",
+        "evidence_quote": "Let's start with the first day.",
+        "speaker": "user",
+        "action_id": "0-3",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 0,
+        "action_type": "Constrain",
+        "action_text": "User specifies they want to look around near the University of Pittsburgh on the first day.",
+        "role": "SHAPER",
+        "evidence_quote": "On the first day I want to look around near the University of Pittsburgh.",
+        "speaker": "user",
+        "action_id": "0-4",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 0,
+        "action_type": "State",
+        "action_text": "User expresses a desire to visit the Cathedral of Learning.",
+        "role": "SHAPER",
+        "evidence_quote": "I really want to visit the Cathedral of Learning.",
+        "speaker": "user",
+        "action_id": "0-5",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 0,
+        "action_type": "Ask",
+        "action_text": "User asks what else would be good to do.",
+        "role": "SHAPER",
+        "evidence_quote": "What else would be good to do?",
+        "speaker": "user",
+        "action_id": "0-6",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Implement",
+        "action_text": "Assistant states intent to execute a maps query.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Let's execute the maps query.",
+        "speaker": "assistant",
+        "action_id": "1-3",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Provide",
+        "action_text": "Assistant provides a Day 1 plan centered on Oakland and the University of Pittsburgh campus.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Here is a plan for Day 1 of your Pittsburgh trip, centered on the Oakland area and the University of Pittsburgh campus.",
+        "speaker": "assistant",
+        "action_id": "1-4",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Describe",
+        "action_text": "Assistant describes the Cathedral of Learning.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Cathedral of Learning: A 42-story Gothic-style building.",
+        "speaker": "assistant",
+        "action_id": "1-5",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Recommend",
+        "action_text": "Assistant recommends visiting the Commons Room and the Nationality Rooms in the Cathedral of Learning.",
+        "role": "EXECUTOR",
+        "evidence_quote": "I recommend visiting the impressive Commons Room on the 1st floor and the Nationality Rooms showcasing cultures from around the world.",
+        "speaker": "assistant",
+        "action_id": "1-6",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Describe",
+        "action_text": "Assistant describes Heinz Memorial Chapel and its proximity to the Cathedral.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Heinz Memorial Chapel: A beautiful Gothic Revival chapel right next to the Cathedral.",
+        "speaker": "assistant",
+        "action_id": "1-7",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Warn",
+        "action_text": "Assistant warns that Heinz Memorial Chapel is currently closed Fri–Sun and advises to check before visiting.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Note: currently closed Fri–Sun, so check the day before visiting.",
+        "speaker": "assistant",
+        "action_id": "1-8",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Describe",
+        "action_text": "Assistant describes Schenley Plaza as a nearby green space for lunch or a break.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Schenley Plaza: A green space across from the Cathedral with food stands and a carousel, great for lunch or a break.",
+        "speaker": "assistant",
+        "action_id": "1-9",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Describe",
+        "action_text": "Assistant describes the Carnegie Museum of Natural History and its attractions.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Carnegie Museum of Natural History: World-class dinosaur fossils and gem galleries.",
+        "speaker": "assistant",
+        "action_id": "1-10",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Describe",
+        "action_text": "Assistant describes Phipps Conservatory and Botanical Gardens.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Phipps Conservatory and Botanical Gardens: A historic glass conservatory from 1893 with seasonal flower displays and themed gardens.",
+        "speaker": "assistant",
+        "action_id": "1-11",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Summarize",
+        "action_text": "Assistant summarizes that all listed attractions are within walking distance for Day 1.",
+        "role": "EXECUTOR",
+        "evidence_quote": "All of these are within walking distance on Day 1.",
+        "speaker": "assistant",
+        "action_id": "1-12",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Provide",
+        "action_text": "Assistant provides a Day 1 schedule around the Cathedral and Phipps with nearby restaurant suggestions.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Here is a Day 1 schedule around the Cathedral and Phipps with nearby restaurant suggestions.",
+        "speaker": "assistant",
+        "action_id": "1-14",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Recommend",
+        "action_text": "Assistant recommends The Porch at Schenley as a lunch option.",
+        "role": "EXECUTOR",
+        "evidence_quote": "The Porch at Schenley: Outdoor terrace on Schenley Plaza. Wood-fired pizza and fresh local ingredients are popular.",
+        "speaker": "assistant",
+        "action_id": "1-15",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Recommend",
+        "action_text": "Assistant recommends Primanti Bros. as a lunch option.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Primanti Bros.: A Pittsburgh icon. Sandwiches come with fries and vinegar-based coleslaw inside—a unique style worth trying.",
+        "speaker": "assistant",
+        "action_id": "1-16",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Provide",
+        "action_text": "Assistant schedules afternoon visit to Phipps Conservatory and notes walking time.",
+        "role": "EXECUTOR",
+        "evidence_quote": "About 10–15 min on foot from the Cathedral. Tour the themed glass conservatory gardens.",
+        "speaker": "assistant",
+        "action_id": "1-17",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Recommend",
+        "action_text": "Assistant recommends Spirits & Tales and Butterjoint as dinner options.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Spirits & Tales: On the 10th floor... Butterjoint: Cozy spot for house-made burgers and pierogi and other local fare.",
+        "speaker": "assistant",
+        "action_id": "1-18",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Advise",
+        "action_text": "Assistant advises that walking is convenient within the area and suggests parking once and walking.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Everything in this area is within walking distance; parking once and walking is convenient.",
+        "speaker": "assistant",
+        "action_id": "1-19",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 3,
+        "action_type": "Provide",
+        "action_text": "Assistant provides a schedule summary combining the recommended restaurants and attractions for Day 1.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Schedule summary: 1. Morning: Breakfast at Pamela's Diner, then Cathedral of Learning 2. Lunch: Primanti Bros. for a Pittsburgh-style sandwich 3. Afternoon: Phipps Conservatory 4. Dinner: Butterjoint for pierogi and local vibe",
+        "speaker": "assistant",
+        "action_id": "3-5",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 4,
+        "action_type": "State",
+        "action_text": "User states a preference to stop for coffee after lunch.",
+        "role": "SHAPER",
+        "evidence_quote": "After lunch I'd like to stop for coffee.",
+        "speaker": "user",
+        "action_id": "4-1",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 4,
+        "action_type": "Report",
+        "action_text": "User reports having heard La Prima is a famous brand.",
+        "role": "SHAPER",
+        "evidence_quote": "I heard La Prima is a famous brand",
+        "speaker": "user",
+        "action_id": "4-2",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 4,
+        "action_type": "Ask",
+        "action_text": "User asks whether there is a La Prima location near the trip area.",
+        "role": "SHAPER",
+        "evidence_quote": "is there a location near the trip area?",
+        "speaker": "user",
+        "action_id": "4-3",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 5,
+        "action_type": "Provide",
+        "action_text": "Assistant states that La Prima Espresso Company has several locations in and around Oakland.",
+        "role": "EXECUTOR",
+        "evidence_quote": "**La Prima Espresso Company** has several locations in and around Oakland.\"",
+        "speaker": "assistant",
+        "action_id": "5-1",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 5,
+        "action_type": "Provide",
+        "action_text": "Assistant provides details for the Oakland location (link, walking time, address).",
+        "role": "EXECUTOR",
+        "evidence_quote": "La Prima Espresso Company - Oakland: About 15–20 min on foot from the Cathedral... (Address: 3400 Fifth Ave)\"",
+        "speaker": "assistant",
+        "action_id": "5-2",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 5,
+        "action_type": "Provide",
+        "action_text": "Assistant provides details for the Strip District location (link, car time, character).",
+        "role": "EXECUTOR",
+        "evidence_quote": "La Prima Espresso Company - Strip District: The most famous branch; classic Italian café vibe. About 10 min by car from Oakland\"",
+        "speaker": "assistant",
+        "action_id": "5-3",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 5,
+        "action_type": "Suggest",
+        "action_text": "Assistant suggests stopping at the Oakland location in the afternoon before or after Phipps.",
+        "role": "EXECUTOR",
+        "evidence_quote": "I’d suggest stopping at the Oakland location in the afternoon before or after Phipps for coffee.\"",
+        "speaker": "assistant",
+        "action_id": "5-4",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 6,
+        "action_type": "Decide",
+        "action_text": "User selects the 3400 Fifth Ave La Prima location.",
+        "role": "SHAPER",
+        "evidence_quote": "I'll go with the 3400 Fifth Ave location.",
+        "speaker": "user",
+        "action_id": "6-1",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 6,
+        "action_type": "Request",
+        "action_text": "User requests the assistant to add the café and finalize the schedule.",
+        "role": "SHAPER",
+        "evidence_quote": "Please add the café and finalize the schedule.",
+        "speaker": "user",
+        "action_id": "6-2",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 7,
+        "action_type": "Provide",
+        "action_text": "Assistant provides the finalized Day 1 schedule for the Pittsburgh trip.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Final Day 1 schedule for your Pittsburgh trip: Oakland local spots and main sights.",
+        "speaker": "assistant",
+        "action_id": "7-1",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 7,
+        "action_type": "Include",
+        "action_text": "Assistant includes the 14:00 La Prima entry with the 3400 Fifth Ave location in the itinerary.",
+        "role": "EXECUTOR",
+        "evidence_quote": "14:00 - Coffee: [La Prima Espresso Company]... The 3400 Fifth Ave location you asked for.\"",
+        "speaker": "assistant",
+        "action_id": "7-2",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 7,
+        "action_type": "Explain",
+        "action_text": "Assistant states that everything is within Oakland and that walking or short trips are sufficient.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Everything is within Oakland; walking or short trips are enough.\"",
+        "speaker": "assistant",
+        "action_id": "7-3",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 8,
+        "action_type": "Suggest",
+        "action_text": "User proposes changing dinner to The Porch instead of Butterjoint.",
+        "role": "SHAPER",
+        "evidence_quote": "For dinner let's do the Porch instead of Butterjoint.",
+        "speaker": "user",
+        "action_id": "8-1",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 9,
+        "action_type": "Confirm",
+        "action_text": "Assistant confirms it updated the Day 1 schedule with dinner at The Porch at Schenley.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Updated final Day 1 schedule with dinner at **The Porch at Schenley**.",
+        "speaker": "assistant",
+        "action_id": "9-1",
+        "bound_outcome_id": "outcome_2"
+      },
+      {
+        "turn_id": 9,
+        "action_type": "Provide",
+        "action_text": "Assistant provides the full updated Day 1 itinerary.",
+        "role": "EXECUTOR",
+        "evidence_quote": "### **Pittsburgh Day 1: Oakland local tour (final)**\n\n- **09:00 - Breakfast: [Pamela's Diner](https://pamelasdiner.com/)** (pancakes, Lyonnaise potatoes)\n- **10:30 - Morning: [Cathedral of Learning](http://www.tour.pitt.edu/tour/cathedral-learning)** (Commons Room, Nationality Rooms)\n- **12:30 - Lunch: [Primanti Bros.](https://primantibros.com/)** (Pittsburgh-style sandwich)\n- **14:00 - Coffee: [La Prima Espresso Company](http://laprima.com/)** (3400 Fifth Ave)\n- **15:30 - Afternoon: [Phipps Conservatory](https://www.phipps.conservatory.org/)** (conservatory and themed gardens)\n- **18:30 - Dinner: [The Porch at Schenley](https://www.dineattheporch.com/)** (wood-fired pizza and local ingredients)",
+        "speaker": "assistant",
+        "action_id": "9-2",
+        "bound_outcome_id": "outcome_2"
+      }
+    ],
+    "outcome_5": [
+      {
+        "turn_id": 2,
+        "action_type": "State",
+        "action_text": "User states they want to try famous Pittsburgh food for meals.",
+        "role": "SHAPER",
+        "evidence_quote": "For meals I'd like to try famous Pittsburgh food.",
+        "speaker": "user",
+        "action_id": "2-1",
+        "bound_outcome_id": "outcome_5"
+      },
+      {
+        "turn_id": 2,
+        "action_type": "Constrain",
+        "action_text": "User prefers places locals go to rather than expensive or fancy spots.",
+        "role": "SHAPER",
+        "evidence_quote": "I prefer places that locals go to rather than expensive or fancy spots.",
+        "speaker": "user",
+        "action_id": "2-2",
+        "bound_outcome_id": "outcome_5"
+      },
+      {
+        "turn_id": 2,
+        "action_type": "Request",
+        "action_text": "User asks the assistant to narrow down and recommend those kinds of restaurants.",
+        "role": "SHAPER",
+        "evidence_quote": "Can you narrow it down and recommend those kinds of restaurants?",
+        "speaker": "user",
+        "action_id": "2-3",
+        "bound_outcome_id": "outcome_5"
+      },
+      {
+        "turn_id": 3,
+        "action_type": "Provide",
+        "action_text": "Assistant provides a list of local favorite restaurant picks for Day 1.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Here are local favorites where you can try iconic Pittsburgh food.",
+        "speaker": "assistant",
+        "action_id": "3-1",
+        "bound_outcome_id": "outcome_5"
+      },
+      {
+        "turn_id": 3,
+        "action_type": "Provide",
+        "action_text": "Assistant provides details about Pamela's Diner as a breakfast/lunch local favorite.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Pamela's Diner (breakfast/lunch): A Pittsburgh breakfast staple. Known for crepe-style pancakes with thin, crispy edges and Lyonnaise potatoes.",
+        "speaker": "assistant",
+        "action_id": "3-2",
+        "bound_outcome_id": "outcome_5"
+      },
+      {
+        "turn_id": 3,
+        "action_type": "Provide",
+        "action_text": "Assistant provides details about Primanti Bros. as a lunch option and iconic sandwich spot.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Primanti Bros. (lunch): Home of the famous Primanti sandwich—meat plus fries and vinegar-based coleslaw stuffed inside the sandwich.",
+        "speaker": "assistant",
+        "action_id": "3-3",
+        "bound_outcome_id": "outcome_5"
+      },
+      {
+        "turn_id": 3,
+        "action_type": "Provide",
+        "action_text": "Assistant provides details about Butterjoint as a dinner option for pierogi and local fare.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Butterjoint (dinner): Pittsburgh is known for pierogi... This cozy spot near campus does proper house-made pierogi and burgers with local ingredients.",
+        "speaker": "assistant",
+        "action_id": "3-4",
+        "bound_outcome_id": "outcome_5"
+      }
+    ],
+    "outcome_3": [
+      {
+        "turn_id": 1,
+        "action_type": "Ask",
+        "action_text": "Assistant asks whether to plan Day 2 (downtown and Mount Washington).",
+        "role": "EXECUTOR",
+        "evidence_quote": "Shall we plan Day 2 (e.g. downtown and Mount Washington)?",
+        "speaker": "assistant",
+        "action_id": "1-13",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 1,
+        "action_type": "Ask",
+        "action_text": "Assistant asks again whether to plan Day 2.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Would you like me to plan Day 2 (e.g. downtown, Strip District, etc.) next?",
+        "speaker": "assistant",
+        "action_id": "1-20",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 3,
+        "action_type": "Ask",
+        "action_text": "Assistant asks whether to plan Day 2 for downtown or areas with great views.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Should I plan Day 2 for downtown or areas with great views?",
+        "speaker": "assistant",
+        "action_id": "3-6",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 7,
+        "action_type": "Invite",
+        "action_text": "Assistant asks if the user wants to plan Day 2 (downtown and overlooks) next.",
+        "role": "EXECUTOR",
+        "evidence_quote": "If you’re happy with Day 1, shall we plan **Day 2 (downtown and overlooks)** next?\"\n    }",
+        "speaker": "assistant",
+        "action_id": "7-4",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 9,
+        "action_type": "Ask",
+        "action_text": "Assistant asks whether to plan Day 2.",
+        "role": "SHAPER",
+        "evidence_quote": "That’s Day 1 set. Shall I plan Day 2?",
+        "speaker": "assistant",
+        "action_id": "9-3",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 10,
+        "action_type": "Request",
+        "action_text": "User asks the assistant to begin planning Day 2.",
+        "role": "SHAPER",
+        "evidence_quote": "Let's plan Day 2 now.",
+        "speaker": "user",
+        "action_id": "10-1",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 10,
+        "action_type": "Ask",
+        "action_text": "User asks which areas are good to explore on Day 2.",
+        "role": "SHAPER",
+        "evidence_quote": "What areas are good to explore on Day 2?",
+        "speaker": "user",
+        "action_id": "10-2",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 11,
+        "action_type": "Recommend",
+        "action_text": "Assistant recommends the Strip District and Mount Washington for Day 2.",
+        "role": "SHAPER",
+        "evidence_quote": "For Day 2 I recommend **Strip District** and **Mount Washington** for market culture and great views.",
+        "speaker": "assistant",
+        "action_id": "11-1",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 11,
+        "action_type": "Provide",
+        "action_text": "Assistant provides a Morning plan for the Strip District with a brief description.",
+        "role": "EXECUTOR",
+        "evidence_quote": "- **Morning: Strip District**\n    - Former warehouse district; now a lively area where locals buy ingredients and street food—very Pittsburgh.",
+        "speaker": "assistant",
+        "action_id": "11-2",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 11,
+        "action_type": "Provide",
+        "action_text": "Assistant provides local experience suggestions (Pennsylvania Macaroni Co., Wholey's Fish Market).",
+        "role": "EXECUTOR",
+        "evidence_quote": "**Local experience:** Browse cheese at **Pennsylvania Macaroni Co.** or seafood at **Wholey's Fish Market**.",
+        "speaker": "assistant",
+        "action_id": "11-3",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 11,
+        "action_type": "Provide",
+        "action_text": "Assistant provides lunch options and specific dish suggestions for Day 2.",
+        "role": "EXECUTOR",
+        "evidence_quote": "- **Lunch: [Wholey's]... or [S&D Polish Deli]**\n    - Try Wholey's famous **fish sandwich** or S&D's **Polish pierogi**.",
+        "speaker": "assistant",
+        "action_id": "11-4",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 11,
+        "action_type": "Provide",
+        "action_text": "Assistant provides Afternoon activities (North Shore, Andy Warhol Museum, Point State Park).",
+        "role": "EXECUTOR",
+        "evidence_quote": "- **Afternoon: North Shore and downtown**\n    - Walk from the Strip along the river. Visit the **Andy Warhol Museum** or see the three rivers meet at the fountain in **Point State Park**.",
+        "speaker": "assistant",
+        "action_id": "11-5",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 11,
+        "action_type": "Provide",
+        "action_text": "Assistant provides an Evening activity suggestion to take the Duquesne Incline for skyline views.",
+        "role": "EXECUTOR",
+        "evidence_quote": "- **Evening: Duquesne Incline**\n    - Take the historic cable car up Mount Washington for a classic Pittsburgh skyline view.",
+        "speaker": "assistant",
+        "action_id": "11-6",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 11,
+        "action_type": "Provide",
+        "action_text": "Assistant provides a Day 2 dinner suggestion (Gaucho Parrilla Argentina) with background.",
+        "role": "EXECUTOR",
+        "evidence_quote": "- **Dinner: [Gaucho Parrilla Argentina](https://www.google.com/search?q=https://www.eatgaucho.com/)**\n    - Started in the Strip, now in downtown—a popular Argentine wood-fire grill.",
+        "speaker": "assistant",
+        "action_id": "11-7",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 11,
+        "action_type": "Provide",
+        "action_text": "Assistant provides English study example expressions related to the itinerary.",
+        "role": "EXECUTOR",
+        "evidence_quote": "### **English Study: Natural Expressions**\n\n- \"The Strip District is the heart and soul of Pittsburgh's food scene.\"\n- \"You'll get the best view of the skyline from Mount Washington.\"\n- \"Riding the incline is a quintessential Pittsburgh experience.\"",
+        "speaker": "assistant",
+        "action_id": "11-8",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 11,
+        "action_type": "Ask",
+        "action_text": "Assistant asks if the user needs more details on Day 2 dinner or activities.",
+        "role": "SHAPER",
+        "evidence_quote": "Need more details on Day 2 dinner or specific activities?",
+        "speaker": "assistant",
+        "action_id": "11-9",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 11,
+        "action_type": "Ask",
+        "action_text": "Assistant offers to find the Duquesne Incline hours and asks if the user wants that.",
+        "role": "SHAPER",
+        "evidence_quote": "Would you like me to find the Duquesne Incline hours?",
+        "speaker": "assistant",
+        "action_id": "11-10",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 12,
+        "action_type": "Suggest",
+        "action_text": "Suggest visiting the Strip District in the morning",
+        "role": "SHAPER",
+        "evidence_quote": "Let's visit the Strip District in the morning",
+        "speaker": "user",
+        "action_id": "12-1",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 12,
+        "action_type": "Suggest",
+        "action_text": "Suggest having lunch at Wholey's",
+        "role": "SHAPER",
+        "evidence_quote": "and have lunch at Wholey's.",
+        "speaker": "user",
+        "action_id": "12-2",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 12,
+        "action_type": "Plan",
+        "action_text": "State intent to visit the Andy Warhol Museum after lunch",
+        "role": "SHAPER",
+        "evidence_quote": "After that I want to go to the Andy Warhol Museum.",
+        "speaker": "user",
+        "action_id": "12-3",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 13,
+        "action_type": "Provide",
+        "action_text": "Announce and provide an updated Day 2 schedule",
+        "role": "EXECUTOR",
+        "evidence_quote": "Here’s your updated Day 2 schedule.\"",
+        "speaker": "assistant",
+        "action_id": "13-3",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 13,
+        "action_type": "Plan",
+        "action_text": "Schedule a 10:00 Strip District walk",
+        "role": "SHAPER",
+        "evidence_quote": "- **10:00 - Strip District walk** – Soak up the morning market vibe in “Pittsburgh’s kitchen.”",
+        "speaker": "assistant",
+        "action_id": "13-4",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 13,
+        "action_type": "Plan",
+        "action_text": "Schedule 12:00 lunch at Wholey's and recommend the fried fish sandwich and seating",
+        "role": "SHAPER",
+        "evidence_quote": "- **12:00 - Lunch: [Wholey's Fish Market](https://wholey.com/)** – Their signature **fried fish sandwich**—hearty, honest local flavor. Eat on the 2nd floor.",
+        "speaker": "assistant",
+        "action_id": "13-5",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 13,
+        "action_type": "Plan",
+        "action_text": "Schedule a 14:00 visit to the Andy Warhol Museum and provide logistics (travel time and elevator suggestion)",
+        "role": "SHAPER",
+        "evidence_quote": "- **14:00 - Afternoon: [Andy Warhol Museum](https://www.warhol.org/)** – 5 min by car or ~20 min on foot from the Strip. Take the elevator to the 7th floor and work your way down.",
+        "speaker": "assistant",
+        "action_id": "13-6",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 13,
+        "action_type": "Plan",
+        "action_text": "Schedule a 17:00 visit to Point State Park and suggest pairing it with Mount Washington view",
+        "role": "SHAPER",
+        "evidence_quote": "- **17:00 - Point State Park and evening** – Cross the bridge from the museum to the park where the three rivers meet. Pair with the Mount Washington view for a full day.",
+        "speaker": "assistant",
+        "action_id": "13-7",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 14,
+        "action_type": "Evaluate",
+        "action_text": "Express that the museum does not sound appealing",
+        "role": "OTHER",
+        "evidence_quote": "After hearing about it, it doesn't sound that appealing.",
+        "speaker": "user",
+        "action_id": "14-1",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 14,
+        "action_type": "Decide",
+        "action_text": "Decide to skip the Andy Warhol Museum and head downtown after lunch",
+        "role": "SHAPER",
+        "evidence_quote": "Let's skip the Andy Warhol Museum and head downtown after lunch.\"",
+        "speaker": "user",
+        "action_id": "14-2",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 14,
+        "action_type": "State",
+        "action_text": "State a preference to spend time outdoors rather than indoors downtown",
+        "role": "SHAPER",
+        "evidence_quote": "I'd rather spend time outdoors than indoors downtown.\"",
+        "speaker": "user",
+        "action_id": "14-3",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 14,
+        "action_type": "Ask",
+        "action_text": "Ask for recommendations of where to go downtown outdoors",
+        "role": "OTHER",
+        "evidence_quote": "Where should we go?",
+        "speaker": "user",
+        "action_id": "14-4",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 15,
+        "action_type": "Summarize",
+        "action_text": "Summarize a revised Day 2 focused on outdoor downtown spots without the Warhol Museum",
+        "role": "SHAPER",
+        "evidence_quote": "Revised Day 2 schedule without the Warhol Museum, focused on outdoor downtown spots.",
+        "speaker": "assistant",
+        "action_id": "15-1",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 15,
+        "action_type": "Plan",
+        "action_text": "Keep the 10:00 Strip District walk in the revised schedule",
+        "role": "SHAPER",
+        "evidence_quote": "- **10:00 - Strip District walk** – Lively local market atmosphere.",
+        "speaker": "assistant",
+        "action_id": "15-2",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 15,
+        "action_type": "Plan",
+        "action_text": "Keep the 12:00 lunch at Wholey's in the revised schedule",
+        "role": "SHAPER",
+        "evidence_quote": "- **12:00 - Lunch: [Wholey's Fish Market](https://wholey.com/)** – Fish sandwich on the 2nd floor.",
+        "speaker": "assistant",
+        "action_id": "15-3",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 15,
+        "action_type": "Suggest",
+        "action_text": "Suggest Point State Park as a downtown outdoor option",
+        "role": "SHAPER",
+        "evidence_quote": "- [**Point State Park**](https://www.pa.gov/agencies/dcnr/recreation/where-to-go/state-parks/find-a-park/point-state-park.html): Where Pittsburgh’s three rivers meet; big fountain and riverfront paths—ideal for outdoor time.",
+        "speaker": "assistant",
+        "action_id": "15-4",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 15,
+        "action_type": "Suggest",
+        "action_text": "Suggest Market Square as a downtown outdoor option",
+        "role": "SHAPER",
+        "evidence_quote": "- [**Market Square**](http://marketsquarepgh.com/): European-style square with outdoor cafés and benches; a local hangout.",
+        "speaker": "assistant",
+        "action_id": "15-5",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 15,
+        "action_type": "Suggest",
+        "action_text": "Suggest PPG Plaza as a downtown outdoor option",
+        "role": "SHAPER",
+        "evidence_quote": "- [**PPG Plaza**](http://www.ppgplace.com/): The “glass castle”—Gothic-style glass buildings around a plaza.",
+        "speaker": "assistant",
+        "action_id": "15-6",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 15,
+        "action_type": "Plan",
+        "action_text": "Schedule a 17:00 ride on the Duquesne Incline to Mount Washington for the skyline view",
+        "role": "SHAPER",
+        "evidence_quote": "- **17:00 - Duquesne Incline** – Ride up Mount Washington for the skyline view.",
+        "speaker": "assistant",
+        "action_id": "15-7",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 15,
+        "action_type": "Plan",
+        "action_text": "Schedule 19:00 dinner at Gaucho Parrilla Argentina and note its character",
+        "role": "SHAPER",
+        "evidence_quote": "- **19:00 - Dinner: [Gaucho Parrilla Argentina](https://www.google.com/search?q=https://www.eatgaucho.com/)**\n    - Well-known Argentine grill in downtown.",
+        "speaker": "assistant",
+        "action_id": "15-8",
+        "bound_outcome_id": "outcome_3"
+      },
+      {
+        "turn_id": 15,
+        "action_type": "Provide",
+        "action_text": "Provide English study: three natural expression examples",
+        "role": "EXECUTOR",
+        "evidence_quote": "\"I think I'll pass on the Warhol Museum.\" \"I'd rather spend some time outdoors.\" \"Let's head downtown after lunch.\"",
+        "speaker": "assistant",
+        "action_id": "15-9",
+        "bound_outcome_id": "outcome_3"
+      }
+    ],
+    "outcome_7": [
+      {
+        "turn_id": 12,
+        "action_type": "Ask",
+        "action_text": "Ask for a description of the Andy Warhol Museum",
+        "role": "OTHER",
+        "evidence_quote": "What is the Andy Warhol Museum like?",
+        "speaker": "user",
+        "action_id": "12-4",
+        "bound_outcome_id": "outcome_7"
+      },
+      {
+        "turn_id": 13,
+        "action_type": "Describe",
+        "action_text": "Describe the Andy Warhol Museum's focus, scale, and collections",
+        "role": "EXECUTOR",
+        "evidence_quote": "**The Andy Warhol Museum** is dedicated to the life and work of Andy Warhol, the pop art icon from Pittsburgh. It’s the largest museum in North America devoted to a single artist. Seven floors cover everything from early commercial design to Campbell’s soup cans and Marilyn Monroe portraits, plus experimental film and archives.",
+        "speaker": "assistant",
+        "action_id": "13-1",
+        "bound_outcome_id": "outcome_7"
+      },
+      {
+        "turn_id": 13,
+        "action_type": "Provide",
+        "action_text": "Provide examples of interactive exhibits and activities",
+        "role": "EXECUTOR",
+        "evidence_quote": "You can try silkscreen techniques and the “Silver Clouds” helium balloon room—it’s interactive, not just viewing.",
+        "speaker": "assistant",
+        "action_id": "13-2",
+        "bound_outcome_id": "outcome_7"
+      }
+    ],
+    "outcome_6": [
+      {
+        "turn_id": 16,
+        "action_type": "State",
+        "action_text": "User states they will have dinner at Gaucho Parrilla Argentina",
+        "role": "OTHER",
+        "evidence_quote": "I'll have dinner at the Gaucho Parrilla Argentina you recommended.",
+        "speaker": "user",
+        "action_id": "16-1",
+        "bound_outcome_id": "outcome_6"
+      },
+      {
+        "turn_id": 16,
+        "action_type": "Constrain",
+        "action_text": "User states a dietary constraint (cannot eat strongly gamey meat)",
+        "role": "SHAPER",
+        "evidence_quote": "I can't eat strongly gamey meat",
+        "speaker": "user",
+        "action_id": "16-2",
+        "bound_outcome_id": "outcome_6"
+      },
+      {
+        "turn_id": 16,
+        "action_type": "Request",
+        "action_text": "User asks the assistant to recommend menu items given the dietary constraint",
+        "role": "SHAPER",
+        "evidence_quote": "please recommend menu items with that in mind.",
+        "speaker": "user",
+        "action_id": "16-3",
+        "bound_outcome_id": "outcome_6"
+      },
+      {
+        "turn_id": 17,
+        "action_type": "Recommend",
+        "action_text": "Assistant recommends choosing lean, mild, or seafood/vegetable-focused options",
+        "role": "EXECUTOR",
+        "evidence_quote": "If you’re sensitive to gamey flavors, choose lean, mild, or seafood/vegetable-focused options.",
+        "speaker": "assistant",
+        "action_id": "17-1",
+        "bound_outcome_id": "outcome_6"
+      },
+      {
+        "turn_id": 17,
+        "action_type": "Provide",
+        "action_text": "Assistant introduces that it will provide Gaucho Parrilla Argentina suggestions",
+        "role": "EXECUTOR",
+        "evidence_quote": "Here are **Gaucho Parrilla Argentina** suggestions.",
+        "speaker": "assistant",
+        "action_id": "17-2",
+        "bound_outcome_id": "outcome_6"
+      },
+      {
+        "turn_id": 17,
+        "action_type": "Recommend",
+        "action_text": "Assistant recommends Lomo (Filet Mignon) as lean and less gamey",
+        "role": "EXECUTOR",
+        "evidence_quote": "Lomo (Filet Mignon): Lean and clean-tasting; less gamey than other cuts.",
+        "speaker": "assistant",
+        "action_id": "17-3",
+        "bound_outcome_id": "outcome_6"
+      },
+      {
+        "turn_id": 17,
+        "action_type": "Recommend",
+        "action_text": "Assistant recommends Pollo a la Parrilla (Grilled Chicken) as a light option",
+        "role": "EXECUTOR",
+        "evidence_quote": "Pollo a la Parrilla (Grilled Chicken): With lemon, thyme, and pickled red onion; light and fresh.",
+        "speaker": "assistant",
+        "action_id": "17-4",
+        "bound_outcome_id": "outcome_6"
+      },
+      {
+        "turn_id": 17,
+        "action_type": "Recommend",
+        "action_text": "Assistant recommends Camarones (Grilled Shrimp) to avoid meat flavor",
+        "role": "EXECUTOR",
+        "evidence_quote": "Camarones (Grilled Shrimp): Rosemary and olive oil; good when you want to avoid meat flavor entirely.",
+        "speaker": "assistant",
+        "action_id": "17-5",
+        "bound_outcome_id": "outcome_6"
+      },
+      {
+        "turn_id": 17,
+        "action_type": "Recommend",
+        "action_text": "Assistant recommends Pescado (Fish) as a fresh, light option",
+        "role": "EXECUTOR",
+        "evidence_quote": "Pescado (Fish): \"Fish of the day\" or fish sandwich (Pescado con Pan) with lemon and arugula—fresh and light.",
+        "speaker": "assistant",
+        "action_id": "17-6",
+        "bound_outcome_id": "outcome_6"
+      },
+      {
+        "turn_id": 17,
+        "action_type": "Recommend",
+        "action_text": "Assistant recommends sides Maiz (grilled corn) and Vegetales (grilled vegetables)",
+        "role": "EXECUTOR",
+        "evidence_quote": "Sides: Maiz (grilled corn) and Vegetales (grilled vegetables) are signature options.",
+        "speaker": "assistant",
+        "action_id": "17-7",
+        "bound_outcome_id": "outcome_6"
+      },
+      {
+        "turn_id": 17,
+        "action_type": "Recommend",
+        "action_text": "Assistant suggests sauces (Chimichurri or Ajo) to balance stronger flavors",
+        "role": "EXECUTOR",
+        "evidence_quote": "Sauces: Table Chimichurri or Ajo (garlic) sauce can balance stronger flavors.",
+        "speaker": "assistant",
+        "action_id": "17-8",
+        "bound_outcome_id": "outcome_6"
+      },
+      {
+        "turn_id": 17,
+        "action_type": "Warn",
+        "action_text": "Assistant warns to avoid Parrillada Mixta or Asado Plate which can include offal or strong sausage",
+        "role": "EXECUTOR",
+        "evidence_quote": "Avoid: Parrillada Mixta or Asado Plate (mixed grill) can include offal or strong sausage—skip if you’re sensitive.",
+        "speaker": "assistant",
+        "action_id": "17-9",
+        "bound_outcome_id": "outcome_6"
+      }
+    ],
+    "outcome_4": [
+      {
+        "turn_id": 15,
+        "action_type": "Ask",
+        "action_text": "Ask whether to plan the final Day 3 as well",
+        "role": "SHAPER",
+        "evidence_quote": "Should I plan the final Day 3 as well?",
+        "speaker": "assistant",
+        "action_id": "15-10",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 18,
+        "action_type": "Plan",
+        "action_text": "User proposes planning Day 3",
+        "role": "SHAPER",
+        "evidence_quote": "Let's plan Day 3.",
+        "speaker": "user",
+        "action_id": "18-1",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 18,
+        "action_type": "State",
+        "action_text": "User states they want to visit and explore CMU on Day 3",
+        "role": "SHAPER",
+        "evidence_quote": "On Day 3 I want to visit and explore CMU.",
+        "speaker": "user",
+        "action_id": "18-2",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 18,
+        "action_type": "Request",
+        "action_text": "User asks the assistant to recommend a plan for Day 3",
+        "role": "SHAPER",
+        "evidence_quote": "Please recommend a plan.",
+        "speaker": "user",
+        "action_id": "18-3",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 19,
+        "action_type": "Frame",
+        "action_text": "Assistant frames Day 3 as CMU and the nearby neighborhood Squirrel Hill",
+        "role": "EXECUTOR",
+        "evidence_quote": "Day 3 of your Pittsburgh trip: Carnegie Mellon University (CMU) and the nearby neighborhood Squirrel Hill.",
+        "speaker": "assistant",
+        "action_id": "19-1",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 19,
+        "action_type": "Provide",
+        "action_text": "Assistant provides a 10:00 schedule item for visiting CMU campus",
+        "role": "EXECUTOR",
+        "evidence_quote": "10:00 - CMU campus",
+        "speaker": "assistant",
+        "action_id": "19-2",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 19,
+        "action_type": "Describe",
+        "action_text": "Assistant describes The Fence as a campus icon students repaint nightly",
+        "role": "EXECUTOR",
+        "evidence_quote": "The Fence: A campus icon that students repaint every night.",
+        "speaker": "assistant",
+        "action_id": "19-3",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 19,
+        "action_type": "Describe",
+        "action_text": "Assistant describes the Gates Hillman Complex and its spiral corridor",
+        "role": "EXECUTOR",
+        "evidence_quote": "Gates Hillman Complex: Distinctive modern building with an impressive spiral corridor.",
+        "speaker": "assistant",
+        "action_id": "19-4",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 19,
+        "action_type": "Describe",
+        "action_text": "Assistant describes Pausch Bridge honoring Randy Pausch with art and tech lighting",
+        "role": "EXECUTOR",
+        "evidence_quote": "Pausch Bridge: A bridge honoring Randy Pausch; art and tech lighting.",
+        "speaker": "assistant",
+        "action_id": "19-5",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 19,
+        "action_type": "Provide",
+        "action_text": "Assistant provides a 12:30 lunch recommendation at Everyday Noodles (link included)",
+        "role": "EXECUTOR",
+        "evidence_quote": "12:30 - Lunch: [Everyday Noodles](https://www.everydaynoodles.net/) – Popular spot in Squirrel Hill.",
+        "speaker": "assistant",
+        "action_id": "19-6",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 19,
+        "action_type": "Recommend",
+        "action_text": "Assistant recommends lighter lunch options like shrimp dumplings or vegetable stir-fry noodles",
+        "role": "EXECUTOR",
+        "evidence_quote": "For a lighter option try shrimp dumplings or vegetable stir-fry noodles.",
+        "speaker": "assistant",
+        "action_id": "19-7",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 19,
+        "action_type": "Provide",
+        "action_text": "Assistant provides a 14:30 coffee recommendation for 61C Cafe (link included)",
+        "role": "EXECUTOR",
+        "evidence_quote": "14:30 - Coffee: [61C Cafe](https://www.google.com/search?q=http://www.61ccafe.com/) – Long-standing neighborhood café; cozy and relaxed.",
+        "speaker": "assistant",
+        "action_id": "19-8",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 19,
+        "action_type": "Provide",
+        "action_text": "Assistant provides a 15:30 outdoors suggestion to visit Schenley Park trails and related activities",
+        "role": "EXECUTOR",
+        "evidence_quote": "15:30 - Outdoors: Schenley Park trails – Large park next to CMU. Walk around Panther Hollow Lake or enjoy the view from the hill.",
+        "speaker": "assistant",
+        "action_id": "19-9",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 19,
+        "action_type": "Provide",
+        "action_text": "Assistant provides an 18:00 dinner recommendation at Aiello's Pizza (link included)",
+        "role": "EXECUTOR",
+        "evidence_quote": "18:00 - Dinner: [Aiello's Pizza](https://www.aiellospizza.com/) – One of Pittsburgh’s best-known pizzerias.",
+        "speaker": "assistant",
+        "action_id": "19-10",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 20,
+        "action_type": "State",
+        "action_text": "User states they want to see both CMU's main campus and the buildings on the Craig St side.",
+        "role": "SHAPER",
+        "evidence_quote": "I want to see both CMU's main campus and the buildings on the Craig St side.",
+        "speaker": "user",
+        "action_id": "20-1",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 20,
+        "action_type": "Suggest",
+        "action_text": "User suggests having dinner on Craig St.",
+        "role": "SHAPER",
+        "evidence_quote": "Let's have dinner on Craig St.",
+        "speaker": "user",
+        "action_id": "20-2",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 20,
+        "action_type": "Request",
+        "action_text": "User requests that the assistant adjust the plan accordingly.",
+        "role": "SHAPER",
+        "evidence_quote": "Please adjust the plan accordingly.",
+        "speaker": "user",
+        "action_id": "20-3",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 21,
+        "action_type": "Plan",
+        "action_text": "Assistant provides a revised Day 3 plan focused on CMU main campus and Craig St with dinner on Craig St.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Revised Day 3: CMU main campus and Craig St area, with dinner on Craig St.",
+        "speaker": "assistant",
+        "action_id": "21-1",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 21,
+        "action_type": "Provide",
+        "action_text": "Assistant provides detailed itinerary items and suggestions for Day 3 (times, sites, lunch, Craig St, dinner).",
+        "role": "EXECUTOR",
+        "evidence_quote": "10:00 - CMU main campus – The Fence, Gates Hillman Complex\n\n- **12:30 - Lunch: [Everyday Noodles](https://www.everydaynoodles.net/)** – Taiwanese dumplings and noodles in Squirrel Hill. (Try the shrimp dumplings.)\n\n- **14:30 - Craig St area** – **Mellon Institute:** Classic columned building; a CMU icon and film location. **Software Engineering Institute (SEI):** Modern research buildings.\n\n- **18:00 - Dinner: [Union Grill Oakland](https://www.uniongrilloakland.com/)** – A Craig St favorite.",
+        "speaker": "assistant",
+        "action_id": "21-2",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 22,
+        "action_type": "State",
+        "action_text": "User expresses a preference to have bread for lunch.",
+        "role": "SHAPER",
+        "evidence_quote": "For lunch I'd like to have bread.",
+        "speaker": "user",
+        "action_id": "22-1",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 22,
+        "action_type": "State",
+        "action_text": "User expresses a desire to have coffee at a café after lunch.",
+        "role": "SHAPER",
+        "evidence_quote": "And after lunch I want to have coffee at a café.",
+        "speaker": "user",
+        "action_id": "22-2",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 22,
+        "action_type": "Request",
+        "action_text": "User asks the assistant to update the plan to reflect these preferences.",
+        "role": "SHAPER",
+        "evidence_quote": "Please update the plan.",
+        "speaker": "user",
+        "action_id": "22-3",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 23,
+        "action_type": "Report",
+        "action_text": "Assistant reports that Day 3 has been updated with a bakery lunch and a coffee stop.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Day 3 updated with a bakery lunch and a coffee stop.",
+        "speaker": "assistant",
+        "action_id": "23-1",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 23,
+        "action_type": "Plan",
+        "action_text": "Assistant provides the updated Day 3 itinerary including Allegro Hearth Bakery at 12:30 and Commonplace Coffee at 14:00.",
+        "role": "EXECUTOR",
+        "evidence_quote": "12:30 - Lunch: [Allegro Hearth Bakery](https://www.allegrohearth.com/) – Local bakery known for fresh bread and sandwiches. Great if you want a “bread lunch.”\n\n14:00 - Coffee: [Commonplace Coffee](https://commonplacecoffee.com/) – Pittsburgh local roaster; good coffee in a relaxed setting.",
+        "speaker": "assistant",
+        "action_id": "23-2",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 23,
+        "action_type": "Recommend",
+        "action_text": "Assistant recommends Allegro Hearth Bakery as a good option for a 'bread lunch.'",
+        "role": "EXECUTOR",
+        "evidence_quote": "Great if you want a “bread lunch.”",
+        "speaker": "assistant",
+        "action_id": "23-3",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 23,
+        "action_type": "Recommend",
+        "action_text": "Assistant recommends Commonplace Coffee as the coffee stop.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Commonplace Coffee – Pittsburgh local roaster; good coffee in a relaxed setting.",
+        "speaker": "assistant",
+        "action_id": "23-4",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 24,
+        "action_type": "State",
+        "action_text": "User states a preference to have lunch and coffee at the same time.",
+        "role": "SHAPER",
+        "evidence_quote": "Actually I'd like to have lunch and coffee at the same time.",
+        "speaker": "user",
+        "action_id": "24-1",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 24,
+        "action_type": "Request",
+        "action_text": "User asks the assistant to find a place where they can have both lunch and coffee together.",
+        "role": "SHAPER",
+        "evidence_quote": "Can you find a place where we can do both?",
+        "speaker": "user",
+        "action_id": "24-2",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 25,
+        "action_type": "Modify",
+        "action_text": "Assistant announces a revised Day 3 itinerary to allow lunch and coffee in one place while still covering Craig St and CMU.",
+        "role": "EXECUTOR",
+        "evidence_quote": "Day 3 revised so you can have lunch and coffee in one place while still covering Craig St and CMU.",
+        "speaker": "assistant",
+        "action_id": "25-1",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 25,
+        "action_type": "Provide",
+        "action_text": "Assistant provides the 10:00 CMU main campus item with a note about on-site coffee/sandwich options.",
+        "role": "EXECUTOR",
+        "evidence_quote": "- **10:00 - CMU main campus** – The Fence, Gates Hillman Complex (**Tazza D'Oro** in the building has coffee and sandwiches too, but for a proper bakery I recommend the next spot.)",
+        "speaker": "assistant",
+        "action_id": "25-2",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 25,
+        "action_type": "Recommend",
+        "action_text": "Assistant recommends Sidecar as the lunch-and-coffee spot.",
+        "role": "EXECUTOR",
+        "evidence_quote": "- **12:00 - Lunch & coffee: [Sidecar](https://sidecar412.com/)** – Sister to Butterjoint on Craig St.",
+        "speaker": "assistant",
+        "action_id": "25-3",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 25,
+        "action_type": "Describe",
+        "action_text": "Assistant describes Sidecar's offerings (breads, sandwiches, espresso) and gives its address.",
+        "role": "EXECUTOR",
+        "evidence_quote": "**Japanese milk bread** and **ciabatta** baked daily; fresh **sandwiches** and **espresso** in one cozy, local spot. (200 N Craig St)\"",
+        "speaker": "assistant",
+        "action_id": "25-4",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 25,
+        "action_type": "Provide",
+        "action_text": "Assistant provides the 14:00 Craig St and nearby items (Mellon Institute, SEI).",
+        "role": "EXECUTOR",
+        "evidence_quote": "- **14:00 - Craig St and nearby** – Mellon Institute (very close to Sidecar), SEI",
+        "speaker": "assistant",
+        "action_id": "25-5",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 25,
+        "action_type": "Provide",
+        "action_text": "Assistant provides the 16:00 Craig St walk and free time item (bookstores and small shops).",
+        "role": "EXECUTOR",
+        "evidence_quote": "- **16:00 - Craig St walk and free time** – Bookstores and small shops",
+        "speaker": "assistant",
+        "action_id": "25-6",
+        "bound_outcome_id": "outcome_4"
+      },
+      {
+        "turn_id": 25,
+        "action_type": "Provide",
+        "action_text": "Assistant provides the 18:00 dinner recommendation at Union Grill Oakland with dish suggestions.",
+        "role": "EXECUTOR",
+        "evidence_quote": "- **18:00 - Dinner: [Union Grill Oakland](https://www.uniongrilloakland.com/)** – **Fish and chips** or **salad** for a light, non-gamey finish.",
+        "speaker": "assistant",
+        "action_id": "25-7",
+        "bound_outcome_id": "outcome_4"
+      }
+    ]
+  },
+  "metadata": {
+    "num_outcomes": 7,
+    "num_actions": 138
+  }
+}

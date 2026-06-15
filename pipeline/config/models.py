@@ -136,6 +136,24 @@ def get_openai_client():
     return OpenAI(base_url=OPENAI_DEFAULT_BASE)
 
 
+def resolve_embedding_model() -> str:
+    """Embedding model id (e.g. text-embedding-3-small or openai/text-embedding-3-large)."""
+    return (os.environ.get("EMBEDDING_MODEL") or EMBEDDING_MODEL_OPENAI).strip()
+
+
+def get_embedding_client():
+    """OpenAI or OpenRouter client for Step 2 embeddings (EMBEDDING_PROVIDER env)."""
+    provider = (os.environ.get("EMBEDDING_PROVIDER") or "openai").strip().lower()
+    if not _OPENAI_AVAILABLE or OpenAI is None:
+        raise ImportError("openai package required. Install with: pip install openai")
+    if provider == "openrouter":
+        api_key = os.environ.get("OPENROUTER_API_KEY")
+        if not api_key:
+            raise ValueError("OPENROUTER_API_KEY environment variable is required for openrouter embeddings")
+        return OpenAI(base_url=OPENROUTER_DEFAULT_BASE, api_key=api_key)
+    return get_openai_client()
+
+
 def _is_rate_limit(err: BaseException) -> bool:
     s = str(err).upper()
     return "429" in s or "RESOURCE_EXHAUSTED" in s or "RATE_LIMIT" in s or "QUOTA" in s

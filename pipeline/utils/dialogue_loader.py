@@ -107,9 +107,9 @@ def load_dialogues(dialogue_file: str) -> List[Dict]:
             elif "conversation" in data and "id" in data:
                 # Wildchat format
                 return [_coerce_cogym_event_log_to_turns(convert_wildchat_to_dialogue(data))]
-
-
-
+            elif "turns" in data or "utterances" in data:
+                return [_coerce_cogym_event_log_to_turns(data)]
+            return [_coerce_cogym_event_log_to_turns(data)]
 def convert_action_log_to_dialogue(data: Dict, dialogue_id: str = None) -> Dict:
     """
     Convert action_log format to turns format.

@@ -60,7 +60,7 @@ from config.prompts import (
     REQUIREMENT_ACTION_LABELING_PROMPT,
     REQUIREMENT_ACTION_LABELING_BATCH_PROMPT,
 )
-from config.models import get_provider_and_model, chat_completion, get_openai_client
+from config.models import get_provider_and_model, chat_completion, get_openai_client, resolve_embedding_model
 
 try:
     from openai import OpenAI
@@ -1188,10 +1188,13 @@ def _truncate_text_for_embedding(text: str, max_tokens: int = 8000, model: str =
     return enc.decode(tokens[:max_tokens])
 
 
-def get_embeddings(texts: list, model: str = "text-embedding-3-small", batch_size: int = 100) -> np.ndarray:
-    """Get embeddings using OpenAI API with automatic truncation and batch size adjustment."""
+def get_embeddings(texts: list, model: str = None, batch_size: int = 100) -> np.ndarray:
+    """Get embeddings via OpenAI or OpenRouter (EMBEDDING_PROVIDER / EMBEDDING_MODEL env)."""
     import openai as _openai
-    client = get_openai_client()
+    from config.models import get_embedding_client, resolve_embedding_model
+
+    model = model or resolve_embedding_model()
+    client = get_embedding_client()
     texts = [_truncate_text_for_embedding(t) if (isinstance(t, str) and t.strip()) else " " for t in texts]
     embeddings = []
     i = 0
@@ -1435,7 +1438,7 @@ def run_step2a(
     step2_output = {
         "dialogue_id": dialogue_id,
         "pairs": pairs,
-        "metadata": {"num_pairs": len(pairs), "model": "text-embedding-3-small"},
+        "metadata": {"num_pairs": len(pairs), "model": resolve_embedding_model()},
     }
     save_json(step2_output, step2_file)
     return step2_output, pairs

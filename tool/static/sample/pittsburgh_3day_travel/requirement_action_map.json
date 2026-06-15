@@ -1,0 +1,2983 @@
+{
+  "r1": {
+    "origin_actions": [
+      {
+        "action_id": "0-1",
+        "role": "SHAPER",
+        "action_text": "User states they are planning to visit Pittsburgh for 3 days."
+      },
+      {
+        "action_id": "0-2",
+        "role": "SHAPER",
+        "action_text": "User requests to start planning the trip now."
+      }
+    ],
+    "contributing_actions": [
+      {
+        "action_id": "1-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant decides to stick to Korean and provide a concise plan."
+      }
+    ],
+    "implementation_actions": [],
+    "revise_actions": [],
+    "related_actions": [
+      {
+        "action_id": "21-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant reports that the 3-day Pittsburgh plan is complete.",
+        "relationship_type": "DIRECT_CONNECTION",
+        "influence": "direct",
+        "relationship_score": 4,
+        "explanation": "Intent-Reveal: Explicitly evaluates/claims that the 3-day Pittsburgh plan requirement has been completed."
+      },
+      {
+        "action_id": "1-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant acknowledges the user's preference for concise responses and revising chat.",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Preference-Accumulate: Acknowledging conciseness/revision preference sets constraints that indirectly shape how the 3-day plan will be delivered."
+      },
+      {
+        "action_id": "1-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant decides to stick to Korean and provide a concise plan.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Option-Select: Choosing Korean and conciseness determines presentation of the trip plan, supporting delivery but not itself producing the plan content."
+      }
+    ]
+  },
+  "r2": {
+    "origin_actions": [
+      {
+        "action_id": "0-4",
+        "role": "SHAPER",
+        "action_text": "User specifies they want to look around near the University of Pittsburgh on the first day."
+      },
+      {
+        "action_id": "0-5",
+        "role": "SHAPER",
+        "action_text": "User expresses a desire to visit the Cathedral of Learning."
+      }
+    ],
+    "contributing_actions": [
+      {
+        "action_id": "1-12",
+        "role": "EXECUTOR",
+        "action_text": "Assistant summarizes that all listed attractions are within walking distance for Day 1."
+      },
+      {
+        "action_id": "1-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant states intent to execute a maps query."
+      },
+      {
+        "action_id": "1-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes the Cathedral of Learning."
+      },
+      {
+        "action_id": "1-6",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends visiting the Commons Room and the Nationality Rooms in the Cathedral of Learning."
+      },
+      {
+        "action_id": "4-3",
+        "role": "SHAPER",
+        "action_text": "User asks whether there is a La Prima location near the trip area."
+      },
+      {
+        "action_id": "1-11",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes Phipps Conservatory and Botanical Gardens."
+      },
+      {
+        "action_id": "6-1",
+        "role": "SHAPER",
+        "action_text": "User selects the 3400 Fifth Ave La Prima location."
+      },
+      {
+        "action_id": "1-9",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes Schenley Plaza as a nearby green space for lunch or a break."
+      },
+      {
+        "action_id": "5-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details for the Oakland location (link, walking time, address)."
+      },
+      {
+        "action_id": "7-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant states that everything is within Oakland and that walking or short trips are sufficient."
+      },
+      {
+        "action_id": "1-7",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes Heinz Memorial Chapel and its proximity to the Cathedral."
+      },
+      {
+        "action_id": "0-3",
+        "role": "SHAPER",
+        "action_text": "User decides to start with planning the first day."
+      },
+      {
+        "action_id": "5-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant suggests stopping at the Oakland location in the afternoon before or after Phipps."
+      },
+      {
+        "action_id": "1-10",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes the Carnegie Museum of Natural History and its attractions."
+      },
+      {
+        "action_id": "1-17",
+        "role": "EXECUTOR",
+        "action_text": "Assistant schedules afternoon visit to Phipps Conservatory and notes walking time."
+      },
+      {
+        "action_id": "5-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details for the Strip District location (link, car time, character)."
+      },
+      {
+        "action_id": "6-2",
+        "role": "SHAPER",
+        "action_text": "User requests the assistant to add the café and finalize the schedule."
+      },
+      {
+        "action_id": "7-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant includes the 14:00 La Prima entry with the 3400 Fifth Ave location in the itinerary."
+      },
+      {
+        "action_id": "8-1",
+        "role": "SHAPER",
+        "action_text": "User proposes changing dinner to The Porch instead of Butterjoint."
+      },
+      {
+        "action_id": "1-8",
+        "role": "EXECUTOR",
+        "action_text": "Assistant warns that Heinz Memorial Chapel is currently closed Fri–Sun and advises to check before visiting."
+      },
+      {
+        "action_id": "5-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant states that La Prima Espresso Company has several locations in and around Oakland."
+      },
+      {
+        "action_id": "1-19",
+        "role": "EXECUTOR",
+        "action_text": "Assistant advises that walking is convenient within the area and suggests parking once and walking."
+      },
+      {
+        "action_id": "9-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant confirms it updated the Day 1 schedule with dinner at The Porch at Schenley."
+      },
+      {
+        "action_id": "1-15",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends The Porch at Schenley as a lunch option."
+      },
+      {
+        "action_id": "0-6",
+        "role": "SHAPER",
+        "action_text": "User asks what else would be good to do."
+      }
+    ],
+    "implementation_actions": [
+      {
+        "action_id": "9-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the full updated Day 1 itinerary."
+      },
+      {
+        "action_id": "1-14",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a Day 1 schedule around the Cathedral and Phipps with nearby restaurant suggestions."
+      },
+      {
+        "action_id": "7-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the finalized Day 1 schedule for the Pittsburgh trip."
+      },
+      {
+        "action_id": "1-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a Day 1 plan centered on Oakland and the University of Pittsburgh campus."
+      },
+      {
+        "action_id": "3-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a schedule summary combining the recommended restaurants and attractions for Day 1."
+      }
+    ],
+    "revise_actions": [],
+    "related_actions": [
+      {
+        "action_id": "1-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a Day 1 plan centered on Oakland and the University of Pittsburgh campus.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Provides a Day 1 plan explicitly centered on Oakland/University of Pittsburgh campus, directly fulfilling the 'focus on Oakland' part of r2."
+      },
+      {
+        "action_id": "1-14",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a Day 1 schedule around the Cathedral and Phipps with nearby restaurant suggestions.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Provides a Day 1 schedule explicitly organized around the Cathedral (and nearby Oakland activities), satisfying both Oakland focus and Cathedral inclusion."
+      },
+      {
+        "action_id": "3-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a schedule summary combining the recommended restaurants and attractions for Day 1.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Provides a consolidated Day 1 schedule summary of Oakland/U Pitt attractions (including the Cathedral component from earlier), fulfilling r2 as an itinerary output."
+      },
+      {
+        "action_id": "7-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the finalized Day 1 schedule for the Pittsburgh trip.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Provides the finalized Day 1 schedule (an itinerary output) consistent with the Oakland/U Pitt focus and Cathedral inclusion established earlier."
+      },
+      {
+        "action_id": "9-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the full updated Day 1 itinerary.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Provides the full updated Day 1 itinerary, which operationally fulfills the Oakland/U Pitt focus and Cathedral inclusion requirement."
+      },
+      {
+        "action_id": "1-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes the Cathedral of Learning.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Adds substantive Cathedral of Learning content, supporting inclusion of the Cathedral visit requirement."
+      },
+      {
+        "action_id": "1-6",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends visiting the Commons Room and the Nationality Rooms in the Cathedral of Learning.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Recommends specific activities inside the Cathedral of Learning, reinforcing the required Cathedral visit."
+      },
+      {
+        "action_id": "7-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant states that everything is within Oakland and that walking or short trips are sufficient.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Explicitly explains that the itinerary stays within Oakland with walking/short trips, directly reinforcing the geographic focus aspect of r2."
+      },
+      {
+        "action_id": "1-7",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes Heinz Memorial Chapel and its proximity to the Cathedral.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Adds another nearby Oakland/U Pitt attraction, supporting the Oakland-area focus."
+      },
+      {
+        "action_id": "1-9",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes Schenley Plaza as a nearby green space for lunch or a break.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Describes Schenley Plaza as a nearby option, reinforcing the Oakland-centered itinerary."
+      },
+      {
+        "action_id": "1-10",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes the Carnegie Museum of Natural History and its attractions.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Adds an Oakland-area museum option, supporting the requirement that Day 1 focuses on Oakland."
+      },
+      {
+        "action_id": "1-11",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes Phipps Conservatory and Botanical Gardens.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Adds Phipps as an Oakland-area activity, supporting the Oakland focus (though not specifically the Cathedral visit)."
+      },
+      {
+        "action_id": "1-12",
+        "role": "EXECUTOR",
+        "action_text": "Assistant summarizes that all listed attractions are within walking distance for Day 1.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Summarizes proximity/walkability of Oakland attractions, reinforcing the 'focus on Oakland' framing."
+      },
+      {
+        "action_id": "1-17",
+        "role": "EXECUTOR",
+        "action_text": "Assistant schedules afternoon visit to Phipps Conservatory and notes walking time.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Schedules an Oakland-area afternoon activity (Phipps), supporting the Oakland-focused Day 1 structure."
+      },
+      {
+        "action_id": "1-19",
+        "role": "EXECUTOR",
+        "action_text": "Assistant advises that walking is convenient within the area and suggests parking once and walking.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Advice to park once and walk supports the concept that Day 1 is concentrated in the Oakland/U Pitt area."
+      },
+      {
+        "action_id": "5-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details for the Oakland location (link, walking time, address).",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Provides details for an Oakland La Prima location, supporting keeping itinerary stops within the Oakland focus area."
+      },
+      {
+        "action_id": "5-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant suggests stopping at the Oakland location in the afternoon before or after Phipps.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Suggests fitting the Oakland La Prima into the afternoon schedule, supporting an Oakland-based Day 1 plan."
+      },
+      {
+        "action_id": "6-1",
+        "role": "SHAPER",
+        "action_text": "User selects the 3400 Fifth Ave La Prima location.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Selects the Oakland (Fifth Ave) La Prima option, helping keep the itinerary within the Oakland focus area."
+      },
+      {
+        "action_id": "6-2",
+        "role": "SHAPER",
+        "action_text": "User requests the assistant to add the café and finalize the schedule.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Requests adding the chosen Oakland café and finalizing the schedule, further shaping an Oakland-centered itinerary output."
+      },
+      {
+        "action_id": "7-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant includes the 14:00 La Prima entry with the 3400 Fifth Ave location in the itinerary.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Adds a specific Oakland stop into the itinerary, reinforcing that Day 1 remains centered in the Oakland area."
+      },
+      {
+        "action_id": "1-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant states intent to execute a maps query.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Preparatory step toward producing an Oakland-focused itinerary, but does not itself ensure Oakland focus or Cathedral visit."
+      },
+      {
+        "action_id": "1-8",
+        "role": "EXECUTOR",
+        "action_text": "Assistant warns that Heinz Memorial Chapel is currently closed Fri–Sun and advises to check before visiting.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Operational note about a nearby Oakland stop; tangentially supports planning within the Oakland area."
+      },
+      {
+        "action_id": "1-15",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends The Porch at Schenley as a lunch option.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Lunch recommendation within Schenley/Oakland area slightly strengthens keeping the itinerary in Oakland."
+      },
+      {
+        "action_id": "4-3",
+        "role": "SHAPER",
+        "action_text": "User asks whether there is a La Prima location near the trip area.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Asks for a La Prima near the trip area, indirectly reinforcing that activities should remain near Oakland/U Pitt."
+      },
+      {
+        "action_id": "5-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant states that La Prima Espresso Company has several locations in and around Oakland.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Confirms La Prima exists in/around Oakland, weakly supporting keeping itinerary anchored to the Oakland area."
+      },
+      {
+        "action_id": "5-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details for the Strip District location (link, car time, character).",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Provides an alternative outside Oakland; only indirectly related as part of selecting an Oakland-centered plan."
+      },
+      {
+        "action_id": "8-1",
+        "role": "SHAPER",
+        "action_text": "User proposes changing dinner to The Porch instead of Butterjoint.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Dinner swap to a Schenley/Oakland location slightly supports keeping the plan in the Oakland area."
+      },
+      {
+        "action_id": "9-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant confirms it updated the Day 1 schedule with dinner at The Porch at Schenley.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Confirms an update to the schedule (within Oakland), marginally reinforcing the Oakland-centered plan."
+      }
+    ]
+  },
+  "r3": {
+    "origin_actions": [
+      {
+        "action_id": "4-1",
+        "role": "SHAPER",
+        "action_text": "User states a preference to stop for coffee after lunch."
+      },
+      {
+        "action_id": "6-1",
+        "role": "SHAPER",
+        "action_text": "User selects the 3400 Fifth Ave La Prima location."
+      },
+      {
+        "action_id": "6-2",
+        "role": "SHAPER",
+        "action_text": "User requests the assistant to add the café and finalize the schedule."
+      }
+    ],
+    "contributing_actions": [
+      {
+        "action_id": "5-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details for the Oakland location (link, walking time, address)."
+      },
+      {
+        "action_id": "5-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant suggests stopping at the Oakland location in the afternoon before or after Phipps."
+      },
+      {
+        "action_id": "4-3",
+        "role": "SHAPER",
+        "action_text": "User asks whether there is a La Prima location near the trip area."
+      },
+      {
+        "action_id": "5-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant states that La Prima Espresso Company has several locations in and around Oakland."
+      },
+      {
+        "action_id": "5-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details for the Strip District location (link, car time, character)."
+      }
+    ],
+    "implementation_actions": [
+      {
+        "action_id": "7-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the finalized Day 1 schedule for the Pittsburgh trip."
+      },
+      {
+        "action_id": "9-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the full updated Day 1 itinerary."
+      },
+      {
+        "action_id": "7-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant includes the 14:00 La Prima entry with the 3400 Fifth Ave location in the itinerary."
+      }
+    ],
+    "revise_actions": [],
+    "related_actions": [
+      {
+        "action_id": "7-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant includes the 14:00 La Prima entry with the 3400 Fifth Ave location in the itinerary.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Feedback-Adopt: explicitly inserts the La Prima coffee stop with the correct 3400 Fifth Ave address into the itinerary (the core fulfillment of r3, including placement after lunch)."
+      },
+      {
+        "action_id": "7-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the finalized Day 1 schedule for the Pittsburgh trip.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Feedback-Adopt: provides the finalized Day 1 schedule output that (as a whole) is intended to satisfy the requested coffee-stop inclusion."
+      },
+      {
+        "action_id": "9-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the full updated Day 1 itinerary.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Feedback-Adopt: re-issues the full updated Day 1 itinerary; in doing so, it maintains/provides the itinerary that includes the required La Prima post-lunch coffee stop."
+      },
+      {
+        "action_id": "5-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant states that La Prima Espresso Company has several locations in and around Oakland.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Intent-Reveal: provides option-space (multiple La Prima locations) that enables satisfying the specific required coffee stop later."
+      },
+      {
+        "action_id": "5-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details for the Oakland location (link, walking time, address).",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Intent-Reveal: gives concrete details (address/walk time) for the Oakland La Prima, supporting insertion of the correct coffee stop into the itinerary."
+      },
+      {
+        "action_id": "5-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant suggests stopping at the Oakland location in the afternoon before or after Phipps.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Intent-Reveal: suggests where in the afternoon to place a La Prima stop, partially shaping the timing needed for a post-lunch coffee stop."
+      },
+      {
+        "action_id": "3-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a list of local favorite restaurant picks for Day 1.",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Preference-Accumulate: proposes Day 1 meal structure (breakfast/lunch/dinner), which indirectly sets up the idea of placing a coffee stop later, but does not mention La Prima or a post-lunch coffee requirement."
+      },
+      {
+        "action_id": "5-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details for the Strip District location (link, car time, character).",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Intent-Reveal: provides details about an alternative (Strip District) La Prima location; relevant only as an option but not aligned with the target address requirement."
+      }
+    ]
+  },
+  "r4": {
+    "origin_actions": [
+      {
+        "action_id": "8-1",
+        "role": "SHAPER",
+        "action_text": "User proposes changing dinner to The Porch instead of Butterjoint."
+      }
+    ],
+    "contributing_actions": [],
+    "implementation_actions": [
+      {
+        "action_id": "9-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant confirms it updated the Day 1 schedule with dinner at The Porch at Schenley."
+      },
+      {
+        "action_id": "9-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the full updated Day 1 itinerary."
+      }
+    ],
+    "revise_actions": [],
+    "related_actions": [
+      {
+        "action_id": "9-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant confirms it updated the Day 1 schedule with dinner at The Porch at Schenley.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "The assistant explicitly confirms the Day 1 dinner was updated to The Porch at Schenley, directly fulfilling the dinner-update requirement."
+      },
+      {
+        "action_id": "9-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the full updated Day 1 itinerary.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Providing the full updated Day 1 itinerary concretely applies the required dinner change by placing The Porch at Schenley into the schedule output."
+      },
+      {
+        "action_id": "7-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the finalized Day 1 schedule for the Pittsburgh trip.",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "The assistant’s finalized Day 1 schedule (including an implicit/explicit dinner slot) sets the context that later motivates the user to specify a different dinner location, leading to the requirement to update dinner to The Porch at Schenley."
+      }
+    ]
+  },
+  "r5": {
+    "origin_actions": [
+      {
+        "action_id": "2-1",
+        "role": "SHAPER",
+        "action_text": "User states they want to try famous Pittsburgh food for meals."
+      },
+      {
+        "action_id": "2-3",
+        "role": "SHAPER",
+        "action_text": "User asks the assistant to narrow down and recommend those kinds of restaurants."
+      }
+    ],
+    "contributing_actions": [],
+    "implementation_actions": [
+      {
+        "action_id": "3-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a list of local favorite restaurant picks for Day 1."
+      },
+      {
+        "action_id": "3-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details about Primanti Bros. as a lunch option and iconic sandwich spot."
+      },
+      {
+        "action_id": "3-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details about Butterjoint as a dinner option for pierogi and local fare."
+      },
+      {
+        "action_id": "3-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details about Pamela's Diner as a breakfast/lunch local favorite."
+      }
+    ],
+    "revise_actions": [],
+    "related_actions": [
+      {
+        "action_id": "3-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a list of local favorite restaurant picks for Day 1.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Provides a curated list of local-favorite restaurant picks, directly fulfilling the request for Pittsburgh food/meal recommendations for the trip."
+      },
+      {
+        "action_id": "3-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details about Primanti Bros. as a lunch option and iconic sandwich spot.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Recommends Primanti Bros. explicitly as an iconic Pittsburgh sandwich destination, directly satisfying the 'famous Pittsburgh food spot' aspect of the requirement."
+      },
+      {
+        "action_id": "3-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details about Pamela's Diner as a breakfast/lunch local favorite.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Gives a specific well-known local spot (Pamela's Diner) with usage context (breakfast/lunch), implementing the food recommendation requirement."
+      },
+      {
+        "action_id": "3-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details about Butterjoint as a dinner option for pierogi and local fare.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Adds another concrete local-food dinner recommendation (Butterjoint with pierogi/local fare), implementing the requirement for trip meal spot recommendations."
+      },
+      {
+        "action_id": "1-0",
+        "role": "SHAPER",
+        "action_text": "",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Day 1 itinerary includes multiple meal/restaurant suggestions (e.g., Primanti Bros., Butterjoint), which surfaces the trip-meal-planning need and likely prompts the later explicit requirement for famous/local Pittsburgh food recommendations."
+      }
+    ]
+  },
+  "r6": {
+    "origin_actions": [
+      {
+        "action_id": "2-2",
+        "role": "SHAPER",
+        "action_text": "User prefers places locals go to rather than expensive or fancy spots."
+      }
+    ],
+    "contributing_actions": [
+      {
+        "action_id": "2-3",
+        "role": "SHAPER",
+        "action_text": "User asks the assistant to narrow down and recommend those kinds of restaurants."
+      }
+    ],
+    "implementation_actions": [
+      {
+        "action_id": "3-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a list of local favorite restaurant picks for Day 1."
+      },
+      {
+        "action_id": "3-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details about Primanti Bros. as a lunch option and iconic sandwich spot."
+      },
+      {
+        "action_id": "3-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details about Butterjoint as a dinner option for pierogi and local fare."
+      },
+      {
+        "action_id": "3-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details about Pamela's Diner as a breakfast/lunch local favorite."
+      }
+    ],
+    "revise_actions": [],
+    "related_actions": [
+      {
+        "action_id": "3-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a list of local favorite restaurant picks for Day 1.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Provides restaurant picks explicitly framed as local favorites, aligning with the requirement to recommend places locals go to (not fancy/expensive)."
+      },
+      {
+        "action_id": "3-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details about Pamela's Diner as a breakfast/lunch local favorite.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Recommends Pamela's Diner specifically as a local-favorite breakfast/lunch spot, directly executing the 'locals go to' constraint."
+      },
+      {
+        "action_id": "3-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details about Primanti Bros. as a lunch option and iconic sandwich spot.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Recommends Primanti Bros. as an iconic, local-go-to lunch option, supporting the local-favorite/not-fancy intent."
+      },
+      {
+        "action_id": "3-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides details about Butterjoint as a dinner option for pierogi and local fare.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Recommends Butterjoint with local fare framing, contributing to fulfilling the requirement for local-favorite restaurants rather than upscale/fancy dining."
+      },
+      {
+        "action_id": "1-14",
+        "role": "SHAPER",
+        "action_text": "Assistant provides a Day 1 schedule around the Cathedral and Phipps with nearby restaurant suggestions.",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Assistant’s earlier restaurant suggestions (some potentially more \"fancy\") likely prompted/clarified the later requirement that recommendations should be local-favorite and not expensive/fancy."
+      }
+    ]
+  },
+  "r7": {
+    "origin_actions": [
+      {
+        "action_id": "12-1",
+        "role": "SHAPER",
+        "action_text": "Suggest visiting the Strip District in the morning"
+      }
+    ],
+    "contributing_actions": [
+      {
+        "action_id": "13-5",
+        "role": "SHAPER",
+        "action_text": "Schedule 12:00 lunch at Wholey's and recommend the fried fish sandwich and seating"
+      },
+      {
+        "action_id": "10-1",
+        "role": "SHAPER",
+        "action_text": "User asks the assistant to begin planning Day 2."
+      },
+      {
+        "action_id": "15-3",
+        "role": "SHAPER",
+        "action_text": "Keep the 12:00 lunch at Wholey's in the revised schedule"
+      }
+    ],
+    "implementation_actions": [
+      {
+        "action_id": "15-1",
+        "role": "SHAPER",
+        "action_text": "Summarize a revised Day 2 focused on outdoor downtown spots without the Warhol Museum"
+      },
+      {
+        "action_id": "15-2",
+        "role": "SHAPER",
+        "action_text": "Keep the 10:00 Strip District walk in the revised schedule"
+      },
+      {
+        "action_id": "13-4",
+        "role": "SHAPER",
+        "action_text": "Schedule a 10:00 Strip District walk"
+      },
+      {
+        "action_id": "13-3",
+        "role": "EXECUTOR",
+        "action_text": "Announce and provide an updated Day 2 schedule"
+      }
+    ],
+    "revise_actions": [],
+    "related_actions": [
+      {
+        "action_id": "13-3",
+        "role": "EXECUTOR",
+        "action_text": "Announce and provide an updated Day 2 schedule",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Feedback-Adopt: provides an updated Day 2 schedule that includes a morning Strip District visit, satisfying r7 in the itinerary output."
+      },
+      {
+        "action_id": "13-4",
+        "role": "SHAPER",
+        "action_text": "Schedule a 10:00 Strip District walk",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Feedback-Adopt: explicitly schedules a 10:00 Strip District walk, directly fulfilling the 'morning Strip District' requirement."
+      },
+      {
+        "action_id": "15-1",
+        "role": "SHAPER",
+        "action_text": "Summarize a revised Day 2 focused on outdoor downtown spots without the Warhol Museum",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Feedback-Adopt: revised Day 2 summary retains the morning Strip District component, continuing to satisfy r7 after itinerary changes."
+      },
+      {
+        "action_id": "15-2",
+        "role": "SHAPER",
+        "action_text": "Keep the 10:00 Strip District walk in the revised schedule",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Feedback-Adopt: explicitly keeps the 10:00 Strip District walk in the revised schedule, directly fulfilling r7."
+      },
+      {
+        "action_id": "11-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a Morning plan for the Strip District with a brief description.",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Option-Select: assistant already proposed a Day 2 morning plan in the Strip District, which later becomes an explicit must-have requirement."
+      },
+      {
+        "action_id": "10-1",
+        "role": "SHAPER",
+        "action_text": "User asks the assistant to begin planning Day 2.",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Intent-Reveal: user initiates Day 2 planning, creating the context in which a specific morning-location requirement (Strip District) is later stated."
+      },
+      {
+        "action_id": "13-5",
+        "role": "SHAPER",
+        "action_text": "Schedule 12:00 lunch at Wholey's and recommend the fried fish sandwich and seating",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Preference-Accumulate: keeps activity centered in the Strip District around midday, reinforcing the morning Strip District block though not itself the morning visit."
+      },
+      {
+        "action_id": "15-3",
+        "role": "SHAPER",
+        "action_text": "Keep the 12:00 lunch at Wholey's in the revised schedule",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Preference-Accumulate: keeps the Strip District-adjacent lunch plan, supporting the Strip District morning block though not constituting the morning visit itself."
+      }
+    ]
+  },
+  "r8": {
+    "origin_actions": [
+      {
+        "action_id": "12-2",
+        "role": "SHAPER",
+        "action_text": "Suggest having lunch at Wholey's"
+      }
+    ],
+    "contributing_actions": [
+      {
+        "action_id": "13-7",
+        "role": "SHAPER",
+        "action_text": "Schedule a 17:00 visit to Point State Park and suggest pairing it with Mount Washington view"
+      },
+      {
+        "action_id": "15-2",
+        "role": "SHAPER",
+        "action_text": "Keep the 10:00 Strip District walk in the revised schedule"
+      },
+      {
+        "action_id": "13-6",
+        "role": "SHAPER",
+        "action_text": "Schedule a 14:00 visit to the Andy Warhol Museum and provide logistics (travel time and elevator suggestion)"
+      },
+      {
+        "action_id": "13-4",
+        "role": "SHAPER",
+        "action_text": "Schedule a 10:00 Strip District walk"
+      },
+      {
+        "action_id": "14-2",
+        "role": "SHAPER",
+        "action_text": "Decide to skip the Andy Warhol Museum and head downtown after lunch"
+      }
+    ],
+    "implementation_actions": [
+      {
+        "action_id": "15-1",
+        "role": "SHAPER",
+        "action_text": "Summarize a revised Day 2 focused on outdoor downtown spots without the Warhol Museum"
+      },
+      {
+        "action_id": "13-5",
+        "role": "SHAPER",
+        "action_text": "Schedule 12:00 lunch at Wholey's and recommend the fried fish sandwich and seating"
+      },
+      {
+        "action_id": "15-3",
+        "role": "SHAPER",
+        "action_text": "Keep the 12:00 lunch at Wholey's in the revised schedule"
+      },
+      {
+        "action_id": "13-3",
+        "role": "EXECUTOR",
+        "action_text": "Announce and provide an updated Day 2 schedule"
+      }
+    ],
+    "revise_actions": [],
+    "related_actions": [
+      {
+        "action_id": "13-5",
+        "role": "SHAPER",
+        "action_text": "Schedule 12:00 lunch at Wholey's and recommend the fried fish sandwich and seating",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Directly schedules 12:00 lunch at Wholey's, explicitly satisfying r8."
+      },
+      {
+        "action_id": "15-3",
+        "role": "SHAPER",
+        "action_text": "Keep the 12:00 lunch at Wholey's in the revised schedule",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Explicitly keeps the 12:00 lunch at Wholey's in the revised schedule, directly fulfilling r8."
+      },
+      {
+        "action_id": "13-3",
+        "role": "EXECUTOR",
+        "action_text": "Announce and provide an updated Day 2 schedule",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Provides an updated Day 2 schedule that (as part of the update) includes the required Wholey's lunch slot."
+      },
+      {
+        "action_id": "15-1",
+        "role": "SHAPER",
+        "action_text": "Summarize a revised Day 2 focused on outdoor downtown spots without the Warhol Museum",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Summarizes a revised Day 2 plan that retains the Wholey's lunch element, thereby continuing to satisfy r8."
+      },
+      {
+        "action_id": "11-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides lunch options and specific dish suggestions for Day 2.",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Offers Wholey's as a Day 2 lunch option before r8 exists, setting up/triggering the later explicit requirement (Intent-Reveal)."
+      },
+      {
+        "action_id": "13-4",
+        "role": "SHAPER",
+        "action_text": "Schedule a 10:00 Strip District walk",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Positions the morning in the Strip District, supporting/logistically aligning with making it to Wholey's for lunch."
+      },
+      {
+        "action_id": "15-2",
+        "role": "SHAPER",
+        "action_text": "Keep the 10:00 Strip District walk in the revised schedule",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Keeps the Strip District morning walk, supporting being in the right area before Wholey's lunch."
+      },
+      {
+        "action_id": "13-6",
+        "role": "SHAPER",
+        "action_text": "Schedule a 14:00 visit to the Andy Warhol Museum and provide logistics (travel time and elevator suggestion)",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Plans an after-lunch activity that assumes/keeps the lunch-at-Wholey's anchor intact, but does not itself add/modify the lunch requirement."
+      },
+      {
+        "action_id": "13-7",
+        "role": "SHAPER",
+        "action_text": "Schedule a 17:00 visit to Point State Park and suggest pairing it with Mount Washington view",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Schedules later activities downstream of lunch; weakly consistent with keeping the Wholey's lunch plan."
+      },
+      {
+        "action_id": "14-2",
+        "role": "SHAPER",
+        "action_text": "Decide to skip the Andy Warhol Museum and head downtown after lunch",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "User decides to skip the museum and go downtown after lunch, implicitly preserving the lunch plan (Preference-Realize)."
+      }
+    ]
+  },
+  "r9": {
+    "origin_actions": [
+      {
+        "action_id": "12-3",
+        "role": "SHAPER",
+        "action_text": "State intent to visit the Andy Warhol Museum after lunch"
+      }
+    ],
+    "contributing_actions": [
+      {
+        "action_id": "13-5",
+        "role": "SHAPER",
+        "action_text": "Schedule 12:00 lunch at Wholey's and recommend the fried fish sandwich and seating"
+      },
+      {
+        "action_id": "13-4",
+        "role": "SHAPER",
+        "action_text": "Schedule a 10:00 Strip District walk"
+      },
+      {
+        "action_id": "15-3",
+        "role": "SHAPER",
+        "action_text": "Keep the 12:00 lunch at Wholey's in the revised schedule"
+      },
+      {
+        "action_id": "15-2",
+        "role": "SHAPER",
+        "action_text": "Keep the 10:00 Strip District walk in the revised schedule"
+      }
+    ],
+    "implementation_actions": [
+      {
+        "action_id": "13-3",
+        "role": "EXECUTOR",
+        "action_text": "Announce and provide an updated Day 2 schedule"
+      },
+      {
+        "action_id": "13-6",
+        "role": "SHAPER",
+        "action_text": "Schedule a 14:00 visit to the Andy Warhol Museum and provide logistics (travel time and elevator suggestion)"
+      }
+    ],
+    "revise_actions": [],
+    "related_actions": [
+      {
+        "action_id": "13-3",
+        "role": "EXECUTOR",
+        "action_text": "Announce and provide an updated Day 2 schedule",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Provides an updated Day 2 schedule that includes the Warhol Museum after lunch, producing output that satisfies r9."
+      },
+      {
+        "action_id": "13-6",
+        "role": "SHAPER",
+        "action_text": "Schedule a 14:00 visit to the Andy Warhol Museum and provide logistics (travel time and elevator suggestion)",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Explicitly schedules a 14:00 visit to the Andy Warhol Museum after lunch and provides logistics, directly fulfilling r9."
+      },
+      {
+        "action_id": "14-2",
+        "role": "SHAPER",
+        "action_text": "Decide to skip the Andy Warhol Museum and head downtown after lunch",
+        "relationship_type": "DIRECT_CONNECTION",
+        "influence": "direct",
+        "relationship_score": 5,
+        "explanation": "User decides to skip the Andy Warhol Museum, which directly deletes/replaces r9’s required post-lunch museum visit."
+      },
+      {
+        "action_id": "15-1",
+        "role": "SHAPER",
+        "action_text": "Summarize a revised Day 2 focused on outdoor downtown spots without the Warhol Museum",
+        "relationship_type": "DIRECT_CONNECTION",
+        "influence": "direct",
+        "relationship_score": 5,
+        "explanation": "Assistant summarizes a revised Day 2 explicitly without the Warhol Museum, effectively implementing the user’s decision to remove r9."
+      },
+      {
+        "action_id": "14-1",
+        "role": "OTHER",
+        "action_text": "Express that the museum does not sound appealing",
+        "relationship_type": "DIRECT_CONNECTION",
+        "influence": "direct",
+        "relationship_score": 4,
+        "explanation": "User evaluates the Warhol Museum negatively, directly reacting to the requirement’s mandated museum visit (Preference-Realize)."
+      },
+      {
+        "action_id": "11-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides Afternoon activities (North Shore, Andy Warhol Museum, Point State Park).",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Assistant already included the Andy Warhol Museum as an afternoon activity after lunch in the Day 2 outline, offering the option that later becomes the explicit must-have requirement (Option-Select)."
+      },
+      {
+        "action_id": "13-5",
+        "role": "SHAPER",
+        "action_text": "Schedule 12:00 lunch at Wholey's and recommend the fried fish sandwich and seating",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Sets lunch timing/logistics (12:00 at Wholey’s), which is the anchor for ensuring the Warhol Museum visit occurs after lunch as required."
+      },
+      {
+        "action_id": "14-3",
+        "role": "SHAPER",
+        "action_text": "State a preference to spend time outdoors rather than indoors downtown",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "User preference for outdoors explains/motivates dropping an indoor museum stop, indirectly undermining r9 (Preference-Accumulate)."
+      },
+      {
+        "action_id": "14-4",
+        "role": "OTHER",
+        "action_text": "Ask for recommendations of where to go downtown outdoors",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Request for outdoor downtown recommendations arises because the museum stop is being skipped, indirectly serving as a replacement direction for the post-lunch slot."
+      },
+      {
+        "action_id": "15-3",
+        "role": "SHAPER",
+        "action_text": "Keep the 12:00 lunch at Wholey's in the revised schedule",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Keeping the 12:00 lunch maintains the timeline that previously supported a post-lunch museum visit, though the museum requirement has been dropped."
+      },
+      {
+        "action_id": "15-4",
+        "role": "SHAPER",
+        "action_text": "Suggest Point State Park as a downtown outdoor option",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Suggests a downtown outdoor alternative (Point State Park) that implicitly substitutes for the post-lunch museum activity originally required by r9."
+      },
+      {
+        "action_id": "15-5",
+        "role": "SHAPER",
+        "action_text": "Suggest Market Square as a downtown outdoor option",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Suggests Market Square as an outdoor downtown alternative, indirectly replacing time that would have been spent at the Warhol Museum."
+      },
+      {
+        "action_id": "15-6",
+        "role": "SHAPER",
+        "action_text": "Suggest PPG Plaza as a downtown outdoor option",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Suggests PPG Plaza as an outdoor downtown alternative, implicitly serving as a substitute activity for the removed Warhol stop."
+      },
+      {
+        "action_id": "13-4",
+        "role": "SHAPER",
+        "action_text": "Schedule a 10:00 Strip District walk",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Scheduling the 10:00 Strip District walk helps structure the day leading up to lunch and the post-lunch museum slot, but does not itself mention the Warhol requirement."
+      },
+      {
+        "action_id": "15-2",
+        "role": "SHAPER",
+        "action_text": "Keep the 10:00 Strip District walk in the revised schedule",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Keeping the 10:00 Strip District walk preserves the day structure around lunch, but does not restore or address the Warhol-after-lunch requirement."
+      },
+      {
+        "action_id": "15-7",
+        "role": "SHAPER",
+        "action_text": "Schedule a 17:00 ride on the Duquesne Incline to Mount Washington for the skyline view",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Scheduling the Duquesne Incline/Mount Washington is part of the revised plan after skipping the museum, but only loosely relates to r9."
+      }
+    ]
+  },
+  "r10": {
+    "origin_actions": [
+      {
+        "action_id": "14-2",
+        "role": "SHAPER",
+        "action_text": "Decide to skip the Andy Warhol Museum and head downtown after lunch"
+      }
+    ],
+    "contributing_actions": [
+      {
+        "action_id": "15-7",
+        "role": "SHAPER",
+        "action_text": "Schedule a 17:00 ride on the Duquesne Incline to Mount Washington for the skyline view"
+      },
+      {
+        "action_id": "15-8",
+        "role": "SHAPER",
+        "action_text": "Schedule 19:00 dinner at Gaucho Parrilla Argentina and note its character"
+      },
+      {
+        "action_id": "15-3",
+        "role": "SHAPER",
+        "action_text": "Keep the 12:00 lunch at Wholey's in the revised schedule"
+      },
+      {
+        "action_id": "15-2",
+        "role": "SHAPER",
+        "action_text": "Keep the 10:00 Strip District walk in the revised schedule"
+      }
+    ],
+    "implementation_actions": [
+      {
+        "action_id": "15-1",
+        "role": "SHAPER",
+        "action_text": "Summarize a revised Day 2 focused on outdoor downtown spots without the Warhol Museum"
+      },
+      {
+        "action_id": "15-6",
+        "role": "SHAPER",
+        "action_text": "Suggest PPG Plaza as a downtown outdoor option"
+      },
+      {
+        "action_id": "15-5",
+        "role": "SHAPER",
+        "action_text": "Suggest Market Square as a downtown outdoor option"
+      },
+      {
+        "action_id": "15-4",
+        "role": "SHAPER",
+        "action_text": "Suggest Point State Park as a downtown outdoor option"
+      }
+    ],
+    "revise_actions": [],
+    "related_actions": [
+      {
+        "action_id": "15-1",
+        "role": "SHAPER",
+        "action_text": "Summarize a revised Day 2 focused on outdoor downtown spots without the Warhol Museum",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Produces the revised Day 2 plan explicitly focused on downtown outdoor spots and removing the Warhol Museum, fulfilling r10’s replacement."
+      },
+      {
+        "action_id": "15-4",
+        "role": "SHAPER",
+        "action_text": "Suggest Point State Park as a downtown outdoor option",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Adds a downtown outdoor stop (Point State Park) as the post-lunch destination, operationalizing 'go downtown after lunch.'"
+      },
+      {
+        "action_id": "15-5",
+        "role": "SHAPER",
+        "action_text": "Suggest Market Square as a downtown outdoor option",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Suggests Market Square as a downtown outdoor option to replace the Warhol Museum after lunch, aligning with r10."
+      },
+      {
+        "action_id": "15-6",
+        "role": "SHAPER",
+        "action_text": "Suggest PPG Plaza as a downtown outdoor option",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Suggests PPG Plaza as another downtown outdoor stop, further executing the requirement to go downtown after lunch instead of Warhol."
+      },
+      {
+        "action_id": "12-3",
+        "role": "SHAPER",
+        "action_text": "State intent to visit the Andy Warhol Museum after lunch",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "User explicitly set the post-lunch plan to the Andy Warhol Museum, which later gets replaced by the new requirement to go downtown instead."
+      },
+      {
+        "action_id": "13-6",
+        "role": "SHAPER",
+        "action_text": "Schedule a 14:00 visit to the Andy Warhol Museum and provide logistics (travel time and elevator suggestion)",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Assistant concretely scheduled the Warhol Museum after lunch, creating the specific plan element that r10 later overrides."
+      },
+      {
+        "action_id": "15-3",
+        "role": "SHAPER",
+        "action_text": "Keep the 12:00 lunch at Wholey's in the revised schedule",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Keeps the lunch anchor at Wholey’s, directly maintaining the 'after lunch' reference point needed for r10 to apply."
+      },
+      {
+        "action_id": "11-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides Afternoon activities (North Shore, Andy Warhol Museum, Point State Park).",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Assistant offered afternoon options including Warhol and downtown-adjacent activities, setting up alternatives from which r10 later selects downtown over Warhol."
+      },
+      {
+        "action_id": "15-2",
+        "role": "SHAPER",
+        "action_text": "Keep the 10:00 Strip District walk in the revised schedule",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Keeps the morning Strip District portion, which supports the overall Day 2 structure but does not itself enforce the post-lunch downtown switch."
+      },
+      {
+        "action_id": "3-6",
+        "role": "EXECUTOR",
+        "action_text": "Assistant asks whether to plan Day 2 for downtown or areas with great views.",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Assistant surfaced 'downtown' as a planning direction earlier, which later becomes the chosen post-lunch destination in r10."
+      },
+      {
+        "action_id": "7-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant asks if the user wants to plan Day 2 (downtown and overlooks) next.",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Assistant prompted planning Day 2 around downtown/overlooks, providing early context that aligns with the later requirement to go downtown after lunch."
+      },
+      {
+        "action_id": "15-7",
+        "role": "SHAPER",
+        "action_text": "Schedule a 17:00 ride on the Duquesne Incline to Mount Washington for the skyline view",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Schedules Mount Washington later in the day; it’s consistent with the revised downtown-first sequence but not required by r10."
+      },
+      {
+        "action_id": "15-8",
+        "role": "SHAPER",
+        "action_text": "Schedule 19:00 dinner at Gaucho Parrilla Argentina and note its character",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Adds a dinner plan; it complements the overall Day 2 downtown-focused itinerary but does not itself satisfy the post-lunch downtown requirement."
+      }
+    ]
+  },
+  "r11": {
+    "origin_actions": [
+      {
+        "action_id": "14-3",
+        "role": "SHAPER",
+        "action_text": "State a preference to spend time outdoors rather than indoors downtown"
+      },
+      {
+        "action_id": "14-4",
+        "role": "OTHER",
+        "action_text": "Ask for recommendations of where to go downtown outdoors"
+      }
+    ],
+    "contributing_actions": [
+      {
+        "action_id": "15-3",
+        "role": "SHAPER",
+        "action_text": "Keep the 12:00 lunch at Wholey's in the revised schedule"
+      },
+      {
+        "action_id": "15-2",
+        "role": "SHAPER",
+        "action_text": "Keep the 10:00 Strip District walk in the revised schedule"
+      }
+    ],
+    "implementation_actions": [
+      {
+        "action_id": "15-1",
+        "role": "SHAPER",
+        "action_text": "Summarize a revised Day 2 focused on outdoor downtown spots without the Warhol Museum"
+      },
+      {
+        "action_id": "15-6",
+        "role": "SHAPER",
+        "action_text": "Suggest PPG Plaza as a downtown outdoor option"
+      },
+      {
+        "action_id": "15-5",
+        "role": "SHAPER",
+        "action_text": "Suggest Market Square as a downtown outdoor option"
+      },
+      {
+        "action_id": "15-4",
+        "role": "SHAPER",
+        "action_text": "Suggest Point State Park as a downtown outdoor option"
+      }
+    ],
+    "revise_actions": [],
+    "related_actions": [
+      {
+        "action_id": "15-1",
+        "role": "SHAPER",
+        "action_text": "Summarize a revised Day 2 focused on outdoor downtown spots without the Warhol Museum",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Feedback-Adopt: the revised Day 2 summary explicitly reorients downtown time toward outdoor spots (fulfilling r11)."
+      },
+      {
+        "action_id": "15-4",
+        "role": "SHAPER",
+        "action_text": "Suggest Point State Park as a downtown outdoor option",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Option-Select: proposing Point State Park directly adds a downtown outdoor activity, supporting r11."
+      },
+      {
+        "action_id": "15-5",
+        "role": "SHAPER",
+        "action_text": "Suggest Market Square as a downtown outdoor option",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Option-Select: suggesting Market Square (outdoor downtown browsing/people-watching) directly satisfies the outdoor-downtown prioritization."
+      },
+      {
+        "action_id": "15-6",
+        "role": "SHAPER",
+        "action_text": "Suggest PPG Plaza as a downtown outdoor option",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Option-Select: suggesting PPG Plaza as an outdoor downtown stop directly advances r11."
+      },
+      {
+        "action_id": "13-6",
+        "role": "SHAPER",
+        "action_text": "Schedule a 14:00 visit to the Andy Warhol Museum and provide logistics (travel time and elevator suggestion)",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Failure-Triggered-Requirement-Add: scheduling an indoor museum visit as a key post-lunch activity helps trigger/justify the later requirement to prioritize outdoor downtown options instead."
+      },
+      {
+        "action_id": "12-3",
+        "role": "SHAPER",
+        "action_text": "State intent to visit the Andy Warhol Museum after lunch",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Intent-Reveal: planning the Andy Warhol Museum (an indoor stop) sets context that later motivates the explicit preference to prioritize outdoor downtown activities."
+      },
+      {
+        "action_id": "11-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides Afternoon activities (North Shore, Andy Warhol Museum, Point State Park).",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Preference-Accumulate: proposing Point State Park (outdoor downtown) provides early context aligned with later prioritizing outdoor downtown time."
+      },
+      {
+        "action_id": "15-8",
+        "role": "SHAPER",
+        "action_text": "Schedule 19:00 dinner at Gaucho Parrilla Argentina and note its character",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Preference-Accumulate: scheduling an indoor dinner downtown affects how downtown time is allocated (and could dilute outdoor prioritization) without explicitly addressing r11."
+      },
+      {
+        "action_id": "3-6",
+        "role": "EXECUTOR",
+        "action_text": "Assistant asks whether to plan Day 2 for downtown or areas with great views.",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Preference-Accumulate: asking whether Day 2 should be downtown or views opens the door to later specifying an outdoor-focused downtown preference."
+      },
+      {
+        "action_id": "7-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant asks if the user wants to plan Day 2 (downtown and overlooks) next.",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Intent-Reveal: prompting planning for 'Day 2 (downtown and overlooks)' sets up the later refinement that downtown should be mainly outdoors."
+      },
+      {
+        "action_id": "15-2",
+        "role": "SHAPER",
+        "action_text": "Keep the 10:00 Strip District walk in the revised schedule",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Preference-Accumulate: keeping the Strip District walk preserves the overall itinerary structure but does not itself enforce 'downtown outdoor' prioritization."
+      },
+      {
+        "action_id": "15-3",
+        "role": "SHAPER",
+        "action_text": "Keep the 12:00 lunch at Wholey's in the revised schedule",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Preference-Accumulate: keeping Wholey's lunch maintains user preferences; it is adjacent context rather than downtown-outdoor prioritization work."
+      }
+    ]
+  },
+  "r12": {
+    "origin_actions": [
+      {
+        "action_id": "12-4",
+        "role": "OTHER",
+        "action_text": "Ask for a description of the Andy Warhol Museum"
+      }
+    ],
+    "contributing_actions": [],
+    "implementation_actions": [
+      {
+        "action_id": "13-2",
+        "role": "EXECUTOR",
+        "action_text": "Provide examples of interactive exhibits and activities"
+      },
+      {
+        "action_id": "13-1",
+        "role": "EXECUTOR",
+        "action_text": "Describe the Andy Warhol Museum's focus, scale, and collections"
+      }
+    ],
+    "revise_actions": [],
+    "related_actions": [
+      {
+        "action_id": "13-1",
+        "role": "EXECUTOR",
+        "action_text": "Describe the Andy Warhol Museum's focus, scale, and collections",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Intent-Reveal"
+      },
+      {
+        "action_id": "13-2",
+        "role": "EXECUTOR",
+        "action_text": "Provide examples of interactive exhibits and activities",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Intent-Reveal"
+      },
+      {
+        "action_id": "11-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides Afternoon activities (North Shore, Andy Warhol Museum, Point State Park).",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Option-Select"
+      }
+    ]
+  },
+  "r13": {
+    "origin_actions": [
+      {
+        "action_id": "16-2",
+        "role": "SHAPER",
+        "action_text": "User states a dietary constraint (cannot eat strongly gamey meat)"
+      },
+      {
+        "action_id": "16-3",
+        "role": "SHAPER",
+        "action_text": "User asks the assistant to recommend menu items given the dietary constraint"
+      }
+    ],
+    "contributing_actions": [
+      {
+        "action_id": "17-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant introduces that it will provide Gaucho Parrilla Argentina suggestions"
+      },
+      {
+        "action_id": "17-8",
+        "role": "EXECUTOR",
+        "action_text": "Assistant suggests sauces (Chimichurri or Ajo) to balance stronger flavors"
+      },
+      {
+        "action_id": "17-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends choosing lean, mild, or seafood/vegetable-focused options"
+      },
+      {
+        "action_id": "16-1",
+        "role": "OTHER",
+        "action_text": "User states they will have dinner at Gaucho Parrilla Argentina"
+      }
+    ],
+    "implementation_actions": [
+      {
+        "action_id": "17-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Lomo (Filet Mignon) as lean and less gamey"
+      },
+      {
+        "action_id": "17-8",
+        "role": "EXECUTOR",
+        "action_text": "Assistant suggests sauces (Chimichurri or Ajo) to balance stronger flavors"
+      },
+      {
+        "action_id": "17-6",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Pescado (Fish) as a fresh, light option"
+      },
+      {
+        "action_id": "17-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Pollo a la Parrilla (Grilled Chicken) as a light option"
+      },
+      {
+        "action_id": "17-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends choosing lean, mild, or seafood/vegetable-focused options"
+      },
+      {
+        "action_id": "17-7",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends sides Maiz (grilled corn) and Vegetales (grilled vegetables)"
+      },
+      {
+        "action_id": "17-9",
+        "role": "EXECUTOR",
+        "action_text": "Assistant warns to avoid Parrillada Mixta or Asado Plate which can include offal or strong sausage"
+      },
+      {
+        "action_id": "17-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Camarones (Grilled Shrimp) to avoid meat flavor"
+      }
+    ],
+    "revise_actions": [],
+    "related_actions": [
+      {
+        "action_id": "17-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Lomo (Filet Mignon) as lean and less gamey",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Directly recommends a specific Gaucho item (Lomo/filet mignon) chosen to be less gamey, fulfilling the requirement."
+      },
+      {
+        "action_id": "17-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Pollo a la Parrilla (Grilled Chicken) as a light option",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Directly recommends Pollo a la Parrilla as a non-gamey option, satisfying the constraint."
+      },
+      {
+        "action_id": "17-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Camarones (Grilled Shrimp) to avoid meat flavor",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Directly recommends Camarones (shrimp) to avoid gamey meat, fulfilling the requirement."
+      },
+      {
+        "action_id": "17-6",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Pescado (Fish) as a fresh, light option",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Directly recommends fish as a lighter, non-gamey choice at Gaucho, fulfilling the requirement."
+      },
+      {
+        "action_id": "17-7",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends sides Maiz (grilled corn) and Vegetales (grilled vegetables)",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Recommends non-meat sides (corn/vegetables) that inherently comply with the no-gamey-meat constraint."
+      },
+      {
+        "action_id": "17-9",
+        "role": "EXECUTOR",
+        "action_text": "Assistant warns to avoid Parrillada Mixta or Asado Plate which can include offal or strong sausage",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Explicitly warns what to avoid (mixed grills/offal/strong sausage) to stay within the no-gamey-meat constraint."
+      },
+      {
+        "action_id": "17-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends choosing lean, mild, or seafood/vegetable-focused options",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Gives general selection strategy (lean/mild/seafood/veg) that guides compliant ordering but is not a specific item list."
+      },
+      {
+        "action_id": "17-8",
+        "role": "EXECUTOR",
+        "action_text": "Assistant suggests sauces (Chimichurri or Ajo) to balance stronger flavors",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Suggests sauces to manage flavor intensity; supports the constraint indirectly but doesn’t itself ensure non-gamey meat selection."
+      },
+      {
+        "action_id": "17-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant introduces that it will provide Gaucho Parrilla Argentina suggestions",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Signals it will provide Gaucho suggestions; minimal progress toward the actual compliant recommendations."
+      }
+    ]
+  },
+  "r14": {
+    "origin_actions": [
+      {
+        "action_id": "18-2",
+        "role": "SHAPER",
+        "action_text": "User states they want to visit and explore CMU on Day 3"
+      },
+      {
+        "action_id": "18-3",
+        "role": "SHAPER",
+        "action_text": "User asks the assistant to recommend a plan for Day 3"
+      }
+    ],
+    "contributing_actions": [
+      {
+        "action_id": "23-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Allegro Hearth Bakery as a good option for a 'bread lunch.'"
+      },
+      {
+        "action_id": "19-7",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends lighter lunch options like shrimp dumplings or vegetable stir-fry noodles"
+      },
+      {
+        "action_id": "24-2",
+        "role": "SHAPER",
+        "action_text": "User asks the assistant to find a place where they can have both lunch and coffee together."
+      },
+      {
+        "action_id": "25-7",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 18:00 dinner recommendation at Union Grill Oakland with dish suggestions."
+      },
+      {
+        "action_id": "19-10",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides an 18:00 dinner recommendation at Aiello's Pizza (link included)"
+      },
+      {
+        "action_id": "20-2",
+        "role": "SHAPER",
+        "action_text": "User suggests having dinner on Craig St."
+      },
+      {
+        "action_id": "23-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant reports that Day 3 has been updated with a bakery lunch and a coffee stop."
+      },
+      {
+        "action_id": "22-3",
+        "role": "SHAPER",
+        "action_text": "User asks the assistant to update the plan to reflect these preferences."
+      },
+      {
+        "action_id": "25-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Sidecar as the lunch-and-coffee spot."
+      },
+      {
+        "action_id": "22-1",
+        "role": "SHAPER",
+        "action_text": "User expresses a preference to have bread for lunch."
+      },
+      {
+        "action_id": "24-1",
+        "role": "SHAPER",
+        "action_text": "User states a preference to have lunch and coffee at the same time."
+      },
+      {
+        "action_id": "25-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes Sidecar's offerings (breads, sandwiches, espresso) and gives its address."
+      },
+      {
+        "action_id": "23-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the updated Day 3 itinerary including Allegro Hearth Bakery at 12:30 and Commonplace Coffee at 14:00."
+      },
+      {
+        "action_id": "18-1",
+        "role": "SHAPER",
+        "action_text": "User proposes planning Day 3"
+      },
+      {
+        "action_id": "19-8",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a 14:30 coffee recommendation for 61C Cafe (link included)"
+      },
+      {
+        "action_id": "19-6",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a 12:30 lunch recommendation at Everyday Noodles (link included)"
+      },
+      {
+        "action_id": "23-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Commonplace Coffee as the coffee stop."
+      },
+      {
+        "action_id": "22-2",
+        "role": "SHAPER",
+        "action_text": "User expresses a desire to have coffee at a café after lunch."
+      },
+      {
+        "action_id": "19-9",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a 15:30 outdoors suggestion to visit Schenley Park trails and related activities"
+      }
+    ],
+    "implementation_actions": [
+      {
+        "action_id": "25-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant announces a revised Day 3 itinerary to allow lunch and coffee in one place while still covering Craig St and CMU."
+      },
+      {
+        "action_id": "25-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 10:00 CMU main campus item with a note about on-site coffee/sandwich options."
+      },
+      {
+        "action_id": "19-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant frames Day 3 as CMU and the nearby neighborhood Squirrel Hill"
+      },
+      {
+        "action_id": "19-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes The Fence as a campus icon students repaint nightly"
+      },
+      {
+        "action_id": "19-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes Pausch Bridge honoring Randy Pausch with art and tech lighting"
+      },
+      {
+        "action_id": "19-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a 10:00 schedule item for visiting CMU campus"
+      },
+      {
+        "action_id": "25-6",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 16:00 Craig St walk and free time item (bookstores and small shops)."
+      },
+      {
+        "action_id": "21-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a revised Day 3 plan focused on CMU main campus and Craig St with dinner on Craig St."
+      },
+      {
+        "action_id": "25-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 14:00 Craig St and nearby items (Mellon Institute, SEI)."
+      },
+      {
+        "action_id": "21-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides detailed itinerary items and suggestions for Day 3 (times, sites, lunch, Craig St, dinner)."
+      },
+      {
+        "action_id": "19-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes the Gates Hillman Complex and its spiral corridor"
+      }
+    ],
+    "revise_actions": [],
+    "related_actions": [
+      {
+        "action_id": "19-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant frames Day 3 as CMU and the nearby neighborhood Squirrel Hill",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Intent-Reveal — explicitly frames Day 3 as a CMU-focused day, directly satisfying the requirement’s intent."
+      },
+      {
+        "action_id": "19-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a 10:00 schedule item for visiting CMU campus",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Intent-Reveal — adds the core Day 3 CMU campus visit item, directly fulfilling the requirement to visit/explore CMU."
+      },
+      {
+        "action_id": "20-1",
+        "role": "SHAPER",
+        "action_text": "User states they want to see both CMU's main campus and the buildings on the Craig St side.",
+        "relationship_type": "DIRECT_CONNECTION",
+        "influence": "direct",
+        "relationship_score": 5,
+        "explanation": "Preference-Realize — tightens the CMU-exploration requirement by specifying coverage of both main campus and the Craig St side."
+      },
+      {
+        "action_id": "21-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a revised Day 3 plan focused on CMU main campus and Craig St with dinner on Craig St.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Feedback-Adopt — produces a revised Day 3 plan explicitly focused on exploring CMU (including Craig St side)."
+      },
+      {
+        "action_id": "25-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant announces a revised Day 3 itinerary to allow lunch and coffee in one place while still covering Craig St and CMU.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Feedback-Adopt — revises Day 3 while explicitly preserving CMU + Craig St coverage, continuing to fulfill the CMU-exploration requirement."
+      },
+      {
+        "action_id": "25-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 10:00 CMU main campus item with a note about on-site coffee/sandwich options.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "CONTRIBUTES — reiterates the CMU main campus visit block as a concrete plan element satisfying the requirement."
+      },
+      {
+        "action_id": "19-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes The Fence as a campus icon students repaint nightly",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "CONTRIBUTES — provides CMU-specific exploration detail (a campus icon), supporting the CMU-visit plan."
+      },
+      {
+        "action_id": "19-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes the Gates Hillman Complex and its spiral corridor",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "CONTRIBUTES — adds CMU-specific site detail (Gates Hillman), strengthening the exploration content."
+      },
+      {
+        "action_id": "19-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes Pausch Bridge honoring Randy Pausch with art and tech lighting",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "CONTRIBUTES — adds a CMU-adjacent landmark (Pausch Bridge) as part of exploring CMU area."
+      },
+      {
+        "action_id": "20-3",
+        "role": "SHAPER",
+        "action_text": "User requests that the assistant adjust the plan accordingly.",
+        "relationship_type": "DIRECT_CONNECTION",
+        "influence": "direct",
+        "relationship_score": 4,
+        "explanation": "Feedback-Adopt — explicitly requests revising Day 3 to align with the newly specified CMU areas (main campus + Craig St side)."
+      },
+      {
+        "action_id": "21-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides detailed itinerary items and suggestions for Day 3 (times, sites, lunch, Craig St, dinner).",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "CONTRIBUTES — adds detailed schedule items that operationalize exploring CMU across the day."
+      },
+      {
+        "action_id": "25-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 14:00 Craig St and nearby items (Mellon Institute, SEI).",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Feedback-Adopt — adds Craig St-side exploration items, directly supporting the requirement to explore CMU (including that side)."
+      },
+      {
+        "action_id": "25-6",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 16:00 Craig St walk and free time item (bookstores and small shops).",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "CONTRIBUTES — extends Craig St exploration time, reinforcing Day 3 as a CMU/Craig St exploration day."
+      },
+      {
+        "action_id": "0-1",
+        "role": "SHAPER",
+        "action_text": "User states they are planning to visit Pittsburgh for 3 days.",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Intent-Reveal — establishes a 3-day trip-planning frame, creating the need for later day-specific requirements (including Day 3)."
+      },
+      {
+        "action_id": "19-6",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a 12:30 lunch recommendation at Everyday Noodles (link included)",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Preference-Accumulate — meal logistics within the Day 3 plan; supports the CMU day but is not itself CMU exploration."
+      },
+      {
+        "action_id": "19-8",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a 14:30 coffee recommendation for 61C Cafe (link included)",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Preference-Accumulate — coffee stop added within the Day 3 itinerary; supports pacing but not CMU exploration itself."
+      },
+      {
+        "action_id": "19-9",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a 15:30 outdoors suggestion to visit Schenley Park trails and related activities",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Preference-Accumulate — adds nearby outdoors time complementing a CMU-area day (adjacent park), indirectly supporting exploration flow."
+      },
+      {
+        "action_id": "19-10",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides an 18:00 dinner recommendation at Aiello's Pizza (link included)",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Preference-Accumulate — dinner logistics for Day 3; not a direct CMU exploration element."
+      },
+      {
+        "action_id": "20-2",
+        "role": "SHAPER",
+        "action_text": "User suggests having dinner on Craig St.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Preference-Accumulate — adds a Craig St dinner preference that shapes the Day 3 itinerary but is secondary to the CMU-visit requirement."
+      },
+      {
+        "action_id": "22-3",
+        "role": "SHAPER",
+        "action_text": "User asks the assistant to update the plan to reflect these preferences.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Feedback-Adopt — requests an itinerary update; indirectly impacts how the CMU day is scheduled while keeping the same CMU-focused goal."
+      },
+      {
+        "action_id": "23-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant reports that Day 3 has been updated with a bakery lunch and a coffee stop.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Feedback-Adopt — confirms the Day 3 plan was updated (logistics adjustment) without changing the CMU-exploration objective."
+      },
+      {
+        "action_id": "23-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the updated Day 3 itinerary including Allegro Hearth Bakery at 12:30 and Commonplace Coffee at 14:00.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "CONTRIBUTES — provides an updated Day 3 itinerary; most content is logistics/food while CMU focus remains assumed."
+      },
+      {
+        "action_id": "24-2",
+        "role": "SHAPER",
+        "action_text": "User asks the assistant to find a place where they can have both lunch and coffee together.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Intent-Reveal — requests a combined lunch+coffee venue, shaping logistics of the CMU day plan without changing its CMU focus."
+      },
+      {
+        "action_id": "25-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Sidecar as the lunch-and-coffee spot.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Option-Select — chooses a lunch+coffee venue to support the Day 3 itinerary; not itself CMU exploration."
+      },
+      {
+        "action_id": "25-7",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 18:00 dinner recommendation at Union Grill Oakland with dish suggestions.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Preference-Accumulate — dinner recommendation to complete the Day 3 schedule; secondary to the CMU exploration requirement."
+      },
+      {
+        "action_id": "1-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a Day 1 plan centered on Oakland and the University of Pittsburgh campus.",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Preference-Accumulate — builds the pattern of day-by-day, area-focused itineraries, indirectly setting up how Day 3 will later be scoped (e.g., a campus-area day)."
+      },
+      {
+        "action_id": "10-1",
+        "role": "SHAPER",
+        "action_text": "User asks the assistant to begin planning Day 2.",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Preference-Accumulate — continues establishing separate day plans (Day 2), indirectly leaving Day 3 to be defined later."
+      },
+      {
+        "action_id": "19-7",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends lighter lunch options like shrimp dumplings or vegetable stir-fry noodles",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Preference-Accumulate — dietary/lunch-option tuning; ancillary to the CMU exploration requirement."
+      },
+      {
+        "action_id": "22-1",
+        "role": "SHAPER",
+        "action_text": "User expresses a preference to have bread for lunch.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Preference-Accumulate — lunch-food preference; affects itinerary details but not whether Day 3 is CMU exploration."
+      },
+      {
+        "action_id": "22-2",
+        "role": "SHAPER",
+        "action_text": "User expresses a desire to have coffee at a café after lunch.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Preference-Accumulate — adds a coffee-after-lunch preference; ancillary to the CMU exploration requirement."
+      },
+      {
+        "action_id": "23-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Allegro Hearth Bakery as a good option for a 'bread lunch.'",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Option-Select — selects a bakery option to meet lunch preference; not directly about exploring CMU."
+      },
+      {
+        "action_id": "23-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Commonplace Coffee as the coffee stop.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Option-Select — selects a coffee stop; ancillary to the CMU exploration requirement."
+      },
+      {
+        "action_id": "24-1",
+        "role": "SHAPER",
+        "action_text": "User states a preference to have lunch and coffee at the same time.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Preference-Realize — refines meal/coffee timing within Day 3; does not alter the CMU exploration requirement itself."
+      },
+      {
+        "action_id": "25-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes Sidecar's offerings (breads, sandwiches, espresso) and gives its address.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "CONTRIBUTES — provides venue details for logistics; indirectly supports the CMU day plan."
+      }
+    ]
+  },
+  "r15": {
+    "origin_actions": [
+      {
+        "action_id": "20-1",
+        "role": "SHAPER",
+        "action_text": "User states they want to see both CMU's main campus and the buildings on the Craig St side."
+      },
+      {
+        "action_id": "20-3",
+        "role": "SHAPER",
+        "action_text": "User requests that the assistant adjust the plan accordingly."
+      }
+    ],
+    "contributing_actions": [
+      {
+        "action_id": "23-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant reports that Day 3 has been updated with a bakery lunch and a coffee stop."
+      },
+      {
+        "action_id": "25-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 10:00 CMU main campus item with a note about on-site coffee/sandwich options."
+      },
+      {
+        "action_id": "25-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 14:00 Craig St and nearby items (Mellon Institute, SEI)."
+      },
+      {
+        "action_id": "25-7",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 18:00 dinner recommendation at Union Grill Oakland with dish suggestions."
+      },
+      {
+        "action_id": "25-6",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 16:00 Craig St walk and free time item (bookstores and small shops)."
+      },
+      {
+        "action_id": "23-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the updated Day 3 itinerary including Allegro Hearth Bakery at 12:30 and Commonplace Coffee at 14:00."
+      }
+    ],
+    "implementation_actions": [
+      {
+        "action_id": "25-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant announces a revised Day 3 itinerary to allow lunch and coffee in one place while still covering Craig St and CMU."
+      },
+      {
+        "action_id": "21-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a revised Day 3 plan focused on CMU main campus and Craig St with dinner on Craig St."
+      },
+      {
+        "action_id": "25-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 14:00 Craig St and nearby items (Mellon Institute, SEI)."
+      },
+      {
+        "action_id": "21-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides detailed itinerary items and suggestions for Day 3 (times, sites, lunch, Craig St, dinner)."
+      }
+    ],
+    "revise_actions": [],
+    "related_actions": [
+      {
+        "action_id": "21-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a revised Day 3 plan focused on CMU main campus and Craig St with dinner on Craig St.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Assistant’s revised Day 3 plan explicitly targets covering both CMU main campus and the Craig St side, satisfying r15."
+      },
+      {
+        "action_id": "21-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides detailed itinerary items and suggestions for Day 3 (times, sites, lunch, Craig St, dinner).",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Detailed itinerary items operationalize the inclusion of both CMU main campus and Craig St-side buildings, executing r15."
+      },
+      {
+        "action_id": "25-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant announces a revised Day 3 itinerary to allow lunch and coffee in one place while still covering Craig St and CMU.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Assistant explicitly revises Day 3 while stating it still covers Craig St and CMU, directly executing r15 alongside other preferences."
+      },
+      {
+        "action_id": "18-2",
+        "role": "SHAPER",
+        "action_text": "User states they want to visit and explore CMU on Day 3",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "User’s intent to explore CMU on Day 3 implicitly motivates later tightening into a requirement to cover both main campus and Craig St side."
+      },
+      {
+        "action_id": "19-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant frames Day 3 as CMU and the nearby neighborhood Squirrel Hill",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Assistant proposes a Day 3 plan centered on CMU (and Squirrel Hill) but does not explicitly cover Craig St-side buildings, setting up the gap that later triggers adding r15."
+      },
+      {
+        "action_id": "25-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 10:00 CMU main campus item with a note about on-site coffee/sandwich options.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Providing the CMU main campus visit block is direct partial fulfillment of r15’s ‘main campus’ component."
+      },
+      {
+        "action_id": "25-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 14:00 Craig St and nearby items (Mellon Institute, SEI).",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Providing Craig St-side items (e.g., Mellon Institute, SEI) directly satisfies the ‘Craig St side buildings’ portion of r15."
+      },
+      {
+        "action_id": "25-7",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 18:00 dinner recommendation at Union Grill Oakland with dish suggestions.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Dinner recommendation on Craig St (Union Grill Oakland) further anchors the itinerary on the Craig St side, supporting r15’s inclusion requirement."
+      },
+      {
+        "action_id": "25-6",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 16:00 Craig St walk and free time item (bookstores and small shops).",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Craig St walk/free time further reinforces presence on the Craig St side, adding coverage depth toward r15."
+      },
+      {
+        "action_id": "23-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant reports that Day 3 has been updated with a bakery lunch and a coffee stop.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Assistant updates Day 3 plan (for food/coffee) while implicitly retaining the CMU main + Craig St side structure established for r15."
+      },
+      {
+        "action_id": "23-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the updated Day 3 itinerary including Allegro Hearth Bakery at 12:30 and Commonplace Coffee at 14:00.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Updated itinerary content likely preserves the two-area CMU coverage, but the action focuses on meal stops rather than explicitly on r15."
+      }
+    ]
+  },
+  "r16": {
+    "origin_actions": [
+      {
+        "action_id": "20-2",
+        "role": "SHAPER",
+        "action_text": "User suggests having dinner on Craig St."
+      },
+      {
+        "action_id": "20-3",
+        "role": "SHAPER",
+        "action_text": "User requests that the assistant adjust the plan accordingly."
+      }
+    ],
+    "contributing_actions": [
+      {
+        "action_id": "25-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant announces a revised Day 3 itinerary to allow lunch and coffee in one place while still covering Craig St and CMU."
+      },
+      {
+        "action_id": "25-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 14:00 Craig St and nearby items (Mellon Institute, SEI)."
+      },
+      {
+        "action_id": "25-6",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 16:00 Craig St walk and free time item (bookstores and small shops)."
+      }
+    ],
+    "implementation_actions": [
+      {
+        "action_id": "21-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a revised Day 3 plan focused on CMU main campus and Craig St with dinner on Craig St."
+      },
+      {
+        "action_id": "25-7",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 18:00 dinner recommendation at Union Grill Oakland with dish suggestions."
+      },
+      {
+        "action_id": "21-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides detailed itinerary items and suggestions for Day 3 (times, sites, lunch, Craig St, dinner)."
+      }
+    ],
+    "revise_actions": [],
+    "related_actions": [
+      {
+        "action_id": "21-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a revised Day 3 plan focused on CMU main campus and Craig St with dinner on Craig St.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Revised Day 3 plan explicitly includes dinner on Craig St, directly fulfilling r16 (Feedback-Adopt)."
+      },
+      {
+        "action_id": "21-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides detailed itinerary items and suggestions for Day 3 (times, sites, lunch, Craig St, dinner).",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Provides itinerary details including the Craig St dinner placement, completing the requirement (Feedback-Adopt)."
+      },
+      {
+        "action_id": "25-7",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 18:00 dinner recommendation at Union Grill Oakland with dish suggestions.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Provides the concrete dinner recommendation on Craig St (Union Grill Oakland), directly fulfilling r16 (Feedback-Adopt)."
+      },
+      {
+        "action_id": "18-1",
+        "role": "SHAPER",
+        "action_text": "User proposes planning Day 3",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Sets up planning for Day 3, which later enables specifying constraints like dinner location."
+      },
+      {
+        "action_id": "18-3",
+        "role": "SHAPER",
+        "action_text": "User asks the assistant to recommend a plan for Day 3",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Requesting a Day 3 plan implicitly invites later refinement of specifics such as dinner location."
+      },
+      {
+        "action_id": "19-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant frames Day 3 as CMU and the nearby neighborhood Squirrel Hill",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Frames Day 3 around CMU and Squirrel Hill, which can prompt later correction/refinement toward Craig St for dinner."
+      },
+      {
+        "action_id": "25-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant announces a revised Day 3 itinerary to allow lunch and coffee in one place while still covering Craig St and CMU.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Revises the Day 3 itinerary while explicitly preserving Craig St as a key area, helping keep conditions compatible with a Craig St dinner (Feedback-Adopt)."
+      },
+      {
+        "action_id": "25-5",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 14:00 Craig St and nearby items (Mellon Institute, SEI).",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Schedules Craig St-area activities, supporting being on/near Craig St later for dinner (Preference-Accumulate)."
+      },
+      {
+        "action_id": "18-2",
+        "role": "SHAPER",
+        "action_text": "User states they want to visit and explore CMU on Day 3",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Establishes Day 3’s core activity (explore CMU), indirectly influencing where dinner might be convenient (e.g., nearby streets)."
+      },
+      {
+        "action_id": "25-6",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 16:00 Craig St walk and free time item (bookstores and small shops).",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Additional Craig St walk/free time loosely supports the feasibility of having dinner on Craig St."
+      }
+    ]
+  },
+  "r17": {
+    "origin_actions": [
+      {
+        "action_id": "22-1",
+        "role": "SHAPER",
+        "action_text": "User expresses a preference to have bread for lunch."
+      },
+      {
+        "action_id": "22-2",
+        "role": "SHAPER",
+        "action_text": "User expresses a desire to have coffee at a café after lunch."
+      },
+      {
+        "action_id": "22-3",
+        "role": "SHAPER",
+        "action_text": "User asks the assistant to update the plan to reflect these preferences."
+      }
+    ],
+    "contributing_actions": [
+      {
+        "action_id": "23-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant reports that Day 3 has been updated with a bakery lunch and a coffee stop."
+      },
+      {
+        "action_id": "23-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Allegro Hearth Bakery as a good option for a 'bread lunch.'"
+      },
+      {
+        "action_id": "25-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 10:00 CMU main campus item with a note about on-site coffee/sandwich options."
+      },
+      {
+        "action_id": "25-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Sidecar as the lunch-and-coffee spot."
+      },
+      {
+        "action_id": "25-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes Sidecar's offerings (breads, sandwiches, espresso) and gives its address."
+      },
+      {
+        "action_id": "23-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Commonplace Coffee as the coffee stop."
+      }
+    ],
+    "implementation_actions": [
+      {
+        "action_id": "23-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the updated Day 3 itinerary including Allegro Hearth Bakery at 12:30 and Commonplace Coffee at 14:00."
+      }
+    ],
+    "revise_actions": [],
+    "related_actions": [
+      {
+        "action_id": "23-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the updated Day 3 itinerary including Allegro Hearth Bakery at 12:30 and Commonplace Coffee at 14:00.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Feedback-Adopt: Provides the updated itinerary with bread-based lunch and a café coffee stop after lunch, fulfilling r17."
+      },
+      {
+        "action_id": "24-2",
+        "role": "SHAPER",
+        "action_text": "User asks the assistant to find a place where they can have both lunch and coffee together.",
+        "relationship_type": "DIRECT_CONNECTION",
+        "influence": "direct",
+        "relationship_score": 4,
+        "explanation": "Preference-Realize: Requests a combined lunch+coffee place, directly altering the 'coffee stop after lunch' structure in r17."
+      },
+      {
+        "action_id": "25-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant announces a revised Day 3 itinerary to allow lunch and coffee in one place while still covering Craig St and CMU.",
+        "relationship_type": "DIRECT_CONNECTION",
+        "influence": "direct",
+        "relationship_score": 4,
+        "explanation": "Feedback-Adopt: Announces revising Day 3 to combine lunch and coffee in one place, effectively modifying r17’s intended sequencing."
+      },
+      {
+        "action_id": "21-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides a revised Day 3 plan focused on CMU main campus and Craig St with dinner on Craig St.",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Failure-Triggered-Requirement-Add: Day 3 lunch is set to Everyday Noodles (not bread-focused) and there is no explicit post-lunch café stop, motivating r17."
+      },
+      {
+        "action_id": "23-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant reports that Day 3 has been updated with a bakery lunch and a coffee stop.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Intent-Reveal: Explicitly states Day 3 was updated to include a bakery lunch and a coffee stop, aligning with r17 (but is only a report)."
+      },
+      {
+        "action_id": "23-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Allegro Hearth Bakery as a good option for a 'bread lunch.'",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Option-Select: Recommends the bakery choice specifically to satisfy the 'bread lunch' part of r17."
+      },
+      {
+        "action_id": "23-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Commonplace Coffee as the coffee stop.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Option-Select: Recommends the café stop to satisfy the 'coffee after lunch' part of r17."
+      },
+      {
+        "action_id": "24-1",
+        "role": "SHAPER",
+        "action_text": "User states a preference to have lunch and coffee at the same time.",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Preference-Realize: Introduces a new preference (lunch+coffee together) that conflicts with/reshapes how r17 would be satisfied."
+      },
+      {
+        "action_id": "25-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Sidecar as the lunch-and-coffee spot.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 3,
+        "explanation": "Option-Select: Recommends a spot that offers bread/sandwiches plus espresso, partially covering r17 (though combined vs after-lunch)."
+      },
+      {
+        "action_id": "25-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 10:00 CMU main campus item with a note about on-site coffee/sandwich options.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Intent-Reveal: Adds on-site coffee/sandwich option notes that partially support lunch/coffee planning related to r17."
+      },
+      {
+        "action_id": "25-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes Sidecar's offerings (breads, sandwiches, espresso) and gives its address.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Intent-Reveal: Details the bread and espresso offerings supporting the lunch+coffee elements tied to r17."
+      }
+    ]
+  },
+  "r17_1": {
+    "origin_actions": [
+      {
+        "action_id": "24-1",
+        "role": "SHAPER",
+        "action_text": "User states a preference to have lunch and coffee at the same time."
+      },
+      {
+        "action_id": "24-2",
+        "role": "SHAPER",
+        "action_text": "User asks the assistant to find a place where they can have both lunch and coffee together."
+      }
+    ],
+    "contributing_actions": [
+      {
+        "action_id": "25-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 10:00 CMU main campus item with a note about on-site coffee/sandwich options."
+      },
+      {
+        "action_id": "25-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes Sidecar's offerings (breads, sandwiches, espresso) and gives its address."
+      }
+    ],
+    "implementation_actions": [
+      {
+        "action_id": "25-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant announces a revised Day 3 itinerary to allow lunch and coffee in one place while still covering Craig St and CMU."
+      },
+      {
+        "action_id": "25-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Sidecar as the lunch-and-coffee spot."
+      }
+    ],
+    "revise_actions": [],
+    "related_actions": [
+      {
+        "action_id": "25-3",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Sidecar as the lunch-and-coffee spot.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 5,
+        "explanation": "Selects a single venue (Sidecar) as the combined lunch-and-coffee stop, fulfilling r17_1."
+      },
+      {
+        "action_id": "25-1",
+        "role": "EXECUTOR",
+        "action_text": "Assistant announces a revised Day 3 itinerary to allow lunch and coffee in one place while still covering Craig St and CMU.",
+        "relationship_type": "IMPLEMENTS",
+        "influence": "indirect",
+        "relationship_score": 4,
+        "explanation": "Explicitly revises Day 3 to make lunch and coffee happen at one place, directly acting to satisfy r17_1."
+      },
+      {
+        "action_id": "22-3",
+        "role": "SHAPER",
+        "action_text": "User asks the assistant to update the plan to reflect these preferences.",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Triggers itinerary revision work around lunch and coffee, setting up the later constraint to combine them."
+      },
+      {
+        "action_id": "23-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant recommends Commonplace Coffee as the coffee stop.",
+        "relationship_type": "IMPLICIT_CONNECTION",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Reinforces the separate coffee-stop structure that later motivates the single-place lunch+coffee requirement."
+      },
+      {
+        "action_id": "25-4",
+        "role": "EXECUTOR",
+        "action_text": "Assistant describes Sidecar's offerings (breads, sandwiches, espresso) and gives its address.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 2,
+        "explanation": "Details Sidecar’s lunch/coffee offerings and location, supporting execution of the single combined stop."
+      },
+      {
+        "action_id": "25-2",
+        "role": "EXECUTOR",
+        "action_text": "Assistant provides the 10:00 CMU main campus item with a note about on-site coffee/sandwich options.",
+        "relationship_type": "CONTRIBUTES",
+        "influence": "indirect",
+        "relationship_score": 1,
+        "explanation": "Mentions on-site coffee/sandwich options, providing ancillary context but not the defined single lunch+coffee stop."
+      }
+    ]
+  },
+  "others": [
+    {
+      "action_id": "1-13",
+      "role": "EXECUTOR",
+      "action_text": "Assistant asks whether to plan Day 2 (downtown and Mount Washington)."
+    },
+    {
+      "action_id": "1-16",
+      "role": "EXECUTOR",
+      "action_text": "Assistant recommends Primanti Bros. as a lunch option."
+    },
+    {
+      "action_id": "1-18",
+      "role": "EXECUTOR",
+      "action_text": "Assistant recommends Spirits & Tales and Butterjoint as dinner options."
+    },
+    {
+      "action_id": "1-20",
+      "role": "EXECUTOR",
+      "action_text": "Assistant asks again whether to plan Day 2."
+    },
+    {
+      "action_id": "4-2",
+      "role": "SHAPER",
+      "action_text": "User reports having heard La Prima is a famous brand."
+    },
+    {
+      "action_id": "9-3",
+      "role": "SHAPER",
+      "action_text": "Assistant asks whether to plan Day 2."
+    },
+    {
+      "action_id": "10-2",
+      "role": "SHAPER",
+      "action_text": "User asks which areas are good to explore on Day 2."
+    },
+    {
+      "action_id": "11-1",
+      "role": "SHAPER",
+      "action_text": "Assistant recommends the Strip District and Mount Washington for Day 2."
+    },
+    {
+      "action_id": "11-3",
+      "role": "EXECUTOR",
+      "action_text": "Assistant provides local experience suggestions (Pennsylvania Macaroni Co., Wholey's Fish Market)."
+    },
+    {
+      "action_id": "11-6",
+      "role": "EXECUTOR",
+      "action_text": "Assistant provides an Evening activity suggestion to take the Duquesne Incline for skyline views."
+    },
+    {
+      "action_id": "11-7",
+      "role": "EXECUTOR",
+      "action_text": "Assistant provides a Day 2 dinner suggestion (Gaucho Parrilla Argentina) with background."
+    },
+    {
+      "action_id": "11-8",
+      "role": "EXECUTOR",
+      "action_text": "Assistant provides English study example expressions related to the itinerary."
+    },
+    {
+      "action_id": "11-9",
+      "role": "SHAPER",
+      "action_text": "Assistant asks if the user needs more details on Day 2 dinner or activities."
+    },
+    {
+      "action_id": "11-10",
+      "role": "SHAPER",
+      "action_text": "Assistant offers to find the Duquesne Incline hours and asks if the user wants that."
+    },
+    {
+      "action_id": "15-9",
+      "role": "EXECUTOR",
+      "action_text": "Provide English study: three natural expression examples"
+    },
+    {
+      "action_id": "15-10",
+      "role": "SHAPER",
+      "action_text": "Ask whether to plan the final Day 3 as well"
+    },
+    {
+      "action_id": "21-4",
+      "role": "EXECUTOR",
+      "action_text": "Assistant invites the user to ask more questions if needed."
+    },
+    {
+      "action_id": "25-8",
+      "role": "EXECUTOR",
+      "action_text": "Assistant concludes the 3-day Pittsburgh trip and offers a courteous send-off."
+    }
+  ]
+}

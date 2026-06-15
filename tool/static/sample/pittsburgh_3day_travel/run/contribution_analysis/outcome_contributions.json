@@ -1,0 +1,329 @@
+{
+  "1": {
+    "thread_id": 1,
+    "outcome_id": "outcome_1",
+    "outcome": "Complete 3-day Pittsburgh trip plan (overall structure and completion/closure)",
+    "speaker_contributions": {
+      "user": {
+        "direct_influence": 10.0,
+        "indirect_influence": 0.0,
+        "total_influence": 10.0,
+        "requirement_count": 1
+      },
+      "assistant": {
+        "direct_influence": 1.0,
+        "indirect_influence": 0.0,
+        "total_influence": 1.0,
+        "requirement_count": 1
+      }
+    },
+    "role_contributions": {
+      "user": {
+        "SHAPER": {
+          "M_dir": 10.0,
+          "M_ind": 0.0,
+          "M_total": 10.0,
+          "count": 2
+        }
+      },
+      "assistant": {
+        "EXECUTOR": {
+          "M_dir": 1.0,
+          "M_ind": 0.0,
+          "M_total": 1.0,
+          "count": 1
+        }
+      }
+    },
+    "requirements": [
+      "r1"
+    ]
+  },
+  "2": {
+    "thread_id": 2,
+    "outcome_id": "outcome_2",
+    "outcome": "Day 1 itinerary near University of Pittsburgh/Oakland (Cathedral of Learning area) with coffee and meal plan updates",
+    "speaker_contributions": {
+      "user": {
+        "direct_influence": 30.0,
+        "indirect_influence": 0.0,
+        "total_influence": 30.0,
+        "requirement_count": 3
+      },
+      "assistant": {
+        "direct_influence": 10.0,
+        "indirect_influence": 4.8,
+        "total_influence": 14.8,
+        "requirement_count": 3
+      }
+    },
+    "role_contributions": {
+      "user": {
+        "SHAPER": {
+          "M_dir": 30.0,
+          "M_ind": 0.0,
+          "M_total": 30.0,
+          "count": 6
+        }
+      },
+      "assistant": {
+        "EXECUTOR": {
+          "M_dir": 10.0,
+          "M_ind": 4.8,
+          "M_total": 14.8,
+          "count": 20
+        }
+      }
+    },
+    "requirements": [
+      "r2",
+      "r3",
+      "r4"
+    ]
+  },
+  "3": {
+    "thread_id": 3,
+    "outcome_id": "outcome_5",
+    "outcome": "Recommendations for famous/local Pittsburgh food and local-favorite restaurants (not fancy/expensive), especially for meals during the trip",
+    "speaker_contributions": {
+      "user": {
+        "direct_influence": 15.0,
+        "indirect_influence": 0.0,
+        "total_influence": 15.0,
+        "requirement_count": 2
+      },
+      "assistant": {
+        "direct_influence": 8.0,
+        "indirect_influence": 24.599999999999994,
+        "total_influence": 32.599999999999994,
+        "requirement_count": 2
+      }
+    },
+    "role_contributions": {
+      "user": {
+        "SHAPER": {
+          "M_dir": 15.0,
+          "M_ind": 0.0,
+          "M_total": 15.0,
+          "count": 3
+        }
+      },
+      "assistant": {
+        "EXECUTOR": {
+          "M_dir": 8.0,
+          "M_ind": 23.39999999999999,
+          "M_total": 31.39999999999999,
+          "count": 47
+        },
+        "SHAPER": {
+          "M_dir": 0.0,
+          "M_ind": 1.2000000000000002,
+          "M_total": 1.2000000000000002,
+          "count": 1
+        }
+      }
+    },
+    "requirements": [
+      "r5",
+      "r6"
+    ]
+  },
+  "4": {
+    "thread_id": 4,
+    "outcome_id": "outcome_3",
+    "outcome": "Day 2 itinerary (Strip District + downtown + Mount Washington), revised to prioritize outdoor downtown spots and user preferences",
+    "speaker_contributions": {
+      "user": {
+        "direct_influence": 30.0,
+        "indirect_influence": 4.040000000000001,
+        "total_influence": 34.04,
+        "requirement_count": 5
+      },
+      "assistant": {
+        "direct_influence": 18.0,
+        "indirect_influence": 46.967999999999996,
+        "total_influence": 64.968,
+        "requirement_count": 5
+      }
+    },
+    "role_contributions": {
+      "user": {
+        "SHAPER": {
+          "M_dir": 25.0,
+          "M_ind": 3.040000000000001,
+          "M_total": 28.040000000000003,
+          "count": 43
+        },
+        "OTHER": {
+          "M_dir": 5.0,
+          "M_ind": 1.0,
+          "M_total": 6.0,
+          "count": 3
+        }
+      },
+      "assistant": {
+        "EXECUTOR": {
+          "M_dir": 3.0,
+          "M_ind": 25.799999999999997,
+          "M_total": 28.799999999999997,
+          "count": 98
+        },
+        "SHAPER": {
+          "M_dir": 15.0,
+          "M_ind": 21.168000000000003,
+          "M_total": 36.168000000000006,
+          "count": 40
+        }
+      }
+    },
+    "requirements": [
+      "r7",
+      "r8",
+      "r9",
+      "r10",
+      "r11"
+    ]
+  },
+  "5": {
+    "thread_id": 5,
+    "outcome_id": "outcome_7",
+    "outcome": "Description of the Andy Warhol Museum (what it is like and what to do there)",
+    "speaker_contributions": {
+      "user": {
+        "direct_influence": 5.0,
+        "indirect_influence": 0.0,
+        "total_influence": 5.0,
+        "requirement_count": 1
+      },
+      "assistant": {
+        "direct_influence": 2.0,
+        "indirect_influence": 7.8,
+        "total_influence": 9.8,
+        "requirement_count": 1
+      }
+    },
+    "role_contributions": {
+      "user": {
+        "OTHER": {
+          "M_dir": 5.0,
+          "M_ind": 0.0,
+          "M_total": 5.0,
+          "count": 1
+        }
+      },
+      "assistant": {
+        "SHAPER": {
+          "M_dir": 0.0,
+          "M_ind": 3.6000000000000005,
+          "M_total": 3.6000000000000005,
+          "count": 3
+        },
+        "EXECUTOR": {
+          "M_dir": 2.0,
+          "M_ind": 4.2,
+          "M_total": 6.2,
+          "count": 9
+        }
+      }
+    },
+    "requirements": [
+      "r12"
+    ]
+  },
+  "6": {
+    "thread_id": 6,
+    "outcome_id": "outcome_6",
+    "outcome": "Menu item recommendations for Gaucho Parrilla Argentina that fit the user's 'no strongly gamey meat' dietary constraint",
+    "speaker_contributions": {
+      "user": {
+        "direct_influence": 10.0,
+        "indirect_influence": 0.0,
+        "total_influence": 10.0,
+        "requirement_count": 1
+      },
+      "assistant": {
+        "direct_influence": 8.0,
+        "indirect_influence": 0.0,
+        "total_influence": 8.0,
+        "requirement_count": 1
+      }
+    },
+    "role_contributions": {
+      "user": {
+        "SHAPER": {
+          "M_dir": 10.0,
+          "M_ind": 0.0,
+          "M_total": 10.0,
+          "count": 2
+        }
+      },
+      "assistant": {
+        "SHAPER": {
+          "M_dir": 0.0,
+          "M_ind": 0.0,
+          "M_total": 0.0,
+          "count": 9
+        },
+        "EXECUTOR": {
+          "M_dir": 8.0,
+          "M_ind": 0.0,
+          "M_total": 8.0,
+          "count": 9
+        }
+      }
+    },
+    "requirements": [
+      "r13"
+    ]
+  },
+  "7": {
+    "thread_id": 7,
+    "outcome_id": "outcome_4",
+    "outcome": "Day 3 itinerary focused on exploring CMU (main campus + Craig St side) with lunch/coffee preferences and dinner on Craig St (revised to combine lunch+coffee at one place)",
+    "speaker_contributions": {
+      "user": {
+        "direct_influence": 55.0,
+        "indirect_influence": 3.3882918912000006,
+        "total_influence": 58.388291891200005,
+        "requirement_count": 5
+      },
+      "assistant": {
+        "direct_influence": 21.0,
+        "indirect_influence": 18.41024,
+        "total_influence": 39.41024,
+        "requirement_count": 5
+      }
+    },
+    "role_contributions": {
+      "user": {
+        "SHAPER": {
+          "M_dir": 55.0,
+          "M_ind": 3.3882918912000006,
+          "M_total": 58.388291891200005,
+          "count": 47
+        }
+      },
+      "assistant": {
+        "EXECUTOR": {
+          "M_dir": 21.0,
+          "M_ind": 18.4,
+          "M_total": 39.4,
+          "count": 181
+        },
+        "SHAPER": {
+          "M_dir": 0.0,
+          "M_ind": 0.010240000000000003,
+          "M_total": 0.010240000000000003,
+          "count": 43
+        }
+      }
+    },
+    "requirements": [
+      "r14",
+      "r15",
+      "r16",
+      "r17",
+      "r17_1"
+    ]
+  }
+}
