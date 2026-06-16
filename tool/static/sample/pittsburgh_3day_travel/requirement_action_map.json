@@ -1639,13 +1639,14 @@
         "action_text": "Ask for a description of the Andy Warhol Museum"
       }
     ],
-    "contributing_actions": [],
-    "implementation_actions": [
+    "contributing_actions": [
       {
         "action_id": "13-2",
         "role": "EXECUTOR",
         "action_text": "Provide examples of interactive exhibits and activities"
-      },
+      }
+    ],
+    "implementation_actions": [
       {
         "action_id": "13-1",
         "role": "EXECUTOR",
@@ -1661,16 +1662,16 @@
         "relationship_type": "IMPLEMENTS",
         "influence": "indirect",
         "relationship_score": 5,
-        "explanation": "Intent-Reveal"
+        "explanation": "Directly provides a description of the museum by covering its focus, scale, and collections, substantially fulfilling r12."
       },
       {
         "action_id": "13-2",
         "role": "EXECUTOR",
         "action_text": "Provide examples of interactive exhibits and activities",
-        "relationship_type": "IMPLEMENTS",
+        "relationship_type": "CONTRIBUTES",
         "influence": "indirect",
-        "relationship_score": 4,
-        "explanation": "Intent-Reveal"
+        "relationship_score": 3,
+        "explanation": "Adds descriptive detail via examples of interactive exhibits/activities; supports r12 but is a partial component of the overall museum description."
       },
       {
         "action_id": "11-5",
@@ -1678,8 +1679,8 @@
         "action_text": "Assistant provides Afternoon activities (North Shore, Andy Warhol Museum, Point State Park).",
         "relationship_type": "IMPLICIT_CONNECTION",
         "influence": "indirect",
-        "relationship_score": 3,
-        "explanation": "Option-Select"
+        "relationship_score": 2,
+        "explanation": "Mentions the Andy Warhol Museum as an afternoon activity in the itinerary, which motivates a later need to describe the museum but does not itself provide a description."
       }
     ]
   },

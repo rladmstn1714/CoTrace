@@ -228,25 +228,26 @@
     },
     "r12": {
       "implementation_action_ids": [
-        "13-1",
+        "13-1"
+      ],
+      "contributing_action_ids": [
         "13-2"
       ],
-      "contributing_action_ids": [],
       "revise_action_ids": [],
       "all_labels": [
         {
           "action_id": "13-1",
           "relationship": "IMPLEMENTS",
           "relationship_score": 5,
-          "explanation": "Intent-Reveal",
+          "explanation": "Directly provides a description of the museum by covering its focus, scale, and collections, substantially fulfilling r12.",
           "explanation_type": "",
           "contribution_role": "EXECUTOR"
         },
         {
           "action_id": "13-2",
-          "relationship": "IMPLEMENTS",
-          "relationship_score": 4,
-          "explanation": "Intent-Reveal",
+          "relationship": "CONTRIBUTES",
+          "relationship_score": 3,
+          "explanation": "Adds descriptive detail via examples of interactive exhibits/activities; supports r12 but is a partial component of the overall museum description.",
           "explanation_type": "",
           "contribution_role": "EXECUTOR"
         }
