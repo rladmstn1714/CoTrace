@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import type { OutcomeNode } from '$lib/types';
 	import type { ContribBarDisplay } from '$lib/contribPeerBar';
 	import { isAssistantSpeakerId } from '$lib/speakerUtils';
@@ -100,6 +101,9 @@
 	const TIMELINE_AXIS_BOTTOM_RESERVE_PX = 26;
 	const TIMELINE_AXIS_MIN_PX = 72;
 	const LIST_VIEWPORT_FALLBACK_PX = 520;
+	const COMPACT_TIMELINE_MQ = '(max-width: 700px)';
+
+	let isCompactTimeline = $state(false);
 
 	let requirementsContentEl = $state<HTMLDivElement | null>(null);
 	let requirementsListEl = $state<HTMLDivElement | null>(null);
@@ -688,9 +692,22 @@
 		return Math.max(0, list.clientHeight - pt - pb);
 	}
 
+	function contentScrollHeightPx(): number {
+		const contentEl = requirementsContentEl;
+		if (!contentEl || typeof contentEl.scrollHeight !== 'number') {
+			return LIST_VIEWPORT_FALLBACK_PX;
+		}
+		return Math.max(contentEl.scrollHeight, TIMELINE_AXIS_MIN_PX);
+	}
+
 	/** Length of the time axis stroke (turn → Y mapping uses this span only). */
 	const timelineAxisSpanPx = $derived.by(() => {
 		layoutVersion;
+		isCompactTimeline;
+		if (isCompactTimeline) {
+			const contentH = contentScrollHeightPx();
+			return Math.max(TIMELINE_AXIS_MIN_PX, contentH - TIMELINE_AXIS_BOTTOM_RESERVE_PX);
+		}
 		const port = listViewportContentHeightPx();
 		const span =
 			port - TIMELINE_AXIS_TOP_PX - TIMELINE_AXIS_BOTTOM_RESERVE_PX;
@@ -702,6 +719,10 @@
 	/** Sticky rail + axis SVG height = visible list inner height. */
 	const timelineRailHeightPx = $derived.by(() => {
 		layoutVersion;
+		isCompactTimeline;
+		if (isCompactTimeline) {
+			return TIMELINE_AXIS_TOP_PX + timelineAxisSpanPx + TIMELINE_AXIS_BOTTOM_RESERVE_PX;
+		}
 		const h = listViewportContentHeightPx();
 		return Math.max(TIMELINE_AXIS_TOP_PX + TIMELINE_AXIS_MIN_PX + TIMELINE_AXIS_BOTTOM_RESERVE_PX, h);
 	});
@@ -753,17 +774,27 @@
 			if (list) list.push(m);
 			else groups.set(k, [m]);
 		}
-		for (const m of raw) {
-			const k = timelineClusterKey(m);
-			const g = groups.get(k)!;
+		for (const [k, g] of groups) {
+			if (isCompactTimeline) {
+				for (const marker of g) {
+					const rowBasedY = Math.min(yMax, Math.max(yMin, marker.rowY));
+					marker.plotY = rowBasedY;
+					marker.markerY = rowBasedY;
+					marker.clusterKey = k;
+					marker.clusterSize = g.length;
+				}
+				continue;
+			}
 			const turnRef = g[0].turn;
 			const turnIdx = turnRef == null ? 0 : Math.max(0, Math.min(tDenom, turnRef));
 			const axisY = topPadding + (turnIdx / tDenom) * usableHeight;
 			const clamped = Math.min(yMax, Math.max(yMin, axisY));
-			m.plotY = clamped;
-			m.markerY = clamped;
-			m.clusterKey = k;
-			m.clusterSize = g.length;
+			for (const marker of g) {
+				marker.plotY = clamped;
+				marker.markerY = clamped;
+				marker.clusterKey = k;
+				marker.clusterSize = g.length;
+			}
 		}
 		return raw;
 	});
@@ -820,6 +851,10 @@
 	}
 
 	function refreshConnectorPaths() {
+		if (isCompactTimeline) {
+			connectorViewportPaths = [];
+			return;
+		}
 		const list = requirementsListEl;
 		const overlay = connectorsOverlayEl;
 		const contentEl = requirementsContentEl;
@@ -919,9 +954,27 @@
 		timelineMarkerLayouts;
 		queueMicrotask(() => refreshConnectorPaths());
 	});
+
+	onMount(() => {
+		const syncCompact = () => {
+			isCompactTimeline = window.matchMedia(COMPACT_TIMELINE_MQ).matches;
+			bumpLayout();
+		};
+		syncCompact();
+		const mq = window.matchMedia(COMPACT_TIMELINE_MQ);
+		mq.addEventListener('change', syncCompact);
+		const onViewportChange = () => bumpLayout();
+		window.visualViewport?.addEventListener('resize', onViewportChange);
+		window.addEventListener('orientationchange', onViewportChange);
+		return () => {
+			mq.removeEventListener('change', syncCompact);
+			window.visualViewport?.removeEventListener('resize', onViewportChange);
+			window.removeEventListener('orientationchange', onViewportChange);
+		};
+	});
 </script>
 
-<div class="requirements-panel">
+<div class="requirements-panel" class:requirements-panel--compact={isCompactTimeline}>
 	<h3 class="panel-header">Timeline (Num Requirements: {totalRequirements})</h3>
 
 	<!-- svelte-ignore a11y_no_static_element_interactions: hover sync to chat only -->
@@ -1148,7 +1201,10 @@
 								{:else}
 									<p class="req-version-hint req-version-hint--active">Viewing related actions (original)</p>
 								{/if}
-								<div class="req-text-card req-text-card--superseded">
+								<div
+									class="req-text-card req-text-card--original"
+									class:card-selected={isOriginalFocused}
+								>
 									{row.text}
 								</div>
 							</div>
@@ -1611,17 +1667,20 @@
 		opacity: 0.96;
 	}
 	.req-original-item.selected {
-		border-color: #f59e0b;
-		background: #fffbeb;
-		box-shadow: 0 6px 16px rgba(245, 158, 11, 0.14);
 		opacity: 1;
+		background: #eff6ff;
+		border-color: #93c5fd;
+		box-shadow: 0 8px 20px rgba(59, 130, 246, 0.12);
+	}
+	.req-original-item.selected .req-version-hint--active {
+		color: #2563eb;
 	}
 	.req-original-item--hint {
 		border-style: dashed;
 	}
 	.req-original-item--hint:hover {
-		border-color: #f59e0b;
-		background: #fffbeb;
+		border-color: #93c5fd;
+		background: #f8fafc;
 	}
 	.req-revised-item--muted {
 		opacity: 0.72;
@@ -1666,6 +1725,14 @@
 	.req-revision-front {
 		position: relative;
 		z-index: calc(var(--stack-depth, 1) + 2);
+	}
+	.req-text-card--original {
+		font-size: 0.82rem;
+		color: #64748b;
+		background: #f8fafc;
+		border-color: #cbd5e1;
+		border-style: dashed;
+		box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
 	}
 	.req-text-card--superseded {
 		font-size: 0.78rem;
@@ -1876,5 +1943,53 @@
 		font-size: 0.88rem;
 		font-weight: 700;
 		color: #334155;
+	}
+
+	@media (max-width: 700px) {
+		.requirements-panel--compact .timeline-rail-sticky-wrap {
+			position: relative;
+			top: auto;
+		}
+		.requirements-panel--compact .requirements-connectors-viewport {
+			display: none;
+		}
+		.requirements-panel--compact .timeline-rail {
+			flex: 0 0 72px;
+			width: 72px;
+			min-width: 72px;
+		}
+		.requirements-panel--compact .timeline-axis-tick {
+			display: none;
+		}
+		.requirements-panel--compact .timeline-axis-caption {
+			display: none;
+		}
+		.requirements-list {
+			overflow-x: hidden;
+			-webkit-overflow-scrolling: touch;
+		}
+		.requirements-scroll-row {
+			align-items: stretch;
+		}
+		.requirements-content {
+			min-width: 0;
+			overflow-x: hidden;
+		}
+		.req-item {
+			padding: 0.65rem 0.72rem;
+		}
+		.req-revision-stack {
+			padding-top: calc(var(--stack-depth, 1) * 4px);
+			padding-right: calc(var(--stack-depth, 1) * 4px);
+		}
+		.req-revision-layer {
+			top: calc(var(--layer-index, 0) * 4px);
+			left: calc(var(--layer-index, 0) * 4px);
+			right: calc((var(--stack-depth, 1) - 1 - var(--layer-index, 0)) * 4px);
+		}
+		.req-version-hint {
+			font-size: 0.64rem;
+			line-height: 1.35;
+		}
 	}
 </style>

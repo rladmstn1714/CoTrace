@@ -53,6 +53,8 @@
 	let hierarchyHighlightedOutcomeId = $state<string | null>(null);
 	let selectedIntentLabel = $state<string | null>(null);
 	let selectedRequirementId = $state<string | null>(null);
+	/** When a revised req is selected: null = show revised actions; earlier version id = show that version's actions. */
+	let selectedRevisionFocusVersionId = $state<string | null>(null);
 	let selectedActionId = $state<string | null>(null);
 	let focusedChatTurnId = $state<number | null>(null);
 	/** Hovered action id: sync highlight across action card, timeline marker, and chat utterance. */
@@ -94,6 +96,10 @@
 	const runGroups = $derived(buildRunGroups(runs));
 
 	const TUTORIAL_STORAGE_KEY = 'chatvis_tutorial_done';
+	const DEFAULT_RUN =
+		(typeof import.meta.env?.VITE_DEFAULT_RUN === 'string' &&
+			import.meta.env.VITE_DEFAULT_RUN.trim()) ||
+		'pittsburgh_3day_travel';
 	let tutorialOpen = $state(false);
 	let tutorialStepIndex = $state(0);
 
@@ -264,17 +270,20 @@
 
 	onMount(async () => {
 		try {
-			const res = await fetch(`${import.meta.env.BASE_URL}api/runs`);
-			const data = res.ok ? (await res.json()) as { runs: string[] } : { runs: [] };
-			runs = data.runs ?? [];
-			// Default run: VITE_DEFAULT_RUN when listed, else pittsburgh_3day_travel, else first
+			let discovered: string[] = [];
+			try {
+				const res = await fetch(`${import.meta.env.BASE_URL}api/runs`);
+				if (res.ok) {
+					const data = (await res.json()) as { runs?: string[] };
+					discovered = Array.isArray(data.runs) ? data.runs : [];
+				}
+			} catch {
+				/* static hosts may not ship api/runs */
+			}
+			// Always include DEFAULT_RUN first so stale api/runs (e.g. sample1-only) cannot win.
+			runs = [...new Set([DEFAULT_RUN, ...discovered])];
 			if (runs.length > 0 && selectedRunValue == null) {
-				const envDefault =
-					typeof import.meta.env?.VITE_DEFAULT_RUN === 'string'
-						? import.meta.env.VITE_DEFAULT_RUN.trim()
-						: '';
-				const preferred = envDefault || 'pittsburgh_3day_travel';
-				const firstRun = runs.includes(preferred) ? preferred : runs[0];
+				const firstRun = runs.includes(DEFAULT_RUN) ? DEFAULT_RUN : runs[0];
 				selectedRunValue = firstRun;
 				const run = firstRun === '__default__' ? null : firstRun;
 				selectedRun.set(run);
@@ -303,6 +312,7 @@
 		selectedRun.set(run);
 		selectedOutcomeId = null;
 		selectedRequirementId = null;
+		selectedRevisionFocusVersionId = null;
 		selectedActionId = null;
 		hoveredPanelTurnId = null;
 		error = null;
@@ -405,7 +415,12 @@
 			: null
 	);
 
-	function getRequirementStatus(reqId: string): { is_executed: boolean; is_dismissed: boolean; dismissed_at_turn: number | null } | null {
+	function getRequirementStatus(reqId: string): {
+		is_executed: boolean;
+		is_dismissed: boolean;
+		dismissed_at_turn: number | null;
+		dismissed_by_action_ids: string[];
+	} | null {
 		const exact = requirementStatusById[reqId];
 		if (exact) return exact;
 		const noPrefix = reqId.replace(/^r/, '');
@@ -421,7 +436,8 @@
 				id: reqId,
 				is_executed: st ? st.is_executed : null,
 				is_dismissed: st ? st.is_dismissed : null,
-				dismissed_at_turn: st ? st.dismissed_at_turn : null
+				dismissed_at_turn: st ? st.dismissed_at_turn : null,
+				dismissed_by_action_ids: st?.dismissed_by_action_ids ?? []
 			};
 		});
 	});
@@ -849,16 +865,40 @@
 		return actions && actions.length > 0 ? actions : null;
 	});
 
-	// Action IDs to highlight on timeline when a requirement is selected
+	// Primary = full highlight; secondary = toned down (only when viewing an earlier revision version).
+	const selectedRequirementActionFocus = $derived.by((): { primary: string[]; secondary: string[] } => {
+		if (!selectedRequirementId) return { primary: [], secondary: [] };
+		if (!selectedOutcome) return { primary: [selectedRequirementId], secondary: [] };
+		const chains = requirementChainsByOutcome.get(selectedOutcome.outcome_id) ?? [];
+		for (const chain of chains) {
+			if (chain.currentId !== selectedRequirementId || chain.history.length === 0) continue;
+			if (
+				selectedRevisionFocusVersionId != null &&
+				chain.history.some((h) => h.id === selectedRevisionFocusVersionId)
+			) {
+				return { primary: [selectedRevisionFocusVersionId], secondary: [chain.currentId] };
+			}
+			return { primary: [chain.currentId], secondary: [] };
+		}
+		return { primary: [selectedRequirementId], secondary: [] };
+	});
+
+	const primaryRequirementVersionIds = $derived(selectedRequirementActionFocus.primary);
+	const secondaryRequirementVersionIds = $derived(selectedRequirementActionFocus.secondary);
+
 	const highlightedActionIds = $derived.by((): Set<string> | null => {
-		if (!selectedRequirementId || !requirementActionMap[selectedRequirementId]) return null;
-		const entry = requirementActionMap[selectedRequirementId];
+		const reqIds = [...primaryRequirementVersionIds, ...secondaryRequirementVersionIds];
+		if (reqIds.length === 0) return null;
 		const set = new Set<string>();
-		const origin = Array.isArray(entry?.origin_actions) ? entry.origin_actions : [];
-		for (const a of origin) set.add(a.action_id);
-		const related = Array.isArray(entry?.related_actions) ? entry.related_actions : [];
-		for (const a of related) {
-			if (a && typeof a === 'object' && 'action_id' in a) set.add((a as { action_id: string }).action_id);
+		for (const reqId of reqIds) {
+			const entry = requirementActionMap[reqId];
+			if (!entry) continue;
+			const origin = Array.isArray(entry?.origin_actions) ? entry.origin_actions : [];
+			for (const a of origin) set.add(a.action_id);
+			const related = Array.isArray(entry?.related_actions) ? entry.related_actions : [];
+			for (const a of related) {
+				if (a && typeof a === 'object' && 'action_id' in a) set.add((a as { action_id: string }).action_id);
+			}
 		}
 		return set.size > 0 ? set : null;
 	});
@@ -874,35 +914,46 @@
 	}
 
 	const selectedRequirementInfluenceKinds = $derived.by(() => {
-		const entry = getRequirementActionEntryForUi(selectedRequirementId);
-		if (!entry) return { hasDirect: false, hasIndirect: false };
-		const origin = Array.isArray(entry.origin_actions) ? entry.origin_actions : [];
-		const impl = Array.isArray((entry as { implementation_actions?: unknown[] }).implementation_actions)
-			? (entry as { implementation_actions: unknown[] }).implementation_actions
-			: [];
-		const contrib = Array.isArray((entry as { contributing_actions?: unknown[] }).contributing_actions)
-			? (entry as { contributing_actions: unknown[] }).contributing_actions
-			: [];
-		const related = Array.isArray(entry.related_actions) ? entry.related_actions : [];
-		const hasIndirect = related.some((a) =>
-			!!a &&
-			typeof a === 'object' &&
-			'influence' in a &&
-			(a as { influence?: string }).influence === 'indirect'
-		);
-		const hasDirect =
-			origin.length > 0 ||
-			impl.length > 0 ||
-			contrib.length > 0 ||
-			related.some((a) =>
-				!!a &&
-				typeof a === 'object' &&
-				(('influence' in a && (a as { influence?: string }).influence === 'direct') ||
-					('relationship_type' in a &&
-						['DIRECT', 'DIRECT_CONNECTION'].includes(
-							String((a as { relationship_type?: string }).relationship_type ?? '').toUpperCase()
-						)))
-			);
+		let hasDirect = false;
+		let hasIndirect = false;
+		for (const reqId of primaryRequirementVersionIds) {
+			const entry = getRequirementActionEntryForUi(reqId);
+			if (!entry) continue;
+			const origin = Array.isArray(entry.origin_actions) ? entry.origin_actions : [];
+			const impl = Array.isArray((entry as { implementation_actions?: unknown[] }).implementation_actions)
+				? (entry as { implementation_actions: unknown[] }).implementation_actions
+				: [];
+			const contrib = Array.isArray((entry as { contributing_actions?: unknown[] }).contributing_actions)
+				? (entry as { contributing_actions: unknown[] }).contributing_actions
+				: [];
+			const related = Array.isArray(entry.related_actions) ? entry.related_actions : [];
+			if (
+				related.some((a) =>
+					!!a &&
+					typeof a === 'object' &&
+					'influence' in a &&
+					(a as { influence?: string }).influence === 'indirect'
+				)
+			) {
+				hasIndirect = true;
+			}
+			if (
+				origin.length > 0 ||
+				impl.length > 0 ||
+				contrib.length > 0 ||
+				related.some((a) =>
+					!!a &&
+					typeof a === 'object' &&
+					(('influence' in a && (a as { influence?: string }).influence === 'direct') ||
+						('relationship_type' in a &&
+							['DIRECT', 'DIRECT_CONNECTION'].includes(
+								String((a as { relationship_type?: string }).relationship_type ?? '').toUpperCase()
+							)))
+				)
+			) {
+				hasDirect = true;
+			}
+		}
 		return { hasDirect, hasIndirect };
 	});
 
@@ -940,10 +991,12 @@
 		return null;
 	});
 
-	// Turn when this requirement version was created — Earlier = ADD turn, Current = MODIFY turn.
+	// Turn when the focused requirement version was created.
 	const selectedRequirementCreationTurn = $derived.by((): number | null => {
-		if (!selectedRequirementId || !requirementRows) return null;
-		const row = requirementRows.find((r) => r.requirement_id === selectedRequirementId);
+		if (!requirementRows) return null;
+		const focusId = selectedRevisionFocusVersionId ?? selectedRequirementId;
+		if (!focusId) return null;
+		const row = requirementRows.find((r) => r.requirement_id === focusId);
 		return row ? row.t : null;
 	});
 
@@ -1017,6 +1070,7 @@
 		selectedOutcomeId = outcomeId;
 		hierarchyHighlightedOutcomeId = null;
 		selectedRequirementId = null;
+		selectedRevisionFocusVersionId = null;
 		focusedChatTurnId = null;
 		hoveredPanelTurnId = null;
 		if (tutorialOpen && tutorialSteps[tutorialStepIndex]?.id === 'click-outcome') {
@@ -1060,6 +1114,7 @@
 		selectedOutcomeId = null;
 		hierarchyHighlightedOutcomeId = null;
 		selectedRequirementId = null;
+		selectedRevisionFocusVersionId = null;
 		focusedChatTurnId = null;
 		hoveredPanelTurnId = null;
 	}
@@ -1074,9 +1129,11 @@
 	function selectRequirement(reqId: string) {
 		if (sameRequirementId(selectedRequirementId, reqId)) {
 			selectedRequirementId = null;
+			selectedRevisionFocusVersionId = null;
 			selectedActionId = null;
 		} else {
 			selectedRequirementId = reqId;
+			selectedRevisionFocusVersionId = null;
 			selectedActionId = null;
 			if (tutorialOpen && tutorialSteps[tutorialStepIndex]?.id === 'explore-reqs-timeline-chat') {
 				tutorialStepIndex += 1;
@@ -1085,6 +1142,15 @@
 		focusedChatTurnId = null;
 		hoveredPanelTurnId = null;
 	}
+
+	function focusRevisionVersion(versionId: string | null, turn?: number | null) {
+		selectedRevisionFocusVersionId = versionId;
+		selectedActionId = null;
+		if (turn != null) focusedChatTurnId = turn;
+		else focusedChatTurnId = null;
+		hoveredPanelTurnId = null;
+	}
+
 	function selectAction(actionId: string | null) {
 		selectedActionId = actionId;
 		focusedChatTurnId = null;
@@ -1201,6 +1267,7 @@
 								if (intent != null) {
 									selectedOutcomeId = null;
 									selectedRequirementId = null;
+									selectedRevisionFocusVersionId = null;
 									selectedActionId = null;
 								}
 							}}
@@ -1234,10 +1301,13 @@
 							utteranceList={utteranceList}
 							requirementCreationTurnByReqId={requirementCreationTurnByReqId}
 							requirementActionMap={requirementActionMap}
+							actionUtteranceMap={actionUtteranceMap}
 							finalTurn={tree?.final_turn ?? 0}
 							childGoalStarts={selectedOutcomeChildGoalStarts}
 							selectedRequirementId={selectedRequirementId}
+							revisionFocusVersionId={selectedRevisionFocusVersionId}
 							onRequirementClick={selectRequirement}
+							onRevisionVersionFocus={focusRevisionVersion}
 							onTurnFocus={focusChatTurn}
 							onPanelRowHover={(t) => (hoveredPanelTurnId = t)}
 							onChildGoalClick={selectOutcomeFromOutputId}
@@ -1310,6 +1380,8 @@
 					{/if}
 					<ChatLogPanel
 						requirementId={selectedRequirementId}
+						primaryRequirementVersionIds={primaryRequirementVersionIds}
+						secondaryRequirementVersionIds={secondaryRequirementVersionIds}
 						requirementCreationTurn={selectedRequirementCreationTurn}
 						focusedTurnId={focusedChatTurnId}
 						allRequirementIds={chatLinkedRequirementIds}
@@ -1674,9 +1746,18 @@
 		}
 		.three-col-grid {
 			grid-template-columns: 1fr;
+			grid-template-rows: auto minmax(240px, 36vh) minmax(280px, 42vh);
+			overflow-y: auto;
+			overflow-x: hidden;
 		}
 		.col-left {
 			grid-column: auto;
+			max-height: none;
+			min-height: 240px;
+		}
+		.col-center,
+		.col-right {
+			min-height: 0;
 		}
 	}
 </style>

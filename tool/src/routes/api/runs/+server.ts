@@ -72,5 +72,10 @@ export const GET: RequestHandler = async () => {
 		(name) => name !== 'sampledata_try_14' && !name.endsWith('/sampledata_try_14')
 	);
 
-	return json({ runs: filtered });
+	const defaultRun =
+		(typeof process !== 'undefined' && process.env?.VITE_DEFAULT_RUN?.trim()) ||
+		'pittsburgh_3day_travel';
+	const runs = [...new Set([defaultRun, ...filtered])];
+
+	return json({ runs });
 };
