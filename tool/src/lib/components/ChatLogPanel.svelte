@@ -40,6 +40,7 @@
 		secondaryRequirementVersionIds = [],
 		requirementCreationTurn = null,
 		focusedTurnId = null,
+		scrollNonce = 0,
 		allRequirementIds = [],
 		childGoalStarts = [],
 		utteranceList = null,
@@ -61,6 +62,8 @@
 		secondaryRequirementVersionIds?: string[];
 		requirementCreationTurn?: number | null;
 		focusedTurnId?: number | null;
+		/** Bumped when panel should scroll even if turn id unchanged (e.g. re-click req). */
+		scrollNonce?: number;
 		allRequirementIds?: string[];
 		childGoalStarts?: Array<{ goalId: string; goalTitle: string; turn: number }>;
 		utteranceList: UtteranceListData | null;
@@ -132,6 +135,7 @@
 	// When requirement is selected, select the "Created here" turn so chat scrolls to it (existing scroll effect handles scroll)
 	$effect(() => {
 		if (requirementId == null || requirementCreationTurn == null) return;
+		if (focusedTurnId != null) return;
 		selectedTurnIdLocal = requirementCreationTurn;
 	});
 	$effect(() => {
@@ -709,9 +713,17 @@
 		return markers;
 	});
 	function scrollToTurn(turnId: number) {
-		if (!chatListEl) return;
-		const row = chatListEl.querySelector(`[data-turn-id="${turnId}"]`);
-		if (row) row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		const attempt = (retries = 0) => {
+			const list = chatListEl;
+			if (!list) return;
+			const row = list.querySelector(`[data-turn-id="${turnId}"]`);
+			if (row) {
+				row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+				return;
+			}
+			if (retries < 4) requestAnimationFrame(() => attempt(retries + 1));
+		};
+		attempt();
 	}
 
 	/** When only outcome is selected (no requirement), do not show direct/indirect — just outcome-related actions. */
@@ -762,15 +774,15 @@
 	}
 
 	let chatListEl = $state<HTMLDivElement | null>(null);
-	// When selection changes, scroll chat so the selected message is visible
+	// When selection changes (or view mode / explicit scroll request), scroll chat to the target turn
 	$effect(() => {
-		const turn = selectedTurnId;
+		const turn = focusedTurnId ?? selectedTurnId;
 		const list = chatListEl;
+		const mode = viewMode;
+		void scrollNonce;
 		if (turn == null || !list) return;
-		tick().then(() => {
-			const row = list.querySelector(`[data-turn-id="${turn}"]`);
-			if (row) row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-		});
+		void mode;
+		tick().then(() => scrollToTurn(turn));
 	});
 
 	let overflowingTurns = $state<Set<number>>(new Set());

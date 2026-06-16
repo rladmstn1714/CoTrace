@@ -57,6 +57,7 @@
 	let selectedRevisionFocusVersionId = $state<string | null>(null);
 	let selectedActionId = $state<string | null>(null);
 	let focusedChatTurnId = $state<number | null>(null);
+	let chatScrollNonce = $state(0);
 	/** Hovered action id: sync highlight across action card, timeline marker, and chat utterance. */
 	let hoveredActionId = $state<string | null>(null);
 	let hoveredPanelTurnId = $state<number | null>(null);
@@ -1127,27 +1128,37 @@
 	}
 
 	function selectRequirement(reqId: string) {
-		if (sameRequirementId(selectedRequirementId, reqId)) {
-			selectedRequirementId = null;
-			selectedRevisionFocusVersionId = null;
-			selectedActionId = null;
-		} else {
-			selectedRequirementId = reqId;
-			selectedRevisionFocusVersionId = null;
-			selectedActionId = null;
-			if (tutorialOpen && tutorialSteps[tutorialStepIndex]?.id === 'explore-reqs-timeline-chat') {
-				tutorialStepIndex += 1;
-			}
-		}
+		if (sameRequirementId(selectedRequirementId, reqId)) return;
+		selectedRequirementId = reqId;
+		selectedRevisionFocusVersionId = null;
+		selectedActionId = null;
 		focusedChatTurnId = null;
 		hoveredPanelTurnId = null;
+		if (tutorialOpen && tutorialSteps[tutorialStepIndex]?.id === 'explore-reqs-timeline-chat') {
+			tutorialStepIndex += 1;
+		}
+	}
+
+	function deselectRequirement() {
+		if (selectedRequirementId == null) return;
+		selectedRequirementId = null;
+		selectedRevisionFocusVersionId = null;
+		selectedActionId = null;
+		focusedChatTurnId = null;
+		hoveredPanelTurnId = null;
+	}
+
+	function bumpChatScroll() {
+		chatScrollNonce += 1;
 	}
 
 	function focusRevisionVersion(versionId: string | null, turn?: number | null) {
 		selectedRevisionFocusVersionId = versionId;
 		selectedActionId = null;
-		if (turn != null) focusedChatTurnId = turn;
-		else focusedChatTurnId = null;
+		if (turn != null) {
+			focusedChatTurnId = turn;
+			bumpChatScroll();
+		} else focusedChatTurnId = null;
 		hoveredPanelTurnId = null;
 	}
 
@@ -1163,6 +1174,14 @@
 		if (turn == null) return;
 		selectedActionId = null;
 		focusedChatTurnId = turn;
+		bumpChatScroll();
+	}
+
+	function handleWindowKeydown(e: KeyboardEvent) {
+		if (e.key !== 'Escape') return;
+		if (selectedRequirementId == null) return;
+		e.preventDefault();
+		deselectRequirement();
 	}
 
 
@@ -1179,6 +1198,8 @@
 <svelte:head>
 	<title>{tree?.dialogue_id ?? 'Requirement evolution from dialogue'}</title>
 </svelte:head>
+
+<svelte:window onkeydown={handleWindowKeydown} />
 
 <div class="page">
 	{#if runsLoading}
@@ -1307,6 +1328,7 @@
 							selectedRequirementId={selectedRequirementId}
 							revisionFocusVersionId={selectedRevisionFocusVersionId}
 							onRequirementClick={selectRequirement}
+							onRequirementDeselect={deselectRequirement}
 							onRevisionVersionFocus={focusRevisionVersion}
 							onTurnFocus={focusChatTurn}
 							onPanelRowHover={(t) => (hoveredPanelTurnId = t)}
@@ -1384,6 +1406,7 @@
 						secondaryRequirementVersionIds={secondaryRequirementVersionIds}
 						requirementCreationTurn={selectedRequirementCreationTurn}
 						focusedTurnId={focusedChatTurnId}
+						scrollNonce={chatScrollNonce}
 						allRequirementIds={chatLinkedRequirementIds}
 						childGoalStarts={selectedOutcomeChildGoalStarts}
 						utteranceList={utteranceList}

@@ -5,7 +5,8 @@
 	"type": "module",
 	"scripts": {
 		"dev": "node node_modules/vite/bin/vite.js dev",
-		"build": "VITE_DATA_BASE=sample node node_modules/vite/bin/vite.js build",
+		"build": "VITE_DATA_BASE=sample VITE_DEFAULT_RUN=pittsburgh_3day_travel node node_modules/vite/bin/vite.js build && npm run postbuild:api-runs",
+		"postbuild:api-runs": "mkdir -p build/api && printf '{\"runs\":[\"pittsburgh_3day_travel\",\"sample1\"]}' > build/api/runs",
 		"preview": "node node_modules/vite/bin/vite.js preview",
 		"prepare": "node node_modules/@sveltejs/kit/svelte-kit.js sync || echo ''",
 		"check": "node node_modules/@sveltejs/kit/svelte-kit.js sync && node node_modules/svelte-check/bin/svelte-check --tsconfig ./tsconfig.json",

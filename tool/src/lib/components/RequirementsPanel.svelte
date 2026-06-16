@@ -59,6 +59,7 @@
 		selectedRequirementId = null,
 		revisionFocusVersionId = null,
 		onRequirementClick,
+		onRequirementDeselect,
 		onRevisionVersionFocus,
 		onChildGoalClick,
 		onTurnFocus,
@@ -86,6 +87,7 @@
 		/** Earlier version id when user is viewing original requirement actions. */
 		revisionFocusVersionId?: string | null;
 		onRequirementClick?: (reqId: string) => void;
+		onRequirementDeselect?: () => void;
 		onRevisionVersionFocus?: (versionId: string | null, turn?: number | null) => void;
 		onChildGoalClick?: (goalId: string) => void;
 		onTurnFocus?: (turn: number | null) => void;
@@ -903,8 +905,9 @@
 		};
 	}
 
-	function focusTurnFromPanel(turn: number | null, reqId?: string) {
-		if (reqId && !requirementIdsEqual(selectedRequirementId, reqId)) onRequirementClick?.(reqId);
+	function focusTurnFromPanel(turn: number | null, reqId?: string, opts?: { clearRequirement?: boolean }) {
+		if (opts?.clearRequirement) onRequirementDeselect?.();
+		else if (reqId && !requirementIdsEqual(selectedRequirementId, reqId)) onRequirementClick?.(reqId);
 		onTurnFocus?.(turn);
 	}
 
@@ -1086,7 +1089,7 @@
 							class="req-item outcome-started req-plain-button"
 							class:dimmed={selectedRequirementId != null}
 							use:trackRequirementRow={{ key: 'outcome-start' }}
-							onclick={() => focusTurnFromPanel(outcomeStartTurn)}
+							onclick={() => focusTurnFromPanel(outcomeStartTurn, undefined, { clearRequirement: true })}
 						>
 							<div class="req-content">
 								<div class="req-label-row">
@@ -1200,6 +1203,7 @@
 									<p class="req-version-hint">Click to view related actions (original)</p>
 								{:else}
 									<p class="req-version-hint req-version-hint--active">Viewing related actions (original)</p>
+									<p class="req-interaction-hint">Click again to scroll to related chat · Esc to clear</p>
 								{/if}
 								<div
 									class="req-text-card req-text-card--original"
@@ -1241,8 +1245,12 @@
 									onRevisionVersionFocus?.(null, turn);
 									return;
 								}
-								if (!wasSelected) onTurnFocus?.(turn);
+								if (wasSelected) {
+									onTurnFocus?.(turn);
+									return;
+								}
 								onRequirementClick?.(reqId);
+								onTurnFocus?.(turn);
 							}}
 						>
 							<div class="req-content">
@@ -1264,6 +1272,9 @@
 									<p class="req-version-hint req-version-hint--active">Viewing related actions (revised)</p>
 								{:else if isSelected && revisionFocusVersionId != null}
 									<p class="req-version-hint">Click to view related actions (revised)</p>
+								{/if}
+								{#if isSelected}
+									<p class="req-interaction-hint">Click again to scroll to related chat · Esc to clear</p>
 								{/if}
 								{#if hasRevisionStack && !isSelected}
 									<div
@@ -1698,6 +1709,13 @@
 	}
 	.req-version-hint--active {
 		color: #92400e;
+	}
+	.req-interaction-hint {
+		margin: 0.1rem 0 0;
+		font-size: 0.62rem;
+		font-weight: 500;
+		color: #94a3b8;
+		letter-spacing: 0.01em;
 	}
 	.req-clickable.req-has-revision {
 		border-color: #fde68a;

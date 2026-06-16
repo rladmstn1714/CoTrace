@@ -2133,15 +2133,6 @@
         "explanation": "CONTRIBUTES — extends Craig St exploration time, reinforcing Day 3 as a CMU/Craig St exploration day."
       },
       {
-        "action_id": "0-1",
-        "role": "SHAPER",
-        "action_text": "User states they are planning to visit Pittsburgh for 3 days.",
-        "relationship_type": "IMPLICIT_CONNECTION",
-        "influence": "indirect",
-        "relationship_score": 2,
-        "explanation": "Intent-Reveal — establishes a 3-day trip-planning frame, creating the need for later day-specific requirements (including Day 3)."
-      },
-      {
         "action_id": "19-6",
         "role": "EXECUTOR",
         "action_text": "Assistant provides a 12:30 lunch recommendation at Everyday Noodles (link included)",
@@ -2239,24 +2230,6 @@
         "influence": "indirect",
         "relationship_score": 2,
         "explanation": "Preference-Accumulate — dinner recommendation to complete the Day 3 schedule; secondary to the CMU exploration requirement."
-      },
-      {
-        "action_id": "1-4",
-        "role": "EXECUTOR",
-        "action_text": "Assistant provides a Day 1 plan centered on Oakland and the University of Pittsburgh campus.",
-        "relationship_type": "IMPLICIT_CONNECTION",
-        "influence": "indirect",
-        "relationship_score": 1,
-        "explanation": "Preference-Accumulate — builds the pattern of day-by-day, area-focused itineraries, indirectly setting up how Day 3 will later be scoped (e.g., a campus-area day)."
-      },
-      {
-        "action_id": "10-1",
-        "role": "SHAPER",
-        "action_text": "User asks the assistant to begin planning Day 2.",
-        "relationship_type": "IMPLICIT_CONNECTION",
-        "influence": "indirect",
-        "relationship_score": 1,
-        "explanation": "Preference-Accumulate — continues establishing separate day plans (Day 2), indirectly leaving Day 3 to be defined later."
       },
       {
         "action_id": "19-7",
