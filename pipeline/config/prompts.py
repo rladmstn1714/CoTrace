@@ -1,5 +1,7 @@
 """
-LLM Prompts 
+CoTrace LLM prompts — current version.
+Prompt version: v0.2.0
+Paper reproduction: use prompts_paper_v1.py (v0.1.0)
 """
 
 # =============================================================================
@@ -341,18 +343,26 @@ For EVERY entry in both sections, label the relationship to the requirement.
 - 4-5 for DIRECT_CONNECTION or IMPLEMENTS (4=explicit, 5=state mutation / full fulfillment)
 - null for NO_CONNECTION
 
-**explanation_type**:concise explanation for the relationship type, could be one of the following:
-Feedback-Adopt | prior feedback, suggestion, or criticism is taken up and turned into a request
+**explanation_type**: a concise explanation of how the requirement was influenced by the prior action. Use the following taxonomy as guidance, not as a closed set. The explanation should reflect the actual actions and content of the conversation rather than merely repeat the descriptions below.
 
-Option-Select | one option is chosen from alternatives offered earlier
-
-Preference-Accumulate | repeated preferences build up and continue shaping the current request
-
-Failure-Triggered-Requirement-Add | a new requirement is added after a prior attempt turns out unsatisfactory or misaligned
-
-Preference-Realize | the user realizes a previously unstated preference after seeing an odd or unsatisfying output
-
-Intent-Reveal | an implicit intention becomes explicit as a request
+UNDERSPECIFIED INTENT / PREFERENCE
+Goal-Concretization | a prior broad goal later leads the Creator to formulate a more concrete requirement
+Preference-Explication | a prior implicit preference is later recognized and expressed as an explicit requirement
+ARTIFACT-TRIGGERED ELABORATION
+Artifact-Triggered-Refinement | a prior artifact later prompts the Creator to add a refinement or missing requirement
+Context-Grounded-Requirement | prior context, code, data, or situational information later grounds a new requirement
+Plan-Driven-Proceduralization | a prior plan or workflow later leads to a procedural or next-step requirement
+PROBLEM-TRIGGERED REVISION
+Problem-Triggered-Correction | a prior failure, mismatch, or reported issue later leads to a corrective requirement
+Complexity-Triggered-Simplification | prior complexity, burden, or ambiguity later leads to a simpler or narrower requirement
+INTERACTIONAL STEERING
+Option-Selection | prior alternatives are later resolved by selecting one option as the requirement
+Recommendation-Driven-Strategy | a prior request for guidance later leads to a strategy, priority, or decision requirement
+Extension-Driven-Next-Step | a prior invitation to continue later leads to a concrete next-step requirement
+Implementation-Triggered-Setup | a prior implementation request later leads to added setup, execution, or usage requirements
+TEMPORAL AND DIAGNOSTIC DYNAMICS
+Incremental-Accumulation | prior preferences, constraints, or decisions accumulate across turns and later shape the requirement
+Hypothesis-And-Diagnosis | a prior causal hypothesis later leads to validation, testing, or diagnostic requirements
 
 **contribution_role**: SHAPER | EXECUTOR | OTHER
 
@@ -495,10 +505,7 @@ Respond ONLY with a JSON object (no additional text):
   "deliverable_type": "code | plan | itinerary | document | list | other | null",
   "source_turn_ids": [<list of integer turn_ids where the deliverable appears>]
 }}
-"""
-
-
-REQUIREMENT_DELIVERABLE_EVALUATION_PROMPT = """You are evaluating whether a set of requirements are reflected/satisfied in a final deliverable.
+"""REQUIREMENT_DELIVERABLE_EVALUATION_PROMPT = """You are evaluating whether a set of requirements are reflected/satisfied in a final deliverable.
 
 DELIVERABLE:
 {deliverable_text}
