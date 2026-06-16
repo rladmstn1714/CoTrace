@@ -33,6 +33,21 @@
 		return 'EXECUTOR';
 	}
 
+	/** Goal-level origin actions in outcome_action_map (SHAPER / CREATOR / OTHER). */
+	function isGoalOriginOamRole(role: string | undefined): boolean {
+		const r = (role ?? '').toUpperCase();
+		return r === 'SHAPER' || r === 'CREATOR' || r === 'OTHER';
+	}
+
+	function oamActionsForOutcome(outcomeId: string) {
+		const oamEntry = outcomeActionMap?.outcome_action_map?.[outcomeId];
+		return (
+			oamEntry?.actions?.filter(
+				(a) => !a.bound_outcome_id || a.bound_outcome_id === outcomeId
+			) ?? []
+		);
+	}
+
 	let {
 		outcomes = [],
 		outputVersions = [],
@@ -409,33 +424,56 @@ function baseOutcomeId(outputId: string): string {
 			for (const reqId of outcome.requirements) {
 				const entry = requirementActionMap[reqId];
 				if (!entry) continue;
-				const add = (a: OriginAction, direct: boolean) => {
+				const add = (a: OriginAction, role: string, direct: boolean) => {
 					const turn_id = getTurnIdFromActionId(a.action_id);
-					mergeReqAction(a.action_id, turn_id, a.role, direct);
+					mergeReqAction(a.action_id, turn_id, role, direct);
 				};
 				const origin = Array.isArray(entry.origin_actions) ? entry.origin_actions : [];
-				const contrib = Array.isArray((entry as { contributing_actions?: OriginAction[] }).contributing_actions) ? (entry as { contributing_actions: OriginAction[] }).contributing_actions : [];
 				const impl = Array.isArray((entry as { implementation_actions?: OriginAction[] }).implementation_actions) ? (entry as { implementation_actions: OriginAction[] }).implementation_actions : [];
-				for (const a of origin) add(a, true);
-				/* Count contributing_actions in the timeline too: execution is often only here while
-				 * `is_executed` is true; excluding them left Executor empty. */
-				for (const a of contrib) add(a, true);
-				for (const a of impl) add(a, true);
+				const related = Array.isArray((entry as { related_actions?: Array<OriginAction & { influence?: string }> }).related_actions)
+					? (entry as { related_actions: Array<OriginAction & { influence?: string }> }).related_actions
+					: [];
+				// Requirement-creating actions count as Shaper on the mini timeline (even when role is OTHER).
+				for (const a of origin) add(a, 'SHAPER', true);
+				for (const a of related) {
+					if (normalizeRole(a.role) !== 'SHAPER') continue;
+					add(a, 'SHAPER', a.influence !== 'indirect');
+				}
+				// Executor chart: implementation_actions only (per requirement_action_map.json).
+				for (const a of impl) add(a, 'EXECUTOR', true);
 			}
-			const oamEntry = outcomeActionMap?.outcome_action_map?.[outcome.outcome_id];
-			const oamActions =
-				oamEntry?.actions?.filter((a) => !a.bound_outcome_id || a.bound_outcome_id === outcome.outcome_id) ?? [];
-			for (const a of oamActions) {
+			// Goal-level origin actions from outcome_action_map (Shaper only; never Executor here).
+			for (const a of oamActionsForOutcome(outcome.outcome_id)) {
+				if (!isGoalOriginOamRole(a.role)) continue;
 				const turn_id = a.turn_id ?? getTurnIdFromActionId(a.action_id);
-				byActionId.set(a.action_id, { turn_id, role: normalizeRole(a.role), direct: true });
+				mergeReqAction(a.action_id, turn_id, 'SHAPER', true);
+			}
+			if (outcome.requirements.length === 0) {
+				for (const a of oamActionsForOutcome(outcome.outcome_id)) {
+					if (isGoalOriginOamRole(a.role)) continue;
+					const turn_id = a.turn_id ?? getTurnIdFromActionId(a.action_id);
+					mergeReqAction(a.action_id, turn_id, 'EXECUTOR', true);
+				}
 			}
 			const points: { turn_id: number; role: string; direct: boolean }[] = [];
 			for (const p of byActionId.values()) {
 				points.push({ turn_id: p.turn_id, role: p.role, direct: p.direct });
 			}
 			const createdTurn = outcome.created_at ?? 0;
-			const hasShaperActions = points.some(p => p.role === 'SHAPER');
-			if (hasShaperActions && createdTurn >= 0 && createdTurn <= maxTurn) points.push({ turn_id: createdTurn, role: 'SHAPER', direct: true });
+			// Ensure each requirement's creation turn appears on the Shaper chart.
+			const shaperTurns = new Set(points.filter((p) => p.role === 'SHAPER').map((p) => p.turn_id));
+			for (const reqId of outcome.requirements) {
+				const entry = requirementActionMap[reqId];
+				const origin = Array.isArray(entry?.origin_actions) ? entry.origin_actions : [];
+				const t =
+					origin.length > 0
+						? getTurnIdFromActionId(origin[0].action_id)
+						: createdTurn;
+				if (t >= 0 && t <= maxTurn && !shaperTurns.has(t)) {
+					points.push({ turn_id: t, role: 'SHAPER', direct: true });
+					shaperTurns.add(t);
+				}
+			}
 
 			const speakerMap = new Map<number, string>();
 			for (const u of utteranceList?.utterances ?? []) speakerMap.set(u.turn_id, u.speaker);
@@ -859,18 +897,14 @@ const outputVersionTurnsByOutcomeId = $derived.by(() => {
 						const entry = requirementActionMap[reqId] as
 							| {
 									origin_actions?: ActionLite[];
-									contributing_actions?: ActionLite[];
 									implementation_actions?: ActionLite[];
-									related_actions?: Array<
-										ActionLite & { relationship_type?: string; influence?: string }
-									>;
 							  }
 							| undefined;
 						const origin = Array.isArray(entry?.origin_actions) ? entry.origin_actions : [];
 						for (const a of origin) {
 							if (!a?.action_id || seen.has(a.action_id)) continue;
 							seen.add(a.action_id);
-							actions.push({ ...a, influence: 'direct' });
+							actions.push({ ...a, role: 'SHAPER', influence: 'direct' });
 						}
 						const impl = Array.isArray(entry?.implementation_actions)
 							? entry.implementation_actions
@@ -878,29 +912,20 @@ const outputVersionTurnsByOutcomeId = $derived.by(() => {
 						for (const a of impl) {
 							if (!a?.action_id || seen.has(a.action_id)) continue;
 							seen.add(a.action_id);
-							actions.push({ ...a, influence: 'direct' });
+							actions.push({ ...a, role: 'EXECUTOR', influence: 'direct' });
 						}
-					const contrib = Array.isArray(entry?.contributing_actions)
-						? entry.contributing_actions
-						: [];
-					for (const a of contrib) {
+					}
+					for (const a of oamActionsForOutcome(outcome.outcome_id)) {
+						if (!isGoalOriginOamRole(a.role)) continue;
 						if (!a?.action_id || seen.has(a.action_id)) continue;
 						seen.add(a.action_id);
-						actions.push({ ...a, influence: 'direct' });
-					}
-						const related = Array.isArray(entry?.related_actions) ? entry.related_actions : [];
-						for (const a of related) {
-							if (!a?.action_id || seen.has(a.action_id)) continue;
-							seen.add(a.action_id);
-							const rel = (a.relationship_type ?? '').toUpperCase();
-							const infl =
-								a.influence === 'direct' ||
-								rel === 'DIRECT_CONNECTION' ||
-								rel === 'DIRECT'
-									? 'direct'
-									: 'indirect';
-							actions.push({ ...a, influence: infl });
-						}
+						actions.push({
+							action_id: a.action_id,
+							turn_id: a.turn_id,
+							speaker: a.speaker,
+							role: 'SHAPER',
+							influence: 'direct'
+						});
 					}
 				}
 				const turns = actions.map((a) => {
