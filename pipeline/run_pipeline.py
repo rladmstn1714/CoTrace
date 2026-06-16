@@ -27,6 +27,9 @@ from pathlib import Path
 from collections import defaultdict
 from typing import Optional
 
+sys.path.insert(0, str(Path(__file__).parent))
+from utils.helpers import is_influence_action_after_req_origin, is_preceding_turn_for_req
+
 def sanitize_folder_name(name: str) -> str:
     s = (name or "").strip()
     if not s:
@@ -570,6 +573,7 @@ def _merge_step2c_into_related(req_id: str, step1: dict, step2c: dict, action_lo
     if not step2c:
         return
     req = step1.get("requirements", {}).get(req_id) or {}
+    origin_turn = req.get("origin_turn_id", req.get("created_at", 0))
     origin_ids = {_norm_action_id(a) for a in _req_origin_action_ids(req) if _norm_action_id(a)}
     existing = {r["action_id"] for r in req_to_related.get(req_id, [])}
     fwd = (step2c.get("forward_labels") or {}).get(req_id) or {}
@@ -579,6 +583,10 @@ def _merge_step2c_into_related(req_id: str, step1: dict, step2c: dict, action_lo
             continue
         aid = _norm_action_id(lbl.get("action_id") or "")
         if not aid or aid in origin_ids or aid in existing:
+            continue
+        if rel in ("DIRECT_CONNECTION", "IMPLICIT_CONNECTION") and is_influence_action_after_req_origin(
+            aid, origin_turn, action_lookup
+        ):
             continue
         existing.add(aid)
         info = action_lookup.get(aid, {})
@@ -606,6 +614,10 @@ def to_requirement_action_map(step1: dict, step3: dict, step05: dict, step2c: di
         req_id = pair.get("req_id")
         if not req_id:
             continue
+        req = step1.get("requirements", {}).get(req_id) or {}
+        origin_turn = pair.get("origin_turn_id", req.get("origin_turn_id", req.get("created_at", 0)))
+        if not is_preceding_turn_for_req(pair.get("prev_turn_id", origin_turn), origin_turn):
+            continue
         origin_ids = set()
         for r in step1.get("requirements", {}).values():
             if r.get("req_id") == req_id:
@@ -616,6 +628,11 @@ def to_requirement_action_map(step1: dict, step3: dict, step05: dict, step2c: di
                 continue
             aid = _norm_action_id(ar.get("action_id") or "")
             if not aid or aid in origin_ids:
+                continue
+            rel_type = ar.get("relationship_type", "NO_CONNECTION")
+            if rel_type in ("DIRECT_CONNECTION", "IMPLICIT_CONNECTION") and is_influence_action_after_req_origin(
+                aid, origin_turn, action_lookup
+            ):
                 continue
             info = action_lookup.get(aid, {})
             role = (ar.get("contribution_role") or info.get("role") or "OTHER").strip() or "OTHER"
@@ -731,8 +748,11 @@ def convert_and_save(run_dir: Path, output_dir: Path):
               {"dialogue_id": dialogue_id, "requirements": to_requirement_status(step1)})
 
     step05b_path = run_dir / "step05b_output.json"
+    intent_out_path = output_dir / "intent_outcome_map.json"
     if step05b_path.exists():
-        save_json(output_dir / "intent_outcome_map.json", load_json(step05b_path))
+        save_json(intent_out_path, load_json(step05b_path))
+    elif intent_out_path.exists():
+        intent_out_path.unlink()
 
     print(f"Parsed outputs written to {output_dir}")
 
@@ -804,9 +824,6 @@ def normalize_dialogue(data: dict) -> dict:
         if data.get("metadata") is not None:
             out["metadata"] = data["metadata"]
         return out
-
-    # CoGym / _converted_event_log.json: event_log rows → hybrid turns (same as run_pipeline_sharechat).
-    # Without this, run_step1 sees len(turns)==0 → no actions → empty step1b/1c (outcomes & requirements).
     ev = data.get("event_log")
     if isinstance(ev, list) and ev:
         from utils.cogym_hybrid_turns import build_hybrid_dialogue_from_event_log
@@ -830,7 +847,8 @@ def count_turns(input_file: Path) -> int:
 def run_pipeline(input_file: Path, run_dir: Path, model: str = "gpt-5.2",
                  turn_block_size: int = 4, provider: str = None,
                  step2b_req_batch_size: int = 1, stop_at: str = None,
-                 action_model: str = None, action_provider: str = None):
+                 action_model: str = None, action_provider: str = None,
+                 with_intentions: bool = False):
     """Run full pipeline. stop_at: action_extraction (1a only), step1 (outcomes+requirements, no step2/3)."""
     run_dir.mkdir(parents=True, exist_ok=True)
 
@@ -860,6 +878,7 @@ def run_pipeline(input_file: Path, run_dir: Path, model: str = "gpt-5.2",
             model=model, turn_block_size=turn_block_size, provider=provider,
             step2b_req_batch_size=step2b_req_batch_size,
             action_model=action_model, action_provider=action_provider,
+            with_intentions=with_intentions,
         )
 
 
@@ -884,6 +903,11 @@ def main():
     ap.add_argument("--turn_block_size", "-b", type=int, default=4, help="Turns per block")
     ap.add_argument("--step2b_req_batch_size", type=int, default=1,
                     help="Step 2b (Req–action influence labeling): requirements per LLM call; default 1 = one call per requirement")
+    ap.add_argument(
+        "--with-intentions",
+        action="store_true",
+        help="Run Step 1b intention extraction (1 LLM call). Off by default.",
+    )
     ap.add_argument(
         "--stop_at",
         choices=("action_extraction", "step1"),
@@ -971,6 +995,7 @@ def main():
         if args.max_turns > 0:
             print(f"Excluding files with > {args.max_turns} turns")
         stop_at = getattr(args, "stop_at", None)
+        with_intentions = getattr(args, "with_intentions", False)
         for f in files:
             if args.max_turns > 0:
                 try:
@@ -993,7 +1018,8 @@ def main():
                 run_pipeline(f, rd, model=args.model, turn_block_size=args.turn_block_size,
                              provider=args.provider, step2b_req_batch_size=args.step2b_req_batch_size,
                              stop_at=stop_at,
-                             action_model=args.action_model, action_provider=args.action_provider)
+                             action_model=args.action_model, action_provider=args.action_provider,
+                             with_intentions=with_intentions)
                 if stop_at == "step1":
                     convert_and_save_requirements_only(rd, od)
                 elif not stop_at:
@@ -1035,10 +1061,12 @@ def main():
         ap.error(f"Input file not found: {input_file}")
 
     stop_at = getattr(args, "stop_at", None)
+    with_intentions = getattr(args, "with_intentions", False)
     run_pipeline(input_file, run_dir, model=args.model,
                  turn_block_size=args.turn_block_size, provider=args.provider,
                  step2b_req_batch_size=args.step2b_req_batch_size, stop_at=stop_at,
-                 action_model=args.action_model, action_provider=args.action_provider)
+                 action_model=args.action_model, action_provider=args.action_provider,
+                 with_intentions=with_intentions)
     if stop_at == "step1":
         convert_and_save_requirements_only(run_dir, output_dir)
     elif not stop_at:

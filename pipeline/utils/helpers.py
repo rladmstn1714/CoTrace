@@ -51,7 +51,40 @@ def compute_cosine_similarity(vec1: np.ndarray, vec2: np.ndarray) -> float:
     return float(dot_product / (norm1 * norm2))
 
 
-def format_turn_context(turns: List[Dict], start_idx: int = 0, end_idx: Optional[int] = None, 
+def norm_action_id(aid: str) -> str:
+    """Normalize action_id: strip brackets so \"[0-1]\" and \"0-1\" match."""
+    if not isinstance(aid, str) or not aid:
+        return aid or ""
+    return aid.strip().strip("[]").strip()
+
+
+def turn_id_from_action_id(action_id: str, action_lookup: Optional[Dict[str, Dict]] = None) -> int:
+    """Resolve turn_id from action lookup or action_id prefix (e.g. 19-7 → 19)."""
+    aid = norm_action_id(action_id)
+    if action_lookup and aid in action_lookup:
+        return int(action_lookup[aid].get("turn_id", 0))
+    if not aid:
+        return 0
+    head = aid.split("-", 1)[0]
+    try:
+        return int(head)
+    except ValueError:
+        return 0
+
+
+def is_preceding_turn_for_req(prev_turn_id: int, origin_turn_id: int) -> bool:
+    """True when prev_turn_id is strictly before the requirement origin turn."""
+    return prev_turn_id < origin_turn_id
+
+
+def is_influence_action_after_req_origin(
+    action_id: str, origin_turn_id: int, action_lookup: Optional[Dict[str, Dict]] = None,
+) -> bool:
+    """True when action occurs after the requirement was created (exclude from indirect/direct)."""
+    return turn_id_from_action_id(action_id, action_lookup) > origin_turn_id
+
+
+def format_turn_context(turns: List[Dict], start_idx: int = 0, end_idx: Optional[int] = None,
                         max_turns: int = 10) -> str:
     """
     Format dialogue turns for LLM context.

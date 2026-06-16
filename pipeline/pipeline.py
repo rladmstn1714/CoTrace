@@ -5,7 +5,7 @@ pipeline logic
 Architecture :
   Step 0:  Normalize input                       (no LLM)
   Step 1:  Unified block extraction               (1 LLM call per block → outcomes + actions + req ops)
-  Step 1b: Intention extraction                   (1 LLM call total)
+  Step 1b: Intention extraction (optional)        (1 LLM call total when enabled)
   Step 2a: Embedding-based pair selection          (no LLM)
   Step 2b: Batch relationship labeling             (1 LLM call per outcome, not per pair)
   Step 3:  Contribution analysis                   (no LLM)
@@ -48,7 +48,15 @@ except ImportError:
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from utils.helpers import save_json, parse_llm_json_response, format_turn_context, format_turn_context_for_indices
+from utils.helpers import (
+    save_json,
+    parse_llm_json_response,
+    format_turn_context,
+    format_turn_context_for_indices,
+    turn_id_from_action_id,
+    is_preceding_turn_for_req,
+    is_influence_action_after_req_origin,
+)
 from utils.dialogue_loader import load_dialogues
 from config.prompts import (
     BLOCK_ACTION_EXTRACTION_PROMPT,
@@ -252,6 +260,43 @@ def _norm_action_id(aid: str) -> str:
     if not isinstance(aid, str) or not aid:
         return aid or ""
     return aid.strip().strip("[]").strip()
+
+
+def _filter_prev_turn_actions(actions: list, origin_turn_id: int, action_lookup: dict) -> list:
+    """Drop actions that occur after the requirement origin turn."""
+    out = []
+    for a in actions or []:
+        aid = a.get("action_id", "")
+        if is_influence_action_after_req_origin(aid, origin_turn_id, action_lookup):
+            continue
+        out.append(a)
+    return out
+
+
+def _sanitize_preceding_pair(p: dict, origin_turn_id: int, action_lookup: dict) -> Optional[dict]:
+    """Return a preceding pair suitable for indirect/direct labeling, or None if excluded."""
+    prev_turn_id = p.get("prev_turn_id", 0)
+    if not is_preceding_turn_for_req(prev_turn_id, origin_turn_id):
+        return None
+    lp = p.copy()
+    lp["prev_turn_actions"] = _filter_prev_turn_actions(
+        lp.get("prev_turn_actions", []), origin_turn_id, action_lookup
+    )
+    return lp
+
+
+def _filter_labeled_influence_actions(action_rels: list, origin_turn_id: int, action_lookup: dict) -> list:
+    """Remove direct/indirect labels on actions after requirement origin."""
+    out = []
+    for ar in action_rels or []:
+        rel = ar.get("relationship_type", "NO_CONNECTION")
+        aid = ar.get("action_id", "")
+        if rel in ("DIRECT_CONNECTION", "IMPLICIT_CONNECTION") and is_influence_action_after_req_origin(
+            aid, origin_turn_id, action_lookup
+        ):
+            continue
+        out.append(ar)
+    return out
 
 
 # Step 3: geometric decay on the influential-action chain (req origin excluded).
@@ -1118,9 +1163,26 @@ def _build_step1_input(step05_output, step1_output, dialogue_id, output_dir):
 # Step 1b: Intention Extraction
 # =============================================================================
 
-def run_step1b(step05_output: dict, output_dir: str, client: LoggedLLMClient, model: str) -> dict:
-    """Extract intentions from outcomes (1 LLM call)."""
+def run_step1b(
+    step05_output: dict,
+    output_dir: str,
+    client: LoggedLLMClient,
+    model: str,
+    with_intentions: bool = False,
+) -> dict:
+    """Extract intentions from outcomes (1 LLM call) when with_intentions=True."""
     step05b_file = os.path.join(output_dir, "step05b_output.json")
+    empty = {
+        "dialogue_id": step05_output.get("dialogue_id", ""),
+        "intentions": [],
+        "outcome_to_intention": {},
+    }
+    if not with_intentions:
+        print("  Step 1b: Intention extraction skipped (use --with-intentions to enable)")
+        if os.path.exists(step05b_file):
+            os.remove(step05b_file)
+        return empty
+
     if os.path.exists(step05b_file):
         print("  Step 1b: Loading cached intentions...")
         with open(step05b_file) as f:
@@ -1359,6 +1421,8 @@ def compute_similarity_pairs(
             ctid = ca.get("turn_id", 0)
             if ctid == origin_turn_id:
                 continue
+            if not is_preceding_turn_for_req(ctid, origin_turn_id):
+                continue
             key = (req_id, origin_turn_id, ctid)
             if key not in pair_map:
                 ct = turns[ctid] if 0 <= ctid < len(turns) else None
@@ -1392,6 +1456,8 @@ def compute_similarity_pairs(
                 continue
             ptid = related_req.get("origin_turn_id", -1)
             if 0 <= ptid < len(turns) and ptid != origin_turn_id:
+                if not is_preceding_turn_for_req(ptid, origin_turn_id):
+                    continue
                 key = (req_id, origin_turn_id, ptid)
                 if key not in pair_map:
                     pt = turns[ptid]
@@ -1501,8 +1567,14 @@ def label_actions_for_requirement(
     preceding_pairs: list, subsequent_actions: list,
     req_id: str, req_text: str, req_origin_turn: int,
     outcome_desc: str, client: LoggedLLMClient, model: str,
+    action_lookup: dict | None = None,
 ) -> Tuple[list, list]:
     """Label both preceding (backward) and subsequent (forward) actions for one requirement."""
+    action_lookup = action_lookup or {}
+    preceding_pairs = [
+        sp for p in preceding_pairs
+        if (sp := _sanitize_preceding_pair(p, req_origin_turn, action_lookup)) is not None
+    ]
     preceding_block = _format_preceding_block(preceding_pairs)
     subsequent_block = _format_subsequent_block(subsequent_actions)
 
@@ -1553,14 +1625,19 @@ def label_actions_for_requirement(
         lp["relationship_score"] = rel_score
         lp["explanation"] = explanation
         lp["explanation_type"] = explanation_type
-        lp["action_relationships"] = [{
+        lp["action_relationships"] = _filter_labeled_influence_actions([{
             "action_id": action_id,
             "relationship_type": rel_type,
             "relationship_score": rel_score,
             "explanation": explanation,
             "explanation_type": explanation_type,
             "contribution_role": contrib_role,
-        }]
+        }], req_origin_turn, action_lookup)
+        if not lp["action_relationships"]:
+            lp["relationship_type"] = "NO_CONNECTION"
+            lp["relationship_score"] = None
+            lp["explanation"] = ""
+            lp["explanation_type"] = ""
         labeled_pairs.append(lp)
 
     # --- Process subsequent labels → forward results ---
@@ -1604,11 +1681,21 @@ SECTION B: SUBSEQUENT ACTIONS ({subs_count} entries)
 
 def label_actions_for_requirement_batch(
     batch_items: list, client: LoggedLLMClient, model: str,
+    action_lookup: dict | None = None,
 ) -> Tuple[list, dict]:
     """
     batch_items: list of (rid, req_text, origin_turn, outcome_desc, llm_pairs, subsequent_actions).
     Returns (all_labeled_pairs, forward_labels_by_rid).
     """
+    action_lookup = action_lookup or {}
+    sanitized_batch = []
+    for (rid, req_text, origin_turn, outcome_desc, llm_pairs, subsequent_actions) in batch_items:
+        filtered_pairs = [
+            sp for p in llm_pairs
+            if (sp := _sanitize_preceding_pair(p, origin_turn, action_lookup)) is not None
+        ]
+        sanitized_batch.append((rid, req_text, origin_turn, outcome_desc, filtered_pairs, subsequent_actions))
+    batch_items = sanitized_batch
     blocks = []
     for (rid, req_text, origin_turn, outcome_desc, llm_pairs, subsequent_actions) in batch_items:
         preceding_block = _format_preceding_block(llm_pairs)
@@ -1662,14 +1749,19 @@ def label_actions_for_requirement_batch(
             lp["explanation_type"] = lbl.get("explanation_type", "")
             contrib_role = _normalize_role(lbl.get("contribution_role", "OTHER"))
             action_id = _norm_action_id(lbl.get("action_id", ""))
-            lp["action_relationships"] = [{
+            lp["action_relationships"] = _filter_labeled_influence_actions([{
                 "action_id": action_id,
                 "relationship_type": rel_type,
                 "relationship_score": lbl.get("relationship_score"),
                 "explanation": lbl.get("explanation", ""),
                 "explanation_type": lbl.get("explanation_type", ""),
                 "contribution_role": contrib_role,
-            }]
+            }], origin_turn, action_lookup)
+            if not lp["action_relationships"]:
+                lp["relationship_type"] = "NO_CONNECTION"
+                lp["relationship_score"] = None
+                lp["explanation"] = ""
+                lp["explanation_type"] = ""
             labeled_pairs.append(lp)
         all_labeled.extend(labeled_pairs)
 
@@ -1738,6 +1830,7 @@ def run_step2b(
 
     requirements_dict = step1_output.get("requirements", {})
     all_actions = step05_output.get("all_actions", [])
+    action_lookup = {a.get("action_id"): a for a in all_actions if a.get("action_id")}
     outcomes = step1_input.get("outcomes", [])
     outcomes_by_id = {o.get("outcome_id"): o for o in outcomes}
 
@@ -1777,9 +1870,13 @@ def run_step2b(
         llm_pairs = []
         for p in req_pairs:
             if "related_to" in (p.get("sources") or []):
+                if not is_preceding_turn_for_req(p.get("prev_turn_id", 0), origin_turn):
+                    continue
                 lp = p.copy()
                 origin_acts = p.get("origin_turn_actions", [])
-                prev_acts = p.get("prev_turn_actions", [])
+                prev_acts = _filter_prev_turn_actions(
+                    p.get("prev_turn_actions", []), origin_turn, action_lookup
+                )
                 ars = []
                 for a in origin_acts:
                     ars.append({"action_id": a.get("action_id", ""), "relationship_type": "NO_CONNECTION",
@@ -1793,7 +1890,9 @@ def run_step2b(
                 lp["explanation"] = "Related requirement link (default)."
                 all_labeled.append(lp)
             else:
-                llm_pairs.append(p)
+                sanitized = _sanitize_preceding_pair(p, origin_turn, action_lookup)
+                if sanitized is not None:
+                    llm_pairs.append(sanitized)
 
         subsequent = []
         if req.get("status") == "active":
@@ -1817,6 +1916,7 @@ def run_step2b(
             tqdm.write(f"  {rid}: {len(llm_pairs)} preceding + {len(subsequent)} subsequent")
             labeled_pairs, fwd_results = label_actions_for_requirement(
                 llm_pairs, subsequent, rid, req_text, origin_turn, outcome_desc, client, model,
+                action_lookup=action_lookup,
             )
             all_labeled.extend(labeled_pairs)
             impl_ids = []
@@ -1849,7 +1949,9 @@ def run_step2b(
             req["contributing_action_ids"] = list(existing_contrib | set(contrib_ids))
             req["revise_action_ids"] = list(existing_revise | set(revise_ids))
         else:
-            batch_labeled, batch_forward = label_actions_for_requirement_batch(chunk, client, model)
+            batch_labeled, batch_forward = label_actions_for_requirement_batch(
+                chunk, client, model, action_lookup=action_lookup,
+            )
             all_labeled.extend(batch_labeled)
             for (rid, _rtext, _oturn, _odesc, _lp, _sub) in chunk:
                 req = requirements_dict.get(rid, {})
@@ -2181,6 +2283,7 @@ def run_test(
     step2b_req_batch_size: int = 1,
     action_model: str = None,
     action_provider: str = None,
+    with_intentions: bool = False,
 ) -> None:
     """Run the full V4 pipeline."""
     os.makedirs(output_dir, exist_ok=True)
@@ -2206,8 +2309,10 @@ def run_test(
         action_extraction_client=action_extraction_client,
     )
 
-    # Step 1b: Intention extraction
-    step05b_output = run_step1b(step05_output, output_dir, client, model)
+    # Step 1b: Intention extraction (optional)
+    step05b_output = run_step1b(
+        step05_output, output_dir, client, model, with_intentions=with_intentions
+    )
     step1_input["outcome_to_intention"] = step05b_output.get("outcome_to_intention", {})
 
     # Step 2a: Embedding pairs

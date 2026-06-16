@@ -177,7 +177,7 @@ Main parsed outputs are written to `--output_dir`:
 
 Optional outputs when available:
 - `requirement_forward_labels.json` (from step2c)
-- `intent_outcome_map.json` (from step05b)
+- `intent_outcome_map.json` (from step05b; only when run with `--with-intentions`)
 
 Raw pipeline intermediates are written under:
 
