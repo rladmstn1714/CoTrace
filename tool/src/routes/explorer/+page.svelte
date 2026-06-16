@@ -267,9 +267,14 @@
 			const res = await fetch(`${import.meta.env.BASE_URL}api/runs`);
 			const data = res.ok ? (await res.json()) as { runs: string[] } : { runs: [] };
 			runs = data.runs ?? [];
-			// Default to first run (wine3 when VITE_DATA_BASE is set) so it loads immediately
+			// Default run: VITE_DEFAULT_RUN when listed, else pittsburgh_3day_travel, else first
 			if (runs.length > 0 && selectedRunValue == null) {
-				const firstRun = runs[0];
+				const envDefault =
+					typeof import.meta.env?.VITE_DEFAULT_RUN === 'string'
+						? import.meta.env.VITE_DEFAULT_RUN.trim()
+						: '';
+				const preferred = envDefault || 'pittsburgh_3day_travel';
+				const firstRun = runs.includes(preferred) ? preferred : runs[0];
 				selectedRunValue = firstRun;
 				const run = firstRun === '__default__' ? null : firstRun;
 				selectedRun.set(run);
