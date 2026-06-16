@@ -15,6 +15,7 @@
 		getExecutedTurn,
 		getDismissedTurn,
 		isRequirementDismissed,
+		chainHasRevisionHistory,
 		getRequirementActionEntry,
 		getTurnFromActionId,
 		goalLabel,
@@ -55,7 +56,9 @@
 		finalTurn = 1,
 		childGoalStarts = [],
 		selectedRequirementId = null,
+		revisionFocusVersionId = null,
 		onRequirementClick,
+		onRevisionVersionFocus,
 		onChildGoalClick,
 		onTurnFocus,
 		onPanelRowHover
@@ -79,7 +82,10 @@
 		finalTurn?: number;
 		childGoalStarts?: Array<{ goalId: string; goalTitle: string; turn: number }>;
 		selectedRequirementId?: string | null;
+		/** Earlier version id when user is viewing original requirement actions. */
+		revisionFocusVersionId?: string | null;
 		onRequirementClick?: (reqId: string) => void;
+		onRevisionVersionFocus?: (versionId: string | null, turn?: number | null) => void;
 		onChildGoalClick?: (goalId: string) => void;
 		onTurnFocus?: (turn: number | null) => void;
 		/** Hover over any requirement row highlights this turn in the chat log (no click). */
@@ -107,6 +113,7 @@
 		executed: boolean;
 		indirect: boolean;
 		dismissed: boolean;
+		revised: boolean;
 	};
 
 	let connectorViewportPaths = $state<ConnectorViewportSeg[]>([]);
@@ -372,6 +379,20 @@
 		);
 	}
 
+	function getIndirectEventsForChain(
+		chain: RequirementChainItem,
+		selected: boolean
+	): Array<{ turn: number; explanation: string; speaker: string }> {
+		if (!selected) return getIndirectEvents(chain.currentId);
+		if (
+			revisionFocusVersionId != null &&
+			chain.history.some((h) => h.id === revisionFocusVersionId)
+		) {
+			return getIndirectEvents(revisionFocusVersionId);
+		}
+		return getIndirectEvents(chain.currentId);
+	}
+
 	function toggleIndirectExpanded(key: string) {
 		expandedIndirectKeys = { ...expandedIndirectKeys, [key]: !expandedIndirectKeys[key] };
 		bumpLayout();
@@ -384,7 +405,7 @@
 		turn: number | null;
 		speaker: string;
 		selected: boolean;
-		eventKind?: 'base' | 'executed' | 'indirect' | 'dismissed';
+		eventKind?: 'base' | 'executed' | 'indirect' | 'dismissed' | 'revise-origin';
 		explanation?: string;
 	};
 
@@ -410,6 +431,7 @@
 		hasExecuted: boolean;
 		hasIndirect: boolean;
 		hasDismissed: boolean;
+		hasRevised: boolean;
 	};
 
 	type DisplayRow =
@@ -449,6 +471,15 @@
 				speaker: string;
 		  }
 		| {
+				kind: 'requirement-original';
+				key: string;
+				reqId: string;
+				versionId: string;
+				text: string;
+				turn: number | null;
+				chain: RequirementChainItem;
+		  }
+		| {
 				kind: 'requirement';
 				key: string;
 				reqId: string;
@@ -478,7 +509,7 @@
 			const reqId = chain.currentId;
 			const turn = requirementCreationTurnByReqId[reqId] ?? null;
 			if (requirementIdsEqual(selectedRequirementId, reqId)) {
-				for (const indirect of getIndirectEvents(reqId)) {
+				for (const indirect of getIndirectEventsForChain(chain, true)) {
 					rows.push({
 						kind: 'indirect',
 						key: indirectEventKey(reqId, indirect.turn, indirect.explanation),
@@ -487,6 +518,20 @@
 						speaker: indirect.speaker,
 						explanation: indirect.explanation
 					});
+				}
+				if (chainHasRevisionHistory(chain)) {
+					for (const earlier of chain.history) {
+						const originTurn = requirementCreationTurnByReqId[earlier.id] ?? null;
+						rows.push({
+							kind: 'requirement-original',
+							key: `req:${reqId}:original:${earlier.id}`,
+							reqId,
+							versionId: earlier.id,
+							text: earlier.text,
+							turn: originTurn,
+							chain
+						});
+					}
 				}
 				const executedTurn = getExecutedTurn(reqId, requirementActionMap);
 				if (executedTurn != null) {
@@ -521,6 +566,7 @@
 			indirect: 0,
 			'outcome-start': 1,
 			'child-goal-start': 2,
+			'requirement-original': 2.8,
 			requirement: 3,
 			executed: 4,
 			dismissed: 5
@@ -591,8 +637,22 @@
 					eventKind: 'dismissed'
 				});
 			}
+			if (requirementIdsEqual(selectedRequirementId, chain.currentId) && chainHasRevisionHistory(chain)) {
+				for (const earlier of chain.history) {
+					const originTurn = requirementCreationTurnByReqId[earlier.id] ?? null;
+					entries.push({
+						key: `req:${chain.currentId}:revise-origin:${earlier.id}`,
+						rowKey: `req:${chain.currentId}:original:${earlier.id}`,
+						reqId: chain.currentId,
+						turn: originTurn,
+						speaker: getRequirementCreatorSpeaker(earlier.id, originTurn),
+						selected: true,
+						eventKind: 'revise-origin'
+					});
+				}
+			}
 			if (requirementIdsEqual(selectedRequirementId, chain.currentId)) {
-				for (const indirect of getIndirectEvents(chain.currentId)) {
+				for (const indirect of getIndirectEventsForChain(chain, true)) {
 					entries.push({
 						key: indirectEventKey(chain.currentId, indirect.turn, indirect.explanation),
 						rowKey: `req:${chain.currentId}`,
@@ -730,7 +790,8 @@
 				dotColor: speakerColor(colorM.speaker),
 				hasExecuted: members.some((m) => m.eventKind === 'executed'),
 				hasIndirect: members.some((m) => m.eventKind === 'indirect'),
-				hasDismissed: members.some((m) => m.eventKind === 'dismissed')
+				hasDismissed: members.some((m) => m.eventKind === 'dismissed'),
+				hasRevised: members.some((m) => m.eventKind === 'revise-origin')
 			};
 		});
 		clusters.sort((a, b) => a.plotY - b.plotY || a.key.localeCompare(b.key));
@@ -789,7 +850,8 @@
 				selected: m.selected,
 				executed: m.eventKind === 'executed',
 				indirect: m.eventKind === 'indirect',
-				dismissed: m.eventKind === 'dismissed'
+				dismissed: m.eventKind === 'dismissed',
+				revised: m.eventKind === 'revise-origin'
 			});
 		}
 		connectorViewportPaths = out;
@@ -821,6 +883,11 @@
 		const dismissedM = clus.members.find((m) => m.eventKind === 'dismissed');
 		if (dismissedM) {
 			focusTurnFromPanel(dismissedM.turn, dismissedM.reqId);
+			return;
+		}
+		const reviseOriginM = clus.members.find((m) => m.eventKind === 'revise-origin');
+		if (reviseOriginM) {
+			focusTurnFromPanel(reviseOriginM.turn, reviseOriginM.reqId);
 			return;
 		}
 		const allChild =
@@ -875,6 +942,7 @@
 						class:executed={seg.executed}
 						class:indirect={seg.indirect}
 						class:dismissed={seg.dismissed}
+						class:revised={seg.revised}
 						d={seg.d}
 					></path>
 				{/each}
@@ -931,6 +999,7 @@
 							class:executed={clus.hasExecuted}
 							class:indirect={clus.hasIndirect}
 							class:dismissed={clus.hasDismissed}
+							class:revised={clus.hasRevised}
 							style="--dot-color:{clus.dotColor}"
 							onmouseenter={() => onPanelRowHover?.(clus.turn ?? null)}
 							cx="40"
@@ -1054,6 +1123,37 @@
 							</div>
 						</button>
 					</div>
+				{:else if row.kind === 'requirement-original'}
+					{@const speaker = getRequirementCreatorSpeaker(row.versionId, row.turn)}
+					{@const isOriginalFocused = revisionFocusVersionId === row.versionId}
+					<div class="req-row-shell" role="presentation" onmouseenter={() => onPanelRowHover?.(row.turn)}>
+						<button
+							type="button"
+							class="req-item req-original-item req-clickable"
+							class:selected={isOriginalFocused}
+							class:req-original-item--hint={!isOriginalFocused}
+							use:trackRequirementRow={{ key: row.key }}
+							onclick={(e) => {
+								e.stopPropagation();
+								onRevisionVersionFocus?.(row.versionId, row.turn);
+							}}
+						>
+							<div class="req-content">
+								<div class="req-label-row">
+									<span class="circle-indicator" style="{circleStyle(speaker)}"></span>
+									<span class="req-type-label">Original requirement</span>
+								</div>
+								{#if !isOriginalFocused}
+									<p class="req-version-hint">Click to view related actions (original)</p>
+								{:else}
+									<p class="req-version-hint req-version-hint--active">Viewing related actions (original)</p>
+								{/if}
+								<div class="req-text-card req-text-card--superseded">
+									{row.text}
+								</div>
+							</div>
+						</button>
+					</div>
 				{:else}
 					{@const reqId = row.reqId}
 					{@const chain = row.chain}
@@ -1064,21 +1164,29 @@
 					{@const statusKind = getReqStatusKind(reqId)}
 					{@const statusLabel = getReqStatusLabel(reqId)}
 					{@const contrib = resolveContribBar(reqId)}
+					{@const hasRevisionStack = chainHasRevisionHistory(chain)}
+					{@const showRevisedOnly = hasRevisionStack && isSelected}
+					{@const isRevisedActionFocus = isSelected && revisionFocusVersionId == null}
 					<div class="req-row-shell" role="presentation" onmouseenter={() => onPanelRowHover?.(turn)}>
 						<button
 							type="button"
 							class="req-item req-clickable"
-							class:selected={isSelected}
+							class:selected={isSelected && isRevisedActionFocus}
 							class:req-dismissed={isDismissed}
+							class:req-has-revision={hasRevisionStack && !isSelected}
+							class:req-revised-item={showRevisedOnly}
+							class:req-revised-item--muted={isSelected && revisionFocusVersionId != null}
 							class:dimmed={selectedRequirementId != null && !isSelected && !isDismissed}
 							use:trackRequirementRow={{ key: row.key }}
 							onclick={(e) => {
 								e.stopPropagation();
 								const wasSelected = requirementIdsEqual(selectedRequirementId, reqId);
-								onRequirementClick?.(reqId);
-								// Avoid focusTurnFromPanel here: it calls onRequirementClick when reqId !== selectedRequirementId,
-								// which re-selects immediately after toggle-off.
+								if (wasSelected && revisionFocusVersionId != null) {
+									onRevisionVersionFocus?.(null, turn);
+									return;
+								}
 								if (!wasSelected) onTurnFocus?.(turn);
+								onRequirementClick?.(reqId);
 							}}
 						>
 							<div class="req-content">
@@ -1089,16 +1197,51 @@
 										style={isDismissed ? undefined : circleStyle(speaker)}
 									></span>
 									<span class="req-type-label" class:req-type-label--dismissed={isDismissed}>
-										{isDismissed ? 'Dismissed requirement' : getRequirementLabel(chain)}
+										{isDismissed
+											? 'Dismissed requirement'
+											: showRevisedOnly
+												? 'Revised requirement'
+												: getRequirementLabel(chain)}
 									</span>
 								</div>
-								<div
-									class="req-text-card"
-									class:req-text-card--dismissed={isDismissed}
-									class:card-selected={isSelected && !isDismissed}
-								>
-									{chain.currentText}
-								</div>
+								{#if isSelected && showRevisedOnly && revisionFocusVersionId == null}
+									<p class="req-version-hint req-version-hint--active">Viewing related actions (revised)</p>
+								{:else if isSelected && revisionFocusVersionId != null}
+									<p class="req-version-hint">Click to view related actions (revised)</p>
+								{/if}
+								{#if hasRevisionStack && !isSelected}
+									<div
+										class="req-revision-stack req-revision-stack--preview"
+										style="--stack-depth: {chain.history.length}"
+										aria-hidden="false"
+									>
+										{#each chain.history as _, layerIdx (layerIdx)}
+											<div
+												class="req-revision-layer req-revision-layer--ghost"
+												style="--layer-index: {layerIdx}"
+												aria-hidden="true"
+											>
+												<div class="req-text-card req-text-card--ghost"></div>
+											</div>
+										{/each}
+										<div class="req-revision-front">
+											<div
+												class="req-text-card"
+												class:req-text-card--dismissed={isDismissed}
+											>
+												{chain.currentText}
+											</div>
+										</div>
+									</div>
+								{:else}
+									<div
+										class="req-text-card"
+										class:req-text-card--dismissed={isDismissed}
+										class:card-selected={isSelected && !isDismissed}
+									>
+										{chain.currentText}
+									</div>
+								{/if}
 
 								{#if isSelected}
 									{#if contrib.hasData}
@@ -1342,6 +1485,11 @@
 		stroke-width: 2;
 		stroke-dasharray: 2 3;
 	}
+	.timeline-connector-line.revised {
+		stroke: #d97706;
+		stroke-width: 2;
+		stroke-dasharray: 4 3;
+	}
 	.timeline-marker-dot {
 		fill: var(--dot-color, #3b82f6);
 		stroke: var(--dot-color, #3b82f6);
@@ -1359,6 +1507,10 @@
 	.timeline-marker-dot.dismissed {
 		stroke: #64748b;
 		fill: #94a3b8;
+	}
+	.timeline-marker-dot.revised {
+		stroke: #b45309;
+		fill: #f59e0b;
 	}
 	.timeline-marker-dot:focus-visible {
 		outline: 2px solid #2563eb;
@@ -1446,6 +1598,97 @@
 		border-color: #cbd5e1;
 		background: #f1f5f9;
 		box-shadow: 0 4px 12px rgba(100, 116, 139, 0.08);
+	}
+	.req-revised-item {
+		border-color: #fcd34d;
+		background: #fffbeb;
+		box-shadow: 0 6px 16px rgba(245, 158, 11, 0.1);
+	}
+	.req-original-item {
+		border-color: #fde68a;
+		background: #fffdf5;
+		box-shadow: 0 4px 12px rgba(245, 158, 11, 0.08);
+		opacity: 0.96;
+	}
+	.req-original-item.selected {
+		border-color: #f59e0b;
+		background: #fffbeb;
+		box-shadow: 0 6px 16px rgba(245, 158, 11, 0.14);
+		opacity: 1;
+	}
+	.req-original-item--hint {
+		border-style: dashed;
+	}
+	.req-original-item--hint:hover {
+		border-color: #f59e0b;
+		background: #fffbeb;
+	}
+	.req-revised-item--muted {
+		opacity: 0.72;
+		border-style: dashed;
+	}
+	.req-revised-item--muted.selected {
+		opacity: 0.85;
+	}
+	.req-version-hint {
+		margin: 0;
+		font-size: 0.68rem;
+		font-weight: 600;
+		color: #b45309;
+		letter-spacing: 0.01em;
+	}
+	.req-version-hint--active {
+		color: #92400e;
+	}
+	.req-clickable.req-has-revision {
+		border-color: #fde68a;
+		background: linear-gradient(135deg, #fffbeb 0%, #ffffff 55%);
+	}
+	.req-clickable.req-has-revision.selected {
+		border-color: #f59e0b;
+		background: linear-gradient(135deg, #fef3c7 0%, #eff6ff 60%);
+		box-shadow: 0 8px 20px rgba(245, 158, 11, 0.14);
+	}
+	.req-revision-stack {
+		position: relative;
+		margin-top: 0.15rem;
+		padding-top: calc(var(--stack-depth, 1) * 7px);
+		padding-right: calc(var(--stack-depth, 1) * 7px);
+	}
+	.req-revision-layer {
+		position: absolute;
+		top: calc(var(--layer-index, 0) * 7px);
+		left: calc(var(--layer-index, 0) * 7px);
+		right: calc((var(--stack-depth, 1) - 1 - var(--layer-index, 0)) * 7px);
+		z-index: calc(var(--layer-index, 0) + 1);
+		pointer-events: none;
+	}
+	.req-revision-front {
+		position: relative;
+		z-index: calc(var(--stack-depth, 1) + 2);
+	}
+	.req-text-card--superseded {
+		font-size: 0.78rem;
+		color: #64748b;
+		background: #f1f5f9;
+		border-color: #cbd5e1;
+		border-style: dashed;
+		opacity: 0.72;
+		text-decoration: line-through;
+		text-decoration-color: #94a3b8;
+		text-decoration-thickness: 1px;
+		box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+	}
+	.req-text-card--ghost {
+		min-height: 2.4rem;
+		background: #f8fafc;
+		border-color: #e2e8f0;
+		border-style: dashed;
+		opacity: 0.55;
+		box-shadow: none;
+	}
+	.req-revision-layer--ghost {
+		opacity: 1;
 	}
 	.req-clickable.req-dismissed {
 		opacity: 0.62;

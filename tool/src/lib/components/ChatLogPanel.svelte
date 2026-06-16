@@ -36,6 +36,8 @@
 
 	let {
 		requirementId = null,
+		primaryRequirementVersionIds = [],
+		secondaryRequirementVersionIds = [],
 		requirementCreationTurn = null,
 		focusedTurnId = null,
 		allRequirementIds = [],
@@ -53,6 +55,10 @@
 		hideActions = false
 	}: {
 		requirementId: string | null;
+		/** Requirement version ids shown with full action highlight. */
+		primaryRequirementVersionIds?: string[];
+		/** Other chain versions shown toned down when non-empty. */
+		secondaryRequirementVersionIds?: string[];
 		requirementCreationTurn?: number | null;
 		focusedTurnId?: number | null;
 		allRequirementIds?: string[];
@@ -76,6 +82,32 @@
 
 	function getRequirementEntryById(reqId: string | null | undefined) {
 		return findRequirementEntryById(requirementActionMap, reqId);
+	}
+
+	const primaryReqIds = $derived.by((): string[] => {
+		if (primaryRequirementVersionIds.length > 0) return primaryRequirementVersionIds;
+		if (requirementId != null) return [requirementId];
+		return [];
+	});
+
+	const secondaryReqIds = $derived(secondaryRequirementVersionIds ?? []);
+
+	const activeReqIds = $derived.by((): string[] => {
+		if (primaryReqIds.length > 0 || secondaryReqIds.length > 0) {
+			return [...primaryReqIds, ...secondaryReqIds];
+		}
+		if (requirementId != null) return [requirementId];
+		return allRequirementIds;
+	});
+
+	function collectTurnsForReqIds(
+		reqIds: string[],
+		collect: (actionId: string) => void
+	) {
+		for (const reqId of reqIds) {
+			const entry = getRequirementEntryById(reqId);
+			if (entry) collectActionIds(entry as unknown as Record<string, unknown>, null, collect);
+		}
 	}
 
 	const combinedOutcomeActions = $derived.by((): OutcomeActionItem[] | null => {
@@ -121,9 +153,10 @@
 			const ev = actionUtteranceMap[actionId];
 			if (ev != null && !map.has(ev.turn_id)) map.set(ev.turn_id, actionId);
 		};
-		if (requirementId) {
-			const entry = getRequirementEntryById(requirementId);
-			if (entry) collectActionIds(entry as unknown as Record<string, unknown>, null, setTurn);
+		if (primaryReqIds.length > 0) {
+			collectTurnsForReqIds(primaryReqIds, setTurn);
+		} else if (activeReqIds.length > 0) {
+			collectTurnsForReqIds(activeReqIds, setTurn);
 		} else if (selectedActionId) {
 			setTurn(selectedActionId);
 		} else if (allRequirementIds.length > 0) {
@@ -148,7 +181,27 @@
 		return map;
 	});
 
+	const primaryRelatedTurnIds = $derived.by((): Set<number> => {
+		const set = new Set<number>();
+		if (primaryReqIds.length === 0) return set;
+		collectRelatedTurnsForReqIds(primaryReqIds, set);
+		return set;
+	});
+
+	const secondaryRelatedTurnIds = $derived.by((): Set<number> => {
+		const set = new Set<number>();
+		if (secondaryReqIds.length === 0) return set;
+		collectRelatedTurnsForReqIds(secondaryReqIds, set);
+		for (const turn of primaryRelatedTurnIds) set.delete(turn);
+		return set;
+	});
+
 	const relatedTurnIds = $derived.by((): Set<number> => {
+		if (primaryReqIds.length > 0 || secondaryReqIds.length > 0) {
+			const set = new Set<number>(primaryRelatedTurnIds);
+			for (const turn of secondaryRelatedTurnIds) set.add(turn);
+			return set;
+		}
 		const set = new Set<number>();
 		const validTurns = utteranceList?.utterances?.map((u) => u.turn_id) ?? [];
 		const validTurnSet = new Set(validTurns);
@@ -157,7 +210,6 @@
 				set.add(turn);
 				return;
 			}
-			// Some derived events (e.g. child-goal creation) may be off by one from utterance turns.
 			if (validTurnSet.has(turn - 1)) {
 				set.add(turn - 1);
 				return;
@@ -166,7 +218,6 @@
 				set.add(turn + 1);
 				return;
 			}
-			// Last fallback: nearest known utterance turn.
 			if (validTurns.length === 0) return;
 			let nearest = validTurns[0];
 			let bestDist = Math.abs(nearest - turn);
@@ -183,15 +234,8 @@
 			const ev = actionUtteranceMap[actionId];
 			if (ev != null) addTurnWithFallback(ev.turn_id);
 		};
-		const reqIds = requirementId != null ? [requirementId] : (allRequirementIds.length > 0 ? allRequirementIds : []);
-		if (requirementId) {
-			const entry = getRequirementEntryById(requirementId);
-			if (entry) collectActionIds(entry as unknown as Record<string, unknown>, null, collect);
-		} else if (allRequirementIds.length > 0) {
-			for (const reqId of allRequirementIds) {
-				const entry = getRequirementEntryById(reqId);
-				if (entry) collectActionIds(entry as unknown as Record<string, unknown>, null, collect);
-			}
+		if (allRequirementIds.length > 0) {
+			collectTurnsForReqIds(allRequirementIds, collect);
 		} else if (allRequirementIds.length === 0 && combinedOutcomeActions != null) {
 			for (const a of combinedOutcomeActions) {
 				if (a.turn_id != null) addTurnWithFallback(a.turn_id);
@@ -203,7 +247,50 @@
 		} else if (selectedActionId) {
 			collect(selectedActionId);
 		}
-		// Include turns for related_actions even when not in actionUtteranceMap (so View related shows that turn)
+		if (combinedOutcomeActions != null) {
+			for (const a of combinedOutcomeActions) {
+				if (a.turn_id != null) addTurnWithFallback(a.turn_id);
+			}
+		}
+		for (const child of childGoalStarts) {
+			if (typeof child?.turn === 'number') addTurnWithFallback(child.turn);
+		}
+		return set;
+	});
+
+	function collectRelatedTurnsForReqIds(reqIds: string[], set: Set<number>) {
+		const validTurns = utteranceList?.utterances?.map((u) => u.turn_id) ?? [];
+		const validTurnSet = new Set(validTurns);
+		const addTurnWithFallback = (turn: number) => {
+			if (validTurnSet.has(turn)) {
+				set.add(turn);
+				return;
+			}
+			if (validTurnSet.has(turn - 1)) {
+				set.add(turn - 1);
+				return;
+			}
+			if (validTurnSet.has(turn + 1)) {
+				set.add(turn + 1);
+				return;
+			}
+			if (validTurns.length === 0) return;
+			let nearest = validTurns[0];
+			let bestDist = Math.abs(nearest - turn);
+			for (const t of validTurns) {
+				const d = Math.abs(t - turn);
+				if (d < bestDist) {
+					bestDist = d;
+					nearest = t;
+				}
+			}
+			set.add(nearest);
+		};
+		const collect = (actionId: string) => {
+			const ev = actionUtteranceMap[actionId];
+			if (ev != null) addTurnWithFallback(ev.turn_id);
+		};
+		collectTurnsForReqIds(reqIds, collect);
 		if (reqIds.length > 0 && utteranceList?.utterances?.length) {
 			const validTurns = new Set(utteranceList.utterances.map((u) => u.turn_id));
 			for (const reqId of reqIds) {
@@ -218,16 +305,7 @@
 				}
 			}
 		}
-		if (combinedOutcomeActions != null) {
-			for (const a of combinedOutcomeActions) {
-				if (a.turn_id != null) addTurnWithFallback(a.turn_id);
-			}
-		}
-		for (const child of childGoalStarts) {
-			if (typeof child?.turn === 'number') addTurnWithFallback(child.turn);
-		}
-		return set;
-	});
+	}
 
 	/** Indices of related utterances (for scroll strip). Position 0 = first message, 1 = second, etc. */
 	const relatedIndices = $derived.by((): number[] => {
@@ -278,8 +356,15 @@
 			const list = map.get(turnId)!;
 			if (!list.some((x) => x.actionId === item.actionId)) list.push(item);
 		};
-		// Only actions related to the selected outcome/requirement
-		const reqIds = requirementId != null ? [requirementId] : (allRequirementIds.length > 0 ? allRequirementIds : []);
+		// Prefer primary requirement ids, then secondary (toned down in the UI).
+		const reqIds =
+			primaryReqIds.length > 0 || secondaryReqIds.length > 0
+				? [...primaryReqIds, ...secondaryReqIds]
+				: activeReqIds;
+		const resolveReqIds =
+			primaryReqIds.length > 0 || secondaryReqIds.length > 0
+				? [...primaryReqIds, ...secondaryReqIds]
+				: reqIds;
 		for (const [actionId, ev] of Object.entries(actionUtteranceMap)) {
 			if (!ev || typeof ev.turn_id !== 'number') continue;
 			const turnId = ev.turn_id;
@@ -288,7 +373,8 @@
 			let action_text: string | undefined;
 			let reason: string | undefined;
 			let role: string | undefined;
-			for (const reqId of reqIds) {
+			let matched = false;
+			for (const reqId of resolveReqIds) {
 				const entry = getRequirementEntryById(reqId) as unknown as {
 					origin_actions?: { action_id: string; action_text?: string; role?: string }[];
 					contributing_actions?: { action_id: string; action_text?: string; role?: string }[];
@@ -320,15 +406,21 @@
 						'Implementation',
 						true
 					)
-				) break;
-				if (fromList(entry.origin_actions, 'Origin', true)) break;
+				) {
+					matched = true;
+					break;
+				}
+				if (fromList(entry.origin_actions, 'Origin', true)) {
+					matched = true;
+					break;
+				}
 				const related = entry.related_actions ?? [];
 				const rel = related.find((r) => r && typeof r === 'object' && (r as { action_id: string }).action_id === actionId) as
 					| { action_id: string; action_text?: string; reason?: string; explanation?: string }
 					| undefined;
 				if (fromList(entry.contributing_actions, 'Contributing', true)) {
-					// Enrich with explanation from related_actions when same action is in both
 					if (rel) reason = rel.explanation ?? rel.reason;
+					matched = true;
 					break;
 				}
 				if (rel) {
@@ -340,6 +432,7 @@
 					action_text = (rel.action_text ?? r.action_text ?? r.actionText) as string | undefined;
 					reason = rel.explanation ?? rel.reason;
 					role = (rel as { role?: string }).role;
+					matched = true;
 					break;
 				}
 			}
@@ -763,8 +856,10 @@
 			onkeydown={(e) => { if (e.key === 'Escape') onActionClick?.(null); }}
 		>
 			{#each displayedUtterances as u, i}
-			{@const isRelated = relatedTurnIds.has(u.turn_id)}
-			{@const isIndirectOnly = isRelated && showDirectIndirect && !turnIdsWithDirectAction.has(u.turn_id)}
+			{@const isPrimaryRelated = primaryRelatedTurnIds.has(u.turn_id)}
+			{@const isSecondaryRelated = secondaryRelatedTurnIds.has(u.turn_id)}
+			{@const isRelated = isPrimaryRelated || isSecondaryRelated}
+			{@const isIndirectOnly = isPrimaryRelated && showDirectIndirect && !turnIdsWithDirectAction.has(u.turn_id)}
 			{@const side = speakerSide(u.speaker)}
 			{@const sColor = speakerColor(u.speaker)}
 			{@const isSelected = selectedTurnId !== null && u.turn_id === selectedTurnId}
@@ -820,8 +915,9 @@
 				</div>
 				<div
 					class="bubble"
-					class:side-a={side === 'a' && isRelated}
-					class:side-b={side === 'b' && isRelated}
+					class:side-a={side === 'a' && isPrimaryRelated}
+					class:side-b={side === 'b' && isPrimaryRelated}
+					class:secondary-related={isSecondaryRelated}
 					class:unrelated={!isRelated}
 					class:indirect={isIndirectOnly}
 					style="--sc:{sColor}"
@@ -1114,6 +1210,15 @@
 				transparent 8px
 			),
 			color-mix(in srgb, var(--sc) 8%, #ffffff);
+	}
+	.bubble.secondary-related {
+		border: 1px dashed color-mix(in srgb, var(--sc) 22%, #cbd5e1);
+		background: color-mix(in srgb, var(--sc) 4%, #f8fafc);
+		opacity: 0.72;
+	}
+	.bubble.secondary-related .utterance-markdown,
+	.bubble.secondary-related .utterance-markdown :global(*) {
+		color: #94a3b8;
 	}
 	.bubble.indirect .utterance-markdown,
 	.bubble.indirect .utterance-markdown :global(*) {

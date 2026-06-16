@@ -178,6 +178,60 @@ export function getDismissedTurn(
 	return status.dismissed_at_turn;
 }
 
+/** Turn where the current (latest) version was created via REVISE/MODIFY. */
+export function getReviseTurn(
+	chain: RequirementChainLike,
+	creationTurnByReqId: Record<string, number>
+): number | null {
+	if (!chain.history.length) return null;
+	const turn = creationTurnByReqId[chain.currentId];
+	return turn ?? null;
+}
+
+/** Turn where the earliest version in a revision chain was first created. */
+export function getOriginalRequirementTurn(
+	chain: RequirementChainLike,
+	creationTurnByReqId: Record<string, number>
+): number | null {
+	if (!chain.history.length) return null;
+	const turn = creationTurnByReqId[chain.history[0].id];
+	return turn ?? null;
+}
+
+export function chainHasRevisionHistory(chain: RequirementChainLike): boolean {
+	return chain.history.length > 0;
+}
+
+/** All requirement ids in a revision chain, oldest → newest. */
+export function getChainRequirementIds(chain: RequirementChainLike): string[] {
+	return [...chain.history.map((h) => h.id), chain.currentId];
+}
+
+/** Indirect influence events across every version in a revision chain (deduped). */
+export function getMergedIndirectInfluenceEvents(
+	chain: RequirementChainLike,
+	requirementActionMap: RequirementActionMap,
+	requirementCreationTurnByReqId: Record<string, number>,
+	getSpeakerForTurn: (turn: number | null | undefined) => string
+): Array<{ turn: number; explanation: string; speaker: string }> {
+	const seen = new Set<string>();
+	const events: Array<{ turn: number; explanation: string; speaker: string }> = [];
+	for (const reqId of getChainRequirementIds(chain)) {
+		for (const ev of getIndirectInfluenceEvents(
+			reqId,
+			requirementActionMap,
+			requirementCreationTurnByReqId,
+			getSpeakerForTurn
+		)) {
+			const key = `${ev.turn}:${ev.explanation}`;
+			if (seen.has(key)) continue;
+			seen.add(key);
+			events.push(ev);
+		}
+	}
+	return events.sort((a, b) => a.turn - b.turn || a.explanation.localeCompare(b.explanation));
+}
+
 export function goalLabel(goalId: string): string {
 	const normalized = goalId.trim();
 	const alphaChild = normalized.match(/^outcome_(\d+)([a-z])(?:_\d+)?$/i);
@@ -239,11 +293,13 @@ export function timelineClusterKey(entry: {
 	key: string;
 	rowKey: string;
 	turn: number | null;
-	eventKind?: 'base' | 'executed' | 'indirect' | 'dismissed';
+	eventKind?: 'base' | 'executed' | 'indirect' | 'dismissed' | 'revised' | 'revise-origin';
 }): string {
 	if (entry.eventKind === 'indirect') return `indirect:${entry.key}`;
 	if (entry.eventKind === 'executed') return `${entry.turn ?? 'na'}:executed`;
 	if (entry.eventKind === 'dismissed') return `${entry.turn ?? 'na'}:dismissed`;
+	if (entry.eventKind === 'revised') return `${entry.turn ?? 'na'}:revised`;
+	if (entry.eventKind === 'revise-origin') return `${entry.turn ?? 'na'}:revise-origin`;
 	if (entry.key === 'outcome-start') return 'base:outcome-start';
 	if (entry.rowKey.startsWith('child-goal-start:')) return `base:child:${entry.turn ?? 'na'}`;
 	return `base:req:${entry.turn ?? 'na'}`;
