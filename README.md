@@ -20,6 +20,13 @@
 
 This repository contains the code for CoTrace pipeline, and interactive tool for the paper.
 Try an [interactive CoTrace-viewer demo](https://rladmstn1714.github.io/CoTrace/viewer) on a sample collaboration trace.
+
+## Paper reproduction
+
+To match the prompts used in the paper ([arXiv:2605.21363](https://arxiv.org/abs/2605.21363)), use the frozen snapshot `pipeline/config/prompts_paper_v1.py` (v0.1.0).
+
+The default pipeline uses `pipeline/config/prompts.py` (v0.2.0), which includes updated prompt. See [pipeline/README.md](pipeline/README.md#prompt-versioning) for details.
+
 ## Repository Structure
 
 ```text

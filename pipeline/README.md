@@ -161,6 +161,17 @@ python run_pipeline.py \
   --model gpt-5.2
 ```
 
+## Prompt versioning
+
+LLM prompts live under `config/`. We keep a frozen paper snapshot alongside the current prompts:
+
+| File | Version | Use |
+|------|---------|-----|
+| `config/prompts.py` | v0.2.0 | Default for new runs |
+| `config/prompts_paper_v1.py` | v0.1.0 | Paper reproduction ([arXiv:2605.21363](https://arxiv.org/abs/2605.21363)).|
+
+By default, `pipeline.py` imports from `config/prompts.py`.
+
 ## Output files
 
 Main parsed outputs are written to `--output_dir`:
