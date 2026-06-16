@@ -3,7 +3,7 @@
 	import type { ContribBarDisplay } from '$lib/contribPeerBar';
 	import { isAssistantSpeakerId } from '$lib/speakerUtils';
 	import { isEunsuSpeakerName } from '$lib/contribPeerBar';
-	import type { RequirementActionMap, UtteranceListData } from '$lib/data/dataLoader';
+	import type { RequirementActionMap, UtteranceListData, ActionUtteranceMap } from '$lib/data/dataLoader';
 	import {
 		requirementIdsEqual,
 		buildRequirementStatusIndex,
@@ -13,6 +13,8 @@
 		resolveContribBarByReqId,
 		getRequirementLabel as getRequirementEventLabel,
 		getExecutedTurn,
+		getDismissedTurn,
+		isRequirementDismissed,
 		getRequirementActionEntry,
 		getTurnFromActionId,
 		goalLabel,
@@ -47,6 +49,7 @@
 		contribBarByReqId = {},
 		requirementStatusOverview = [],
 		utteranceList = null,
+		actionUtteranceMap = {},
 		requirementCreationTurnByReqId = {},
 		requirementActionMap = {},
 		finalTurn = 1,
@@ -67,8 +70,10 @@
 			is_executed: boolean | null;
 			is_dismissed: boolean | null;
 			dismissed_at_turn: number | null;
+			dismissed_by_action_ids?: string[];
 		}>;
 		utteranceList?: UtteranceListData | null;
+		actionUtteranceMap?: ActionUtteranceMap;
 		requirementCreationTurnByReqId?: Record<string, number>;
 		requirementActionMap?: RequirementActionMap;
 		finalTurn?: number;
@@ -101,6 +106,7 @@
 		selected: boolean;
 		executed: boolean;
 		indirect: boolean;
+		dismissed: boolean;
 	};
 
 	let connectorViewportPaths = $state<ConnectorViewportSeg[]>([]);
@@ -109,6 +115,7 @@
 	const requirementRowEls = new Map<string, HTMLElement>();
 	const indirectCardEls = new Map<string, HTMLElement>();
 	const executedCardEls = new Map<string, HTMLElement>();
+	const dismissedCardEls = new Map<string, HTMLElement>();
 
 	let _bumpRaf = 0;
 	function bumpLayout() {
@@ -218,6 +225,31 @@
 		};
 	}
 
+	function trackDismissedCard(el: HTMLElement, params: { key: string }) {
+		dismissedCardEls.set(params.key, el);
+		bumpLayout();
+		let ro: ResizeObserver | null = null;
+		if (typeof ResizeObserver !== 'undefined') {
+			ro = new ResizeObserver(() => bumpLayout());
+			ro.observe(el);
+		}
+		return {
+			update(next: { key: string }) {
+				if (next.key !== params.key) {
+					dismissedCardEls.delete(params.key);
+					dismissedCardEls.set(next.key, el);
+				}
+				params = next;
+				bumpLayout();
+			},
+			destroy() {
+				dismissedCardEls.delete(params.key);
+				ro?.disconnect();
+				bumpLayout();
+			}
+		};
+	}
+
 	const speakerByTurnId = $derived.by((): Map<number, string> => {
 		const map = new Map<number, string>();
 		for (const u of utteranceList?.utterances ?? []) {
@@ -272,6 +304,22 @@
 
 	function getReqStatusLabel(reqId: string): string {
 		return getRequirementStatusLabel(requirementStatusById, reqId);
+	}
+
+	const actionTurnById = $derived.by((): Record<string, number> => {
+		const map: Record<string, number> = {};
+		for (const [id, entry] of Object.entries(actionUtteranceMap ?? {})) {
+			if (entry?.turn_id != null) map[id] = entry.turn_id;
+		}
+		return map;
+	});
+
+	function reqIsDismissed(reqId: string): boolean {
+		return isRequirementDismissed(requirementStatusById, reqId);
+	}
+
+	function getReqDismissedTurn(reqId: string): number | null {
+		return getDismissedTurn(requirementStatusById, reqId, actionTurnById);
 	}
 
 	const sortedChains = $derived.by(() => {
@@ -336,7 +384,7 @@
 		turn: number | null;
 		speaker: string;
 		selected: boolean;
-		eventKind?: 'base' | 'executed' | 'indirect';
+		eventKind?: 'base' | 'executed' | 'indirect' | 'dismissed';
 		explanation?: string;
 	};
 
@@ -361,6 +409,7 @@
 		dotColor: string;
 		hasExecuted: boolean;
 		hasIndirect: boolean;
+		hasDismissed: boolean;
 	};
 
 	type DisplayRow =
@@ -387,6 +436,13 @@
 		  }
 		| {
 				kind: 'executed';
+				key: string;
+				reqId: string;
+				turn: number;
+				speaker: string;
+		  }
+		| {
+				kind: 'dismissed';
 				key: string;
 				reqId: string;
 				turn: number;
@@ -442,6 +498,16 @@
 						speaker: getSpeakerForTurn(executedTurn)
 					});
 				}
+				const dismissedTurn = getReqDismissedTurn(reqId);
+				if (dismissedTurn != null) {
+					rows.push({
+						kind: 'dismissed',
+						key: `req:${reqId}:dismissed`,
+						reqId,
+						turn: dismissedTurn,
+						speaker: getSpeakerForTurn(dismissedTurn)
+					});
+				}
 			}
 			rows.push({
 				kind: 'requirement',
@@ -456,7 +522,8 @@
 			'outcome-start': 1,
 			'child-goal-start': 2,
 			requirement: 3,
-			executed: 4
+			executed: 4,
+			dismissed: 5
 		};
 		return rows.sort((a, b) => {
 			const ta = a.turn ?? Number.POSITIVE_INFINITY;
@@ -510,6 +577,18 @@
 					speaker: getSpeakerForTurn(executedTurn),
 					selected: true,
 					eventKind: 'executed'
+				});
+			}
+			const dismissedTurn = getReqDismissedTurn(chain.currentId);
+			if (requirementIdsEqual(selectedRequirementId, chain.currentId) && dismissedTurn != null) {
+				entries.push({
+					key: `req:${chain.currentId}:dismissed`,
+					rowKey: `req:${chain.currentId}:dismissed`,
+					reqId: chain.currentId,
+					turn: dismissedTurn,
+					speaker: getSpeakerForTurn(dismissedTurn),
+					selected: true,
+					eventKind: 'dismissed'
 				});
 			}
 			if (requirementIdsEqual(selectedRequirementId, chain.currentId)) {
@@ -584,7 +663,9 @@
 					? indirectCardEls.get(entry.key)
 					: entry.eventKind === 'executed'
 						? executedCardEls.get(entry.key)
-						: requirementRowEls.get(entry.rowKey);
+						: entry.eventKind === 'dismissed'
+							? dismissedCardEls.get(entry.key)
+							: requirementRowEls.get(entry.rowKey);
 				if (!targetEl) return null;
 				const { centerY, leftX } = layoutMetricsInContent(contentEl, targetEl);
 				const rowY = centerY;
@@ -648,7 +729,8 @@
 				members,
 				dotColor: speakerColor(colorM.speaker),
 				hasExecuted: members.some((m) => m.eventKind === 'executed'),
-				hasIndirect: members.some((m) => m.eventKind === 'indirect')
+				hasIndirect: members.some((m) => m.eventKind === 'indirect'),
+				hasDismissed: members.some((m) => m.eventKind === 'dismissed')
 			};
 		});
 		clusters.sort((a, b) => a.plotY - b.plotY || a.key.localeCompare(b.key));
@@ -706,7 +788,8 @@
 				d,
 				selected: m.selected,
 				executed: m.eventKind === 'executed',
-				indirect: m.eventKind === 'indirect'
+				indirect: m.eventKind === 'indirect',
+				dismissed: m.eventKind === 'dismissed'
 			});
 		}
 		connectorViewportPaths = out;
@@ -733,6 +816,11 @@
 		if (indirectM) {
 			toggleIndirectExpanded(indirectM.key);
 			onTurnFocus?.(indirectM.turn);
+			return;
+		}
+		const dismissedM = clus.members.find((m) => m.eventKind === 'dismissed');
+		if (dismissedM) {
+			focusTurnFromPanel(dismissedM.turn, dismissedM.reqId);
 			return;
 		}
 		const allChild =
@@ -786,6 +874,7 @@
 						class:selected={seg.selected}
 						class:executed={seg.executed}
 						class:indirect={seg.indirect}
+						class:dismissed={seg.dismissed}
 						d={seg.d}
 					></path>
 				{/each}
@@ -841,6 +930,7 @@
 							class:selected={clus.anySelected}
 							class:executed={clus.hasExecuted}
 							class:indirect={clus.hasIndirect}
+							class:dismissed={clus.hasDismissed}
 							style="--dot-color:{clus.dotColor}"
 							onmouseenter={() => onPanelRowHover?.(clus.turn ?? null)}
 							cx="40"
@@ -948,12 +1038,29 @@
 							</div>
 						</button>
 					</div>
+				{:else if row.kind === 'dismissed'}
+					<div class="req-row-shell" role="presentation" onmouseenter={() => onPanelRowHover?.(row.turn)}>
+						<button
+							type="button"
+							class="req-item req-dismissed-item req-plain-button"
+							use:trackDismissedCard={{ key: row.key }}
+							onclick={() => focusTurnFromPanel(row.turn, row.reqId)}
+						>
+							<div class="req-content">
+								<div class="req-label-row">
+									<span class="circle-indicator circle-indicator--muted" aria-hidden="true"></span>
+									<span class="req-type-label">Dismissed</span>
+								</div>
+							</div>
+						</button>
+					</div>
 				{:else}
 					{@const reqId = row.reqId}
 					{@const chain = row.chain}
 					{@const turn = row.turn}
 					{@const speaker = getRequirementCreatorSpeaker(reqId, turn)}
 					{@const isSelected = requirementIdsEqual(selectedRequirementId, reqId)}
+					{@const isDismissed = reqIsDismissed(reqId)}
 					{@const statusKind = getReqStatusKind(reqId)}
 					{@const statusLabel = getReqStatusLabel(reqId)}
 					{@const contrib = resolveContribBar(reqId)}
@@ -962,7 +1069,8 @@
 							type="button"
 							class="req-item req-clickable"
 							class:selected={isSelected}
-							class:dimmed={selectedRequirementId != null && !isSelected}
+							class:req-dismissed={isDismissed}
+							class:dimmed={selectedRequirementId != null && !isSelected && !isDismissed}
 							use:trackRequirementRow={{ key: row.key }}
 							onclick={(e) => {
 								e.stopPropagation();
@@ -975,10 +1083,20 @@
 						>
 							<div class="req-content">
 								<div class="req-label-row">
-									<span class="circle-indicator" style="{circleStyle(speaker)}"></span>
-									<span class="req-type-label">{getRequirementLabel(chain)}</span>
+									<span
+										class="circle-indicator"
+										class:circle-indicator--muted={isDismissed}
+										style={isDismissed ? undefined : circleStyle(speaker)}
+									></span>
+									<span class="req-type-label" class:req-type-label--dismissed={isDismissed}>
+										{isDismissed ? 'Dismissed requirement' : getRequirementLabel(chain)}
+									</span>
 								</div>
-								<div class="req-text-card" class:card-selected={isSelected}>
+								<div
+									class="req-text-card"
+									class:req-text-card--dismissed={isDismissed}
+									class:card-selected={isSelected && !isDismissed}
+								>
 									{chain.currentText}
 								</div>
 
@@ -1219,6 +1337,11 @@
 		stroke-width: 1.8;
 		stroke-dasharray: 3 4;
 	}
+	.timeline-connector-line.dismissed {
+		stroke: #94a3b8;
+		stroke-width: 2;
+		stroke-dasharray: 2 3;
+	}
 	.timeline-marker-dot {
 		fill: var(--dot-color, #3b82f6);
 		stroke: var(--dot-color, #3b82f6);
@@ -1232,6 +1355,10 @@
 	.timeline-marker-dot.executed {
 		stroke: #15803d;
 		fill: #22c55e;
+	}
+	.timeline-marker-dot.dismissed {
+		stroke: #64748b;
+		fill: #94a3b8;
 	}
 	.timeline-marker-dot:focus-visible {
 		outline: 2px solid #2563eb;
@@ -1314,6 +1441,54 @@
 		border-color: #b9decf;
 		background: #eef8f2;
 		box-shadow: 0 6px 16px rgba(47, 122, 87, 0.08);
+	}
+	.req-dismissed-item {
+		border-color: #cbd5e1;
+		background: #f1f5f9;
+		box-shadow: 0 4px 12px rgba(100, 116, 139, 0.08);
+	}
+	.req-clickable.req-dismissed {
+		opacity: 0.62;
+		background: #eef2f6;
+		border-color: #cbd5e1;
+		border-style: dashed;
+		color: #64748b;
+		box-shadow: none;
+	}
+	.req-clickable.req-dismissed:hover {
+		opacity: 0.78;
+		background: #e8edf2;
+		border-color: #94a3b8;
+		box-shadow: none;
+	}
+	.req-clickable.req-dismissed .req-type-label--dismissed {
+		color: #64748b;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		font-size: 0.68rem;
+	}
+	.req-clickable.req-dismissed .req-text-card--dismissed {
+		color: #64748b;
+		background: rgba(241, 245, 249, 0.65);
+		border-color: #cbd5e1;
+		border-style: dashed;
+		text-decoration: line-through;
+		text-decoration-color: #94a3b8;
+		text-decoration-thickness: 1.5px;
+	}
+	.req-clickable.req-dismissed.selected {
+		opacity: 0.92;
+		background: #e8edf2;
+		border-color: #94a3b8;
+		border-style: dashed;
+		box-shadow: 0 4px 14px rgba(100, 116, 139, 0.1);
+	}
+	.req-clickable.req-dismissed.selected .req-text-card--dismissed {
+		background: rgba(248, 250, 252, 0.85);
+	}
+	.circle-indicator--muted {
+		border-color: #94a3b8 !important;
+		background: transparent !important;
 	}
 	.child-goal-started {
 		border-color: #c7d2fe;

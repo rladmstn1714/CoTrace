@@ -570,7 +570,12 @@ export async function loadOutcomeActionMap(run?: string | null): Promise<Outcome
 
 export type RequirementStatusById = Record<
 	string,
-	{ is_executed: boolean; is_dismissed: boolean; dismissed_at_turn: number | null }
+	{
+		is_executed: boolean;
+		is_dismissed: boolean;
+		dismissed_at_turn: number | null;
+		dismissed_by_action_ids: string[];
+	}
 >;
 
 interface RequirementStatusFile {
@@ -594,7 +599,10 @@ export async function loadRequirementStatus(run?: string | null): Promise<Requir
 		byId[row.id] = {
 			is_executed: !!row.is_executed,
 			is_dismissed: !!row.is_dismissed,
-			dismissed_at_turn: row.dismissed_at_turn ?? null
+			dismissed_at_turn: row.dismissed_at_turn ?? null,
+			dismissed_by_action_ids: Array.isArray(row.dismissed_by_action_ids)
+				? row.dismissed_by_action_ids.filter((id): id is string => typeof id === 'string' && id.length > 0)
+				: []
 		};
 	}
 	return byId;

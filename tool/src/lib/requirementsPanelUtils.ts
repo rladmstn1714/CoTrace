@@ -6,11 +6,17 @@ export type RequirementStatusRow = {
 	is_executed: boolean | null;
 	is_dismissed: boolean | null;
 	dismissed_at_turn: number | null;
+	dismissed_by_action_ids?: string[];
 };
 
 export type RequirementStatusMap = Map<
 	string,
-	{ is_executed: boolean | null; is_dismissed: boolean | null; dismissed_at_turn: number | null }
+	{
+		is_executed: boolean | null;
+		is_dismissed: boolean | null;
+		dismissed_at_turn: number | null;
+		dismissed_by_action_ids: string[];
+	}
 >;
 
 export type RequirementChainLike = {
@@ -34,9 +40,17 @@ export function buildRequirementStatusIndex(rows: RequirementStatusRow[]): Requi
 	const map: RequirementStatusMap = new Map();
 	for (const row of rows) {
 		if (!row?.id) continue;
-		map.set(row.id, row);
-		if (/^r\d+/.test(row.id)) map.set(row.id.replace(/^r/, ''), row);
-		if (/^\d+/.test(row.id)) map.set(`r${row.id}`, row);
+		const entry = {
+			is_executed: row.is_executed,
+			is_dismissed: row.is_dismissed,
+			dismissed_at_turn: row.dismissed_at_turn ?? null,
+			dismissed_by_action_ids: Array.isArray(row.dismissed_by_action_ids)
+				? row.dismissed_by_action_ids.filter((id): id is string => typeof id === 'string' && id.length > 0)
+				: []
+		};
+		map.set(row.id, entry);
+		if (/^r\d+/.test(row.id)) map.set(row.id.replace(/^r/, ''), entry);
+		if (/^\d+/.test(row.id)) map.set(`r${row.id}`, entry);
 	}
 	return map;
 }
@@ -124,6 +138,46 @@ export function getExecutedTurn(requirementId: string, requirementActionMap: Req
 	return Math.min(...turns);
 }
 
+function resolveStatusRow(
+	statusById: RequirementStatusMap,
+	requirementId: string
+): RequirementStatusMap extends Map<string, infer V> ? V | undefined : never {
+	return (
+		statusById.get(requirementId) ??
+		statusById.get(requirementId.replace(/^r/, '')) ??
+		statusById.get(/^r/.test(requirementId) ? requirementId : `r${requirementId}`)
+	);
+}
+
+/** True when requirement was deleted/dismissed (has dismiss action ids or is_dismissed flag). */
+export function isRequirementDismissed(
+	statusById: RequirementStatusMap,
+	requirementId: string
+): boolean {
+	const status = resolveStatusRow(statusById, requirementId);
+	if (!status) return false;
+	if (status.is_dismissed) return true;
+	return (status.dismissed_by_action_ids?.length ?? 0) > 0;
+}
+
+/** Dismiss turn: prefer turn from dismissed_by_action_ids, else dismissed_at_turn. */
+export function getDismissedTurn(
+	statusById: RequirementStatusMap,
+	requirementId: string,
+	actionTurnById: Record<string, number> = {}
+): number | null {
+	const status = resolveStatusRow(statusById, requirementId);
+	if (!status || !isRequirementDismissed(statusById, requirementId)) return null;
+	const actionIds = status.dismissed_by_action_ids ?? [];
+	if (actionIds.length > 0) {
+		const turns = actionIds
+			.map((id) => actionTurnById[id] ?? getTurnFromActionId(id))
+			.filter((turn): turn is number => turn != null);
+		if (turns.length > 0) return Math.min(...turns);
+	}
+	return status.dismissed_at_turn;
+}
+
 export function goalLabel(goalId: string): string {
 	const normalized = goalId.trim();
 	const alphaChild = normalized.match(/^outcome_(\d+)([a-z])(?:_\d+)?$/i);
@@ -185,10 +239,11 @@ export function timelineClusterKey(entry: {
 	key: string;
 	rowKey: string;
 	turn: number | null;
-	eventKind?: 'base' | 'executed' | 'indirect';
+	eventKind?: 'base' | 'executed' | 'indirect' | 'dismissed';
 }): string {
 	if (entry.eventKind === 'indirect') return `indirect:${entry.key}`;
 	if (entry.eventKind === 'executed') return `${entry.turn ?? 'na'}:executed`;
+	if (entry.eventKind === 'dismissed') return `${entry.turn ?? 'na'}:dismissed`;
 	if (entry.key === 'outcome-start') return 'base:outcome-start';
 	if (entry.rowKey.startsWith('child-goal-start:')) return `base:child:${entry.turn ?? 'na'}`;
 	return `base:req:${entry.turn ?? 'na'}`;
