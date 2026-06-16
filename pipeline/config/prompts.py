@@ -505,7 +505,9 @@ Respond ONLY with a JSON object (no additional text):
   "deliverable_type": "code | plan | itinerary | document | list | other | null",
   "source_turn_ids": [<list of integer turn_ids where the deliverable appears>]
 }}
-"""REQUIREMENT_DELIVERABLE_EVALUATION_PROMPT = """You are evaluating whether a set of requirements are reflected/satisfied in a final deliverable.
+"""
+
+REQUIREMENT_DELIVERABLE_EVALUATION_PROMPT = """You are evaluating whether a set of requirements are reflected/satisfied in a final deliverable.
 
 DELIVERABLE:
 {deliverable_text}
