@@ -1475,6 +1475,9 @@
 
     .track .cell.later { font-style: italic; }
 
+    .trace-demo.is-raw .trace-grid { grid-template-columns: minmax(0, 760px); }
+    .trace-demo.is-raw .trace-panel:last-child { display: none; }
+
     .trace-foot {
       margin: 14px 4px 0;
       color: var(--muted);
@@ -1626,13 +1629,13 @@
             </div>
             <div class="trace-nav">
               <button type="button" id="tracePrev" aria-label="Previous step">←</button>
-              <span id="traceCount">1 / 4</span>
+              <span id="traceCount">0 / 4</span>
               <button type="button" id="traceNext" aria-label="Next step">→</button>
             </div>
           </div>
           <div class="trace-grid">
             <div class="trace-panel">
-              <h4 class="trace-panel-title">The chat, annotated</h4>
+              <h4 class="trace-panel-title" id="traceChatTitle">The chat, annotated</h4>
               <ol class="trace-chat" id="traceChat" aria-label="Annotated chat turns"></ol>
             </div>
             <div class="trace-panel">
@@ -1900,6 +1903,7 @@
       const TURNS = TURNS_ALL.filter(t => t.t <= LAST);
 
       const STEPS = {
+        0: { title: "The input: a human–AI chat", right: "" },
         1: { title: "Outcome & action extraction", right: "Outcomes" },
         2: { title: "Requirement extraction", right: "Requirements over time" },
         3: { title: "Influence labeling", right: "Who influenced each requirement" },
@@ -1936,6 +1940,7 @@
 
       // ---------- chat ----------
       function chipsFor(tu) {
+        if (step === 0) return "";
         const out = [];
         if (step === 1) {
           GOALS.filter(g => g.start === tu.t).forEach(g =>
@@ -1971,7 +1976,7 @@
         chatEl.innerHTML = TURNS.map(tu => `
           <li class="turn" data-who="${tu.who}" data-t="${tu.t}">
             <div class="turn-who"><span class="avatar">${tu.who === "you" ? "Y" : "A"}</span>${whoName(tu.who)}<span class="tid">T${tu.t}</span></div>
-            <div class="turn-bubble">${tu.html}</div>
+            <div class="turn-bubble">${step === 0 ? tu.html.replace(/<\/?b>/g, "") : tu.html}</div>
             ${step === 1 ? actsFor(tu) : ""}
             <div class="chips">${chipsFor(tu)}</div>
           </li>`).join("");
@@ -2084,7 +2089,7 @@
       }
 
       function renderRight() {
-        rightEl.innerHTML = [null, renderStep1, renderStep2, renderStep3, renderStep4][step]();
+        rightEl.innerHTML = [() => "", renderStep1, renderStep2, renderStep3, renderStep4][step]();
         if (step === 3) drawEdges();
       }
 
@@ -2107,6 +2112,7 @@
 
       // ---------- focus / highlight ----------
       function currentFocus() {
+        if (step === 0) return null;
         if (hover) return hover;
         if (step === 1) return selGoal ? { goal: selGoal } : null;
         return { reqs: new Set([selReq]) };
@@ -2173,11 +2179,13 @@
           b.setAttribute("aria-selected", on ? "true" : "false");
         });
         const S = STEPS[n];
-        document.getElementById("traceEyebrow").textContent = `Step ${n} of 4 · interactive example`;
+        document.getElementById("traceEyebrow").textContent = n === 0 ? "Step 0 · interactive example" : `Step ${n} of 4 · interactive example`;
+        document.getElementById("traceChatTitle").textContent = n === 0 ? "The chat" : "The chat, annotated";
+        root.classList.toggle("is-raw", n === 0);
         document.getElementById("traceTitle").textContent = S.title;
         document.getElementById("traceRightTitle").textContent = S.right;
         document.getElementById("traceCount").textContent = `${n} / 4`;
-        document.getElementById("tracePrev").disabled = n === 1;
+        document.getElementById("tracePrev").disabled = n === 0;
         document.getElementById("traceNext").disabled = n === 4;
         renderChat();
         renderRight();
@@ -2186,7 +2194,7 @@
 
       // ---------- events (delegated) ----------
       stepBtns.forEach(b => b.addEventListener("click", () => setStep(+b.dataset.step)));
-      document.getElementById("tracePrev").addEventListener("click", () => setStep(Math.max(1, step - 1)));
+      document.getElementById("tracePrev").addEventListener("click", () => setStep(Math.max(0, step - 1)));
       document.getElementById("traceNext").addEventListener("click", () => setStep(Math.min(4, step + 1)));
 
       root.addEventListener("click", e => {
@@ -2226,7 +2234,7 @@
       });
       root.addEventListener("mouseleave", () => { hover = null; applyFocus(); });
 
-      setStep(1);
+      setStep(0);
       if ("ResizeObserver" in window) new ResizeObserver(() => step === 3 && drawEdges()).observe(rightEl);
       document.fonts?.ready.then(() => step === 3 && drawEdges());
     })();
