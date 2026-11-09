@@ -1183,7 +1183,7 @@
 
     .goal-card:hover { border-color: #b7bbc0; }
     .goal-card.is-sel { border: 2.5px solid var(--ink); padding: 9px 11px; }
-    .goal-card .gbadge { margin-top: 2px; background: var(--accent); width: 24px; height: 24px; }
+    .goal-card .gbadge { margin-top: 1px; height: 22px; min-width: 30px; font-size: 0.78rem; }
     .goal-card .gname { font-weight: 800; color: var(--ink); line-height: 1.3; }
     .goal-card .gmeta { grid-column: 2; color: var(--muted); font-size: 0.84rem; font-weight: 600; }
     .goal-tree .child { margin-left: 22px; position: relative; }
@@ -1417,7 +1417,7 @@
       line-height: 1.3;
     }
 
-    .score-goal .head .gbadge { background: var(--accent); width: 24px; height: 24px; flex-shrink: 0; }
+    .score-goal .head .gbadge { margin-top: 1px; height: 22px; min-width: 30px; font-size: 0.78rem; flex-shrink: 0; }
 
     .bars { display: grid; gap: 6px; padding: 10px 12px; border-radius: 12px; background: var(--panel); }
 
@@ -2034,7 +2034,7 @@
       function renderStep1() {
         const count = g => ACTIONS.filter(a => a[2] === g).length;
         const card = g => `<button type="button" class="goal-card${selGoal === g.g ? " is-sel" : ""}" data-goal="${g.g}">
-            <span class="gbadge">${g.g}</span><span class="gname">${g.name}</span>
+            <span class="gbadge">G${g.g}</span><span class="gname">${g.name}</span>
             <span class="gmeta">${g.parent ? "Sub-goal" : "Top-level goal"} · starts ${pill(g.start)} · ${count(g.g)} actions</span></button>`;
         const you = ACTIONS.filter(a => turnByT[a[0]].who === "you");
         const asst = ACTIONS.filter(a => turnByT[a[0]].who === "asst");
@@ -2117,7 +2117,7 @@
                 <span class="nm"><b>${id}</b> ${r.label}</span>${hbar(r.you, 100 - r.you).html}<span class="num">${r.you} · ${100 - r.you}</span></button>`;
           }).join("");
           return `<div class="score-goal">
-              <div class="head"><span class="gbadge">${gs.g}</span>${goalById[gs.g].name}</div>
+              <div class="head"><span class="gbadge">G${gs.g}</span>${goalById[gs.g].name}</div>
               <div class="bars">
                 <div class="bar"><span class="lbl">overall</span>${o.html}<span class="num">${o.yp} · ${o.ap}</span></div>
                 <div class="bar"><span class="lbl">shaper</span>${sh.html}<span class="num">${sh.yp} · ${sh.ap}</span></div>
