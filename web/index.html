@@ -1475,8 +1475,43 @@
 
     .track .cell.later { font-style: italic; }
 
-    .trace-demo.is-raw .trace-grid { grid-template-columns: minmax(0, 760px); }
-    .trace-demo.is-raw .trace-panel:last-child { display: none; }
+    .goto-hint { margin: 0 0 12px; color: var(--text); font-size: 0.93rem; }
+    .goto-list { display: grid; gap: 8px; }
+
+    .goto-step {
+      appearance: none;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1.5px solid var(--line);
+      background: #ffffff;
+      color: var(--ink);
+      font: inherit;
+      font-weight: 800;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 160ms ease, transform 160ms ease;
+    }
+
+    .goto-step:hover { border-color: var(--ink); transform: translateY(-1px); }
+
+    .goto-step .num {
+      display: inline-grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 900;
+    }
+
+    .goto-step .arrow { color: var(--muted); }
 
     .trace-foot {
       margin: 14px 4px 0;
@@ -1903,7 +1938,7 @@
       const TURNS = TURNS_ALL.filter(t => t.t <= LAST);
 
       const STEPS = {
-        0: { title: "The input: a human–AI chat", right: "" },
+        0: { title: "The input: a human–AI chat", right: "What CoTrace adds" },
         1: { title: "Goal & action extraction", right: "Goals" },
         2: { title: "Requirement extraction", right: "Requirements over time" },
         3: { title: "Influence labeling", right: "Who influenced each requirement" },
@@ -1988,6 +2023,13 @@
         const tot = y + a || 1, yp = Math.round((y / tot) * 100);
         return { yp, ap: 100 - yp, html: `<span class="hbar"><i class="you" style="width:${yp}%"></i><i class="asst" style="width:${100 - yp}%"></i></span>` };
       };
+
+      function renderStep0() {
+        const items = [1, 2, 3, 4].map(n => `<button type="button" class="goto-step" data-goto="${n}">
+            <span class="num">${n}</span><span>${STEPS[n].title}</span><span class="arrow">→</span></button>`).join("");
+        return `<p class="goto-hint">This is the raw chat. Click a step to see what each part of the pipeline labels in it. You can also use the cards above or the arrows.</p>
+          <div class="goto-list">${items}</div>`;
+      }
 
       function renderStep1() {
         const count = g => ACTIONS.filter(a => a[2] === g).length;
@@ -2089,7 +2131,7 @@
       }
 
       function renderRight() {
-        rightEl.innerHTML = [() => "", renderStep1, renderStep2, renderStep3, renderStep4][step]();
+        rightEl.innerHTML = [renderStep0, renderStep1, renderStep2, renderStep3, renderStep4][step]();
         if (step === 3) drawEdges();
       }
 
@@ -2177,9 +2219,11 @@
           const on = +b.dataset.step === n;
           b.classList.toggle("is-active", on);
           b.setAttribute("aria-selected", on ? "true" : "false");
+          const cta = b.querySelector(".step-cta");
+          if (cta) cta.textContent = on ? "Click again for the plain chat" : "See it on the example ↓";
         });
         const S = STEPS[n];
-        document.getElementById("traceEyebrow").textContent = n === 0 ? "Step 0 · interactive example" : `Step ${n} of 4 · interactive example`;
+        document.getElementById("traceEyebrow").textContent = n === 0 ? "Step 0 · start here" : `Step ${n} of 4 · interactive example`;
         document.getElementById("traceChatTitle").textContent = n === 0 ? "The chat" : "The chat, annotated";
         root.classList.toggle("is-raw", n === 0);
         document.getElementById("traceTitle").textContent = S.title;
@@ -2193,11 +2237,13 @@
       }
 
       // ---------- events (delegated) ----------
-      stepBtns.forEach(b => b.addEventListener("click", () => setStep(+b.dataset.step)));
+      stepBtns.forEach(b => b.addEventListener("click", () => setStep(+b.dataset.step === step ? 0 : +b.dataset.step)));
       document.getElementById("tracePrev").addEventListener("click", () => setStep(Math.max(0, step - 1)));
       document.getElementById("traceNext").addEventListener("click", () => setStep(Math.min(4, step + 1)));
 
       root.addEventListener("click", e => {
+        const go = e.target.closest("[data-goto]");
+        if (go) { setStep(+go.dataset.goto); return; }
         const more = e.target.closest("[data-more]");
         if (more) {
           const t = +more.dataset.more;
