@@ -2103,7 +2103,7 @@
           <dl class="detail-rows">
             <div class="detail-row"><dt>Direct</dt><dd>${stated}</dd></div>
             <div class="detail-row"><dt>Indirect</dt><dd>${setup}</dd></div>
-            <div class="detail-row"><dt>Carried out</dt><dd>${r.exec.filter(t => t <= LAST).map(pill).join("")}${r.exec.some(t => t > LAST) ? `<span class="why">Later in the chat: ${r.exec.filter(t => t > LAST).map(t => "T" + t).join(", ")}. <a class="text-link" href="viewer">See it in the viewer</a></span>` : ""}</dd></div>
+            <div class="detail-row"><dt>Carried out</dt><dd>${r.exec.filter(t => t <= LAST).map(pill).join("")}${r.exec.some(t => t > LAST) ? `<span class="why">Later in the chat: ${r.exec.filter(t => t > LAST).map(t => "T" + t).join(", ")}.</span>` : ""}</dd></div>
           </dl>`;
       }
 
@@ -2125,7 +2125,7 @@
               </div>
               <p class="score-note">${Math.round((gs.asstIndirect / gs.asst) * 100)}% of the assistant’s share comes from indirect influence.</p>
               <div class="score-reqs">${reqs}</div>
-              ${hidden ? `<p class="score-note">+ ${hidden} more requirement${hidden > 1 ? "s" : ""} later in the chat, in the <a class="text-link" href="viewer">viewer</a>.</p>` : ""}
+              ${hidden ? `<p class="score-note">+ ${hidden} more requirement${hidden > 1 ? "s" : ""} later in the chat.</p>` : ""}
             </div>`;
         }).join("") + `<p class="score-note" style="margin-top:12px">Numbers are you · assistant. Click a requirement to see its turns.</p>`;
       }
