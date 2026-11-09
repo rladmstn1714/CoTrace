@@ -7,24 +7,31 @@
   <meta property="og:title" content="CoTrace: Goal-Level AI Contributions in Collaboration" />
   <meta property="og:description" content="A framework for measuring direct and indirect human-AI goal shaping across collaboration logs." />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#111827" />
+  <meta name="theme-color" content="#24272b" />
 
   <title>CoTrace | Goal-Level AI Contributions in Collaboration</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg: #ffffff;
       --paper: #ffffff;
-      --ink: #111827;
-      --muted: #5b6474;
-      --line: #e5e7eb;
-      --accent: #4f46e5;
-      --accent-2: #0f766e;
-      --accent-soft: #eef2ff;
-      --shadow: 0 24px 80px rgba(15, 23, 42, 0.10);
+      --ink: #24272b;
+      --text: #3a3d42;
+      --muted: #6f7378;
+      --faint: #a3a6a9;
+      --line: #dcdee2;
+      --panel: #f2f3f5;
+      --accent: #4472c4;
+      --accent-2: #4f8a4b;
+      --accent-soft: #e2eaf7;
+      --you: #4472c4;
+      --you-soft: #e2eaf7;
+      --asst: #4f8a4b;
+      --asst-soft: #e3eedb;
+      --shadow: 0 16px 40px rgba(36, 39, 43, 0.08);
       --radius-xl: 28px;
       --radius-lg: 18px;
       --max: 1120px;
@@ -40,10 +47,11 @@
 
     body {
       margin: 0;
-      font-family: "Manrope", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--ink);
+      font-family: "Nunito", ui-rounded, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
       background: var(--bg);
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
     a {
@@ -66,7 +74,7 @@
       z-index: 10;
       backdrop-filter: blur(18px);
       background: rgba(255, 255, 255, 0.92);
-      border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+      border-bottom: 1.5px solid var(--panel);
     }
 
     nav {
@@ -81,8 +89,10 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--ink);
+      letter-spacing: -0.01em;
     }
 
     .brand-mark {
@@ -147,10 +157,11 @@
     }
 
     h1 {
-      font-size: clamp(2.55rem, 6vw, 5.2rem);
-      line-height: 1;
-      letter-spacing: -0.045em;
-      font-weight: 700;
+      font-size: clamp(2.4rem, 5.6vw, 4.8rem);
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+      font-weight: 800;
+      color: var(--ink);
       margin: 0 0 24px;
     }
 
@@ -165,8 +176,8 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px 14px;
-      color: #374151;
-      font-weight: 700;
+      color: var(--ink);
+      font-weight: 800;
       margin-bottom: 8px;
     }
 
@@ -184,11 +195,10 @@
 
     .concept-figure {
       margin-top: 52px;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 18px;
-      background: #ffffff;
-      box-shadow: 0 14px 38px rgba(15, 23, 42, 0.05);
+      border: none;
+      border-radius: 26px;
+      padding: 18px 18px 22px;
+      background: var(--panel);
     }
 
     .concept-figure img {
@@ -196,12 +206,16 @@
       width: 100%;
       height: auto;
       border-radius: 16px;
+      background: #ffffff;
+      border: 1.5px solid var(--line);
+      box-sizing: border-box;
     }
 
     .concept-figure figcaption {
       margin-top: 12px;
       color: var(--muted);
       font-size: 0.95rem;
+      font-weight: 600;
       text-align: center;
     }
 
@@ -210,25 +224,26 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 12px 18px;
+      padding: 11px 20px;
       border-radius: 999px;
-      border: 1px solid var(--line);
-      background: var(--paper);
+      border: 1.5px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
       font-weight: 800;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
-      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
     }
 
     .button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 18px 38px rgba(15, 23, 42, 0.10);
-      border-color: #c7d2fe;
+      background: #e9eaed;
+      border-color: #c8cbd0;
+      color: var(--ink);
     }
 
     .button.primary {
       color: white;
-      border-color: transparent;
-      background: linear-gradient(135deg, var(--accent), #7c3aed);
+      border-color: var(--ink);
+      background: var(--ink);
     }
 
     .stats-card {
@@ -244,7 +259,7 @@
     .stat {
       padding: 18px;
       border-radius: var(--radius-lg);
-      background: #f9fafb;
+      background: var(--panel);
       border: 1px solid var(--line);
     }
 
@@ -271,10 +286,11 @@
     }
 
     .section-title h2 {
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      line-height: 1.05;
-      letter-spacing: -0.035em;
-      font-weight: 700;
+      font-size: clamp(1.8rem, 4vw, 2.9rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      color: var(--ink);
       margin: 0;
     }
 
@@ -286,11 +302,10 @@
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.82);
-      border: 1px solid rgba(229, 231, 235, 0.9);
-      border-radius: 22px;
-      padding: 28px;
-      box-shadow: 0 14px 38px rgba(15, 23, 42, 0.05);
+      background: var(--panel);
+      border: none;
+      border-radius: 24px;
+      padding: 22px;
     }
 
     .grid-3 {
@@ -307,16 +322,16 @@
 
     .mini-card {
       padding: 22px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: var(--paper);
+      border-radius: 20px;
+      border: none;
+      background: var(--panel);
     }
 
     .mini-card h3 {
       margin: 0 0 8px;
-      font-size: 1.08rem;
-      letter-spacing: -0.015em;
-      font-weight: 700;
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: var(--ink);
     }
 
     .mini-card p {
@@ -332,27 +347,31 @@
     }
 
     .desideratum-card {
-      border: 1px solid var(--line);
+      border: none;
       border-radius: 22px;
       padding: 24px;
-      background: #f9fafb;
+      background: var(--panel);
     }
 
     .desideratum-label {
       display: inline-flex;
       margin-bottom: 12px;
-      color: var(--accent);
-      font-size: 0.78rem;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: var(--you-soft);
+      color: var(--you);
+      font-size: 0.76rem;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
     }
 
     .desideratum-card h3 {
       margin: 0 0 10px;
-      font-size: 1.25rem;
+      font-size: 1.28rem;
       line-height: 1.15;
-      letter-spacing: -0.03em;
+      font-weight: 800;
+      color: var(--ink);
     }
 
     .desideratum-card p {
@@ -373,9 +392,9 @@
       position: relative;
       padding: 22px;
       min-height: 200px;
-      border-radius: 18px;
+      border-radius: 20px;
       background: #ffffff;
-      border: 1px solid var(--line);
+      border: 1.5px solid var(--line);
       overflow: hidden;
     }
 
@@ -384,20 +403,20 @@
       content: counter(step);
       display: inline-grid;
       place-items: center;
-      width: 34px;
-      height: 34px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-weight: 850;
-      margin-bottom: 18px;
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 900;
+      margin-bottom: 16px;
     }
 
     .step h3 {
       margin: 0 0 8px;
-      line-height: 1.18;
-      letter-spacing: -0.015em;
-      font-weight: 700;
+      line-height: 1.2;
+      font-weight: 800;
+      color: var(--ink);
     }
 
     .step p {
@@ -427,90 +446,6 @@
       margin-top: 16px;
     }
 
-
-    .card {
-      background: rgba(255, 255, 255, 0.82);
-      border: 1px solid rgba(229, 231, 235, 0.9);
-      border-radius: 22px;
-      padding: 28px;
-      box-shadow: 0 14px 38px rgba(15, 23, 42, 0.05);
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-
-    .mini-card {
-      padding: 22px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: var(--paper);
-    }
-
-    .mini-card h3 {
-      margin: 0 0 8px;
-      font-size: 1.08rem;
-      letter-spacing: -0.015em;
-      font-weight: 700;
-    }
-
-    .mini-card p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .pipeline {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      counter-reset: step;
-    }
-
-    .step {
-      position: relative;
-      padding: 22px;
-      min-height: 200px;
-      border-radius: 18px;
-      background: #ffffff;
-      border: 1px solid var(--line);
-      overflow: hidden;
-    }
-
-    .step::before {
-      counter-increment: step;
-      content: counter(step);
-      display: inline-grid;
-      place-items: center;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-weight: 850;
-      margin-bottom: 18px;
-    }
-
-    .step h3 {
-      margin: 0 0 8px;
-      line-height: 1.18;
-      letter-spacing: -0.015em;
-      font-weight: 700;
-    }
-
-    .step p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
-
     .contribution-tabs {
       display: flex;
       flex-wrap: wrap;
@@ -520,21 +455,21 @@
 
     .contribution-tab {
       appearance: none;
-      border: 1px solid var(--line);
+      border: 1.5px solid var(--line);
       border-radius: 999px;
       background: #ffffff;
       color: var(--muted);
-      padding: 10px 16px;
+      padding: 9px 18px;
       font: inherit;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
     }
 
     .contribution-tab:hover {
       transform: translateY(-1px);
-      border-color: #c7d2fe;
-      color: var(--accent);
+      border-color: #b7bbc0;
+      color: var(--ink);
     }
 
     .contribution-tab.active {
@@ -559,18 +494,19 @@
     }
 
     .label-card {
-      border: 1px solid var(--line);
-      border-radius: 22px;
+      border: none;
+      border-radius: 24px;
       padding: 28px;
-      background: #ffffff;
-      box-shadow: 0 14px 38px rgba(15, 23, 42, 0.05);
+      background: var(--panel);
     }
 
     .label-card h3 {
       margin: 0 0 12px;
-      font-size: clamp(1.45rem, 3vw, 2.2rem);
-      line-height: 1.08;
-      letter-spacing: -0.04em;
+      font-size: clamp(1.45rem, 3vw, 2.1rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      color: var(--ink);
     }
 
     .label-card p {
@@ -592,7 +528,7 @@
       border: 1px solid var(--line);
       border-radius: 18px;
       padding: 16px;
-      background: #f9fafb;
+      background: var(--panel);
       scroll-snap-align: start;
       transition: background 180ms ease, transform 180ms ease;
     }
@@ -666,9 +602,9 @@
       gap: 12px;
       align-items: start;
       padding: 13px 14px;
-      border: 1px solid var(--line);
+      border: 1.5px solid var(--line);
       border-radius: 14px;
-      background: #f9fafb;
+      background: #ffffff;
     }
 
     .setup-item strong {
@@ -689,7 +625,7 @@
       width: var(--value, 0%);
       height: 100%;
       border-radius: inherit;
-      background: linear-gradient(90deg, var(--accent), #8b5cf6);
+      background: var(--accent);
       transition: width 520ms ease;
     }
 
@@ -717,11 +653,11 @@
 
     .findings-card {
       display: grid;
-      gap: 14px;
-      border: 1px solid var(--line);
-      border-radius: 22px;
+      gap: 12px;
+      border: none;
+      border-radius: 24px;
       padding: 22px;
-      background: #f9fafb;
+      background: var(--panel);
     }
 
     .findings-card h4 {
@@ -739,19 +675,22 @@
       border-radius: 16px;
       padding: 16px;
       background: #ffffff;
-      border: 1px solid var(--line);
+      border: 1.5px solid var(--line);
+      color: var(--text);
       font: inherit;
       cursor: pointer;
-      transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+      transition: border-color 180ms ease, transform 180ms ease;
     }
 
     .evidence-item:hover {
       transform: translateY(-1px);
-      background: #f8fafc;
+      border-color: #b7bbc0;
     }
 
     .evidence-item.active {
-      background: var(--accent-soft);
+      background: #ffffff;
+      border-color: var(--ink);
+      box-shadow: 0 0 0 1px var(--ink);
     }
 
     .evidence-item.active strong {
@@ -761,7 +700,8 @@
     .evidence-item strong {
       display: block;
       margin-bottom: 4px;
-      letter-spacing: -0.015em;
+      color: var(--ink);
+      font-weight: 800;
     }
 
     .metric-inline {
@@ -809,16 +749,17 @@
       display: grid;
       grid-template-rows: auto 1fr;
       gap: 8px;
-      border: 1px solid var(--line);
+      border: 1.5px solid var(--line);
       border-radius: 16px;
       padding: 14px;
       background: #ffffff;
       scroll-snap-align: start;
-      transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+      transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
     }
 
     .reflection-card.active {
       background: var(--accent-soft);
+      border-color: var(--accent);
     }
 
     .reflection-card:focus-visible {
@@ -875,12 +816,13 @@
       margin: 0;
       white-space: pre-wrap;
       word-break: break-word;
-      color: #d1d5db;
-      background: #0b1120;
-      border-radius: 18px;
+      color: var(--ink);
+      background: #ffffff;
+      border-radius: 16px;
       padding: 20px;
       overflow: auto;
-      border: 1px solid #1f2937;
+      border: 1.5px solid var(--line);
+      font-size: 0.88rem;
     }
 
     .copy-row {
@@ -917,6 +859,462 @@
 
       .hero {
         padding-top: 56px;
+      }
+    }
+    /* ── Interactive trace example (pipeline section) ─────────────── */
+    .trace-demo {
+      margin-top: 34px;
+    }
+
+    .trace-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 10px 24px;
+      margin-bottom: 14px;
+    }
+
+    .trace-head h3 {
+      margin: 4px 0 4px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+
+    .trace-head p {
+      margin: 0;
+      max-width: 640px;
+      color: var(--muted);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #ffffff;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .trace-source {
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .trace-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .trace-panel {
+      background: var(--panel);
+      border-radius: 24px;
+      padding: 20px 20px 22px;
+      min-width: 0;
+    }
+
+    .trace-step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 14px;
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.25;
+    }
+
+    .trace-step .num {
+      display: inline-grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-weight: 900;
+    }
+
+    .trace-chat {
+      list-style: none;
+      margin: 0;
+      padding: 2px 6px 2px 0;
+      display: grid;
+      gap: 12px;
+      max-height: 860px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #d3d5d9 transparent;
+    }
+
+    .turn {
+      display: grid;
+      gap: 6px;
+      transition: opacity 160ms ease;
+    }
+
+    .turn-who {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+
+    .turn-who .avatar {
+      display: inline-grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 900;
+    }
+
+    .turn-who .tid {
+      margin-left: auto;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.86rem;
+    }
+
+    .turn[data-who="you"] .turn-who { color: var(--you); }
+    .turn[data-who="you"] .avatar { background: var(--you); }
+    .turn[data-who="asst"] .turn-who { color: var(--asst); }
+    .turn[data-who="asst"] .avatar { background: var(--asst); }
+
+    .turn-bubble {
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 1.5px solid var(--line);
+      background: #ffffff;
+      color: var(--ink);
+      font-size: 0.93rem;
+      line-height: 1.5;
+      transition: border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .turn-bubble b {
+      font-weight: 800;
+    }
+
+    .turn[data-who="you"] { --c: var(--you); }
+    .turn[data-who="asst"] { --c: var(--asst); }
+
+    .turn.is-hot .turn-bubble {
+      border-color: var(--c);
+      box-shadow: 0 0 0 1px var(--c);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      appearance: none;
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 10px;
+      border-radius: 999px;
+      border: 1.5px solid transparent;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.5;
+      cursor: pointer;
+      transition: transform 140ms ease, opacity 160ms ease, box-shadow 160ms ease;
+    }
+
+    .chip:hover {
+      transform: translateY(-1px);
+    }
+
+    .chip.you { background: var(--you-soft); color: #2f5aa3; }
+    .chip.asst { background: var(--asst-soft); color: #3f7a3c; }
+    .chip.goal { background: #ffffff; color: var(--muted); border-color: var(--line); cursor: default; }
+    .chip.goal:hover { transform: none; }
+    .chip.setup {
+      background: #ffffff;
+      color: #3f7a3c;
+      border: 1.5px dashed var(--asst);
+    }
+
+    .chip.is-sel {
+      box-shadow: 0 0 0 2px var(--ink);
+    }
+
+    .trace-demo.has-focus .chip:not(.is-hot):not(.goal) {
+      opacity: 0.38;
+    }
+
+    .trace-demo.has-focus .turn:not(.is-hot) {
+      opacity: 0.55;
+    }
+
+    .trace-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 16px;
+      margin: -2px 0 14px;
+      color: var(--ink);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .trace-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .trace-legend svg {
+      flex-shrink: 0;
+    }
+
+    .lifecycle {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(48px, 0.55fr) minmax(0, 1.05fr);
+      align-items: stretch;
+    }
+
+    .lifecycle svg.edges {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .edge {
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      transition: opacity 160ms ease, stroke-width 160ms ease;
+    }
+
+    .edge.create { stroke: var(--you); }
+    .edge.setup { stroke: var(--asst); stroke-dasharray: 6 5; }
+    .edge.exec { stroke: var(--asst); stroke-dasharray: 1.5 4.5; opacity: 0.45; }
+    .lifecycle.has-focus .edge { opacity: 0.1; }
+    .lifecycle.has-focus .edge.is-hot { opacity: 1; stroke-width: 2.6; }
+
+    .node-col {
+      min-width: 0;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .req-col {
+      grid-column: 3;
+      align-content: space-around;
+    }
+
+    .node {
+      appearance: none;
+      width: 100%;
+      min-width: 0;
+      overflow: hidden;
+      text-align: left;
+      font: inherit;
+      padding: 6px 10px;
+      border-radius: 11px;
+      border: 1.5px solid;
+      cursor: pointer;
+      line-height: 1.3;
+      transition: opacity 160ms ease, box-shadow 160ms ease, transform 140ms ease;
+    }
+
+    .node:hover { transform: translateY(-1px); }
+
+    .node .k {
+      display: block;
+      font-weight: 900;
+      font-size: 0.8rem;
+    }
+
+    .node .v {
+      display: block;
+      color: var(--ink);
+      font-size: 0.84rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .node.turn-node.you { background: var(--you-soft); border-color: var(--you); }
+    .node.turn-node.you .k { color: var(--you); }
+    .node.turn-node.asst { background: var(--asst-soft); border-color: var(--asst); }
+    .node.turn-node.asst .k { color: var(--asst); }
+
+    .node.req-node {
+      background: #ffffff;
+      border-color: var(--you);
+      padding: 9px 12px;
+    }
+
+    .node.req-node .k { color: var(--you); font-size: 0.92rem; }
+    .node.req-node .v { font-size: 0.92rem; white-space: normal; }
+
+    .node.is-sel {
+      box-shadow: 0 0 0 2px var(--ink);
+    }
+
+    .lifecycle.has-focus .node:not(.is-hot) {
+      opacity: 0.4;
+    }
+
+    .trace-detail {
+      margin-top: 16px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: #ffffff;
+      border: 1.5px solid var(--line);
+    }
+
+    .trace-detail h5 {
+      margin: 0 0 4px;
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--ink);
+    }
+
+    .trace-detail h5 .rid {
+      color: var(--you);
+      margin-right: 4px;
+    }
+
+    .trace-detail .req-text {
+      margin: 0 0 12px;
+      color: var(--text);
+      font-size: 0.93rem;
+    }
+
+    .detail-rows {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+    }
+
+    .detail-row {
+      display: grid;
+      grid-template-columns: 104px minmax(0, 1fr);
+      gap: 10px;
+      font-size: 0.88rem;
+      align-items: baseline;
+    }
+
+    .detail-row dt {
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.74rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .detail-row dd {
+      margin: 0;
+      color: var(--ink);
+    }
+
+    .detail-row .why {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+    }
+
+    .tpill {
+      display: inline-flex;
+      padding: 0 8px;
+      margin-right: 4px;
+      border-radius: 999px;
+      color: #ffffff;
+      font-size: 0.76rem;
+      font-weight: 800;
+      line-height: 1.55;
+    }
+
+    .tpill.you { background: var(--you); }
+    .tpill.asst { background: var(--asst); }
+
+    .share {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .share-bar {
+      height: 12px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(36, 39, 43, 0.5);
+      overflow: hidden;
+      display: flex;
+      box-sizing: border-box;
+    }
+
+    .share-bar i { display: block; height: 100%; transition: width 400ms ease; }
+    .share-bar i.you { background: var(--you); }
+    .share-bar i.asst { background: var(--asst); }
+
+    .share-num {
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .share-num .you { color: var(--you); }
+    .share-num .asst { color: var(--asst); }
+
+    .trace-hint {
+      margin: 10px 2px 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .trace-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .trace-chat {
+        max-height: 520px;
+      }
+
+      .detail-row {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      .lifecycle {
+        grid-template-columns: minmax(0, 1fr) 30px minmax(0, 0.9fr);
+      }
+
+      .node .v {
+        font-size: 0.78rem;
+      }
+
+      .node.req-node .v {
+        font-size: 0.84rem;
       }
     }
   </style>
@@ -1042,6 +1440,39 @@
             <h3>Contribution scoring</h3>
             <p>Aggregate influence across requirements and goal levels to summarize each participant’s role in shaping the collaboration.</p>
           </article>
+        </div>
+
+        <div class="trace-demo" id="traceDemo">
+          <div class="trace-head">
+            <div>
+              <span class="eyebrow">Interactive example</span>
+              <h3>See the annotations on a real chat</h3>
+              <p>The first ten turns of the Pittsburgh trip-planning chat from the CoTrace viewer, with the labels the pipeline produced. Hover a turn, or click a requirement or a tag, to follow it through the chat.</p>
+            </div>
+            <a class="trace-source text-link" href="viewer">Open the full chat in the viewer</a>
+          </div>
+
+          <div class="trace-grid">
+            <div class="trace-panel">
+              <h4 class="trace-step"><span class="num">1</span>Read the chat, mark the requirements</h4>
+              <ol class="trace-chat" id="traceChat" aria-label="Annotated chat turns"></ol>
+            </div>
+
+            <div class="trace-panel">
+              <h4 class="trace-step"><span class="num">2</span>Track the lifecycle of requirements</h4>
+              <div class="trace-legend" aria-hidden="true">
+                <span><svg width="26" height="8"><line x1="1" y1="4" x2="25" y2="4" stroke="#4472c4" stroke-width="2.4" stroke-linecap="round"/></svg>you stated it</span>
+                <span><svg width="26" height="8"><line x1="1" y1="4" x2="25" y2="4" stroke="#4f8a4b" stroke-width="2.4" stroke-dasharray="6 5" stroke-linecap="round"/></svg>the assistant's turn set it up</span>
+                <span><svg width="26" height="8"><line x1="1" y1="4" x2="25" y2="4" stroke="#4f8a4b" stroke-width="2.4" stroke-dasharray="1.5 4.5" stroke-linecap="round"/></svg>the assistant carried it out</span>
+              </div>
+              <div class="lifecycle" id="traceGraph">
+                <svg class="edges" id="traceEdges" aria-hidden="true"></svg>
+                <div class="node-col" id="traceTurnNodes"></div>
+                <div class="node-col req-col" id="traceReqNodes"></div>
+              </div>
+              <div class="trace-detail" id="traceDetail" aria-live="polite"></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1251,6 +1682,236 @@
         });
       });
     });
+
+    // ── Interactive trace example (real annotations from the sample run) ──
+    (() => {
+      const root = document.getElementById("traceDemo");
+      if (!root) return;
+
+      const REQS = [
+        { id: "R1", label: "Oakland & Cathedral", text: "Day 1 itinerary must focus on the University of Pittsburgh/Oakland area and include a visit to the Cathedral of Learning.", created: [1], setup: null, exec: [2, 4, 8, 10], you: 67 },
+        { id: "R2", label: "famous food", text: "Provide recommendations for famous Pittsburgh food/meal spots for the trip.", created: [3], setup: { t: 2, why: "The Day 1 plan already suggested places to eat, which surfaced the need to plan meals." }, exec: [4], you: 38 },
+        { id: "R3", label: "where locals eat", text: "Recommended restaurants must be places locals go to (not expensive or fancy).", created: [3], setup: { t: 2, why: "The assistant's earlier restaurant picks (some possibly fancier) likely prompted the ask for places locals go." }, exec: [4], you: 23 },
+        { id: "R4", label: "coffee at La Prima", text: "Day 1 itinerary must include a coffee stop after lunch at La Prima Espresso Company (3400 Fifth Ave).", created: [5, 7], setup: { t: 4, why: "Proposing a breakfast, lunch and dinner structure set up the idea of a coffee stop after lunch." }, exec: [8, 10], you: 74 },
+        { id: "R5", label: "dinner at The Porch", text: "Day 1 dinner plan must be updated to The Porch at Schenley.", created: [9], setup: { t: 8, why: "The finalized schedule's dinner slot set the context for asking to change dinner." }, exec: [10], you: 53 }
+      ];
+
+      const TURNS = [
+        { t: 1, who: "you", node: "Oakland, Cathedral",
+          html: "I'm planning to visit Pittsburgh for 3 days… On the first day I want to look around <b>near the University of Pittsburgh</b>. I really want to visit <b>the Cathedral of Learning</b>. What else would be good to do?",
+          chips: [{ goal: "goal · 3-day Pittsburgh trip" }, { goal: "sub-goal · Day 1 itinerary" }, { r: "R1", kind: "created" }] },
+        { t: 2, who: "asst", node: "Day 1 plan in Oakland",
+          html: "Here is a plan for Day 1 of your Pittsburgh trip, <b>centered on the Oakland area</b>… Cathedral of Learning, Heinz Memorial Chapel, Phipps Conservatory, with <b>lunch nearby at The Porch</b> or Primanti Bros.…",
+          chips: [{ r: "R1", kind: "executed" }] },
+        { t: 3, who: "you", node: "famous food, locals' spots",
+          html: "For meals I'd like to try <b>famous Pittsburgh food</b>. I prefer <b>places that locals go to</b> rather than expensive or fancy spots. Can you narrow it down and recommend those kinds of restaurants?",
+          chips: [{ goal: "sub-goal · famous local food" }, { r: "R2", kind: "created" }, { r: "R3", kind: "created" }, { setupBy: 2, rs: ["R2", "R3"] }] },
+        { t: 4, who: "asst", node: "Pamela's, Primanti, Butterjoint",
+          html: "Here are local favorites where you can try iconic Pittsburgh food: <b>Pamela's Diner</b> (breakfast/lunch), <b>Primanti Bros.</b> (lunch), <b>Butterjoint</b> (dinner)…",
+          chips: [{ r: "R2", kind: "executed" }, { r: "R3", kind: "executed" }, { r: "R1", kind: "executed" }] },
+        { t: 5, who: "you", node: "coffee at La Prima?",
+          html: "After lunch I'd like to <b>stop for coffee</b>. I heard <b>La Prima</b> is a famous brand—is there a location near the trip area?",
+          chips: [{ r: "R4", kind: "created" }, { setupBy: 4, rs: ["R4"] }] },
+        { t: 6, who: "asst", node: "two La Prima locations",
+          html: "La Prima Espresso Company has several locations in and around Oakland: <b>Oakland</b> (3400 Fifth Ave, 15–20 min on foot) and <b>Strip District</b> (about 10 min by car)…",
+          chips: [{ r: "R4", kind: "contributed" }] },
+        { t: 7, who: "you", node: "3400 Fifth Ave, finalize",
+          html: "I'll go with <b>the 3400 Fifth Ave location</b>. Please <b>add the café</b> and finalize the schedule.",
+          chips: [{ r: "R4", kind: "refined" }] },
+        { t: 8, who: "asst", node: "final Day 1 schedule",
+          html: "Final Day 1 schedule: 09:00 Pamela's Diner · 10:30 Cathedral of Learning · 12:30 Primanti Bros. · <b>14:00 La Prima</b> (3400 Fifth Ave) · 15:30 Phipps · <b>18:30 dinner at Butterjoint</b>…",
+          chips: [{ r: "R4", kind: "executed" }, { r: "R1", kind: "executed" }] },
+        { t: 9, who: "you", node: "dinner at The Porch",
+          html: "For dinner <b>let's do the Porch instead of Butterjoint</b>.",
+          chips: [{ r: "R5", kind: "created" }, { setupBy: 8, rs: ["R5"] }] },
+        { t: 10, who: "asst", node: "updated schedule",
+          html: "Updated final Day 1 schedule with <b>dinner at The Porch at Schenley</b>… 14:00 La Prima (3400 Fifth Ave) · 18:30 The Porch at Schenley. That's Day 1 set.",
+          chips: [{ r: "R5", kind: "executed" }, { r: "R4", kind: "executed" }, { r: "R1", kind: "executed" }] }
+      ];
+
+      const reqById = Object.fromEntries(REQS.map(r => [r.id, r]));
+      const turnByT = Object.fromEntries(TURNS.map(t => [t.t, t]));
+
+      // Edges: turn → requirement
+      const EDGES = [];
+      for (const r of REQS) {
+        r.created.forEach(t => EDGES.push({ t, r: r.id, kind: "create" }));
+        if (r.setup) EDGES.push({ t: r.setup.t, r: r.id, kind: "setup" });
+        r.exec.forEach(t => EDGES.push({ t, r: r.id, kind: "exec" }));
+      }
+      EDGES.push({ t: 6, r: "R4", kind: "exec" });
+
+      const chatEl = document.getElementById("traceChat");
+      const turnCol = document.getElementById("traceTurnNodes");
+      const reqCol = document.getElementById("traceReqNodes");
+      const svg = document.getElementById("traceEdges");
+      const graph = document.getElementById("traceGraph");
+      const detail = document.getElementById("traceDetail");
+      const whoName = w => (w === "you" ? "You" : "Assistant");
+
+      // Render chat
+      chatEl.innerHTML = TURNS.map(tu => {
+        const chips = tu.chips.map(c => {
+          if (c.goal) return `<span class="chip goal">${c.goal}</span>`;
+          if (c.setupBy) return `<button type="button" class="chip setup" data-reqs="${c.rs.join(",")}" data-turns="${c.setupBy},${tu.t}">set up by T${c.setupBy}'s draft</button>`;
+          const cls = tu.who === "you" ? "you" : "asst";
+          return `<button type="button" class="chip ${cls}" data-reqs="${c.r}" data-turns="${tu.t}">${c.r} ${reqById[c.r].label} · ${c.kind}</button>`;
+        }).join("");
+        return `<li class="turn" data-who="${tu.who}" data-t="${tu.t}">
+            <div class="turn-who"><span class="avatar">${tu.who === "you" ? "Y" : "A"}</span>${whoName(tu.who)}<span class="tid">T${tu.t}</span></div>
+            <div class="turn-bubble">${tu.html}</div>
+            <div class="chips">${chips}</div>
+          </li>`;
+      }).join("");
+
+      // Render graph nodes
+      turnCol.innerHTML = TURNS.map(tu =>
+        `<button type="button" class="node turn-node ${tu.who}" data-t="${tu.t}"><span class="k">T${tu.t} · ${whoName(tu.who)}</span><span class="v">${tu.node}</span></button>`
+      ).join("");
+      reqCol.innerHTML = REQS.map(r =>
+        `<button type="button" class="node req-node" data-r="${r.id}"><span class="k">${r.id}</span><span class="v">${r.label}</span></button>`
+      ).join("");
+
+      // Draw edges from element geometry
+      function drawEdges() {
+        const box = graph.getBoundingClientRect();
+        const parts = EDGES.map((e, i) => {
+          const a = turnCol.querySelector(`[data-t="${e.t}"]`).getBoundingClientRect();
+          const b = reqCol.querySelector(`[data-r="${e.r}"]`).getBoundingClientRect();
+          const x1 = a.right - box.left, y1 = a.top + a.height / 2 - box.top;
+          const x2 = b.left - box.left, y2 = b.top + b.height / 2 - box.top;
+          const dx = (x2 - x1) * 0.5;
+          return `<path class="edge ${e.kind}" data-i="${i}" d="M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}"/>`;
+        });
+        svg.innerHTML = parts.join("");
+        applyFocus();
+      }
+
+      let selected = "R2";   // requirement pinned by click
+      let hover = null;      // { turns:Set, reqs:Set } while hovering
+
+      function focusSets() {
+        if (hover) return hover;
+        if (!selected) return null;
+        const r = reqById[selected];
+        const turns = new Set(EDGES.filter(e => e.r === selected).map(e => e.t));
+        return { turns, reqs: new Set([selected]) };
+      }
+
+      function edgeIsHot(e, f) {
+        if (f.reqs.size && f.turns.size && hover && hover.mode === "chip") return f.reqs.has(e.r) && f.turns.has(e.t);
+        if (hover && hover.mode === "turn") return f.turns.has(e.t);
+        return f.reqs.has(e.r);
+      }
+
+      function applyFocus() {
+        const f = focusSets();
+        const on = !!f;
+        root.classList.toggle("has-focus", on);
+        graph.classList.toggle("has-focus", on);
+        svg.querySelectorAll(".edge").forEach(p => {
+          const e = EDGES[+p.dataset.i];
+          p.classList.toggle("is-hot", on && edgeIsHot(e, f));
+        });
+        // nodes + turns hot if touched by a hot edge
+        const hotTurns = new Set(), hotReqs = new Set();
+        if (on) EDGES.forEach(e => { if (edgeIsHot(e, f)) { hotTurns.add(e.t); hotReqs.add(e.r); } });
+        if (on) { f.turns.forEach(t => hotTurns.add(t)); if (!(hover && hover.mode === "turn")) f.reqs.forEach(r => hotReqs.add(r)); }
+        turnCol.querySelectorAll(".node").forEach(n => n.classList.toggle("is-hot", hotTurns.has(+n.dataset.t)));
+        reqCol.querySelectorAll(".node").forEach(n => {
+          n.classList.toggle("is-hot", hotReqs.has(n.dataset.r));
+          n.classList.toggle("is-sel", n.dataset.r === selected);
+        });
+        chatEl.querySelectorAll(".turn").forEach(li => li.classList.toggle("is-hot", hotTurns.has(+li.dataset.t)));
+        chatEl.querySelectorAll(".chip:not(.goal)").forEach(c => {
+          const rs = c.dataset.reqs.split(",");
+          const ts = c.dataset.turns.split(",").map(Number);
+          const hot = on && rs.some(r => hotReqs.has(r)) && ts.some(t => hotTurns.has(t)) &&
+            (!(hover && hover.mode === "turn") || ts.includes([...f.turns][0]));
+          c.classList.toggle("is-hot", hot);
+          c.classList.toggle("is-sel", !hover && rs.includes(selected));
+        });
+      }
+
+      function renderDetail() {
+        const r = reqById[selected];
+        if (!r) { detail.innerHTML = ""; return; }
+        const pill = t => `<span class="tpill ${turnByT[t].who}">T${t}</span>`;
+        const stated = r.created.map((t, i) => `${pill(t)}You${i ? " (refined)" : ""}`).join(" &nbsp;");
+        const setup = r.setup
+          ? `${pill(r.setup.t)}Assistant<span class="why">${r.setup.why}</span>`
+          : `<span style="color:var(--muted)">No indirect influence found.</span>`;
+        const done = r.exec.map(pill).join("");
+        detail.innerHTML = `
+          <h5><span class="rid">${r.id}</span>${r.label}</h5>
+          <p class="req-text">${r.text}</p>
+          <dl class="detail-rows">
+            <div class="detail-row"><dt>Stated by</dt><dd>${stated}</dd></div>
+            <div class="detail-row"><dt>Set up by</dt><dd>${setup}</dd></div>
+            <div class="detail-row"><dt>Carried out</dt><dd>${done}</dd></div>
+            <div class="detail-row"><dt>Contribution</dt><dd>
+              <div class="share">
+                <div class="share-bar" role="img" aria-label="You ${r.you}%, assistant ${100 - r.you}%"><i class="you" style="width:${r.you}%"></i><i class="asst" style="width:${100 - r.you}%"></i></div>
+                <span class="share-num"><span class="you">you ${r.you}</span> · <span class="asst">assistant ${100 - r.you}</span></span>
+              </div>
+            </dd></div>
+          </dl>`;
+      }
+
+      function select(rid, scrollChat) {
+        selected = rid;
+        hover = null;
+        renderDetail();
+        applyFocus();
+        if (scrollChat) {
+          const first = Math.min(...EDGES.filter(e => e.r === rid).map(e => e.t));
+          const li = chatEl.querySelector(`.turn[data-t="${first}"]`);
+          if (li) chatEl.scrollTo({ top: li.offsetTop - chatEl.offsetTop - 4, behavior: "smooth" });
+        }
+      }
+
+      const setHover = h => { hover = h; applyFocus(); };
+      const clearHover = () => setHover(null);
+
+      // Turn hover (chat + graph)
+      const turnHover = t => setHover({ mode: "turn", turns: new Set([t]), reqs: new Set() });
+      chatEl.querySelectorAll(".turn").forEach(li => {
+        li.addEventListener("mouseenter", () => turnHover(+li.dataset.t));
+        li.addEventListener("mouseleave", clearHover);
+      });
+      turnCol.querySelectorAll(".node").forEach(n => {
+        n.addEventListener("mouseenter", () => turnHover(+n.dataset.t));
+        n.addEventListener("mouseleave", clearHover);
+        n.addEventListener("focus", () => turnHover(+n.dataset.t));
+        n.addEventListener("blur", clearHover);
+        n.addEventListener("click", () => {
+          const li = chatEl.querySelector(`.turn[data-t="${n.dataset.t}"]`);
+          if (li) chatEl.scrollTo({ top: li.offsetTop - chatEl.offsetTop - 4, behavior: "smooth" });
+        });
+      });
+
+      // Requirement nodes
+      reqCol.querySelectorAll(".node").forEach(n => {
+        n.addEventListener("mouseenter", () => setHover({ mode: "req", turns: new Set(), reqs: new Set([n.dataset.r]) }));
+        n.addEventListener("mouseleave", clearHover);
+        n.addEventListener("click", () => select(n.dataset.r, true));
+      });
+
+      // Chips
+      chatEl.querySelectorAll(".chip:not(.goal)").forEach(c => {
+        const rs = c.dataset.reqs.split(",");
+        const ts = c.dataset.turns.split(",").map(Number);
+        c.addEventListener("mouseenter", e => { e.stopPropagation(); setHover({ mode: "chip", turns: new Set(ts), reqs: new Set(rs) }); });
+        c.addEventListener("mouseleave", () => turnHover(+c.closest(".turn").dataset.t));
+        c.addEventListener("click", () => select(rs[0], false));
+      });
+
+      renderDetail();
+      drawEdges();
+      if ("ResizeObserver" in window) new ResizeObserver(drawEdges).observe(graph);
+      window.addEventListener("resize", drawEdges);
+      document.fonts?.ready.then(drawEdges);
+    })();
 
     // ── BibTeX copy ──────────────────────────────────────────────────
     document.getElementById("copyBibtex")?.addEventListener("click", async () => {
