@@ -109,10 +109,10 @@
 			id: 'goals-hierarchy',
 			target: 'outcomes',
 			title: 'Goals & hierarchy',
-			body: 'Read each goal’s name and how goals are nested in the hierarchy. Try clicking the mini timeline graph: the horizontal axis is conversation time.',
+			body: 'Read each goal’s name and how goals are nested in the hierarchy. Each card shows who shaped and who executed the goal. Click the bars to see how that changed over the conversation.',
 			bodyHtml:
 				'<p>Read each goal’s name and how goals are nested in the hierarchy. This panel shows how goals and their relationships change over the conversation—earlier toward the top, later toward the bottom.</p>' +
-				'<p>Try clicking the mini timeline graph in this panel. The horizontal axis is conversation time (earlier to later turns). The top row (bulb) is Shaper activity (idea framing), and the bottom row (wrench) is Executor activity (implementation actions).</p>'
+				'<p>Each card has two bars. The <b>shaper</b> bar shows who framed the goal and its ideas, and the <b>executor</b> bar shows who carried it out. The numbers are your share and the assistant’s share. Click the bars to open a timeline of how those shares changed over the conversation.</p>'
 		},
 		{
 			id: 'outcome',
@@ -1357,7 +1357,7 @@
 							{#if selectedOutcomeChildGoalCount > 0}
 								<span>
 									This goal has {selectedOutcomeChildGoalCount} child goal{selectedOutcomeChildGoalCount === 1 ? '' : 's'}. Click a child goal item on the left pannel or right timeline.
-									<span class="empty-guide__sub-note">* Click the left graph to view it larger and read a brief explanation.</span>
+									<span class="empty-guide__sub-note">* Click the shaper/executor bars on the left to see them over time.</span>
 								</span>
 							{:else}
 								This goal has no requirements. Try selecting another goal.
@@ -1369,7 +1369,7 @@
 							{#if selectedOutcomeChildGoalCount > 0}
 								<span>
 									This goal has {selectedOutcomeChildGoalCount} child goal{selectedOutcomeChildGoalCount === 1 ? '' : 's'}. Click a child goal item on the left pannel or right timeline.
-									<span class="empty-guide__sub-note">* Click the left graph to view it larger and read a brief explanation.</span>
+									<span class="empty-guide__sub-note">* Click the shaper/executor bars on the left to see them over time.</span>
 								</span>
 							{:else}
 								<span>
@@ -1439,10 +1439,11 @@
 		max-height: 100dvh;
 		min-height: 0;
 		overflow: hidden;
-		background: #f8fafc;
-		padding: 0.9rem 1rem;
+		background: var(--ct-page);
+		color: var(--ct-text);
+		padding: 0.9rem 1.1rem 1.1rem;
 		width: 100%;
-		max-width: 1480px;
+		max-width: 1560px;
 		margin: 0 auto;
 	}
 	.loading,
@@ -1483,12 +1484,12 @@
 	}
 	.header {
 		display: flex;
-		align-items: flex-start;
+		align-items: center;
 		justify-content: space-between;
 		gap: 0.5rem;
-		margin-bottom: 0.75rem;
+		margin-bottom: 0.85rem;
 		flex-wrap: wrap;
-		padding: 0.4rem 0.25rem 0;
+		padding: 0.3rem 0.35rem 0;
 		flex-shrink: 0;
 	}
 	.header__title-row {
@@ -1507,113 +1508,113 @@
 	}
 	.run-picker__label {
 		font-size: 0.78rem;
-		font-weight: 700;
-		color: #475569;
+		font-weight: 800;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--ct-muted);
 		white-space: nowrap;
 	}
 	.run-picker__select {
 		min-width: 12rem;
 		max-width: min(42vw, 22rem);
-		padding: 0.4rem 0.55rem;
-		border: 1px solid #cbd5e1;
-		border-radius: 10px;
-		font-size: 0.84rem;
-		color: #0f172a;
-		background: #ffffff;
+		padding: 0.42rem 0.7rem;
+		border: 1.5px solid var(--ct-line);
+		border-radius: 12px;
+		font-size: 0.88rem;
+		font-weight: 600;
+		color: var(--ct-ink);
+		background: var(--ct-panel);
 		cursor: pointer;
 	}
 	.run-picker__select:focus {
 		outline: none;
-		border-color: #6366f1;
-		box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.16);
+		border-color: var(--ct-user);
+		box-shadow: 0 0 0 3px var(--ct-user-soft);
 	}
 	.title {
 		margin: 0;
-		font-size: 1.15rem;
-		font-weight: 700;
-		color: #111827;
+		font-size: 1.3rem;
+		font-weight: 800;
+		color: var(--ct-ink);
 		line-height: 1.3;
+		letter-spacing: -0.01em;
 	}
 	.help-trigger {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.45rem;
-		padding: 0.42rem 0.78rem;
+		padding: 0.4rem 0.85rem 0.4rem 0.45rem;
 		border-radius: 999px;
-		border: 1px solid #bfdbfe;
-		background: linear-gradient(180deg, #eff6ff 0%, #dbeafe 100%);
-		color: #1e40af;
-		font-size: 0.85rem;
+		border: 1.5px solid var(--ct-line);
+		background: var(--ct-panel);
+		color: var(--ct-ink);
+		font-size: 0.9rem;
 		font-weight: 700;
-		letter-spacing: 0.01em;
 		cursor: pointer;
-		box-shadow: 0 2px 8px rgba(37, 99, 235, 0.14);
-		transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+		transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 	}
 	.help-trigger:hover {
 		transform: translateY(-1px);
-		background: linear-gradient(180deg, #dbeafe 0%, #bfdbfe 100%);
-		box-shadow: 0 6px 14px rgba(37, 99, 235, 0.2);
+		background: #e9eaed;
+		border-color: #c8cbd0;
 	}
 	.help-trigger:focus-visible {
-		outline: 2px solid #60a5fa;
+		outline: 2px solid var(--ct-user);
 		outline-offset: 2px;
 	}
 	.help-trigger__icon {
 		display: inline-grid;
 		place-items: center;
-		width: 1.1rem;
-		height: 1.1rem;
+		width: 1.35rem;
+		height: 1.35rem;
 		border-radius: 999px;
-		background: #1d4ed8;
+		background: var(--ct-ink);
 		color: #ffffff;
-		font-size: 0.72rem;
+		font-size: 0.78rem;
 		font-weight: 800;
 		line-height: 1;
 	}
 	.empty-guide {
 		flex-shrink: 0;
-		margin: 0 0 0.5rem;
-		padding: 0.72rem 0.85rem;
-		border-radius: 10px;
-		border: 1px solid #ddd6fe;
-		background: #f5f3ff;
-		color: #4c1d95;
-		font-size: 0.95rem;
+		margin: 0 0 0.75rem;
+		padding: 0.75rem 0.95rem;
+		border-radius: 16px;
+		border: 1.5px dashed #c8cbd0;
+		background: var(--ct-panel);
+		color: var(--ct-text);
+		font-size: 0.92rem;
 		font-weight: 600;
 		line-height: 1.45;
 		display: flex;
-		align-items: center;
-		gap: 0.45rem;
+		align-items: flex-start;
+		gap: 0.6rem;
 	}
 	.empty-guide--soft {
-		border-style: solid;
-		border-color: #ddd6fe;
-		background: #f5f3ff;
-		color: #4c1d95;
+		border-color: #c8cbd0;
+		background: var(--ct-panel);
+		color: var(--ct-text);
 	}
 	.empty-guide__tip-head {
 		display: inline-flex;
 		align-items: center;
+		gap: 0.2rem;
 		flex-shrink: 0;
-		padding: 0.16rem 0.46rem;
+		padding: 0.14rem 0.55rem;
 		border-radius: 999px;
-		border: 1px solid #c4b5fd;
-		background: #ede9fe;
-		box-shadow: 0 1px 0 rgba(124, 58, 237, 0.08) inset;
-		font-size: 0.82rem;
+		border: 1.5px solid var(--ct-line);
+		background: #ffffff;
+		font-size: 0.74rem;
 		font-weight: 800;
-		color: #6d28d9;
-		letter-spacing: 0.01em;
+		color: var(--ct-ink);
+		letter-spacing: 0.06em;
 		text-transform: uppercase;
 	}
 	.empty-guide__sub-note {
 		display: block;
-		margin-top: 0.18rem;
+		margin-top: 0.2rem;
 		font-size: 0.82rem;
 		font-weight: 500;
-		color: #6d28d9;
-		opacity: 0.92;
+		color: var(--ct-muted);
 	}
 	.empty-guide__inline-strong {
 		font-weight: 800;
@@ -1643,10 +1644,10 @@
 	}
 	.three-col-grid {
 		display: grid;
-		grid-template-columns: var(--left-col-width, 320px) 6px 380px 1fr;
+		grid-template-columns: var(--left-col-width, 320px) 6px 420px 1fr;
 		grid-template-rows: minmax(0, 1fr);
 		gap: 0;
-		column-gap: 0.75rem;
+		column-gap: 0.7rem;
 		flex: 1 1 0;
 		min-height: 0;
 		overflow: hidden;
@@ -1671,7 +1672,7 @@
 	}
 	.resize-handle:hover,
 	.three-col-grid.is-resizing .resize-handle {
-		background: #cbd5e1;
+		background: var(--ct-line-soft);
 	}
 	.resize-handle::after {
 		content: '';
@@ -1738,15 +1739,16 @@
 		align-items: center;
 		justify-content: center;
 		height: 100%;
-		background: #ffffff;
-		border: 1px solid #e5e7eb;
-		border-radius: 18px;
-		box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+		padding: 1.5rem;
+		box-sizing: border-box;
+		background: var(--ct-panel);
+		border-radius: 22px;
 	}
 	.column-hint {
 		margin: 0;
-		font-size: 0.875rem;
-		color: #64748b;
+		font-size: 0.92rem;
+		font-weight: 600;
+		color: var(--ct-faint);
 		text-align: center;
 	}
 

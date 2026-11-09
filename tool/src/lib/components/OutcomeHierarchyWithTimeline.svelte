@@ -377,6 +377,8 @@ function baseOutcomeId(outputId: string): string {
 		return { a: sorted[0], b: sorted[1] };
 	});
 
+	const USER_COLOR = '#4472c4';
+	const ASST_COLOR = '#4f8a4b';
 	const PEER_A_COLOR = '#7c3aed';
 	const PEER_B_COLOR = '#ea580c';
 
@@ -1106,19 +1108,11 @@ function selectIntent(intentLabel: string | null) {
 <div class="outcome-hierarchy-with-timeline">
 	<div class="hierarchy-and-strip">
 	<div class="chart-legend" data-tutorial="timeline-graph">
-		<span class="legend-section">
-			<span class="legend-line" style="background:{peerNames ? PEER_A_COLOR : '#3b82f6'}"></span><span class="legend-label">{peerNames ? peerNames.a : 'User'}</span>
-			<span class="legend-line" style="background:{peerNames ? PEER_B_COLOR : '#16a34a'}"></span><span class="legend-label">{peerNames ? peerNames.b : 'Assistant'}</span>
-		</span>
-		<span class="legend-divider"></span>
-		<span class="legend-section">
-			<span class="legend-emoji">💡</span><span class="legend-label">Shaper</span>
-			<span class="legend-emoji">🔧</span><span class="legend-label">Executor</span>
-		</span>
-		<span class="legend-divider"></span>
-		<span class="legend-section">
-			<span class="mini-ratio-bar" style="--u:0.6;--a:0.4;--cu:{peerNames ? PEER_A_COLOR : '#3b82f6'};--ca:{peerNames ? PEER_B_COLOR : '#16a34a'}"></span><span class="legend-label">Ratio</span>
-		</span>
+		<h3 class="panel-heading">Goals · how they evolve</h3>
+		<div class="legend-chips">
+			<span class="legend-chip"><span class="legend-swatch" style="background:{peerNames ? PEER_A_COLOR : USER_COLOR}"></span>{peerNames ? peerNames.a : 'you'}</span>
+			<span class="legend-chip"><span class="legend-swatch" style="background:{peerNames ? PEER_B_COLOR : ASST_COLOR}"></span>{peerNames ? peerNames.b : 'assistant'}</span>
+		</div>
 	</div>
 	<ul class="hierarchy-list" role="tree" bind:this={hierarchyListEl}>
 		{#each visibleOutcomes as outcome}
@@ -1188,27 +1182,16 @@ function selectIntent(intentLabel: string | null) {
 							assistantExecutor: outcomeRatio.assistantExecutor
 						}, e)}
 					>
-						<div class="outcome-contrib-summary">{outcomeContributionSummary(outcomeRatio)}</div>
 						<div class="outcome-contrib-rows">
-							<div class="mini-chart-row outcome-card-chart" title="Shaper · {peerNames ? peerNames.a : 'User'} {Math.round(outcomeRatio.userShaper * 100)}% / {peerNames ? peerNames.b : 'Assistant'} {Math.round(outcomeRatio.assistantShaper * 100)}%">
-								<span class="mini-role-emoji" aria-hidden="true">💡</span>
-								<span class="mini-ratio-bar" style="--u:{outcomeRatio.userShaper};--a:{outcomeRatio.assistantShaper};--cu:{peerNames ? PEER_A_COLOR : '#3b82f6'};--ca:{peerNames ? PEER_B_COLOR : '#16a34a'}"></span>
-								<svg class="mini-chart role-chart" viewBox="0 0 96 12" preserveAspectRatio="none" width="96" height="12">
-									<rect x="0" y="0" width="96" height="12" fill="#f8fafc"/>
-									<path d={linePath(outcomeSeries.map((p) => p.userShaper), 96, 12)} stroke={peerNames ? PEER_A_COLOR : '#3b82f6'} stroke-width="1.4" fill="none"/>
-									<path d={linePath(outcomeSeries.map((p) => p.assistantShaper), 96, 12)} stroke={peerNames ? PEER_B_COLOR : '#16a34a'} stroke-width="1.4" fill="none"/>
-								</svg>
-								<span class="outcome-contrib-pct">{Math.round(outcomeRatio.userShaper * 100)}/{Math.round(outcomeRatio.assistantShaper * 100)}</span>
+							<div class="contrib-row" title="Shaper (framing ideas) · {peerNames ? peerNames.a : 'You'} {Math.round(outcomeRatio.userShaper * 100)}% / {peerNames ? peerNames.b : 'Assistant'} {Math.round(outcomeRatio.assistantShaper * 100)}%">
+								<span class="contrib-role">shaper</span>
+								<span class="contrib-hbar" style="--u:{outcomeRatio.userShaper};--a:{outcomeRatio.assistantShaper};--cu:{peerNames ? PEER_A_COLOR : USER_COLOR};--ca:{peerNames ? PEER_B_COLOR : ASST_COLOR}"></span>
+								<span class="outcome-contrib-pct">{Math.round(outcomeRatio.userShaper * 100)} · {Math.round(outcomeRatio.assistantShaper * 100)}</span>
 							</div>
-							<div class="mini-chart-row outcome-card-chart" title="Executor · {peerNames ? peerNames.a : 'User'} {Math.round(outcomeRatio.userExecutor * 100)}% / {peerNames ? peerNames.b : 'Assistant'} {Math.round(outcomeRatio.assistantExecutor * 100)}%">
-								<span class="mini-role-emoji" aria-hidden="true">🔧</span>
-								<span class="mini-ratio-bar" style="--u:{outcomeRatio.userExecutor};--a:{outcomeRatio.assistantExecutor};--cu:{peerNames ? PEER_A_COLOR : '#3b82f6'};--ca:{peerNames ? PEER_B_COLOR : '#16a34a'}"></span>
-								<svg class="mini-chart role-chart" viewBox="0 0 96 10" preserveAspectRatio="none" width="96" height="10">
-									<rect x="0" y="0" width="96" height="10" fill="#f8fafc"/>
-									<path d={linePath(outcomeSeries.map((p) => p.userExecutor), 96, 10)} stroke={peerNames ? PEER_A_COLOR : '#3b82f6'} stroke-width="1.2" fill="none" opacity="0.72"/>
-									<path d={linePath(outcomeSeries.map((p) => p.assistantExecutor), 96, 10)} stroke={peerNames ? PEER_B_COLOR : '#16a34a'} stroke-width="1.2" fill="none" opacity="0.72"/>
-								</svg>
-								<span class="outcome-contrib-pct">{Math.round(outcomeRatio.userExecutor * 100)}/{Math.round(outcomeRatio.assistantExecutor * 100)}</span>
+							<div class="contrib-row" title="Executor (implementing) · {peerNames ? peerNames.a : 'You'} {Math.round(outcomeRatio.userExecutor * 100)}% / {peerNames ? peerNames.b : 'Assistant'} {Math.round(outcomeRatio.assistantExecutor * 100)}%">
+								<span class="contrib-role">executor</span>
+								<span class="contrib-hbar" style="--u:{outcomeRatio.userExecutor};--a:{outcomeRatio.assistantExecutor};--cu:{peerNames ? PEER_A_COLOR : USER_COLOR};--ca:{peerNames ? PEER_B_COLOR : ASST_COLOR}"></span>
+								<span class="outcome-contrib-pct">{Math.round(outcomeRatio.userExecutor * 100)} · {Math.round(outcomeRatio.assistantExecutor * 100)}</span>
 							</div>
 						</div>
 					</button>
@@ -1238,14 +1221,14 @@ function selectIntent(intentLabel: string | null) {
 				<div class="chart-modal-section-header">
 					<span class="chart-modal-role-icon" aria-hidden="true">💡</span>
 					<span class="chart-modal-role-label">Shaper</span>
-					<span class="chart-modal-pct" style="color:{peerNames ? PEER_A_COLOR : '#3b82f6'}">{peerNames ? peerNames.a : 'User'} {Math.round(chartPopup.userShaper * 100)}%</span>
-					<div class="chart-modal-ratio-bar" style="--u:{chartPopup.userShaper};--a:{chartPopup.assistantShaper};--cu:{peerNames ? PEER_A_COLOR : '#3b82f6'};--ca:{peerNames ? PEER_B_COLOR : '#16a34a'}"></div>
-					<span class="chart-modal-pct" style="color:{peerNames ? PEER_B_COLOR : '#16a34a'}">{peerNames ? peerNames.b : 'Asst'} {Math.round(chartPopup.assistantShaper * 100)}%</span>
+					<span class="chart-modal-pct" style="color:{peerNames ? PEER_A_COLOR : '#4472c4'}">{peerNames ? peerNames.a : 'User'} {Math.round(chartPopup.userShaper * 100)}%</span>
+					<div class="chart-modal-ratio-bar" style="--u:{chartPopup.userShaper};--a:{chartPopup.assistantShaper};--cu:{peerNames ? PEER_A_COLOR : '#4472c4'};--ca:{peerNames ? PEER_B_COLOR : '#4f8a4b'}"></div>
+					<span class="chart-modal-pct" style="color:{peerNames ? PEER_B_COLOR : '#4f8a4b'}">{peerNames ? peerNames.b : 'Asst'} {Math.round(chartPopup.assistantShaper * 100)}%</span>
 				</div>
 				<svg class="chart-modal-svg" viewBox="0 0 320 60" preserveAspectRatio="none" width="320" height="60">
 					<rect x="0" y="0" width="320" height="60" fill="#f1f5f9" rx="4"/>
-					<path d={linePath(chartPopup.series.map((p) => p.userShaper), 320, 60)} stroke={peerNames ? PEER_A_COLOR : '#3b82f6'} stroke-width="2" fill="none"/>
-					<path d={linePath(chartPopup.series.map((p) => p.assistantShaper), 320, 60)} stroke={peerNames ? PEER_B_COLOR : '#16a34a'} stroke-width="2" fill="none"/>
+					<path d={linePath(chartPopup.series.map((p) => p.userShaper), 320, 60)} stroke={peerNames ? PEER_A_COLOR : '#4472c4'} stroke-width="2" fill="none"/>
+					<path d={linePath(chartPopup.series.map((p) => p.assistantShaper), 320, 60)} stroke={peerNames ? PEER_B_COLOR : '#4f8a4b'} stroke-width="2" fill="none"/>
 				</svg>
 			</div>
 
@@ -1253,21 +1236,21 @@ function selectIntent(intentLabel: string | null) {
 				<div class="chart-modal-section-header">
 					<span class="chart-modal-role-icon" aria-hidden="true">🔧</span>
 					<span class="chart-modal-role-label">Executor</span>
-					<span class="chart-modal-pct" style="color:{peerNames ? PEER_A_COLOR : '#3b82f6'}">{peerNames ? peerNames.a : 'User'} {Math.round(chartPopup.userExecutor * 100)}%</span>
-					<div class="chart-modal-ratio-bar" style="--u:{chartPopup.userExecutor};--a:{chartPopup.assistantExecutor};--cu:{peerNames ? PEER_A_COLOR : '#3b82f6'};--ca:{peerNames ? PEER_B_COLOR : '#16a34a'}"></div>
-					<span class="chart-modal-pct" style="color:{peerNames ? PEER_B_COLOR : '#16a34a'}">{peerNames ? peerNames.b : 'Asst'} {Math.round(chartPopup.assistantExecutor * 100)}%</span>
+					<span class="chart-modal-pct" style="color:{peerNames ? PEER_A_COLOR : '#4472c4'}">{peerNames ? peerNames.a : 'User'} {Math.round(chartPopup.userExecutor * 100)}%</span>
+					<div class="chart-modal-ratio-bar" style="--u:{chartPopup.userExecutor};--a:{chartPopup.assistantExecutor};--cu:{peerNames ? PEER_A_COLOR : '#4472c4'};--ca:{peerNames ? PEER_B_COLOR : '#4f8a4b'}"></div>
+					<span class="chart-modal-pct" style="color:{peerNames ? PEER_B_COLOR : '#4f8a4b'}">{peerNames ? peerNames.b : 'Asst'} {Math.round(chartPopup.assistantExecutor * 100)}%</span>
 				</div>
 				<svg class="chart-modal-svg" viewBox="0 0 320 60" preserveAspectRatio="none" width="320" height="60">
 					<rect x="0" y="0" width="320" height="60" fill="#f8fafc" rx="4"/>
-					<path d={linePath(chartPopup.series.map((p) => p.userExecutor), 320, 60)} stroke={peerNames ? PEER_A_COLOR : '#3b82f6'} stroke-width="2" fill="none" opacity="0.8"/>
-					<path d={linePath(chartPopup.series.map((p) => p.assistantExecutor), 320, 60)} stroke={peerNames ? PEER_B_COLOR : '#16a34a'} stroke-width="2" fill="none" opacity="0.8"/>
+					<path d={linePath(chartPopup.series.map((p) => p.userExecutor), 320, 60)} stroke={peerNames ? PEER_A_COLOR : '#4472c4'} stroke-width="2" fill="none" opacity="0.8"/>
+					<path d={linePath(chartPopup.series.map((p) => p.assistantExecutor), 320, 60)} stroke={peerNames ? PEER_B_COLOR : '#4f8a4b'} stroke-width="2" fill="none" opacity="0.8"/>
 				</svg>
 			</div>
 
 			<div class="chart-modal-legend">
-				<span class="chart-modal-legend-dot" style="background:{peerNames ? PEER_A_COLOR : '#3b82f6'}"></span>
+				<span class="chart-modal-legend-dot" style="background:{peerNames ? PEER_A_COLOR : '#4472c4'}"></span>
 				<span class="chart-modal-legend-text">{peerNames ? peerNames.a : 'User'}</span>
-				<span class="chart-modal-legend-dot" style="background:{peerNames ? PEER_B_COLOR : '#16a34a'}; margin-left: 0.75rem;"></span>
+				<span class="chart-modal-legend-dot" style="background:{peerNames ? PEER_B_COLOR : '#4f8a4b'}; margin-left: 0.75rem;"></span>
 				<span class="chart-modal-legend-text">{peerNames ? peerNames.b : 'Assistant'}</span>
 				<span class="chart-modal-legend-hint">Each point = a segment of the conversation</span>
 			</div>
@@ -1292,17 +1275,16 @@ function selectIntent(intentLabel: string | null) {
 		transition: filter 0.12s;
 	}
 	.chart-expand-btn:hover {
-		filter: brightness(0.93);
-		outline: 1.5px dashed #94a3b8;
+		background: var(--ct-panel);
+		outline: 1.5px dashed var(--ct-faint);
 		outline-offset: 2px;
-		border-radius: 4px;
 	}
 
 	/* Modal */
 	.chart-modal-backdrop {
 		position: fixed;
 		inset: 0;
-		background: rgba(15, 23, 42, 0.45);
+		background: rgba(36, 39, 43, 0.35);
 		z-index: 9999;
 		display: flex;
 		align-items: center;
@@ -1311,8 +1293,9 @@ function selectIntent(intentLabel: string | null) {
 	}
 	.chart-modal {
 		background: #ffffff;
-		border-radius: 16px;
-		box-shadow: 0 24px 56px rgba(15, 23, 42, 0.22);
+		border-radius: 22px;
+		border: 1.5px solid var(--ct-line);
+		box-shadow: 0 24px 56px rgba(36, 39, 43, 0.18);
 		padding: 1.5rem;
 		min-width: 380px;
 		max-width: 460px;
@@ -1333,9 +1316,9 @@ function selectIntent(intentLabel: string | null) {
 		gap: 0.2rem;
 	}
 	.chart-modal-title {
-		font-size: 0.97rem;
-		font-weight: 700;
-		color: #1e293b;
+		font-size: 1.05rem;
+		font-weight: 800;
+		color: var(--ct-ink);
 		line-height: 1.3;
 	}
 	.chart-modal-sublabel {
@@ -1395,10 +1378,10 @@ function selectIntent(intentLabel: string | null) {
 		overflow: hidden;
 		background: linear-gradient(
 			to right,
-			var(--cu, #3b82f6) 0%,
-			var(--cu, #3b82f6) calc(var(--u) / (var(--u) + var(--a)) * 100%),
-			var(--ca, #16a34a) calc(var(--u) / (var(--u) + var(--a)) * 100%),
-			var(--ca, #16a34a) 100%
+			var(--cu, #4472c4) 0%,
+			var(--cu, #4472c4) calc(var(--u) / (var(--u) + var(--a)) * 100%),
+			var(--ca, #4f8a4b) calc(var(--u) / (var(--u) + var(--a)) * 100%),
+			var(--ca, #4f8a4b) 100%
 		);
 	}
 	.chart-modal-svg {
@@ -1448,16 +1431,15 @@ function selectIntent(intentLabel: string | null) {
 	.outcome-hierarchy-with-timeline {
 		display: flex;
 		flex-direction: column;
-		gap: 0.75rem;
-		padding: 0.85rem;
-		background: #ffffff;
-		border: 1px solid #e5e7eb;
-		border-radius: 18px;
+		gap: 0.6rem;
+		padding: 1rem 0.9rem 0.9rem;
+		background: var(--ct-panel);
+		border: none;
+		border-radius: 22px;
 		min-width: 0;
 		min-height: 0;
 		flex: 1 1 0;
 		overflow: hidden;
-		box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
 	}
 	.hierarchy-and-strip {
 		display: flex;
@@ -1510,10 +1492,10 @@ function selectIntent(intentLabel: string | null) {
 		overflow: hidden;
 		background: linear-gradient(
 			to bottom,
-			var(--cu, #3b82f6) 0%,
-			var(--cu, #3b82f6) calc(var(--u) * 100%),
-			var(--ca, #16a34a) calc(var(--u) * 100%),
-			var(--ca, #16a34a) 100%
+			var(--cu, #4472c4) 0%,
+			var(--cu, #4472c4) calc(var(--u) * 100%),
+			var(--ca, #4f8a4b) calc(var(--u) * 100%),
+			var(--ca, #4f8a4b) 100%
 		);
 	}
 	.mini-chart.role-chart {
@@ -1522,62 +1504,55 @@ function selectIntent(intentLabel: string | null) {
 	}
 	.chart-legend {
 		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 0.6rem;
-		padding: 0.55rem 0.75rem;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.45rem;
+		padding: 0 0.2rem 0.15rem;
 		margin: 0;
-		background: #f8fafc;
-		border: 1px solid #e5e7eb;
-		border-radius: 14px;
 		flex-shrink: 0;
-		flex-wrap: wrap;
 	}
-	.chart-legend::before {
-		content: 'GOALS · How your goals evolve';
-		font-size: 0.72rem;
+	.panel-heading {
+		margin: 0;
+		font-size: 0.8rem;
 		font-weight: 800;
-		letter-spacing: 0.08em;
-		color: #64748b;
-		margin-right: auto;
+		letter-spacing: 0.07em;
+		text-transform: uppercase;
+		color: var(--ct-muted);
 	}
-	.legend-section {
+	.legend-chips {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.3rem;
+		gap: 0.85rem;
 	}
-	.legend-line {
+	.legend-chip {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		font-size: 0.86rem;
+		font-weight: 700;
+		color: var(--ct-ink);
+	}
+	.legend-swatch {
 		display: inline-block;
-		width: 14px;
-		height: 2px;
-		border-radius: 1px;
-	}
-	.legend-label {
-		font-size: 0.64rem;
-		font-weight: 600;
-		color: #475569;
-	}
-	.legend-emoji {
-		font-size: 0.55rem;
-		line-height: 1;
-	}
-	.legend-divider {
-		width: 1px;
-		height: 12px;
-		background: #cbd5e1;
-		flex-shrink: 0;
+		width: 18px;
+		height: 11px;
+		border-radius: 4px;
+		border: 1.5px solid rgba(36, 39, 43, 0.55);
+		box-sizing: border-box;
 	}
 	.hierarchy-list {
 		list-style: none;
 		margin: 0;
-		padding: 0;
+		padding: 0.2rem 0.2rem 0.4rem;
 		flex: 1 1 0;
 		min-width: 0;
 		overflow-y: auto;
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		gap: 1rem;
+		gap: 0.7rem;
+		scrollbar-width: thin;
+		scrollbar-color: #d3d5d9 transparent;
 	}
 	.intent-group,
 	.intent-group-header {
@@ -1699,12 +1674,11 @@ function selectIntent(intentLabel: string | null) {
 	.hierarchy-item {
 		position: relative;
 		/* Narrow deeper nodes to make hierarchy depth obvious at a glance. */
-		--node-offset: min(calc(var(--level, 0) * 0.6rem), 1.8rem);
+		--node-offset: min(calc(var(--level, 0) * 1.1rem), 2.2rem);
 		display: flex;
 		flex-direction: column;
-		gap: 0.45rem;
-		padding: 0.8rem 0.85rem;
-		padding-left: calc(0.75rem + var(--depth, 0) * 0.55rem);
+		gap: 0.5rem;
+		padding: 0.8rem 0.85rem 0.85rem;
 		margin-left: var(--node-offset);
 		margin-top: 0;
 		margin-right: 0;
@@ -1715,88 +1689,93 @@ function selectIntent(intentLabel: string | null) {
 		box-sizing: border-box;
 		/* Never let flex compress cards when many goals share a short viewport — scroll instead. */
 		min-height: 4.5rem;
-		border-radius: 14px;
+		border-radius: 16px;
 		cursor: pointer;
-		border: 1px solid #e5e7eb;
-		border-left: 4px solid #cbd5e1;
-		background: #ffffff;
-		box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+		border: 1.5px solid var(--ct-line);
+		background: var(--ct-card);
 		transition:
-			border-color 0.15s ease,
-			box-shadow 0.15s ease,
-			background 0.15s ease;
+		border-color 0.15s ease,
+		box-shadow 0.15s ease,
+		transform 0.15s ease;
 	}
 	.hierarchy-item.child-node {
-		padding-left: calc(0.75rem + var(--depth, 0) * 0.62rem);
+		padding-left: 0.85rem;
 	}
 	.hierarchy-item.child-node::before {
 		content: '';
 		position: absolute;
-		left: calc(0.62rem + var(--level, 1) * 0.62rem - 0.42rem);
-		top: -0.45rem;
-		bottom: 0;
-		width: 1px;
-		background: #dbeafe;
+		left: calc(-0.6rem - 1.5px);
+		top: -0.7rem;
+		bottom: 50%;
+		width: 0.6rem;
+		border-left: 2px solid #d1d4d8;
+		border-bottom: 2px solid #d1d4d8;
+		border-bottom-left-radius: 8px;
 		pointer-events: none;
-	}
-	.hierarchy-item.child-node .item-header-row::before {
-		content: '';
-		display: inline-block;
-		width: 0.36rem;
-		height: 1px;
-		background: #bfdbfe;
-		flex-shrink: 0;
-		margin-right: 0.04rem;
 	}
 	.item-header-row {
 		display: flex;
-		align-items: center;
-		gap: 0.35rem;
+		align-items: flex-start;
+		gap: 0.45rem;
 		min-width: 0;
 	}
 	.item-detail-row {
 		display: flex;
 		align-items: center;
 		gap: 0.4rem;
-		padding-left: 1.2rem;
+		padding-left: 0.1rem;
 		flex-wrap: wrap;
 	}
 	.outcome-contrib-card {
 		display: flex;
 		flex-direction: column;
 		gap: 0.35rem;
-		margin-left: 1.2rem;
-		padding: 0.5rem 0.6rem;
-		border: 1px solid #e5e7eb;
+		margin-left: 0;
+		padding: 0.5rem 0.65rem;
+		border: none;
 		border-radius: 12px;
-		background: #f8fafc;
+		background: var(--ct-panel);
 		flex-shrink: 0;
 		align-self: stretch;
-	}
-	.outcome-contrib-summary {
-		font-size: 0.68rem;
-		font-weight: 600;
-		color: #475569;
-		line-height: 1.35;
 	}
 	.outcome-contrib-rows {
 		display: flex;
 		flex-direction: column;
 		gap: 0.25rem;
 	}
-	.outcome-card-chart {
-		gap: 0.3rem;
+	.contrib-row {
+		display: grid;
+		grid-template-columns: 4.1rem minmax(0, 1fr) auto;
+		align-items: center;
+		gap: 0.5rem;
 	}
-	.outcome-card-chart .mini-chart {
-		width: 96px;
-		flex: 0 0 auto;
+	.contrib-role {
+		font-size: 0.78rem;
+		font-weight: 700;
+		color: var(--ct-muted);
+	}
+	.contrib-hbar {
+		display: block;
+		height: 11px;
+		border-radius: 999px;
+		border: 1.5px solid rgba(36, 39, 43, 0.5);
+		box-sizing: border-box;
+		background: linear-gradient(
+			to right,
+			var(--cu) 0%,
+			var(--cu) calc(var(--u) / max(var(--u) + var(--a), 0.0001) * 100%),
+			var(--ca) calc(var(--u) / max(var(--u) + var(--a), 0.0001) * 100%),
+			var(--ca) 100%
+		);
 	}
 	.outcome-contrib-pct {
-		font-size: 0.62rem;
-		font-weight: 700;
-		color: #64748b;
-		min-width: 2.3rem;
+		font-size: 0.8rem;
+		font-weight: 800;
+		color: var(--ct-ink);
+		min-width: 3.4rem;
 		text-align: right;
+		font-variant-numeric: tabular-nums;
+		white-space: nowrap;
 	}
 	.mini-dot {
 		position: absolute;
@@ -1808,136 +1787,121 @@ function selectIntent(intentLabel: string | null) {
 		pointer-events: none;
 	}
 	.mini-dot.shaper-only {
-		background: #3b82f6;
+		background: #4472c4;
 	}
 	.mini-dot.executor-only {
 		background: #6366f1;
 	}
 	.mini-dot.both {
-		background: linear-gradient(to bottom, #3b82f6 50%, #6366f1 50%);
+		background: linear-gradient(to bottom, #4472c4 50%, #6366f1 50%);
 	}
 	.hierarchy-item:hover {
-		background: #f8fafc;
-		border-color: #dbe4ee;
+		border-color: #bcc0c5;
+		transform: translateY(-1px);
 	}
 	.hierarchy-item.selected {
-		background: linear-gradient(180deg, #eff6ff 0%, #dbeafe 100%);
-		border: 2px solid #3b82f6;
-		border-left: 5px solid #1d4ed8;
-		box-shadow:
-			0 0 0 1px rgba(37, 99, 235, 0.25),
-			0 8px 22px rgba(37, 99, 235, 0.18);
+		background: var(--ct-card);
+		border: 2.5px solid var(--ct-select);
+		padding: calc(0.8rem - 1px) calc(0.85rem - 1px) calc(0.85rem - 1px);
+		box-shadow: 0 6px 16px rgba(36, 39, 43, 0.08);
 	}
 	.hierarchy-item.selected .outcome-title {
-		font-weight: 700;
-		color: #0f172a;
+		font-weight: 800;
+		color: var(--ct-ink);
 	}
 	.hierarchy-item.branch-expanded:not(.selected) {
-		border-color: #e0e7ff;
-		box-shadow: inset 0 -2px 0 0 #c7d2fe;
+		border-color: #c8cbd0;
 	}
 	.expand-btn {
 		flex-shrink: 0;
-		min-width: 1.85rem;
-		min-height: 1.85rem;
-		width: 1.85rem;
-		height: 1.85rem;
+		min-width: 1.7rem;
+		min-height: 1.7rem;
+		width: 1.7rem;
+		height: 1.7rem;
 		padding: 0;
-		border: 1px solid #cbd5e1;
-		border-radius: 10px;
-		background: #f8fafc;
+		border: 1.5px solid var(--ct-line);
+		border-radius: 8px;
+		background: #ffffff;
 		cursor: pointer;
-		color: #475569;
+		color: var(--ct-ink);
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
 		transition:
-			background 0.12s ease,
-			border-color 0.12s ease,
-			color 0.12s ease,
-			box-shadow 0.12s ease;
+		background 0.12s ease,
+		border-color 0.12s ease,
+		transform 0.15s ease;
 	}
 	.expand-btn:hover {
-		background: #f1f5f9;
-		border-color: #94a3b8;
-		color: #0f172a;
+		background: var(--ct-panel);
+		border-color: #b7bbc0;
 	}
 	.expand-btn:focus-visible {
-		outline: 2px solid #3b82f6;
+		outline: 2px solid var(--ct-user);
 		outline-offset: 2px;
 	}
 	.expand-btn--open {
-		background: #dbeafe;
-		border-color: #60a5fa;
-		color: #1e40af;
-		box-shadow: 0 1px 3px rgba(37, 99, 235, 0.2);
+		background: #ffffff;
+		border-color: var(--ct-line);
+		color: var(--ct-ink);
 	}
 	.expand-btn--open:hover {
-		background: #bfdbfe;
-		border-color: #3b82f6;
-		color: #1e3a8a;
+		background: var(--ct-panel);
+		border-color: #b7bbc0;
 	}
 	.expand-btn__chevron {
-		font-size: 0.72rem;
+		font-size: 0.66rem;
 		line-height: 1;
-		font-weight: 800;
-		letter-spacing: -0.02em;
 	}
 	.expand-placeholder {
-		display: inline-block;
-		width: 1.85rem;
-		height: 1.85rem;
-		flex-shrink: 0;
+		display: none;
 	}
 	.outcome-num {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 		min-width: 1.45rem;
-		height: 1.1rem;
-		padding: 0 0.35rem;
+		height: 1.45rem;
+		padding: 0 0.3rem;
+		box-sizing: border-box;
 		border-radius: 9999px;
-		font-weight: 700;
-		font-size: 0.64rem;
+		font-weight: 800;
+		font-size: 0.78rem;
 		color: #ffffff;
-		background: linear-gradient(180deg, #60a5fa 0%, #2563eb 100%);
-		border: 1px solid #3b82f6;
+		background: var(--ct-user);
+		border: none;
 		flex-shrink: 0;
 		white-space: nowrap;
-		box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
+		margin-top: 0.05rem;
 	}
 	.hierarchy-item.selected .outcome-num {
-		background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
+		background: var(--ct-user);
 		color: #ffffff;
-		border-color: #2563eb;
 	}
 	.outcome-num.depth-0 {
 		color: #ffffff;
-		background: linear-gradient(180deg, #60a5fa 0%, #2563eb 100%);
-		border-color: #3b82f6;
+		background: var(--ct-user);
 	}
 	.outcome-num.depth-1 {
-		color: #eff6ff;
-		background: linear-gradient(180deg, #93c5fd 0%, #3b82f6 100%);
-		border-color: #60a5fa;
+		color: #ffffff;
+		background: var(--ct-user);
 	}
 	.outcome-num.depth-2 {
-		color: #eff6ff;
-		background: linear-gradient(180deg, #bfdbfe 0%, #60a5fa 100%);
-		border-color: #93c5fd;
+		color: #ffffff;
+		background: var(--ct-user);
 	}
 	.outcome-num.depth-3 {
-		color: #eff6ff;
-		background: linear-gradient(180deg, #dbeafe 0%, #93c5fd 100%);
-		border-color: #bfdbfe;
+		color: #ffffff;
+		background: var(--ct-user);
 	}
 	.outcome-title {
-		font-size: 0.84rem;
+		font-size: 0.95rem;
+		font-weight: 700;
 		line-height: 1.35;
-		color: #111827;
+		color: var(--ct-ink);
 		flex: 1;
 		min-width: 0;
+		padding-top: 0.08rem;
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
 		line-clamp: 2;
@@ -1948,37 +1912,34 @@ function selectIntent(intentLabel: string | null) {
 		display: inline-flex;
 		align-items: center;
 		flex-wrap: wrap;
-		gap: 0.35rem;
-		font-size: 0.66rem;
+		gap: 0.3rem;
+		font-size: 0.8rem;
 		font-weight: 600;
 		line-height: 1.2;
-		color: #64748b;
-		letter-spacing: 0.01em;
+		color: var(--ct-muted);
 	}
 	.child-count-badge {
 		display: inline-flex;
 		align-items: center;
-		padding: 0.12rem 0.45rem;
-		border-radius: 999px;
-		font-size: 0.6rem;
+		padding: 0;
+		font-size: 0.74rem;
 		font-weight: 800;
 		text-transform: uppercase;
 		letter-spacing: 0.06em;
-		background: #f1f5f9;
-		color: #64748b;
-		border: 1px solid #e2e8f0;
+		background: none;
+		color: var(--ct-faint);
+		border: none;
 	}
 	.child-count-badge--open {
-		background: #dbeafe;
-		color: #1e40af;
-		border-color: #93c5fd;
+		background: none;
+		color: var(--ct-muted);
 	}
 	.child-count-text {
 		font-weight: 600;
-		color: #64748b;
+		color: var(--ct-muted);
 	}
 	.child-count-note--open .child-count-text {
-		color: #334155;
+		color: var(--ct-muted);
 	}
 	.req-rate-badge {
 		flex-shrink: 0;

@@ -287,10 +287,16 @@
 	const PEER_B_COLOR = '#ea580c';
 
 	function speakerColor(speaker: string): string {
-		if (!peerNames) return isAssistantSpeakerId(speaker) ? '#16a34a' : '#3b82f6';
+		if (!peerNames) return isAssistantSpeakerId(speaker) ? '#4f8a4b' : '#4472c4';
 		if (speaker === peerNames.a) return PEER_A_COLOR;
 		if (speaker === peerNames.b) return PEER_B_COLOR;
 		return '#94a3b8';
+	}
+
+	function speakerPillLabel(speaker: string | null | undefined): string {
+		if (!speaker) return '';
+		if (peerNames) return speaker;
+		return isAssistantSpeakerId(speaker) ? 'assistant' : 'you';
 	}
 
 	function circleStyle(speaker: string): string {
@@ -978,7 +984,7 @@
 </script>
 
 <div class="requirements-panel" class:requirements-panel--compact={isCompactTimeline}>
-	<h3 class="panel-header">Timeline (Num Requirements: {totalRequirements})</h3>
+	<h3 class="panel-header">Timeline · {totalRequirements} requirement{totalRequirements === 1 ? '' : 's'}</h3>
 
 	<!-- svelte-ignore a11y_no_static_element_interactions: hover sync to chat only -->
 	<div
@@ -1033,7 +1039,7 @@
 						</pattern>
 						<pattern id="timelineHatchUserIndirect" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
 							<rect width="4" height="4" fill="{peerNames ? '#f3f0ff' : '#eff6ff'}"></rect>
-							<line x1="0" y1="0" x2="0" y2="4" stroke="{peerNames ? PEER_A_COLOR : '#3b82f6'}" stroke-width="1.1"></line>
+							<line x1="0" y1="0" x2="0" y2="4" stroke="{peerNames ? PEER_A_COLOR : '#4472c4'}" stroke-width="1.1"></line>
 						</pattern>
 						<pattern id="timelineHatchAssistant" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
 							<rect width="6" height="6" fill="{peerNames ? '#fff7ed' : '#e8f6ef'}"></rect>
@@ -1041,7 +1047,7 @@
 						</pattern>
 						<pattern id="timelineHatchAssistantIndirect" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
 							<rect width="4" height="4" fill="{peerNames ? '#fff7ed' : '#e8f6ef'}"></rect>
-							<line x1="0" y1="0" x2="0" y2="4" stroke="{peerNames ? PEER_B_COLOR : '#16a34a'}" stroke-width="1.1"></line>
+							<line x1="0" y1="0" x2="0" y2="4" stroke="{peerNames ? PEER_B_COLOR : '#4f8a4b'}" stroke-width="1.1"></line>
 						</pattern>
 					</defs>
 					<line class="timeline-axis-line" x1="40" y1={TIMELINE_AXIS_TOP_PX} x2="40" y2={timelineAxisBottomY}></line>
@@ -1095,6 +1101,9 @@
 								<div class="req-label-row">
 									<span class="circle-indicator" style="{circleStyle(outcomeSpeaker)}"></span>
 									<span class="req-type-label">{goalLabel(outcome.outcome_id)} started</span>
+									{#if outcomeStartTurn != null}
+										<span class="turn-pill" style="--sc:{speakerColor(outcomeSpeaker)}">{formatTurnLabel(outcomeStartTurn)}</span>
+									{/if}
 								</div>
 								<p class="req-text outcome-text">{outcome.outcome ?? outcome.outcome_id}</p>
 							</div>
@@ -1116,6 +1125,7 @@
 								<div class="req-label-row">
 									<span class="circle-indicator" style="{circleStyle(row.speaker)}"></span>
 									<span class="req-type-label">Child {goalLabel(row.goalId)} started</span>
+									<span class="turn-pill" style="--sc:{speakerColor(row.speaker)}">{formatTurnLabel(row.turn)}</span>
 								</div>
 								<p class="req-text outcome-text">{row.goalTitle}</p>
 							</div>
@@ -1198,6 +1208,10 @@
 								<div class="req-label-row">
 									<span class="circle-indicator" style="{circleStyle(speaker)}"></span>
 									<span class="req-type-label">Original requirement</span>
+									{#if speakerPillLabel(speaker)}
+										<span class="who-pill" style="--sc:{speakerColor(speaker)}">{speakerPillLabel(speaker)}</span>
+									{/if}
+									<span class="turn-pill" style="--sc:{speakerColor(speaker)}">{formatTurnLabel(row.turn)}</span>
 								</div>
 								{#if !isOriginalFocused}
 									<p class="req-version-hint">Click to view related actions (original)</p>
@@ -1267,6 +1281,10 @@
 												? 'Revised requirement'
 												: getRequirementLabel(chain)}
 									</span>
+									{#if !isDismissed && speakerPillLabel(speaker)}
+										<span class="who-pill" style="--sc:{speakerColor(speaker)}">{speakerPillLabel(speaker)}</span>
+									{/if}
+									<span class="turn-pill" class:turn-pill--muted={isDismissed} style="--sc:{speakerColor(speaker)}">{formatTurnLabel(turn)}</span>
 								</div>
 								{#if isSelected && showRevisedOnly && revisionFocusVersionId == null}
 									<p class="req-version-hint req-version-hint--active">Viewing related actions (revised)</p>
@@ -1350,23 +1368,21 @@
 	.requirements-panel {
 		display: flex;
 		flex-direction: column;
-		background: #ffffff;
-		border: 1px solid #e5e7eb;
-		border-radius: 18px;
+		background: var(--ct-panel);
+		border: none;
+		border-radius: 22px;
 		min-height: 0;
 		overflow: hidden;
-		box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
 	}
 	.panel-header {
 		margin: 0;
-		padding: 0.9rem 1rem;
-		font-size: 0.72rem;
-		font-weight: 700;
+		padding: 1rem 1.1rem 0.55rem;
+		font-size: 0.8rem;
+		font-weight: 800;
 		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		color: #64748b;
-		border-bottom: 1px solid #e5e7eb;
-		background: #f8fafc;
+		letter-spacing: 0.07em;
+		color: var(--ct-muted);
+		background: transparent;
 		flex-shrink: 0;
 	}
 	.requirements-list {
@@ -1376,8 +1392,10 @@
 		overflow-y: auto;
 		flex: 1;
 		min-height: 0;
-		padding: 0.65rem 0.65rem 0.65rem 0.4rem;
-		background: #ffffff;
+		padding: 0.35rem 0.75rem 0.85rem 0.4rem;
+		background: transparent;
+		scrollbar-width: thin;
+		scrollbar-color: #d3d5d9 transparent;
 	}
 	.requirements-connectors-viewport {
 		position: absolute;
@@ -1447,11 +1465,11 @@
 	/* Sideways: one horizontal line rotated 90° so it runs top→bottom along the rail (time). */
 	.timeline-axis-caption-text {
 		display: block;
-		font-size: 0.48rem;
-		font-weight: 700;
+		font-size: 0.55rem;
+		font-weight: 800;
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		color: #64748b;
+		letter-spacing: 0.06em;
+		color: var(--ct-faint);
 		white-space: nowrap;
 		writing-mode: sideways-lr;
 	}
@@ -1481,7 +1499,7 @@
 		position: relative;
 		display: flex;
 		flex-direction: column;
-		gap: 0.2rem;
+		gap: 0.55rem;
 		min-height: 100%;
 		flex: 1;
 		min-width: 0;
@@ -1490,27 +1508,27 @@
 		box-sizing: border-box;
 	}
 	.timeline-axis-line {
-		stroke: #cbd5e1;
+		stroke: #d1d4d8;
 		stroke-width: 2;
 		stroke-linecap: round;
 		pointer-events: none;
 	}
 	.timeline-axis-tick {
-		stroke: #cbd5e1;
+		stroke: #d1d4d8;
 		stroke-width: 1.4;
 		stroke-linecap: round;
 		pointer-events: none;
 	}
 	.timeline-edge-label {
 		position: absolute;
-		left: 0.2rem;
-		font-size: 0.62rem;
-		font-weight: 700;
-		color: #64748b;
-		background: #ffffff;
-		border: 1px solid #dbe4ee;
+		left: 0.15rem;
+		font-size: 0.72rem;
+		font-weight: 800;
+		color: #ffffff;
+		background: #9b9e9f;
+		border: none;
 		border-radius: 999px;
-		padding: 0.08rem 0.34rem;
+		padding: 0.18rem 0.5rem;
 		line-height: 1;
 		pointer-events: none;
 		z-index: 7;
@@ -1524,7 +1542,7 @@
 	}
 	.timeline-connector-line {
 		fill: none;
-		stroke: #94a3b8;
+		stroke: #c3c6cb;
 		stroke-width: 2;
 		stroke-dasharray: 5 5;
 		stroke-linecap: round;
@@ -1534,7 +1552,7 @@
 		vector-effect: non-scaling-stroke;
 	}
 	.timeline-connector-line.selected {
-		stroke: #60a5fa;
+		stroke: var(--ct-ink);
 		stroke-width: 2;
 	}
 	.timeline-connector-line.executed {
@@ -1558,29 +1576,30 @@
 		stroke-dasharray: 4 3;
 	}
 	.timeline-marker-dot {
-		fill: var(--dot-color, #3b82f6);
-		stroke: var(--dot-color, #3b82f6);
+		fill: var(--dot-color, #4472c4);
+		stroke: #ffffff;
 		stroke-width: 2;
 		cursor: pointer;
 		pointer-events: auto;
 	}
 	.timeline-marker-dot.selected {
+		stroke: var(--ct-ink);
 		stroke-width: 2.4;
 	}
 	.timeline-marker-dot.executed {
-		stroke: #15803d;
-		fill: #22c55e;
+		stroke: #ffffff;
+		fill: #6aa864;
 	}
 	.timeline-marker-dot.dismissed {
-		stroke: #64748b;
-		fill: #94a3b8;
+		stroke: #ffffff;
+		fill: #a3a6a9;
 	}
 	.timeline-marker-dot.revised {
-		stroke: #b45309;
-		fill: #f59e0b;
+		stroke: #ffffff;
+		fill: #e0a43a;
 	}
 	.timeline-marker-dot:focus-visible {
-		outline: 2px solid #2563eb;
+		outline: 2px solid var(--ct-user);
 		outline-offset: 2px;
 	}
 	.req-row-shell {
@@ -1601,97 +1620,79 @@
 		position: relative;
 		display: flex;
 		align-items: flex-start;
-		gap: 0.65rem;
-		padding: 0.8rem 0.9rem;
-		transition: opacity 0.15s;
-		border-radius: 16px;
-		border: 1px solid #e5e7eb;
-		background: #ffffff;
-		box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+		gap: 0.6rem;
+		padding: 0.75rem 0.9rem 0.85rem;
+		transition: opacity 0.15s, border-color 0.15s, transform 0.15s;
+		border-radius: 14px;
+		border: 1.5px solid var(--ct-line);
+		background: var(--ct-card);
+		box-sizing: border-box;
 	}
 	.req-item.dimmed {
-		opacity: 0.42;
+		opacity: 0.5;
 	}
 	.req-clickable {
 		width: 100%;
-		background: none;
-		border: none;
 		cursor: pointer;
 		text-align: left;
 		font: inherit;
 	}
 	.req-plain-button {
 		width: 100%;
-		background: none;
-		border: 1px solid #e5e7eb;
 		text-align: left;
 		font: inherit;
 		cursor: pointer;
 	}
 	.req-plain-button:hover {
-		box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.22);
-		border-color: #dbeafe;
+		border-color: #b7bbc0;
 	}
 	.req-clickable:hover {
-		background: #f8fafc;
-		border-color: #dbe4ee;
-		box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.2);
+		border-color: #b7bbc0;
+		transform: translateY(-1px);
 	}
 	.req-clickable.selected {
 		opacity: 1;
-		background: #eff6ff;
-		border-color: #93c5fd;
-		box-shadow: 0 8px 20px rgba(59, 130, 246, 0.12);
+		background: var(--ct-card);
+		border: 2.5px solid var(--ct-select);
+		padding: calc(0.75rem - 1px) calc(0.9rem - 1px) calc(0.85rem - 1px);
+		box-shadow: 0 6px 16px rgba(36, 39, 43, 0.08);
 	}
 	.req-indirect-item {
-		border-color: color-mix(in srgb, var(--sc, #3b82f6) 35%, #e5e7eb);
-		background:
-			repeating-linear-gradient(
-				-45deg,
-				color-mix(in srgb, var(--sc, #3b82f6) 14%, transparent) 0px,
-				color-mix(in srgb, var(--sc, #3b82f6) 14%, transparent) 5px,
-				color-mix(in srgb, var(--sc, #3b82f6) 6%, #ffffff) 5px,
-				color-mix(in srgb, var(--sc, #3b82f6) 6%, #ffffff) 10px
-			),
-			color-mix(in srgb, var(--sc, #3b82f6) 6%, #ffffff);
-		box-shadow: 0 6px 16px color-mix(in srgb, var(--sc, #3b82f6) 10%, transparent);
+		border: 1.5px dashed var(--sc, #4472c4);
+		background: color-mix(in srgb, var(--sc, #4472c4) 5%, #ffffff);
 	}
 	.req-executed-item {
-		border-color: #b9decf;
-		background: #eef8f2;
-		box-shadow: 0 6px 16px rgba(47, 122, 87, 0.08);
+		border-color: #cfe1c6;
+		background: #f1f7ec;
 	}
 	.req-dismissed-item {
-		border-color: #cbd5e1;
-		background: #f1f5f9;
-		box-shadow: 0 4px 12px rgba(100, 116, 139, 0.08);
+		border-color: var(--ct-line);
+		border-style: dashed;
+		background: #f6f7f8;
 	}
 	.req-revised-item {
-		border-color: #fcd34d;
-		background: #fffbeb;
-		box-shadow: 0 6px 16px rgba(245, 158, 11, 0.1);
+		border-color: #ecd29a;
+		background: #fffaf0;
 	}
 	.req-original-item {
-		border-color: #fde68a;
-		background: #fffdf5;
-		box-shadow: 0 4px 12px rgba(245, 158, 11, 0.08);
+		border-color: #ecd29a;
+		background: #fffdf7;
 		opacity: 0.96;
 	}
 	.req-original-item.selected {
 		opacity: 1;
-		background: #eff6ff;
-		border-color: #93c5fd;
-		box-shadow: 0 8px 20px rgba(59, 130, 246, 0.12);
+		background: var(--ct-card);
+		border: 2.5px solid var(--ct-select);
 	}
 	.req-original-item.selected .req-version-hint--active {
-		color: #2563eb;
+		color: var(--ct-ink);
 	}
 	.req-original-item--hint {
 		border-style: dashed;
 	}
 	.req-original-item--hint:hover {
-		border-color: #93c5fd;
-		background: #f8fafc;
+		border-color: #d9b867;
+		background: #fffaf0;
 	}
 	.req-revised-item--muted {
 		opacity: 0.72;
@@ -1702,29 +1703,26 @@
 	}
 	.req-version-hint {
 		margin: 0;
-		font-size: 0.68rem;
-		font-weight: 600;
-		color: #b45309;
-		letter-spacing: 0.01em;
+		font-size: 0.74rem;
+		font-weight: 700;
+		color: #b07a1c;
 	}
 	.req-version-hint--active {
 		color: #92400e;
 	}
 	.req-interaction-hint {
-		margin: 0.1rem 0 0;
-		font-size: 0.62rem;
-		font-weight: 500;
-		color: #94a3b8;
-		letter-spacing: 0.01em;
+		margin: 0.05rem 0 0;
+		font-size: 0.7rem;
+		font-weight: 600;
+		color: var(--ct-faint);
 	}
 	.req-clickable.req-has-revision {
-		border-color: #fde68a;
-		background: linear-gradient(135deg, #fffbeb 0%, #ffffff 55%);
+		border-color: #ecd29a;
+		background: linear-gradient(135deg, #fffaf0 0%, #ffffff 55%);
 	}
 	.req-clickable.req-has-revision.selected {
-		border-color: #f59e0b;
-		background: linear-gradient(135deg, #fef3c7 0%, #eff6ff 60%);
-		box-shadow: 0 8px 20px rgba(245, 158, 11, 0.14);
+		border-color: var(--ct-select);
+		background: linear-gradient(135deg, #fff6e2 0%, #ffffff 60%);
 	}
 	.req-revision-stack {
 		position: relative;
@@ -1745,12 +1743,11 @@
 		z-index: calc(var(--stack-depth, 1) + 2);
 	}
 	.req-text-card--original {
-		font-size: 0.82rem;
-		color: #64748b;
-		background: #f8fafc;
-		border-color: #cbd5e1;
-		border-style: dashed;
-		box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+		font-size: 0.88rem;
+		color: var(--ct-muted);
+		padding: 0.5rem 0.65rem;
+		background: #fffaf0;
+		border: 1.5px dashed #e3cb92;
 	}
 	.req-text-card--superseded {
 		font-size: 0.78rem;
@@ -1766,10 +1763,9 @@
 	}
 	.req-text-card--ghost {
 		min-height: 2.4rem;
-		background: #f8fafc;
-		border-color: #e2e8f0;
-		border-style: dashed;
-		opacity: 0.55;
+		background: #fbf6ea;
+		border: 1.5px dashed #e8d7ad;
+		opacity: 0.7;
 		box-shadow: none;
 	}
 	.req-revision-layer--ghost {
@@ -1819,9 +1815,8 @@
 		background: transparent !important;
 	}
 	.child-goal-started {
-		border-color: #c7d2fe;
-		background: #eef2ff;
-		box-shadow: 0 6px 16px rgba(67, 56, 202, 0.08);
+		border-color: #cdd6ef;
+		background: #f1f4fb;
 	}
 	.req-indirect-button {
 		width: 100%;
@@ -1830,33 +1825,34 @@
 		font: inherit;
 	}
 	.req-indirect-button:hover {
-		border-color: var(--sc, #60a5fa);
-		filter: brightness(0.99);
-		box-shadow: 0 0 0 1px color-mix(in srgb, var(--sc, #3b82f6) 25%, transparent);
+		filter: none;
+		border-color: var(--sc, #4472c4);
 	}
 	.req-indirect-button.expanded {
-		border-color: var(--sc, #3b82f6);
-		box-shadow: 0 8px 18px color-mix(in srgb, var(--sc, #3b82f6) 15%, transparent);
+		border-style: solid;
+		border-color: var(--sc, #4472c4);
 	}
 	.req-indirect-text-card {
 		background: #ffffff;
-		border-color: #e5e7eb;
-		color: #334155;
+		border: 1.5px solid var(--ct-line-soft);
+		padding: 0.55rem 0.7rem;
+		border-radius: 10px;
+		color: var(--ct-text);
+		font-size: 0.86rem;
 	}
 	.req-indirect-toggle {
-		color: var(--sc, #2563eb);
+		color: var(--sc, #4472c4);
 		margin-left: auto;
 		font-size: 0.7rem;
-		font-weight: 700;
+		font-weight: 800;
 		line-height: 1;
 	}
 
 	.circle-indicator {
-		width: 14px;
-		height: 14px;
+		width: 12px;
+		height: 12px;
 		border-radius: 50%;
 		flex-shrink: 0;
-		margin-top: 2px;
 		box-sizing: border-box;
 		position: relative;
 		z-index: 1;
@@ -1867,37 +1863,79 @@
 		min-width: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 0.3rem;
+		gap: 0.35rem;
 	}
 	.req-label-row {
 		display: flex;
 		align-items: center;
-		gap: 0.4rem;
+		gap: 0.35rem;
+		min-width: 0;
 	}
 	.req-type-label {
-		font-size: 0.72rem;
-		font-weight: 600;
-		color: #475569;
+		font-size: 0.76rem;
+		font-weight: 800;
+		letter-spacing: 0.035em;
+		text-transform: uppercase;
+		color: var(--ct-ink);
+		min-width: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 	.req-text-card {
-		font-size: 0.82rem;
+		font-size: 0.92rem;
 		line-height: 1.45;
-		color: #334155;
-		padding: 0.6rem 0.7rem;
-		background: #f8fafc;
-		border: 1px solid #e5e7eb;
-		border-radius: 12px;
+		color: var(--ct-text);
+		padding: 0;
+		background: transparent;
+		border: none;
+		border-radius: 10px;
 		word-break: break-word;
 	}
 	.req-text-card.card-selected {
+		color: var(--ct-ink);
+	}
+	.req-revision-front .req-text-card {
+		padding: 0.5rem 0.65rem;
 		background: #ffffff;
-		border-color: #3b82f6;
-		border-width: 2px;
+		border: 1.5px solid #e8d7ad;
+	}
+	.req-indirect-item .req-type-label {
+		color: var(--sc, #4472c4);
+	}
+	.who-pill {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.05rem 0.5rem;
+		border-radius: 999px;
+		flex-shrink: 0;
+		font-size: 0.74rem;
+		font-weight: 700;
+		line-height: 1.35;
+		color: var(--sc, #4472c4);
+		background: color-mix(in srgb, var(--sc, #4472c4) 14%, #ffffff);
+	}
+	.turn-pill {
+		margin-left: auto;
+		flex-shrink: 0;
+		display: inline-flex;
+		align-items: center;
+		padding: 0.1rem 0.5rem;
+		border-radius: 999px;
+		font-size: 0.72rem;
+		font-weight: 800;
+		line-height: 1.3;
+		color: #ffffff;
+		background: var(--sc, #9b9e9f);
+		font-variant-numeric: tabular-nums;
+	}
+	.turn-pill--muted {
+		background: #a3a6a9;
 	}
 	.outcome-text {
-		font-size: 0.82rem;
+		font-size: 0.92rem;
 		line-height: 1.45;
-		color: #334155;
+		color: var(--ct-text);
 		margin: 0;
 	}
 
@@ -1906,13 +1944,15 @@
 	}
 	.contrib-bar {
 		display: flex;
-		height: 8px;
-		border-radius: 4px;
+		height: 11px;
+		border-radius: 999px;
 		overflow: hidden;
-		background: #e5e7eb;
+		background: var(--ct-line-soft);
+		border: 1.5px solid rgba(36, 39, 43, 0.5);
+		box-sizing: border-box;
 	}
 	.contrib-bar-user {
-		background: linear-gradient(135deg, #3b82f6, #60a5fa);
+		background: var(--ct-user);
 		transition: width 0.3s ease;
 	}
 	.contrib-bar--peers {
@@ -1929,7 +1969,7 @@
 		min-width: 0;
 	}
 	.contrib-bar-assistant {
-		background: linear-gradient(135deg, #16a34a, #4ade80);
+		background: var(--ct-asst);
 		transition: width 0.3s ease;
 	}
 
@@ -1940,16 +1980,16 @@
 		margin-top: 0.3rem;
 	}
 	.status-square {
-		width: 16px;
-		height: 16px;
-		border-radius: 3px;
+		width: 14px;
+		height: 14px;
+		border-radius: 5px;
 		flex-shrink: 0;
 	}
 	.status-square.done {
-		background: #3c9b7d;
+		background: #6aa864;
 	}
 	.status-square.pending {
-		background: #3b82f6;
+		background: #4472c4;
 	}
 	.status-square.dismissed {
 		background: #94a3b8;
@@ -1958,9 +1998,9 @@
 		background: #cbd5e1;
 	}
 	.status-label {
-		font-size: 0.88rem;
-		font-weight: 700;
-		color: #334155;
+		font-size: 0.9rem;
+		font-weight: 800;
+		color: var(--ct-ink);
 	}
 
 	@media (max-width: 700px) {

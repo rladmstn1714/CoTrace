@@ -275,26 +275,27 @@
 		pointer-events: auto;
 		width: 100%;
 		max-width: 420px;
-		padding: 1.25rem 1.5rem;
+		padding: 1.3rem 1.5rem;
+		box-sizing: border-box;
 		background: #ffffff;
-		border-radius: 12px;
-		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-		border: 1px solid #e5e7eb;
+		border-radius: 20px;
+		box-shadow: 0 16px 40px rgba(36, 39, 43, 0.2);
+		border: 1.5px solid var(--ct-line);
 	}
 	.tutorial-title {
 		margin: 0 0 0.5rem 0;
-		font-size: 1.1rem;
-		font-weight: 700;
-		color: #0f172a;
+		font-size: 1.15rem;
+		font-weight: 800;
+		color: var(--ct-ink);
 	}
 	.tutorial-body {
 		margin: 0 0 1.25rem 0;
 		font-size: 0.95rem;
 		line-height: 1.55;
-		color: #0f172a;
+		color: var(--ct-text);
 	}
 	.tutorial-body--html {
-		color: #0f172a;
+		color: var(--ct-text);
 	}
 	.tutorial-body--html :global(p) {
 		margin: 0 0 0.75rem 0;
@@ -320,26 +321,26 @@
 		gap: 0.5rem;
 	}
 	.tutorial-btn {
-		padding: 0.5rem 1rem;
-		font-size: 0.875rem;
-		font-weight: 600;
-		border-radius: 8px;
+		padding: 0.5rem 1.1rem;
+		font-size: 0.88rem;
+		font-weight: 700;
+		border-radius: 999px;
 		cursor: pointer;
 		border: none;
 	}
 	.tutorial-btn.primary {
-		background: #1976d2;
+		background: var(--ct-ink);
 		color: #fff;
 	}
 	.tutorial-btn.primary:hover {
-		background: #1565c0;
+		background: #3a3e44;
 	}
 	.tutorial-btn.secondary {
-		background: #f3f4f6;
-		color: #374151;
+		background: var(--ct-panel);
+		color: var(--ct-text);
 	}
 	.tutorial-btn.secondary:hover:not(:disabled) {
-		background: #e5e7eb;
+		background: #e7e8eb;
 	}
 	.tutorial-btn:disabled {
 		opacity: 0.5;
@@ -347,19 +348,20 @@
 	}
 	.tutorial-progress {
 		position: absolute;
-		top: 1rem;
+		top: 1.1rem;
 		right: 1.5rem;
-		font-size: 0.75rem;
-		color: #9ca3af;
+		font-size: 0.78rem;
+		font-weight: 700;
+		color: var(--ct-faint);
 	}
 
 	.tutorial-focus-ring {
 		position: fixed;
 		z-index: 9998;
 		pointer-events: none;
-		border-radius: 12px;
-		border: 2px solid #60a5fa;
-		box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.15), 0 0 0 4px rgba(96, 165, 250, 0.25);
+		border-radius: 22px;
+		border: 2.5px solid #ffffff;
+		box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.15), 0 0 0 4px rgba(255, 255, 255, 0.35);
 	}
 	/* Full left column: stronger dim outside + light border so the panel reads clearly “bright”. */
 	.tutorial-focus-ring--panel {
@@ -385,8 +387,8 @@
 		50% { opacity: 0.85; }
 	}
 	@keyframes tutorial-focus-pulse {
-		0%, 100% { transform: scale(1); border-color: #60a5fa; }
-		50% { transform: scale(1.01); border-color: #93c5fd; }
+		0%, 100% { transform: scale(1); border-color: #ffffff; }
+		50% { transform: scale(1.01); border-color: #e7e8eb; }
 	}
 	@keyframes tutorial-click-pulse {
 		0%, 100% { transform: scale(1); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
