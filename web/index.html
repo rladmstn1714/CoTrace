@@ -1475,23 +1475,6 @@
 
     .track .cell.later { font-style: italic; }
 
-    .trace-more {
-      display: grid;
-      gap: 2px;
-      margin-top: 14px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1.5px dashed #c8cbd0;
-      background: var(--panel);
-      color: var(--muted);
-      font-size: 0.88rem;
-      text-align: center;
-      transition: border-color 160ms ease, background 160ms ease;
-    }
-
-    .trace-more b { color: var(--ink); font-weight: 800; font-size: 0.95rem; }
-    .trace-more:hover { border-color: var(--ink); background: #ffffff; color: var(--muted); }
-
     .trace-foot {
       margin: 14px 4px 0;
       color: var(--muted);
@@ -1651,10 +1634,6 @@
             <div class="trace-panel">
               <h4 class="trace-panel-title">The chat, annotated</h4>
               <ol class="trace-chat" id="traceChat" aria-label="Annotated chat turns"></ol>
-              <a class="trace-more" href="viewer">
-                <span>The chat goes on for 23 more turns, with 4 more goals and 15 more requirements.</span>
-                <b>See the whole chat in the CoTrace viewer →</b>
-              </a>
             </div>
             <div class="trace-panel">
               <h4 class="trace-panel-title" id="traceRightTitle"></h4>
@@ -1882,18 +1861,19 @@
 
       const LAST = 3;            // show only the first turns; the viewer has the rest
       const TOTAL_TURNS = 26;
-      const ACTIONS = ACTIONS_ALL.filter(a => a[0] <= LAST && a[2] !== 3);   // skip the Day 2 goal, which only starts here
+      // Skip the Day 2 goal (it only starts here) and show the food goal as G3.
+      const ACTIONS = ACTIONS_ALL.filter(a => a[0] <= LAST && a[2] !== 3).map(a => (a[2] === 5 ? [a[0], a[1], 3, a[3], a[4]] : a));
 
       const GOALS = [
         { g: 1, name: "Complete 3-day Pittsburgh trip plan", start: 1, parent: null },
         { g: 2, name: "Day 1 itinerary near Oakland and the Cathedral of Learning", start: 1, parent: 1 },
-        { g: 5, name: "Famous local Pittsburgh food, not fancy spots", start: 3, parent: 1 }
+        { g: 3, name: "Famous local Pittsburgh food, not fancy spots", start: 3, parent: 1 }
       ];
 
       const REQS_ALL = [
         { id: "R1", g: 2, label: "Oakland & Cathedral", text: "Day 1 itinerary must focus on the University of Pittsburgh/Oakland area and include a visit to the Cathedral of Learning.", created: [1], refined: [], setup: null, exec: [2, 4, 8, 10], contrib: [], you: 67 },
-        { id: "R2", g: 5, label: "famous food", text: "Provide recommendations for famous Pittsburgh food/meal spots for the trip.", created: [3], refined: [], setup: { t: 2, why: "The Day 1 plan already suggested places to eat, which surfaced the need to plan meals." }, exec: [4], contrib: [], you: 38 },
-        { id: "R3", g: 5, label: "where locals eat", text: "Recommended restaurants must be places locals go to (not expensive or fancy).", created: [3], refined: [], setup: { t: 2, why: "The assistant's earlier restaurant picks (some possibly fancier) likely prompted the ask for places locals go." }, exec: [4], contrib: [], you: 23 },
+        { id: "R2", g: 3, label: "famous food", text: "Provide recommendations for famous Pittsburgh food/meal spots for the trip.", created: [3], refined: [], setup: { t: 2, why: "The Day 1 plan already suggested places to eat, which surfaced the need to plan meals." }, exec: [4], contrib: [], you: 38 },
+        { id: "R3", g: 3, label: "where locals eat", text: "Recommended restaurants must be places locals go to (not expensive or fancy).", created: [3], refined: [], setup: { t: 2, why: "The assistant's earlier restaurant picks (some possibly fancier) likely prompted the ask for places locals go." }, exec: [4], contrib: [], you: 23 },
         { id: "R4", g: 2, label: "coffee at La Prima", text: "Day 1 itinerary must include a coffee stop after lunch at La Prima Espresso Company (3400 Fifth Ave).", created: [5], refined: [7], setup: { t: 4, why: "Proposing a breakfast, lunch and dinner structure set up the idea of a coffee stop after lunch." }, exec: [8, 10], contrib: [6], you: 74 },
         { id: "R5", g: 2, label: "dinner at The Porch", text: "Day 1 dinner plan must be updated to The Porch at Schenley.", created: [9], refined: [], setup: { t: 8, why: "The finalized schedule's dinner slot set the context for asking to change dinner." }, exec: [10], contrib: [], you: 53 }
       ];
@@ -1902,7 +1882,7 @@
       // Goal-level scores (sum of influence mass per side and role)
       const GOAL_SCORES = [
         { g: 2, you: 30, asst: 14.8, shaper: [30, 0], executor: [0, 14.8], asstIndirect: 4.8, reqs: ["R1", "R4", "R5"] },
-        { g: 5, you: 15, asst: 32.6, shaper: [15, 1.2], executor: [0, 31.4], asstIndirect: 24.6, reqs: ["R2", "R3"] }
+        { g: 3, you: 15, asst: 32.6, shaper: [15, 1.2], executor: [0, 31.4], asstIndirect: 24.6, reqs: ["R2", "R3"] }
       ];
 
       const TURNS_ALL = [
