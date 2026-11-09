@@ -2182,21 +2182,15 @@
         }
       }
 
-      function scrollChatTo(t) {
-        const li = chatEl.querySelector(`.turn[data-t="${t}"]`);
-        if (li) chatEl.scrollTo({ top: li.offsetTop - chatEl.offsetTop - 4, behavior: "smooth" });
-      }
-
-      function selectReq(id, scroll) {
+      function selectReq(id) {
         selReq = id;
         hover = null;
         const d = document.getElementById("traceDetail");
         if (d) d.innerHTML = detailHtml();
         applyFocus();
-        if (scroll) scrollChatTo(Math.min(...EDGES.filter(e => e.r === id && (step > 2 || e.op !== "set up")).map(e => e.t)));
       }
 
-      function setStep(n, scrollIntoView) {
+      function setStep(n) {
         step = n;
         hover = null;
         stepBtns.forEach(b => {
@@ -2215,12 +2209,10 @@
         renderChat();
         renderRight();
         applyFocus();
-        chatEl.scrollTop = 0;
-        if (scrollIntoView) root.scrollIntoView({ behavior: "smooth", block: "start" });
       }
 
       // ---------- events (delegated) ----------
-      stepBtns.forEach(b => b.addEventListener("click", () => setStep(+b.dataset.step, true)));
+      stepBtns.forEach(b => b.addEventListener("click", () => setStep(+b.dataset.step)));
       document.getElementById("tracePrev").addEventListener("click", () => setStep(Math.max(1, step - 1)));
       document.getElementById("traceNext").addEventListener("click", () => setStep(Math.min(4, step + 1)));
 
@@ -2236,16 +2228,12 @@
           const g = +goal.dataset.goal;
           selGoal = selGoal === g ? null : g;
           hover = null; applyFocus();
-          const first = ACTIONS.find(a => a[2] === g);
-          if (selGoal && first) scrollChatTo(first[0]);
           return;
         }
         const req = e.target.closest("[data-req]");
-        if (req) { selectReq(req.dataset.req, true); return; }
+        if (req) { selectReq(req.dataset.req); return; }
         const chip = e.target.closest(".chip[data-reqs]");
-        if (chip) { selectReq(chip.dataset.reqs, false); return; }
-        const tnode = e.target.closest(".node[data-t]");
-        if (tnode) scrollChatTo(+tnode.dataset.t);
+        if (chip) { selectReq(chip.dataset.reqs); return; }
       });
 
       root.addEventListener("mouseover", e => {
@@ -2265,7 +2253,7 @@
       });
       root.addEventListener("mouseleave", () => { hover = null; applyFocus(); });
 
-      setStep(1, false);
+      setStep(1);
       if ("ResizeObserver" in window) new ResizeObserver(() => step === 3 && drawEdges()).observe(rightEl);
       document.fonts?.ready.then(() => step === 3 && drawEdges());
     })();
