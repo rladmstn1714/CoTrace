@@ -1640,7 +1640,6 @@
             <div>
               <span class="eyebrow" id="traceEyebrow">Step 1 of 4 · interactive example</span>
               <h3 id="traceTitle"></h3>
-              <p id="traceIntro"></p>
             </div>
             <div class="trace-nav">
               <button type="button" id="tracePrev" aria-label="Previous step">←</button>
@@ -1653,7 +1652,7 @@
               <h4 class="trace-panel-title">The chat, annotated</h4>
               <ol class="trace-chat" id="traceChat" aria-label="Annotated chat turns"></ol>
               <a class="trace-more" href="viewer">
-                <span>The chat goes on for 23 more turns, with 3 more goals and 15 more requirements.</span>
+                <span>The chat goes on for 23 more turns, with 4 more goals and 15 more requirements.</span>
                 <b>See the whole chat in the CoTrace viewer →</b>
               </a>
             </div>
@@ -1883,12 +1882,11 @@
 
       const LAST = 3;            // show only the first turns; the viewer has the rest
       const TOTAL_TURNS = 26;
-      const ACTIONS = ACTIONS_ALL.filter(a => a[0] <= LAST);
+      const ACTIONS = ACTIONS_ALL.filter(a => a[0] <= LAST && a[2] !== 3);   // skip the Day 2 goal, which only starts here
 
       const GOALS = [
         { g: 1, name: "Complete 3-day Pittsburgh trip plan", start: 1, parent: null },
         { g: 2, name: "Day 1 itinerary near Oakland and the Cathedral of Learning", start: 1, parent: 1 },
-        { g: 3, name: "Day 2 itinerary (Strip District, downtown, Mount Washington)", start: 2, parent: 1 },
         { g: 5, name: "Famous local Pittsburgh food, not fancy spots", start: 3, parent: 1 }
       ];
 
@@ -1922,14 +1920,10 @@
       const TURNS = TURNS_ALL.filter(t => t.t <= LAST);
 
       const STEPS = {
-        1: { title: "Outcome & action extraction", right: "Goals found in these turns",
-             intro: "In the first three turns of a trip-planning chat, each turn is split into atomic actions. Every action is labeled as shaping (framing what is wanted) or executing (carrying it out), and bound to the goal it serves. Click a goal to see its actions." },
-        2: { title: "Requirement extraction", right: "Requirements over time",
-             intro: "Each goal is broken into requirements: small conditions you can check. The pipeline records the turn where each one is created, refined, and carried out. Cells after T3 summarize what happens later in the chat. Click a requirement to follow it." },
-        3: { title: "Influence labeling", right: "Who influenced each requirement",
-             intro: "Each requirement is linked to the turns that influenced it. Direct links are explicit asks or executions. Indirect links are earlier turns that set the requirement up without asking for it. Hover a turn or click a requirement." },
-        4: { title: "Contribution scoring", right: "Contribution scores",
-             intro: "Influence is added up per requirement and per goal into each side's share, split into the shaper and executor roles. Scores cover the whole chat. You shape both goals and the assistant executes them, but for the food goal most of the assistant's share comes from indirect influence." }
+        1: { title: "Outcome & action extraction", right: "Goals found in these turns" },
+        2: { title: "Requirement extraction", right: "Requirements over time" },
+        3: { title: "Influence labeling", right: "Who influenced each requirement" },
+        4: { title: "Contribution scoring", right: "Contribution scores" }
       };
 
       const reqById = Object.fromEntries(REQS.map(r => [r.id, r]));
@@ -2023,7 +2017,7 @@
             ${GOALS.slice(1).map(g => `<li class="child">${card(g)}</li>`).join("")}
           </ul>
           <div class="stat-box">
-            <b>${ACTIONS.length} actions</b> in these ${TURNS.length} turns. You: <b>${n(you, "S")} shaper</b>. Assistant: <b>${n(asst, "E")} executor</b>, <b>${n(asst, "S")} shaper</b>.
+            <b>${ACTIONS.length} actions</b> in these ${TURNS.length} turns. You: <b>${n(you, "S")} shaper</b>. Assistant: <b>${n(asst, "E")} executor</b>${n(asst, "S") ? `, <b>${n(asst, "S")} shaper</b>` : ""}.
             <div class="role-legend">
               <span style="background:var(--you);color:#fff">shaper</span><span style="background:var(--you-soft);color:#2f5aa3">executor</span>
               <span style="color:var(--muted)">you</span>
@@ -2201,7 +2195,6 @@
         const S = STEPS[n];
         document.getElementById("traceEyebrow").textContent = `Step ${n} of 4 · interactive example`;
         document.getElementById("traceTitle").textContent = S.title;
-        document.getElementById("traceIntro").textContent = S.intro;
         document.getElementById("traceRightTitle").textContent = S.right;
         document.getElementById("traceCount").textContent = `${n} / 4`;
         document.getElementById("tracePrev").disabled = n === 1;
