@@ -1263,7 +1263,7 @@
 
     .track {
       display: grid;
-      grid-template-columns: repeat(10, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 3px;
     }
 
@@ -1473,6 +1473,25 @@
     .score-req .nm b { color: var(--you); font-weight: 900; }
     .score-req .num { text-align: right; font-weight: 800; font-variant-numeric: tabular-nums; }
 
+    .track .cell.later { font-style: italic; }
+
+    .trace-more {
+      display: grid;
+      gap: 2px;
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1.5px dashed #c8cbd0;
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 0.88rem;
+      text-align: center;
+      transition: border-color 160ms ease, background 160ms ease;
+    }
+
+    .trace-more b { color: var(--ink); font-weight: 800; font-size: 0.95rem; }
+    .trace-more:hover { border-color: var(--ink); background: #ffffff; color: var(--muted); }
+
     .trace-foot {
       margin: 14px 4px 0;
       color: var(--muted);
@@ -1633,13 +1652,17 @@
             <div class="trace-panel">
               <h4 class="trace-panel-title">The chat, annotated</h4>
               <ol class="trace-chat" id="traceChat" aria-label="Annotated chat turns"></ol>
+              <a class="trace-more" href="viewer">
+                <span>The chat goes on for 23 more turns, with 3 more goals and 15 more requirements.</span>
+                <b>See the whole chat in the CoTrace viewer →</b>
+              </a>
             </div>
             <div class="trace-panel">
               <h4 class="trace-panel-title" id="traceRightTitle"></h4>
               <div id="traceRight"></div>
             </div>
           </div>
-          <p class="trace-foot">Turns T1–T10 of the Pittsburgh trip-planning chat in the <a class="text-link" href="viewer">CoTrace viewer</a>. Labels and scores come from the pipeline’s output for this chat; long turns are shortened.</p>
+          <p class="trace-foot">The first three turns of the Pittsburgh trip-planning chat from the <a class="text-link" href="viewer">CoTrace viewer</a>. Labels and scores come from the pipeline’s output for this chat; long turns are shortened.</p>
         </div>
       </div>
     </section>
@@ -1856,7 +1879,11 @@
       if (!root) return;
 
       // Pipeline output for turns T1–T10: [turn, role S/E, goal, action type, text]
-      const ACTIONS = [[1, "S", 1, "State", "states they are planning to visit Pittsburgh for 3 days."], [1, "S", 1, "Plan", "requests to start planning the trip now."], [1, "S", 2, "Decide", "decides to start with planning the first day."], [1, "S", 2, "Constrain", "specifies they want to look around near the University of Pittsburgh on the first day."], [1, "S", 2, "State", "expresses a desire to visit the Cathedral of Learning."], [1, "S", 2, "Ask", "asks what else would be good to do."], [2, "E", 1, "Acknowledge", "acknowledges the user's preference for concise responses and revising chat."], [2, "E", 1, "Decide", "decides to stick to Korean and provide a concise plan."], [2, "E", 2, "Implement", "states intent to execute a maps query."], [2, "E", 2, "Provide", "provides a Day 1 plan centered on Oakland and the University of Pittsburgh campus."], [2, "E", 2, "Describe", "describes the Cathedral of Learning."], [2, "E", 2, "Recommend", "recommends visiting the Commons Room and the Nationality Rooms in the Cathedral of Learning."], [2, "E", 2, "Describe", "describes Heinz Memorial Chapel and its proximity to the Cathedral."], [2, "E", 2, "Warn", "warns that Heinz Memorial Chapel is currently closed Fri–Sun and advises to check before visiting."], [2, "E", 2, "Describe", "describes Schenley Plaza as a nearby green space for lunch or a break."], [2, "E", 2, "Describe", "describes the Carnegie Museum of Natural History and its attractions."], [2, "E", 2, "Describe", "describes Phipps Conservatory and Botanical Gardens."], [2, "E", 2, "Summarize", "summarizes that all listed attractions are within walking distance for Day 1."], [2, "E", 3, "Ask", "asks whether to plan Day 2 (downtown and Mount Washington)."], [2, "E", 2, "Provide", "provides a Day 1 schedule around the Cathedral and Phipps with nearby restaurant suggestions."], [2, "E", 2, "Recommend", "recommends The Porch at Schenley as a lunch option."], [2, "E", 2, "Recommend", "recommends Primanti Bros. as a lunch option."], [2, "E", 2, "Provide", "schedules afternoon visit to Phipps Conservatory and notes walking time."], [2, "E", 2, "Recommend", "recommends Spirits & Tales and Butterjoint as dinner options."], [2, "E", 2, "Advise", "advises that walking is convenient within the area and suggests parking once and walking."], [2, "E", 3, "Ask", "asks again whether to plan Day 2."], [3, "S", 5, "State", "states they want to try famous Pittsburgh food for meals."], [3, "S", 5, "Constrain", "prefers places locals go to rather than expensive or fancy spots."], [3, "S", 5, "Request", "asks the assistant to narrow down and recommend those kinds of restaurants."], [4, "E", 5, "Provide", "provides a list of local favorite restaurant picks for Day 1."], [4, "E", 5, "Provide", "provides details about Pamela's Diner as a breakfast/lunch local favorite."], [4, "E", 5, "Provide", "provides details about Primanti Bros. as a lunch option and iconic sandwich spot."], [4, "E", 5, "Provide", "provides details about Butterjoint as a dinner option for pierogi and local fare."], [4, "E", 2, "Provide", "provides a schedule summary combining the recommended restaurants and attractions for Day 1."], [4, "E", 3, "Ask", "asks whether to plan Day 2 for downtown or areas with great views."], [5, "S", 2, "State", "states a preference to stop for coffee after lunch."], [5, "S", 2, "Report", "reports having heard La Prima is a famous brand."], [5, "S", 2, "Ask", "asks whether there is a La Prima location near the trip area."], [6, "E", 2, "Provide", "states that La Prima Espresso Company has several locations in and around Oakland."], [6, "E", 2, "Provide", "provides details for the Oakland location (link, walking time, address)."], [6, "E", 2, "Provide", "provides details for the Strip District location (link, car time, character)."], [6, "E", 2, "Suggest", "suggests stopping at the Oakland location in the afternoon before or after Phipps."], [7, "S", 2, "Decide", "selects the 3400 Fifth Ave La Prima location."], [7, "S", 2, "Request", "requests the assistant to add the café and finalize the schedule."], [8, "E", 2, "Provide", "provides the finalized Day 1 schedule for the Pittsburgh trip."], [8, "E", 2, "Include", "includes the 14:00 La Prima entry with the 3400 Fifth Ave location in the itinerary."], [8, "E", 2, "Explain", "states that everything is within Oakland and that walking or short trips are sufficient."], [8, "E", 3, "Invite", "asks if the user wants to plan Day 2 (downtown and overlooks) next."], [9, "S", 2, "Suggest", "proposes changing dinner to The Porch instead of Butterjoint."], [10, "E", 2, "Confirm", "confirms it updated the Day 1 schedule with dinner at The Porch at Schenley."], [10, "E", 2, "Provide", "provides the full updated Day 1 itinerary."], [10, "S", 3, "Ask", "asks whether to plan Day 2."]];
+      const ACTIONS_ALL = [[1, "S", 1, "State", "states they are planning to visit Pittsburgh for 3 days."], [1, "S", 1, "Plan", "requests to start planning the trip now."], [1, "S", 2, "Decide", "decides to start with planning the first day."], [1, "S", 2, "Constrain", "specifies they want to look around near the University of Pittsburgh on the first day."], [1, "S", 2, "State", "expresses a desire to visit the Cathedral of Learning."], [1, "S", 2, "Ask", "asks what else would be good to do."], [2, "E", 1, "Acknowledge", "acknowledges the user's preference for concise responses and revising chat."], [2, "E", 1, "Decide", "decides to stick to Korean and provide a concise plan."], [2, "E", 2, "Implement", "states intent to execute a maps query."], [2, "E", 2, "Provide", "provides a Day 1 plan centered on Oakland and the University of Pittsburgh campus."], [2, "E", 2, "Describe", "describes the Cathedral of Learning."], [2, "E", 2, "Recommend", "recommends visiting the Commons Room and the Nationality Rooms in the Cathedral of Learning."], [2, "E", 2, "Describe", "describes Heinz Memorial Chapel and its proximity to the Cathedral."], [2, "E", 2, "Warn", "warns that Heinz Memorial Chapel is currently closed Fri–Sun and advises to check before visiting."], [2, "E", 2, "Describe", "describes Schenley Plaza as a nearby green space for lunch or a break."], [2, "E", 2, "Describe", "describes the Carnegie Museum of Natural History and its attractions."], [2, "E", 2, "Describe", "describes Phipps Conservatory and Botanical Gardens."], [2, "E", 2, "Summarize", "summarizes that all listed attractions are within walking distance for Day 1."], [2, "E", 3, "Ask", "asks whether to plan Day 2 (downtown and Mount Washington)."], [2, "E", 2, "Provide", "provides a Day 1 schedule around the Cathedral and Phipps with nearby restaurant suggestions."], [2, "E", 2, "Recommend", "recommends The Porch at Schenley as a lunch option."], [2, "E", 2, "Recommend", "recommends Primanti Bros. as a lunch option."], [2, "E", 2, "Provide", "schedules afternoon visit to Phipps Conservatory and notes walking time."], [2, "E", 2, "Recommend", "recommends Spirits & Tales and Butterjoint as dinner options."], [2, "E", 2, "Advise", "advises that walking is convenient within the area and suggests parking once and walking."], [2, "E", 3, "Ask", "asks again whether to plan Day 2."], [3, "S", 5, "State", "states they want to try famous Pittsburgh food for meals."], [3, "S", 5, "Constrain", "prefers places locals go to rather than expensive or fancy spots."], [3, "S", 5, "Request", "asks the assistant to narrow down and recommend those kinds of restaurants."], [4, "E", 5, "Provide", "provides a list of local favorite restaurant picks for Day 1."], [4, "E", 5, "Provide", "provides details about Pamela's Diner as a breakfast/lunch local favorite."], [4, "E", 5, "Provide", "provides details about Primanti Bros. as a lunch option and iconic sandwich spot."], [4, "E", 5, "Provide", "provides details about Butterjoint as a dinner option for pierogi and local fare."], [4, "E", 2, "Provide", "provides a schedule summary combining the recommended restaurants and attractions for Day 1."], [4, "E", 3, "Ask", "asks whether to plan Day 2 for downtown or areas with great views."], [5, "S", 2, "State", "states a preference to stop for coffee after lunch."], [5, "S", 2, "Report", "reports having heard La Prima is a famous brand."], [5, "S", 2, "Ask", "asks whether there is a La Prima location near the trip area."], [6, "E", 2, "Provide", "states that La Prima Espresso Company has several locations in and around Oakland."], [6, "E", 2, "Provide", "provides details for the Oakland location (link, walking time, address)."], [6, "E", 2, "Provide", "provides details for the Strip District location (link, car time, character)."], [6, "E", 2, "Suggest", "suggests stopping at the Oakland location in the afternoon before or after Phipps."], [7, "S", 2, "Decide", "selects the 3400 Fifth Ave La Prima location."], [7, "S", 2, "Request", "requests the assistant to add the café and finalize the schedule."], [8, "E", 2, "Provide", "provides the finalized Day 1 schedule for the Pittsburgh trip."], [8, "E", 2, "Include", "includes the 14:00 La Prima entry with the 3400 Fifth Ave location in the itinerary."], [8, "E", 2, "Explain", "states that everything is within Oakland and that walking or short trips are sufficient."], [8, "E", 3, "Invite", "asks if the user wants to plan Day 2 (downtown and overlooks) next."], [9, "S", 2, "Suggest", "proposes changing dinner to The Porch instead of Butterjoint."], [10, "E", 2, "Confirm", "confirms it updated the Day 1 schedule with dinner at The Porch at Schenley."], [10, "E", 2, "Provide", "provides the full updated Day 1 itinerary."], [10, "S", 3, "Ask", "asks whether to plan Day 2."]];
+
+      const LAST = 3;            // show only the first turns; the viewer has the rest
+      const TOTAL_TURNS = 26;
+      const ACTIONS = ACTIONS_ALL.filter(a => a[0] <= LAST);
 
       const GOALS = [
         { g: 1, name: "Complete 3-day Pittsburgh trip plan", start: 1, parent: null },
@@ -1865,13 +1892,14 @@
         { g: 5, name: "Famous local Pittsburgh food, not fancy spots", start: 3, parent: 1 }
       ];
 
-      const REQS = [
+      const REQS_ALL = [
         { id: "R1", g: 2, label: "Oakland & Cathedral", text: "Day 1 itinerary must focus on the University of Pittsburgh/Oakland area and include a visit to the Cathedral of Learning.", created: [1], refined: [], setup: null, exec: [2, 4, 8, 10], contrib: [], you: 67 },
         { id: "R2", g: 5, label: "famous food", text: "Provide recommendations for famous Pittsburgh food/meal spots for the trip.", created: [3], refined: [], setup: { t: 2, why: "The Day 1 plan already suggested places to eat, which surfaced the need to plan meals." }, exec: [4], contrib: [], you: 38 },
         { id: "R3", g: 5, label: "where locals eat", text: "Recommended restaurants must be places locals go to (not expensive or fancy).", created: [3], refined: [], setup: { t: 2, why: "The assistant's earlier restaurant picks (some possibly fancier) likely prompted the ask for places locals go." }, exec: [4], contrib: [], you: 23 },
         { id: "R4", g: 2, label: "coffee at La Prima", text: "Day 1 itinerary must include a coffee stop after lunch at La Prima Espresso Company (3400 Fifth Ave).", created: [5], refined: [7], setup: { t: 4, why: "Proposing a breakfast, lunch and dinner structure set up the idea of a coffee stop after lunch." }, exec: [8, 10], contrib: [6], you: 74 },
         { id: "R5", g: 2, label: "dinner at The Porch", text: "Day 1 dinner plan must be updated to The Porch at Schenley.", created: [9], refined: [], setup: { t: 8, why: "The finalized schedule's dinner slot set the context for asking to change dinner." }, exec: [10], contrib: [], you: 53 }
       ];
+      const REQS = REQS_ALL.filter(r => r.created[0] <= LAST);
 
       // Goal-level scores (sum of influence mass per side and role)
       const GOAL_SCORES = [
@@ -1879,7 +1907,7 @@
         { g: 5, you: 15, asst: 32.6, shaper: [15, 1.2], executor: [0, 31.4], asstIndirect: 24.6, reqs: ["R2", "R3"] }
       ];
 
-      const TURNS = [
+      const TURNS_ALL = [
         { t: 1, who: "you", node: "Oakland, Cathedral", html: "I'm planning to visit Pittsburgh for 3 days… On the first day I want to look around <b>near the University of Pittsburgh</b>. I really want to visit <b>the Cathedral of Learning</b>. What else would be good to do?" },
         { t: 2, who: "asst", node: "Day 1 plan in Oakland", html: "Here is a plan for Day 1 of your Pittsburgh trip, <b>centered on the Oakland area</b>… Cathedral of Learning, Heinz Memorial Chapel, Phipps Conservatory, with <b>lunch nearby at The Porch</b> or Primanti Bros.…" },
         { t: 3, who: "you", node: "famous food, locals' spots", html: "For meals I'd like to try <b>famous Pittsburgh food</b>. I prefer <b>places that locals go to</b> rather than expensive or fancy spots. Can you narrow it down and recommend those kinds of restaurants?" },
@@ -1891,21 +1919,22 @@
         { t: 9, who: "you", node: "dinner at The Porch", html: "For dinner <b>let's do the Porch instead of Butterjoint</b>." },
         { t: 10, who: "asst", node: "updated schedule", html: "Updated final Day 1 schedule with <b>dinner at The Porch at Schenley</b>… 14:00 La Prima (3400 Fifth Ave) · 18:30 The Porch at Schenley. That's Day 1 set." }
       ];
+      const TURNS = TURNS_ALL.filter(t => t.t <= LAST);
 
       const STEPS = {
         1: { title: "Outcome & action extraction", right: "Goals found in these turns",
-             intro: "Each turn is split into atomic actions. Every action is labeled as shaping (framing what is wanted) or executing (carrying it out), and bound to the goal it serves. Click a goal to see its actions." },
+             intro: "In the first three turns of a trip-planning chat, each turn is split into atomic actions. Every action is labeled as shaping (framing what is wanted) or executing (carrying it out), and bound to the goal it serves. Click a goal to see its actions." },
         2: { title: "Requirement extraction", right: "Requirements over time",
-             intro: "Each goal is broken into requirements: small conditions you can check. The pipeline records the turn where each one is created, refined, and carried out. Click a requirement to follow it." },
+             intro: "Each goal is broken into requirements: small conditions you can check. The pipeline records the turn where each one is created, refined, and carried out. Cells after T3 summarize what happens later in the chat. Click a requirement to follow it." },
         3: { title: "Influence labeling", right: "Who influenced each requirement",
              intro: "Each requirement is linked to the turns that influenced it. Direct links are explicit asks or executions. Indirect links are earlier turns that set the requirement up without asking for it. Hover a turn or click a requirement." },
         4: { title: "Contribution scoring", right: "Contribution scores",
-             intro: "Influence is added up per requirement and per goal into each side's share, split into the shaper and executor roles. Here you shape both goals and the assistant executes them, but for the food goal most of the assistant's share comes from indirect influence." }
+             intro: "Influence is added up per requirement and per goal into each side's share, split into the shaper and executor roles. Scores cover the whole chat. You shape both goals and the assistant executes them, but for the food goal most of the assistant's share comes from indirect influence." }
       };
 
       const reqById = Object.fromEntries(REQS.map(r => [r.id, r]));
       const goalById = Object.fromEntries(GOALS.map(g => [g.g, g]));
-      const turnByT = Object.fromEntries(TURNS.map(t => [t.t, t]));
+      const turnByT = Object.fromEntries(TURNS_ALL.map(t => [t.t, t]));
       const whoName = w => (w === "you" ? "You" : "Assistant");
 
       // Turn → requirement links
@@ -1917,6 +1946,9 @@
         r.contrib.forEach(t => EDGES.push({ t, r: r.id, kind: "exec", op: "contributed" }));
         r.exec.forEach(t => EDGES.push({ t, r: r.id, kind: "exec", op: "executed" }));
       }
+
+      for (let i = EDGES.length - 1; i >= 0; i--) if (EDGES[i].t > LAST) EDGES.splice(i, 1);
+      const laterOf = r => [...new Set([...r.refined, ...r.contrib, ...r.exec].filter(t => t > LAST))].sort((a, b) => a - b);
 
       const chatEl = document.getElementById("traceChat");
       const rightEl = document.getElementById("traceRight");
@@ -1991,7 +2023,7 @@
             ${GOALS.slice(1).map(g => `<li class="child">${card(g)}</li>`).join("")}
           </ul>
           <div class="stat-box">
-            <b>${ACTIONS.length} actions</b> in 10 turns. You: <b>${n(you, "S")} shaper</b>. Assistant: <b>${n(asst, "E")} executor</b>, <b>${n(asst, "S")} shaper</b>.
+            <b>${ACTIONS.length} actions</b> in these ${TURNS.length} turns. You: <b>${n(you, "S")} shaper</b>. Assistant: <b>${n(asst, "E")} executor</b>, <b>${n(asst, "S")} shaper</b>.
             <div class="role-legend">
               <span style="background:var(--you);color:#fff">shaper</span><span style="background:var(--you-soft);color:#2f5aa3">executor</span>
               <span style="color:var(--muted)">you</span>
@@ -2012,7 +2044,11 @@
             const cls = r.created.includes(tu.t) ? "created" : r.refined.includes(tu.t) ? "refined"
               : r.exec.includes(tu.t) ? "executed" : r.contrib.includes(tu.t) ? "contributed" : "";
             return `<span class="cell ${cls}" title="T${tu.t}">T${tu.t}</span>`;
-          }).join("");
+          }).join("") + (() => {
+            const later = laterOf(r);
+            const cls = r.exec.some(t => t > LAST) ? "executed" : later.length ? "refined" : "";
+            return `<span class="cell later ${cls}" title="${later.length ? "Later in the chat: " + later.map(t => "T" + t).join(", ") : "Nothing later"}">${later.length ? "later" : "–"}</span>`;
+          })();
           return `<button type="button" class="req-row${selReq === r.id ? " is-sel" : ""}" data-req="${r.id}">
               <span class="top"><span class="rid">${r.id}</span>${r.label}<span class="gbadge" title="Goal ${r.g}">G${r.g}</span></span>
               <p class="rtext">${r.text}</p>
@@ -2046,14 +2082,15 @@
           <dl class="detail-rows">
             <div class="detail-row"><dt>Direct</dt><dd>${stated}</dd></div>
             <div class="detail-row"><dt>Indirect</dt><dd>${setup}</dd></div>
-            <div class="detail-row"><dt>Carried out</dt><dd>${r.exec.map(pill).join("")}</dd></div>
+            <div class="detail-row"><dt>Carried out</dt><dd>${r.exec.filter(t => t <= LAST).map(pill).join("")}${r.exec.some(t => t > LAST) ? `<span class="why">Later in the chat: ${r.exec.filter(t => t > LAST).map(t => "T" + t).join(", ")}. <a class="text-link" href="viewer">See it in the viewer</a></span>` : ""}</dd></div>
           </dl>`;
       }
 
       function renderStep4() {
         return GOAL_SCORES.map(gs => {
           const o = hbar(gs.you, gs.asst), sh = hbar(...gs.shaper), ex = hbar(...gs.executor);
-          const reqs = gs.reqs.map(id => {
+          const hidden = gs.reqs.filter(id => !REQS.some(r => r.id === id)).length;
+          const reqs = gs.reqs.filter(id => REQS.some(r => r.id === id)).map(id => {
             const r = reqById[id];
             return `<button type="button" class="score-req${selReq === id ? " is-sel" : ""}" data-req="${id}">
                 <span class="nm"><b>${id}</b> ${r.label}</span>${hbar(r.you, 100 - r.you).html}<span class="num">${r.you} · ${100 - r.you}</span></button>`;
@@ -2067,6 +2104,7 @@
               </div>
               <p class="score-note">${Math.round((gs.asstIndirect / gs.asst) * 100)}% of the assistant’s share comes from indirect influence.</p>
               <div class="score-reqs">${reqs}</div>
+              ${hidden ? `<p class="score-note">+ ${hidden} more requirement${hidden > 1 ? "s" : ""} later in the chat, in the <a class="text-link" href="viewer">viewer</a>.</p>` : ""}
             </div>`;
         }).join("") + `<p class="score-note" style="margin-top:12px">Numbers are you · assistant. Click a requirement to see its turns.</p>`;
       }
